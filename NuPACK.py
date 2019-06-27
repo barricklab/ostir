@@ -19,7 +19,8 @@
 #Use at your own risk.
 
 import os.path
-import os, popen2, time, random, string
+import os, subprocess, time, random, string
+import io
 
 tempdir = "/tmp" + "".join([random.choice(string.digits) for x in range(6)])
 
@@ -54,7 +55,7 @@ class NuPACK(dict):
         self["material"] = material
 
         random.seed(time.time())
-        long_id = "".join([random.choice(string.letters + string.digits) for x in range(10)])
+        long_id = "".join([random.choice(string.ascii_letters + string.digits) for x in range(10)])
         self.prefix = current_dir + "/nu_temp_" + long_id
 
     def complexes(self,MaxStrands, Temp = 37.0, ordered = "", pairs = "", mfe = "", degenerate = "", dangles = "some", timeonly = "", quiet="", AdditionalComplexes = []):
@@ -83,15 +84,9 @@ class NuPACK(dict):
         args = " -T " + str(Temp) + " -material " + material + " " + ordered + pairs + mfe + degenerate \
         + dangles + timeonly + quiet + " "
 
-        output = popen2.Popen3(cmd + args + self.prefix)
-        while output.poll() < 0:
-            try:
-                output.wait()
-                time.sleep(0.001)
-            except:
-                break
+        output = io.StringIO(subprocess.check_output(cmd + args + self.prefix, shell=True).decode('utf-8'))
 
-        if debug == 1: print output.fromchild.read()
+        if debug == 1: print(output)
 
         #Read output files
         self._read_output_cx()
@@ -133,15 +128,10 @@ class NuPACK(dict):
         cmd = "mfe"
         args = " -T " + str(Temp) + multi + pseudo + " -material " + material + degenerate + dangles + " "
 
-        output = popen2.Popen3(cmd + args + self.prefix)
-        while output.poll() < 0:
-            try:
-                output.wait()
-                time.sleep(0.001)
-            except:
-                break
 
-        if debug == 1: print output.fromchild.read()
+        output = io.StringIO(subprocess.check_output(cmd + args + self.prefix, shell=True).decode('utf-8'))
+
+        if debug == 1: print(output)
 
         self._read_output_mfe()
         self._cleanup("mfe")
@@ -172,15 +162,10 @@ class NuPACK(dict):
         cmd = "subopt"
         args = " -T " + str(Temp) + multi + pseudo + " -material " + material + degenerate + dangles + " "
 
-        output = popen2.Popen3(cmd + args + self.prefix)
-        while output.poll() < 0:
-            try:
-                output.wait()
-                time.sleep(0.001)
-            except:
-                break
 
-        if debug == 1: print output.fromchild.read()
+        output = io.StringIO(subprocess.check_output(cmd + args + self.prefix, shell=True).decode('utf-8'))
+
+        if debug == 1: print(output)
 
         self._read_output_subopt()
         self._cleanup("subopt")
@@ -211,22 +196,16 @@ class NuPACK(dict):
         cmd = "energy"
         args = " -T " + str(Temp) + multi + pseudo + " -material " + material + degenerate + dangles + " "
 
-        output = popen2.Popen3(cmd + args + self.prefix)
-        while output.poll() < 0:
-            try:
-                output.wait()
-                time.sleep(0.001)
-            except:
-                break
+        output = io.StringIO(subprocess.check_output(cmd + args + self.prefix, shell=True).decode('utf-8'))
 
         #if debug == 1: print output.fromchild.read()
 
         self["energy_energy"] = []
 
         #Skip the comments of the text file
-        line = output.fromchild.readline()
+        line = output.readline()
         while line[0]=="%":
-            line = output.fromchild.readline()
+            line = output.readline()
 
 
         energy = float(line)
@@ -261,26 +240,20 @@ class NuPACK(dict):
         cmd = "pfunc"
         args = " -T " + str(Temp) + multi + pseudo + " -material " + material + degenerate + dangles + " "
 
-        output = popen2.Popen3(cmd + args + self.prefix)
-        while output.poll() < 0:
-            try:
-                output.wait()
-                time.sleep(0.001)
-            except:
-                break
+        output = io.StringIO(subprocess.check_output(cmd + args + self.prefix, shell=True).decode('utf-8'))
 
         #if debug == 1: print output.fromchild.read()
 
         #Skip the comments of the text file
-        line = output.fromchild.readline()
+        line = output.readline()
         words = line.split(" ")
         while line[0]=="%" or words[0] == "Attempting":
-            line = output.fromchild.readline()
+            line = output.readline()
             words = line.split(" ")
 
         energy = float(line)
 
-        line = output.fromchild.readline()
+        line = output.readline()
         partition_function = float(line)
 
         self["program"] = "pfunc"
@@ -311,21 +284,15 @@ class NuPACK(dict):
         cmd = "count"
         args = " -T " + str(Temp) + multi + pseudo + " -material " + material + degenerate + dangles + " "
 
-        output = popen2.Popen3(cmd + args + self.prefix)
-        while output.poll() < 0:
-            try:
-                output.wait()
-                time.sleep(0.001)
-            except:
-                break
+        output = io.StringIO(subprocess.check_output(cmd + args + self.prefix, shell=True).decode('utf-8'))
 
         #if debug == 1: print output.fromchild.read()
 
         #Skip the comments of the text file
-        line = output.fromchild.readline()
+        line = output.readline()
         words = line.split(" ")
         while line[0]=="%" or words[0] == "Attempting":
-            line = output.fromchild.readline()
+            line = output.readline()
             words = line.split(" ")
 
         number = float(line)
@@ -725,16 +692,17 @@ class NuPACK(dict):
 
         cmd = "sir_graph_ng" #Assumes it's on the path
         args = "-p" #to PostScript file
-        output = popen2.Popen3(cmd + " " + args + " " + inputfile,"r")
-        output.wait()
-        if debug == 1: print output.fromchild.read()
+        output = io.StringIO(subprocess.check_output(cmd + args + self.prefix, shell=True).decode('utf-8'))
+
+        if debug == 1: print(output)
 
         inputfile = inputfile[0:len(inputfile)-2] + "ps"
 
         cmd = "ps2pdf" #Assumes it's on the path
-        output = popen2.Popen3(cmd + " " + inputfile,"r")
-        output.wait()
-        if debug == 1: print output.fromchild.read()
+        output = io.StringIO(subprocess.check_output(cmd + args + self.prefix, shell=True).decode('utf-8'))
+
+        output = io.StringIO(subprocess.check_output(cmd + args + self.prefix, shell=True).decode('utf-8'))
+        if debug == 1: print(output)
 
         outputfile = inputfile[0:len(inputfile)-2] + "pdf"
 
@@ -919,7 +887,7 @@ if __name__ == "__main__":
     test = NuPACK(sequences,"rna1999")
     test.complexes(3,mfe = 1, ordered=1)
 
-    print test
+    print(test)
 
     strand_compositions = test["ordered_composition"]
     num_complexes = len(strand_compositions)
@@ -933,7 +901,7 @@ if __name__ == "__main__":
 
         output = output + "  dG (RT ln Q): " + str(test["ordered_energy"][counter]) + " kcal/mol"
         output = output + "  # Permutations: " + str(test["ordered_permutations"][counter])
-        print output
+        print(output)
         test.export_PDF(counter, name = "Complex #" + str(counter+1), filename = "Complex_" + str(counter) + ".pdf", program = "ordered")
 
     #Mfe
