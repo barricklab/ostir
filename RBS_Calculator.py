@@ -19,6 +19,7 @@
 from NuPACK import NuPACK
 import re
 import math
+import argparse
 
 class CalcError(Exception):
     """Base class for exceptions in this module."""
@@ -769,8 +770,8 @@ class RBS_Calculator(NuPACK):
                 #index = corrected_structure["MinStructureID"]
                 #corrected_structure.export_PDF(index, name = self.name + ": After standby site", filename =  self.name + "_After_Standby_rRNA.pdf", program = "subopt")
 
-            except(CalcError, msg):
-                print(msg)
+            except CalcError:
+                print(CalcError)
                 self.mRNA_structure_list.append([])
                 self.mRNA_rRNA_uncorrected_structure_list.append([])
                 self.mRNA_rRNA_corrected_structure_list.append([])
@@ -935,7 +936,7 @@ class RBS_Calculator(NuPACK):
 #----------------------------------------------------------------------------------------------------------
 def calc_dG_from_file(handle, output, verbose = True, parameters = {}):
     from Bio import SeqIO
-    from RBS_Calculator import RBS_Calculator
+    #from RBS_Calculator import RBS_Calculator
 
     records = SeqIO.parse(handle,"fasta")
     First = True
@@ -945,8 +946,10 @@ def calc_dG_from_file(handle, output, verbose = True, parameters = {}):
     #    records.next()
 
     for record in records:
-
-        mRNA = record.seq.tostring().upper()
+        try:
+            mRNA = record.seq.tostring().upper()
+        except AttributeError:
+            mRNA = str(record.seq).upper()
 
         #Set any defaults
         start_range = [0, len(mRNA)]
@@ -994,8 +997,6 @@ def calc_dG_from_file(handle, output, verbose = True, parameters = {}):
 
 def calc_dG_pre_post_RBS(pre_list,post_list,RBS_list,name_list,output,verbose = True, parameters = {}):
 
-    from RBS_Calculator import RBS_Calculator
-
     First = True
 
     for (pre,post,RBS,name) in zip(pre_list,post_list,RBS_list,name_list):
@@ -1034,7 +1035,49 @@ def calc_dG_pre_post_RBS(pre_list,post_list,RBS_list,name_list,output,verbose = 
 
     output.close()
 
+def _start_RBS_calc(filename, output_filename):
+    window_list = range(10, 65)
+    for window in window_list:
+        print("Cutoff = ", window)
+        # output_filename = "/common/RBS_Calculator/DataSets/cutoff/Output_All_Tested_RBSs_cutoff_" + str(window) + ".txt"
+
+        handle = open(filename, "r")
+        output = open(output_filename, "w")
+
+        verbose = True
+
+        pars = {"start_range": [18, 44], "export_PDF": False, "cutoff": window}
+        calc_dG_from_file(handle, output, verbose, pars)
+        handle.close()
+        output.close()
+
+def run_RBS_calc(input, output):
+    '''Parse's arguments if imported and ran within python'''
+    _start_RBS_calc(input, output)
+
 if __name__ == "__main__":
+    '''Called if function is run as executable. Parses arguments and then launches main script'''
+    # ------------------------------------------------------------------------------
+    parser = argparse.ArgumentParser(description='input fasta')
+    parser.add_argument(
+        '-i', '--input',
+        action='store',
+        dest='i',
+        required=True,
+        type=str,
+        help="input fasta file",
+    )
+    parser.add_argument(
+        '-o', '--output',
+        action='store',
+        dest='o',
+        required=True,
+        type=str,
+        help="output file prefix",
+    )
+    options = parser.parse_args()
+    filename = options.i
+    output_filename = options.o
 
     from Bio import SeqIO
 
@@ -1046,7 +1089,7 @@ if __name__ == "__main__":
     #filename = "/common/RBS_Calculator/DataSets/DNA20_CDSs.fasta"
     #output_filename = "/common/RBS_Calculator/Output_Forward_Predictions_dangles_all_TTC.txt"
     #output_filename = "/common/RBS_Calculator/Output_Context_Tests_RBSs_test.txt"
-    filename = "/common/RBS_Calculator/DataSets/All_Tested_RBSs.txt"
+    #filename = "/common/RBS_Calculator/DataSets/All_Tested_RBSs.txt"
     #filename = "E:\RBS_Calculator\DataSets\All_Tested_RBSs.txt"
     #filename = "/common/RBS_Calculator/DataSets/Testing_RBSs.txt"
     #filename = "/common/RBS_Calculator/DataSets/Karsten_nif_RBSs.txt"
@@ -1077,20 +1120,7 @@ if __name__ == "__main__":
     #handle.close()
     #output.close()
 
-    window_list = range(10,65)
-    for window in window_list:
-        print("Cutoff = ", window)
-        output_filename = "/common/RBS_Calculator/DataSets/cutoff/Output_All_Tested_RBSs_cutoff_" + str(window) + ".txt"
-
-        handle = open(filename,"rU")
-        output = open(output_filename,"w")
-
-        verbose = True
-
-        pars = {"start_range":[18,44],"export_PDF":False,"cutoff":window}
-        calc_dG_from_file(handle, output, verbose,pars)
-        handle.close()
-        output.close()
+    _start_RBS_calc(filename, output_filename)
 
     #pre = "ggggaattgtgagcggataacaattcccctctagaa"
     #RBS = "GAGGAAGTTAGTAAGGAGGTCAGGCGA"
