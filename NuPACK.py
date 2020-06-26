@@ -21,11 +21,9 @@
 import os.path
 import os, subprocess, time, random, string
 import io
+import tempfile
 
-tempdir = "/tmp" + "".join([random.choice(string.digits) for x in range(6)])
-
-current_dir = os.path.dirname(os.path.abspath(__file__)) + tempdir
-if not os.path.exists(current_dir): os.mkdir(current_dir)
+current_dir = tempfile.TemporaryDirectory()
 
 debug=0
 
@@ -56,7 +54,7 @@ class NuPACK(dict):
 
         random.seed(time.time())
         long_id = "".join([random.choice(string.ascii_letters + string.digits) for x in range(10)])
-        self.prefix = current_dir + "/nu_temp_" + long_id
+        self.prefix = current_dir.name
 
     def complexes(self,MaxStrands, Temp = 37.0, ordered = "", pairs = "", mfe = "", degenerate = "", dangles = "some", timeonly = "", quiet="", AdditionalComplexes = []):
         """A wrapper for the complexes command, which calculates the equilibrium probability of the formation of a multi-strand
@@ -505,7 +503,7 @@ class NuPACK(dict):
 
         #Make sure that the ocx file has already been read.
         if not (self.has_key("ordered_complexes") and self.has_key("ordered_permutations") and self.has_key("ordered_energies") and self.has_key("ordered_composition")):
-            self._read_output_ocx(self,prefix)
+            self._read_output_ocx(self,self.prefix)
 
         handle = open(self.prefix+".ocx-mfe", "rU")
 
