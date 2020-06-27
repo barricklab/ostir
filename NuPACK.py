@@ -23,6 +23,8 @@ import os, subprocess, time, random, string
 import io
 import tempfile
 
+current_dir = tempfile.TemporaryDirectory()
+
 debug=0
 
 #Class that encapsulates all of the functions from NuPACK 2.0
@@ -31,10 +33,9 @@ class NuPACK(dict):
     debug_mode = 0
     RT = 0.61597 #gas constant times 310 Kelvin (in units of kcal/mol)
 
-    def __init__(self,Sequence_List,material,tmp_dir):
+    def __init__(self,Sequence_List,material):
 
         self.ran = 0
-        self.tmp_dir=tmp_dir
 
         import re
         import string
@@ -53,7 +54,7 @@ class NuPACK(dict):
 
         random.seed(time.time())
         long_id = "".join([random.choice(string.ascii_letters + string.digits) for x in range(10)])
-        self.prefix = self.tmp_dir + "/nu_temp_" + long_id
+        self.prefix = current_dir.name + "/nu_temp_" + long_id
 
     def complexes(self,MaxStrands, Temp = 37.0, ordered = "", pairs = "", mfe = "", degenerate = "", dangles = "some", timeonly = "", quiet="", AdditionalComplexes = []):
         """A wrapper for the complexes command, which calculates the equilibrium probability of the formation of a multi-strand

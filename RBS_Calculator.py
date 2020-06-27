@@ -19,9 +19,6 @@
 from NuPACK import NuPACK
 import re
 import math
-import os
-import random
-import string
 
 class CalcError(Exception):
     """Base class for exceptions in this module."""
@@ -55,17 +52,13 @@ class RBS_Calculator(NuPACK):
     energy_cutoff = 3.0
     start_codons = ["ATG", "AUG", "GTG", "GUG","TTG","UUG"] #substituted U for T in actual calcs. Ignores CTG/CUG
     rRNA = "acctcctta" #These are the last 9 nt (3' end) of the 16S rRNA in E. coli
-    #rRNA = "tttctaagg" #These are the last 9 nt (3' end) of the 16S rRNA in Agrobacterium
+
     footprint = 1000 #Footprint of the 30S complex that prevents formation of secondary structures downstream of the start codon. Here, we assume that the entire post-start RNA sequence does not form secondary structures once the 30S complex has bound.
 
     def __init__(self, mRNA, start_range, name = "Unnamed mRNA", verbose = False):
         """Initializes the RBS Calculator class with the mRNA sequence and the range of start codon positions considered."""
 
         #NuPACK.__init__(self,sequences,self.RNA_model)
-
-        tempdir = "/tmp" + "".join([random.choice(string.digits) for x in range(6)])
-        self.folding_dir = os.path.dirname(os.path.abspath(__file__)) + tempdir
-        if not os.path.exists(self.folding_dir): os.mkdir(self.folding_dir)
 
         exp = re.compile('[ATGCU]',re.IGNORECASE)
         if exp.match(mRNA) == None:
@@ -83,9 +76,6 @@ class RBS_Calculator(NuPACK):
         self.run = 0
         self.start_range = start_range
         self.verbose = verbose
-
-    def __del__(self):
-        os.rmdir(self.folding_dir)
 
     def find_min(self,input_list):
         """Finds the minimum of a list of numbers."""
@@ -181,7 +171,7 @@ class RBS_Calculator(NuPACK):
 
         #print "After exception"
 
-        fold = NuPACK([mRNA,self.rRNA],material = self.RNA_model, tmp_dir=self.folding_dir)
+        fold = NuPACK([mRNA,self.rRNA],material = self.RNA_model)
         fold.subopt([1, 2],self.energy_cutoff,dangles = self.dangles, Temp = self.temp)
 
         if len(fold["subopt_basepairing_x"]) == 0:
@@ -256,7 +246,7 @@ class RBS_Calculator(NuPACK):
 
         #Calculate pre-sequence folding
         if len(mRNA_pre) > 0:
-            fold_pre = NuPACK([mRNA_pre], material = self.RNA_model, tmp_dir=self.folding_dir)
+            fold_pre = NuPACK([mRNA_pre], material = self.RNA_model)
             fold_pre.mfe([1], dangles = self.dangles, Temp = self.temp)
             bp_x_pre = fold_pre["mfe_basepairing_x"][0]
             bp_y_pre = fold_pre["mfe_basepairing_y"][0]
@@ -284,7 +274,7 @@ class RBS_Calculator(NuPACK):
 
         #Calculate post-sequence folding
         if len(mRNA_post) > 0:
-            fold_post = NuPACK([mRNA_post], material = self.RNA_model, tmp_dir=self.folding_dir)
+            fold_post = NuPACK([mRNA_post], material = self.RNA_model)
             fold_post.mfe([1], dangles = self.dangles, Temp = self.temp)
             bp_x_post = fold_post["mfe_basepairing_x"][0]
             bp_y_post = fold_post["mfe_basepairing_y"][0]
@@ -298,7 +288,7 @@ class RBS_Calculator(NuPACK):
             total_bp_y.append(nt_y + offset)
 
         mRNA = self.mRNA_input[begin:mRNA_len]
-        fold = NuPACK([mRNA, self.rRNA], material = self.RNA_model, tmp_dir=self.folding_dir)
+        fold = NuPACK([mRNA, self.rRNA], material = self.RNA_model)
 
         total_energy = fold.energy([1, 2], total_bp_x, total_bp_y, Temp = self.temp, dangles = self.dangles)
 
@@ -353,7 +343,7 @@ class RBS_Calculator(NuPACK):
 
         #Fold it and extract the base pairings
         if (len(mRNA_subsequence)) > 0:
-            fold = NuPACK([mRNA_subsequence], material = self.RNA_model, tmp_dir=self.folding_dir)
+            fold = NuPACK([mRNA_subsequence], material = self.RNA_model)
             fold.mfe([1], dangles = self.dangles, Temp = self.temp)
             energy_after_5p = fold["mfe_energy"][0]
             bp_x_5p = fold["mfe_basepairing_x"][0]   #[0] added 12/13/07
@@ -375,7 +365,7 @@ class RBS_Calculator(NuPACK):
             bp_y_after.append(nt_y)
 
         #Calculate its energy
-        fold = NuPACK([mRNA, self.rRNA], material = self.RNA_model, tmp_dir=self.folding_dir)
+        fold = NuPACK([mRNA, self.rRNA], material = self.RNA_model)
         energy_after = fold.energy([1, 2], bp_x_after, bp_y_after, dangles = self.dangles, Temp = self.temp)
 
         dG_standby_site = energy_before - energy_after
@@ -396,7 +386,7 @@ class RBS_Calculator(NuPACK):
         """Calculates the dG_mRNA given the mRNA sequence."""
 
         mRNA = self.mRNA_input[max(0,start_pos-self.cutoff):min(len(self.mRNA_input),start_pos+self.cutoff)]
-        fold = NuPACK([mRNA],self.RNA_model, tmp_dir=self.folding_dir)
+        fold = NuPACK([mRNA],self.RNA_model)
         fold.mfe([1], Temp = self.temp, dangles = self.dangles)
 
         structure = fold
@@ -412,7 +402,7 @@ class RBS_Calculator(NuPACK):
 
     def calc_dG_rRNA(self):
         """Calculates the dG of folding for the last 9 nt of the 16S rRNA. Not used in the free energy model."""
-        fold = NuPACK([self.rRNA],self.RNA_model, tmp_dir=self.folding_dir)
+        fold = NuPACK([self.rRNA],self.RNA_model)
         fold.mfe([1], Temp = self.temp, dangles = "all")
         dG_rRNA_folding = fold["mfe_energy"][0]
         return dG_rRNA_folding
@@ -440,11 +430,11 @@ class RBS_Calculator(NuPACK):
         pre_mRNA = mRNA[0:most_5p_mRNA]
         post_mRNA = mRNA[most_3p_mRNA+1:len(mRNA)+1]
 
-        pre_fold = NuPACK([pre_mRNA],material = self.RNA_model, tmp_dir=self.folding_dir)
+        pre_fold = NuPACK([pre_mRNA],material = self.RNA_model)
         pre_fold.mfe([1],dangles = self.dangles, Temp = self.temp)
         dG_pre = pre_fold["mfe_energy"][0]
 
-        post_fold = NuPACK([post_mRNA],material = self.RNA_model, tmp_dir=self.folding_dir)
+        post_fold = NuPACK([post_mRNA],material = self.RNA_model)
         post_fold.mfe([1],dangles = self.dangles, Temp = self.temp)
         dG_post = post_fold["mfe_energy"][0]
 
