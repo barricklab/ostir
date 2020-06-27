@@ -21,6 +21,7 @@
 import os.path
 import os, subprocess, time, random, string
 import io
+import tempfile
 
 debug=0
 
@@ -501,7 +502,7 @@ class NuPACK(dict):
 
         #Make sure that the ocx file has already been read.
         if not (self.has_key("ordered_complexes") and self.has_key("ordered_permutations") and self.has_key("ordered_energies") and self.has_key("ordered_composition")):
-            self._read_output_ocx(self,prefix)
+            self._read_output_ocx(self,self.prefix)
 
         handle = open(self.prefix+".ocx-mfe", "rU")
 
