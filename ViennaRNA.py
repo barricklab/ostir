@@ -2,6 +2,7 @@
 
 import os.path
 import os, subprocess, time
+import tempfile
 
 current_dir = os.path.dirname(os.path.abspath(__file__)) + "/tmp"
 if not os.path.exists(current_dir): os.mkdir(current_dir)
@@ -35,8 +36,8 @@ class ViennaRNA(dict):
         self["material"] = material
 
         random.seed(time.time())
-        long_id = "".join([random.choice(string.ascii_letters + string.digits) for x in range(10)])
-        self.prefix = "tmp/temp_" + long_id
+        with tempfile.NamedTemporaryFile(delete=False) as temp_file_maker:
+            self.prefix = temp_file_maker.name
 
     def mfe(self, strands, constraints, Temp , dangles, outputPS = False):
 
@@ -261,7 +262,10 @@ class ViennaRNA(dict):
         line = std_out
         words = line.split()
         #print(line, words)
-        energy = float(words[len(words)-1].replace("(","").replace(")","").replace("\n",""))
+        if words:
+            energy = float(words[-1].replace("(","").replace(")","").replace("\n",""))
+        else:
+            energy = 0  # TODO: Handle this better
 
         self["program"] = "energy"
         self["energy_energy"].append(energy)
