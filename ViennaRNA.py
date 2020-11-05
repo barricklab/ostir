@@ -1,11 +1,18 @@
 #!/usr/bin/python
 
-import os.path
-import os, subprocess, time
-import tempfile
 
-current_dir = os.path.dirname(os.path.abspath(__file__)) + "/tmp"
-if not os.path.exists(current_dir): os.mkdir(current_dir)
+import subprocess, time
+import tempfile
+from shutil import which
+import warnings
+
+#  On import check dependencies
+dependencies = [which('RNAfold') is not None,
+                which('RNAsubopt') is not None,
+                which('RNAeval') is not None]
+if False in dependencies:
+    warnings.warn('RBS Calculator Vienna is missing dependency ViennaRNA!')
+#  End dependency check
 
 debug=0
 
@@ -36,6 +43,7 @@ class ViennaRNA(dict):
         self["material"] = material
 
         random.seed(time.time())
+
         with tempfile.NamedTemporaryFile(delete=False) as temp_file_maker:
             self.prefix = temp_file_maker.name
 
@@ -47,7 +55,7 @@ class ViennaRNA(dict):
         if Temp <= 0: raise ValueError("The specified temperature must be greater than zero.")
 
         seq_string = "&".join(self["sequences"])
-
+        constraints = None
         if constraints is None:
             input_string = seq_string + "\n" 
         else: 
@@ -58,10 +66,16 @@ class ViennaRNA(dict):
         handle.write(input_string)
         handle.close()
 
+        with open('tmp/mfe_inputs', 'a') as file:
+           file.write(f'{input_string}   ')
+
         #Set arguments
         material = self["material"]
 
-        param_file = "-P rna_turner1999.par "
+        if material == 'rna1999':
+            param_file = "-P rna_turner1999.par "
+        else:
+            param_file = ''
 
         if dangles is "none":
             dangles = " -d0 "
@@ -97,7 +111,7 @@ class ViennaRNA(dict):
             except:
                 break
 
-        if debug == 1: print(output.stdout.read())
+        #if debug == 1: print(output.stdout.read())
 
         #Skip the unnecessary output lines
         #line = output.stdout.read()
@@ -107,6 +121,7 @@ class ViennaRNA(dict):
         words = line.split()
         #print("These are the mfe value for " + str(words))
         bracket_string = words[1]
+        #print(bracket_string)
         #print("This is the bracket string " + str(bracket_string))
         (strands,bp_x, bp_y) = self.convert_bracket_to_numbered_pairs(bracket_string)
         #print(strands, bp_x, bp_y)
@@ -118,31 +133,33 @@ class ViennaRNA(dict):
         self["mfe_basepairing_y"] = [bp_y]
         self["mfe_energy"] = [energy]
         self["totalnt"]=strands
-        try:
-            self._cleanup()
-        except FileNotFoundError:
-            print("file already removed")
 
         #print "Minimum free energy secondary structure has been calculated."
 
-    def subopt(self, strands, constraints, energy_gap, Temp = 37.0, dangles = "all", outputPS = False):
+    def subopt(self, strands, constraints, energy_gap, Temp = 37.0, dangles = "some", outputPS = False):
 
         self["subopt_composition"] = strands
 
         if Temp <= 0: raise ValueError("The specified temperature must be greater than zero.")
-        
-        param_file = "-P rna_turner1999.par "
+
+        material = self["material"]
+        if material == 'rna1999':
+            param_file = "-P rna_turner1999.par "
+        else:
+            param_file = ''
 
         seq_string = "&".join(self["sequences"])
-        
+        #seq_string = self["sequences"][0]
+
+        #print(f'SEQ STRING: {seq_string}')
         if constraints is None:
             input_string = seq_string + "\n" 
         else: 
             input_string = seq_string + "\n" + constraints + "&........." "\n"
 
-        handle = open(self.prefix,"w")
-        handle.write(input_string)
-        handle.close()
+        #print(self.prefix)
+        with open(self.prefix + '.txt', 'w') as handle:
+            handle.write(input_string)
 
         #Set arguments
         material = self["material"]
@@ -155,17 +172,19 @@ class ViennaRNA(dict):
             dangles = " -d2 "
 
         if outputPS:
-            outputPS_str = " "
+            outputPS_str = ""
         else:
             outputPS_str = " -noPS "
-
         #Call ViennaRNA C programs
-        cmd = "RNAsubopt"
-        if constraints is None:
-            args = " -e " + str(energy_gap) + dangles + param_file + " < " + self.prefix
-        else:
-            args = " -e " + str(energy_gap) + dangles + "-C " + param_file + " < " + self.prefix
 
+        cmd = "RNAsubopt"
+        energy_gap = energy_gap + 2.481
+        if constraints is None:
+            args = " -e " + str(energy_gap) + " -T " + str(Temp) + dangles + "--sorted --en-only " + param_file + " < " + self.prefix + '.txt'
+        else:
+            args = " -e " + str(energy_gap) + " -T " + str(Temp) + dangles + "--sorted --en-only " + "-C " + param_file + " < " + self.prefix + '.txt'
+
+        #print(self.prefix)
         #print(cmd + args)
         output = subprocess.Popen(cmd + args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines = True) #newlines argument was added because subprocess.popen was appending b's to the list output (byte stuff? I dont totally understand)
         std_out = output.communicate()[0]
@@ -183,33 +202,44 @@ class ViennaRNA(dict):
         #Skip unnecessary line
         #line = output.std_out.readline()
         line = std_out
-        #print(std_out)
+        with open("tmp/vienna_no_bind.txt", "w") as file:
+            file.writelines(f"{cmd + args} \n {line}")
 
         self["subopt_basepairing_x"] = []
         self["subopt_basepairing_y"] = []
         self["subopt_energy"] = []
         self["totalnt"]=[]
-        counter=0
 
-        if len(line) > 0:
-            words = line.split()
-            for i in range(3,len(words)):
-                counter+=1
-                if i % 2 == 0:
-                    energy = float(words[i].replace("\n",""))
-                    #print(energy)
-                    self["subopt_energy"].append(energy)
-
+        counter=0  # TODO: Test to see if the latest version of VIENNA requires this workaround
+        #print(f"Line: {line}")
+        findings = line.split("\n")
+        findings = findings[1:]
+        findings = [x.split() for x in findings]
+        #print(findings)
+        for finding in findings:
+            if len(finding) != 2:
+                continue
+            if len(self["sequences"]) > 1:
+                binding_positions = finding[0]
+                binding_positions = binding_positions.split("&")
+                if ")" not in binding_positions[1] and "(" not in binding_positions[1]:
+                    #print("This binding site is fake")
+                    continue
                 else:
-                    bracket_string = words[i]
-                    #print(bracket_string)
-                    (strands,bp_x, bp_y) = self.convert_bracket_to_numbered_pairs(bracket_string)
+                    self["subopt_energy"].append(float(finding[1]))
+                    (strands, bp_x, bp_y) = self.convert_bracket_to_numbered_pairs(finding[0])
+                    #print(strands, bp_x, bp_y)
                     self["subopt_basepairing_x"].append(bp_x)
                     self["subopt_basepairing_y"].append(bp_y)
+            else:
+                self["subopt_energy"].append(float(finding[1]))
+                (strands, bp_x, bp_y) = self.convert_bracket_to_numbered_pairs(finding[0])
+                self["subopt_basepairing_x"].append(bp_x)
+                self["subopt_basepairing_y"].append(bp_y)
+
 
         self["subopt_NumStructs"] = counter
 
-        self._cleanup()
         self["program"] = "subopt"
 
         #print "Minimum free energy and suboptimal secondary structures have been calculated."
@@ -240,11 +270,20 @@ class ViennaRNA(dict):
         elif dangles is "all":
             dangles = " -d2 "
 
+        if material == 'rna1999':
+            param_file = "-P rna_turner1999.par "
+        else:
+            param_file = ''
+
         #Call ViennaRNA C programs
         cmd = "RNAeval"
-        args = dangles + self.prefix
+        args = dangles + param_file + self.prefix
         #print(cmd + args)
         output = subprocess.Popen(cmd + args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines = True) #newlines argument was added because subprocess.popen was appending b's to the list output (byte stuff? I dont totally understand)
+
+        with open('tmp/vienna_energy_input.txt', 'w') as file:
+            file.write(f"{input_string}")
+            file.write(f"\n{cmd + args}")
 
         while output.poll() is None:
             try:
@@ -262,16 +301,14 @@ class ViennaRNA(dict):
         line = std_out
         words = line.split()
         #print(line, words)
-        if words:
-            energy = float(words[-1].replace("(","").replace(")","").replace("\n",""))
-        else:
-            energy = 0  # TODO: Handle this better
+        if not words:
+            raise ValueError('Could not catch the output of RNAeval. Is Vienna installed and in your PATH?')
+        energy = float(words[-1].replace("(","").replace(")","").replace("\n",""))
 
         self["program"] = "energy"
         self["energy_energy"].append(energy)
         self["energy_basepairing_x"] = [base_pairing_x]
         self["energy_basepairing_y"] = [base_pairing_y]
-        self._cleanup()
 
         return energy
 
@@ -348,11 +385,6 @@ class ViennaRNA(dict):
 
         return "".join(bracket_notation)
 
-    def _cleanup(self):
-
-        if os.path.exists(self.prefix): 
-            os.remove(self.prefix) 
-        return
 
 if __name__ == "__main__":
 
