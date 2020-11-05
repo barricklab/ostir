@@ -1,6 +1,6 @@
 # Given an mRNA sequence, this Python class predicts the dG_total and translation initiation rate.
 
-# This file is part of the Ribosome Binding Site Calculator.
+# This file is part of the Ribosome Binding Site Calculator .
 
 # The Ribosome Binding Site Calculator is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
