@@ -7,6 +7,7 @@ import subprocess
 import concurrent.futures
 import itertools
 import csv
+import copy
 
 def calc_dG_from_file(handle, output, verbose=True, parameters={}):
     from Bio import SeqIO
@@ -27,7 +28,7 @@ def calc_dG_from_file(handle, output, verbose=True, parameters={}):
         name = record.description.split(" ")[0]
 
         # Create instance of RBS Calculator
-        test = RBS_Calculator(mRNA, start_range, name)
+        test = OSTIRFactory(mRNA, start_range, name)
 
         # Examine kvars dictionary and pull out any options. Assign them to instanced class.
         for (key, value) in list(parameters.items()):
@@ -337,7 +338,7 @@ if __name__ == "__main__":
             concurrent_futures_args = []
             for sequence in sequences:
                 cmd_kwargs['seq'] = sequence[1]
-                concurrent_futures_args.append(cmd_kwargs)
+                concurrent_futures_args.append(copy.deepcopy(cmd_kwargs))
             with concurrent.futures.ThreadPoolExecutor(max_workers=cores) as multiprocessor:
                 result = multiprocessor.map(_parallelizer, concurrent_futures_args)
             result = [x for x in result]
