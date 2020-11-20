@@ -9,6 +9,8 @@ import itertools
 import csv
 import copy
 
+ostir_version = 1.0
+
 def calc_dG_from_file(handle, output, verbose=True, parameters={}):
     from Bio import SeqIO
 
@@ -207,7 +209,7 @@ def _parallelizer(input):
     if 'print_out' in input.keys():
         print_out = input['print_out']
     else:
-        print_out = None
+        print_out = False
     if 'sd' in input.keys():
         sd = input['sd']
     else:
@@ -232,6 +234,33 @@ def _parallelizer(input):
         output_data_list.append(outdata)
     return output_data_list
 
+def _print_output(outlist):
+    sorted_predictions = {}
+    keys = []
+    for prediction in outlist:
+        if prediction['RNA'] in sorted_predictions.keys():
+            sorted_predictions[prediction['RNA']].append(prediction)
+        else:
+            sorted_predictions[prediction['RNA']] = [prediction]
+            keys.append(prediction['RNA'])
+
+    output_items = ['start_pos', 'codon', 'Expression', 'dG_total', 'dG_rRNA:mRNA', 'dG_mRNA', 'dG_Spacing', 'dG_Standby', 'dG_Start_Codon']
+    row_format = "{:>15}" * (len(output_items))
+    for rna in keys:
+        print('_________________________________________________')
+        print(f'Tested Sequence: {rna}')
+        print(row_format.format(*output_items))
+        for start in sorted_predictions[rna]:
+            output_data = [start[key] for key in output_items]
+            for i, data_point in enumerate(output_data):
+                if type(data_point) == float:
+                    data_point = format(data_point, '.4f')
+                    output_data[i] = data_point
+            print(row_format.format(*output_data))
+        print('_________________________________________________')
+        pass
+
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='input fasta')
@@ -252,14 +281,6 @@ if __name__ == "__main__":
         required=False,
         type=str,
         help="Output filepath. If not provided, results will output to the console. Usage: -o [filepath]",
-    )
-
-    parser.add_argument(
-        '-d', '--detailed',
-        action='store_true',
-        dest='d',
-        required=False,
-        help="Adds individual dG values to output. Usage: -d",
     )
 
     parser.add_argument(
@@ -323,7 +344,7 @@ if __name__ == "__main__":
         outfile = options.o
     else:
         outfile = None
-        cmd_kwargs['print_out'] = True
+        cmd_kwargs['print_out'] = False
     if options.c:
         cores = options.c
     else:
@@ -337,7 +358,7 @@ if __name__ == "__main__":
 
     vienna_version = subprocess.check_output(['RNAfold', '--version'])
     vienna_version = str(vienna_version.strip()).replace("'", "").split(' ')[1]
-    print(f'Running osTIR (with Vienna version: {vienna_version})')
+    print(f'Running osTIR Version {ostir_version} (with Vienna version: {vienna_version})')
 
     # Output data: RNA, Codon, position, dg_total, dg rRNA:mRNA, dg mRNA, dG Spacing, dg Standby, Kinetic Score
 
@@ -359,7 +380,7 @@ if __name__ == "__main__":
                     dict_writer.writeheader()
                     dict_writer.writerows(result)
             else:
-                print('output here')
+                _print_output(result)
         elif Path(cmd_kwargs['seq']).suffix == '.csv':
             csv_keys = []
             csv_values = []
@@ -371,10 +392,8 @@ if __name__ == "__main__":
                     else:
                         single_input = {}
                         for i2, item in enumerate(row):
-                            single_input[csv_keys[i2]] = item
-                        single_input['detailed_out'] = True
-                        csv_values.append(single_input)
-            print(csv_values)
+                            cmd_kwargs[csv_keys[i2]] = item
+                        csv_values.append(copy.deepcopy(cmd_kwargs))
             with concurrent.futures.ThreadPoolExecutor(max_workers=cores) as multiprocessor:
                 result = multiprocessor.map(_parallelizer, csv_values)
             result = [x for x in result]
@@ -385,6 +404,8 @@ if __name__ == "__main__":
                     dict_writer = csv.DictWriter(output_file, csv_keys)
                     dict_writer.writeheader()
                     dict_writer.writerows(result)
+            else:
+                _print_output(result)
 
         else:
             raise ValueError('Input file is not a supported filetype')
@@ -396,3 +417,5 @@ if __name__ == "__main__":
                 dict_writer = csv.DictWriter(output_file, csv_keys)
                 dict_writer.writeheader()
                 dict_writer.writerows(result)
+        else:
+            _print_output(result)
