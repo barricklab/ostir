@@ -185,6 +185,8 @@ def _parallelizer(input):
         start_loc = 0
     if 'end_loc' in input.keys():
         end_loc = input['end_loc']
+    elif 'start_loc' in input.keys():
+        end_loc = input['start_loc']+1
     else:
         end_loc = len(seq)
     if 'i' in input.keys():
@@ -204,7 +206,7 @@ def _parallelizer(input):
     else:
         print_out = None
 
-    normal, detailed = ostir(seq, constraint_str, outfile, start_loc, end_loc, i, verbose, detailed_out, print_out)
+    normal, detailed= ostir(seq, constraint_str, outfile, start_loc, end_loc, i, verbose, detailed_out, print_out)
     normal = list(normal)
     zip_output = zip(normal, detailed)
     output_data_list = []
@@ -328,7 +330,7 @@ if __name__ == "__main__":
 
     vienna_version = subprocess.check_output(['RNAfold', '--version'])
     vienna_version = str(vienna_version.strip()).replace("'", "").split(' ')[1]
-    print(f'Vienna version: {vienna_version}')
+    print(f'Running osTIR (with Vienna version: {vienna_version})')
 
     # Output data: RNA, Codon, position, dg_total, dg rRNA:mRNA, dg mRNA, dG Spacing, dg Standby, Kinetic Score
 
@@ -349,10 +351,41 @@ if __name__ == "__main__":
                     dict_writer = csv.DictWriter(output_file, csv_keys)
                     dict_writer.writeheader()
                     dict_writer.writerows(result)
-
+            else:
+                print('output here')
         elif Path(cmd_kwargs['seq']).suffix == '.csv':
-            pass
+            csv_keys = []
+            csv_values = []
+            with open(cmd_kwargs['seq'], 'r') as csv_input:
+                reader = csv.reader(csv_input, delimiter=',')
+                for i1, row in enumerate(reader):
+                    if i1 == 0:
+                        csv_keys = row
+                    else:
+                        single_input = {}
+                        for i2, item in enumerate(row):
+                            single_input[csv_keys[i2]] = item
+                        single_input['detailed_out'] = True
+                        csv_values.append(single_input)
+            print(csv_values)
+            with concurrent.futures.ThreadPoolExecutor(max_workers=cores) as multiprocessor:
+                result = multiprocessor.map(_parallelizer, csv_values)
+            result = [x for x in result]
+            result = list(itertools.chain.from_iterable(result))
+            if outfile:
+                csv_keys = result[0].keys()
+                with open(outfile, 'w')  as output_file:
+                    dict_writer = csv.DictWriter(output_file, csv_keys)
+                    dict_writer.writeheader()
+                    dict_writer.writerows(result)
+
         else:
             raise ValueError('Input file is not a supported filetype')
     else:
-        output = ostir(**cmd_kwargs)
+        result = _parallelizer(**cmd_kwargs)
+        if outfile:
+            csv_keys = result[0].keys()
+            with open(outfile, 'w')  as output_file:
+                dict_writer = csv.DictWriter(output_file, csv_keys)
+                dict_writer.writeheader()
+                dict_writer.writerows(result)
