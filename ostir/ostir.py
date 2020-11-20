@@ -111,13 +111,16 @@ def calc_dG_pre_post_RBS(pre_list, post_list, RBS_list, name_list, output, verbo
 
 
 def ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None, i=None, verbose=False,
-                          detailed_out=False, print_out=False):
+                          detailed_out=False, print_out=False, sd=None):
     mRNA = seq
     if end_loc == None:
         end_loc = len(mRNA)
     start_range = [start_loc, end_loc]
 
-    calcObj = OSTIRFactory(mRNA, start_range, 'ACCTCCTTA', constraint_str, verbose=verbose)
+    if not sd:
+        sd = 'ACCTCCTTA'
+
+    calcObj = OSTIRFactory(mRNA, start_range, sd, constraint_str, verbose=verbose)
     calcObj.calc_dG()
 
     dG_total_list = calcObj.dG_total_list[:]
@@ -205,8 +208,12 @@ def _parallelizer(input):
         print_out = input['print_out']
     else:
         print_out = None
+    if 'sd' in input.keys():
+        sd = input['sd']
+    else:
+        sd = None
 
-    normal, detailed= ostir(seq, constraint_str, outfile, start_loc, end_loc, i, verbose, detailed_out, print_out)
+    normal, detailed= ostir(seq, constraint_str, outfile, start_loc, end_loc, i, verbose, detailed_out, print_out, sd)
     normal = list(normal)
     zip_output = zip(normal, detailed)
     output_data_list = []
@@ -290,7 +297,7 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        '-c', '--cores',
+        '-j', '--threads',
         action='store',
         dest='c',
         required=False,
