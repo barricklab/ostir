@@ -296,19 +296,21 @@ def main():
     parser.add_argument(
         '-i', '--input',
         action='store',
+        metavar='str/filepath',
         dest='i',
         required=False,
         type=str,
-        help="input DNA/RNA. Usage: -i [sequence]. Required if not using --validate.",
+        help="input DNA/RNA. Required if not using --validate.",
     )
 
     parser.add_argument(
         '-o', '--output',
         action='store',
+        metavar= 'filepath',
         dest='o',
         required=False,
         type=str,
-        help="Output filepath. If not provided, results will output to the console. Usage: -o [filepath]",
+        help="Output filepath. If not provided, results will output to the console.",
     )
 
     parser.add_argument(
@@ -316,39 +318,43 @@ def main():
         action='store_true',
         dest='v',
         required=False,
-        help="Prints verbose output. Usage: -v",
+        help="Prints verbose output.",
     )
 
     parser.add_argument(
         '-s', '--start',
         action='store',
+        metavar='int',
         dest='s',
         required=False,
         type=int,
-        help="Defines most 5' position to consider start codons Usage: -s [int]",
+        help="Defines most 5' position to consider start codons.",
     )
 
     parser.add_argument(
         '-e', '--end',
         action='store',
+        metavar='int',
         dest='e',
         required=False,
         type=int,
-        help="Defines most 3' position to consider start codons Usage: -e [int]",
+        help="Defines most 3' position to consider start codons.",
     )
 
     parser.add_argument(
         '-r', '--rRNA',
         action='store',
+        metavar='str',
         dest='r',
         required=False,
         type=int,
-        help="Defines rRNA anti-Shine-Dalgarno sequence. Defaults to that of E. coli's. Usage: -r [sequence]",
+        help="Defines rRNA anti-Shine-Dalgarno sequence. Defaults to that of E. coli's.",
     )
 
     parser.add_argument(
         '-j', '--threads',
         action='store',
+        metavar='int',
         dest='j',
         required=False,
         type=int,
@@ -360,7 +366,7 @@ def main():
         action='store_true',
         dest='validate',
         required=False,
-        help="Runs a consistency test to ensure proper installation. Usage: --validate",
+        help="Runs a consistency test to ensure proper installation.",
     )
 
     options = parser.parse_args()
