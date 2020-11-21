@@ -323,11 +323,12 @@ def main():
     )
 
     parser.add_argument(
-        '--validate',
-        action='store_true',
-        dest='validate',
+        '-r', '--rRNA',
+        action='store',
+        dest='r',
         required=False,
-        help="Runs a consistency test to ensure proper installation. Usage: --validate",
+        type=int,
+        help="Defines rRNA anti-Shine-Dalgarno sequence. Defaults to that of E. coli's. Usage: -r [sequence]",
     )
 
     parser.add_argument(
@@ -337,6 +338,14 @@ def main():
         required=False,
         type=int,
         help="Number of threads for multiprocessing",
+    )
+
+    parser.add_argument(
+        '--validate',
+        action='store_true',
+        dest='validate',
+        required=False,
+        help="Runs a consistency test to ensure proper installation. Usage: --validate",
     )
 
     options = parser.parse_args()
@@ -367,6 +376,8 @@ def main():
         cmd_kwargs['start'] = options.s
     if options.e:
         cmd_kwargs['end'] = options.e
+    if options.r:
+        cmd_kwargs['sd'] = options.r
 
     vienna_version = subprocess.check_output(['RNAfold', '--version'])
     vienna_version = str(vienna_version.strip()).replace("'", "").split(' ')[1]
