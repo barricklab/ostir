@@ -116,6 +116,15 @@ def calc_dG_pre_post_RBS(pre_list, post_list, RBS_list, name_list, output, verbo
 
 def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None, i=None, verbose=False,
                           detailed_out=False, print_out=False, sd=None):
+    '''Takes an RNA with optional paramaters and returns binding energies.
+
+        Keyword arguments:
+        seq -- Sequence to calculate binding energies for
+        imag -- the imaginary part (default 0.0)
+        """
+        if imag == 0.0 and real == 0.0:
+            return complex_zero
+    '''
     mRNA = seq
     if end_loc == None:
         end_loc = len(mRNA)
