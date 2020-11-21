@@ -22,9 +22,10 @@
 @TODO: Option/column for rRNA/organism
 '''
 
-from ViennaRNA import *
+from ostir.ViennaRNA import *
 import re
 import math
+import os
 
 class CalcError(Exception):
     """Base class for exceptions in this module."""
@@ -74,6 +75,8 @@ class OSTIRFactory:
         if start_range[0] < 0: start_range[0] = 0
         if start_range[1] > len(mRNA): start_range[1] = len(mRNA)
 
+
+        self.install_location = os.path.dirname(os.path.realpath(__file__))
         self.name = mRNA
         self.mRNA_input = mRNA.upper()
         self.constraints = constraints

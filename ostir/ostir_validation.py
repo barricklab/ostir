@@ -1,8 +1,10 @@
 import subprocess
-from RBS_Calculator_Vienna import RBS_Calculator_Vienna
+from ostir import ostir
 from shutil import which
 import concurrent.futures
 import json
+import csv
+import os
 
 
 
@@ -14,16 +16,42 @@ class ValidationError(Exception):
         super().__init__(self.message)
 
 
-def generate_validation_table(): #TODO: Set this up with Salis input
-    RNAs = [
-    ]
+def generate_validation_table():
+    RNAs = []
+    starts = []
+    csv_keys = []
+    file_location = os.path.dirname(os.path.realpath(__file__))
+    with open(f'{file_location}/salis_2009_input.csv', 'r') as csv_input:
+        reader = csv.reader(csv_input, delimiter=',')
+        for i1, row in enumerate(reader):
+            if i1 == 0:
+                csv_keys = row
+            else:
+                single_input = {}
+                for i2, item in enumerate(row):
+                    if item == '':
+                        item = None
+                    if csv_keys[i2] == 'seq':
+                        item = item.replace(' ', '')
+                        RNAs.append(item)
+                    elif csv_keys[i2] == 'start':
+                        if item == '':
+                            item = None
+                        else:
+                            item = int(item)
+                        starts.append(item)
 
-    def _get_rbs_details(seq):
-        findings, details = RBS_Calculator_Vienna(seq, detailed_out=True)
+    input_sequences = list(zip(RNAs, starts))
+
+
+
+    def _get_rbs_details(data_in):
+        seq, start = data_in
+        findings, details = ostir.run_ostir(seq, start_loc=start, detailed_out=True)
         return seq, list(findings), details
 
-    with concurrent.futures.ThreadPoolExecutor() as multiprocessor:
-        results = multiprocessor.map(_get_rbs_details, RNAs)
+    with concurrent.futures.ThreadPoolExecutor(1) as multiprocessor:
+        results = multiprocessor.map(_get_rbs_details, input_sequences)
 
     results = [x for x in results]
 
@@ -31,12 +59,14 @@ def generate_validation_table(): #TODO: Set this up with Salis input
     for result in results:
         result_table[result[0]] = {'findings': result[1],
                                    'details': result[2]}
-    with open('vienna_validation_table.json', 'w') as outfile:
+    with open(f'{file_location}/ostir_validation_table.json', 'w') as outfile:
         json.dump(result_table, fp=outfile, indent=4)
 
 
 
 def verify_ostir_install():
+    file_location = os.path.dirname(os.path.realpath(__file__))
+
     # Check for missing critical ViennaRNA executables
     dependencies = [which('RNAfold') is not None,
                     which('RNAsubopt') is not None,
@@ -51,12 +81,12 @@ def verify_ostir_install():
         raise ValidationError(f'Vienna version did not match {expected_vienna_version} (was {vienna_version}).')
 
     # Check to make sure predefined RNAs match expected
-    with open('vienna_validation_table.json', 'r') as infile:
+    with open(f'{file_location}/ostir_validation_table.json', 'r') as infile:
         validation_table = json.load(infile)
     multiprocessing_in = [[index, value['details'], value['findings']] for index, value in validation_table.items()]
 
     def _verify_predefined_RNAs(table_info):
-        findings, details = RBS_Calculator_Vienna(table_info[0], detailed_out=True)
+        findings, details = ostir.run_ostir(table_info[0], detailed_out=True)
         if table_info[2] == details and table_info[1] == findings:
             return False
         else:
@@ -69,9 +99,7 @@ def verify_ostir_install():
     if False in result:  # If true, validation has failed
         raise ValidationError(f'At least 1 RNA test did not match expected.')
 
-    print('RNA Calculator validation successful')
-
-
+    print('OSTIR validation successful')
 
 if __name__ == '__main__':
     verify_ostir_install()

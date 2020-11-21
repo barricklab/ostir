@@ -5,6 +5,7 @@ import subprocess, time
 import tempfile
 from shutil import which
 import warnings
+import os
 
 #  On import check dependencies
 dependencies = [which('RNAfold') is not None,
@@ -21,7 +22,7 @@ class ViennaRNA(dict):
 
     debug_mode = 0
     RT = 0.61597 #gas constant times 310 Kelvin (in units of kcal/mol)
-    param_file = "-P rna_turner1999.par "
+    param_file = f"-P {os.path.dirname(os.path.realpath(__file__))}/rna_turner1999.par "
 
 
     def __init__(self,Sequence_List,material = "rna37"):
@@ -41,6 +42,7 @@ class ViennaRNA(dict):
 
         self["sequences"] = Sequence_List
         self["material"] = material
+        self.install_location = os.path.dirname(os.path.realpath(__file__))
 
         random.seed(time.time())
 
@@ -70,7 +72,7 @@ class ViennaRNA(dict):
         material = self["material"]
 
         if material == 'rna1999':
-            param_file = "-P rna_turner1999.par "
+            param_file = f"-P {self.install_location}/rna_turner1999.par "
         else:
             param_file = ''
 
@@ -141,7 +143,7 @@ class ViennaRNA(dict):
 
         material = self["material"]
         if material == 'rna1999':
-            param_file = "-P rna_turner1999.par "
+            param_file = f"-P {self.install_location}/rna_turner1999.par "
         else:
             param_file = ''
 
@@ -265,7 +267,7 @@ class ViennaRNA(dict):
             dangles = " -d2 "
 
         if material == 'rna1999':
-            param_file = "-P rna_turner1999.par "
+            param_file = f"-P {self.install_location}/rna_turner1999.par "
         else:
             param_file = ''
 

@@ -1,0 +1,3 @@
+include ostir/ostir_validation_table.json
+include ostir/rna_turner1999.par
+include ostir/salis_2009_input.csv

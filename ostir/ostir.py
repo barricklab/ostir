@@ -1,6 +1,8 @@
+#!/usr/bin/env python
+
 import argparse
 import math
-from ostir_factory import OSTIRFactory
+from ostir.ostir_factory import OSTIRFactory
 import os
 from pathlib import Path
 import subprocess
@@ -112,7 +114,7 @@ def calc_dG_pre_post_RBS(pre_list, post_list, RBS_list, name_list, output, verbo
     output.close()
 
 
-def ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None, i=None, verbose=False,
+def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None, i=None, verbose=False,
                           detailed_out=False, print_out=False, sd=None):
     mRNA = seq
     if end_loc == None:
@@ -174,6 +176,17 @@ def parse_fasta(filepath):
     return sequences
 
 def _parallelizer(input):
+
+    def _valid_entry(key_to_test):
+        if key_to_test not in input.keys():
+            return False
+        elif input[key_to_test] == '':
+            return False
+        elif not input[key_to_test]:
+            return False
+        else:
+            return True
+
     #unpack args:
     seq = input['seq']
     if 'constraint_str' in input.keys():
@@ -184,14 +197,14 @@ def _parallelizer(input):
         outfile = input['outfile']
     else:
         outfile = None
-    if 'start_loc' in input.keys():
-        start_loc = input['start_loc']
+    if _valid_entry('start'):
+        start_loc = int(input['start'])-1
     else:
         start_loc = 0
-    if 'end_loc' in input.keys():
-        end_loc = input['end_loc']
-    elif 'start_loc' in input.keys():
-        end_loc = input['start_loc']+1
+    if _valid_entry('end'):
+        end_loc = int(input['end'])-1
+    elif _valid_entry('start'):
+        end_loc = int(input['start'])+1
     else:
         end_loc = len(seq)
     if 'i' in input.keys():
@@ -215,6 +228,7 @@ def _parallelizer(input):
     else:
         sd = None
 
+
     normal, detailed= ostir(seq, constraint_str, outfile, start_loc, end_loc, i, verbose, detailed_out, print_out, sd)
     normal = list(normal)
     zip_output = zip(normal, detailed)
@@ -222,7 +236,7 @@ def _parallelizer(input):
     for output in list(zip_output):
         outdata = {'RNA': seq,
                    'codon': output[0][5],
-                   'start_pos': output[0][1],
+                   'start_pos': output[0][1]+1,
                    'dG_total': output[0][3],
                    'dG_rRNA:mRNA': output[1][0],
                    'dG_mRNA': output[1][2],
@@ -246,8 +260,8 @@ def _print_output(outlist):
 
     output_items = ['start_pos', 'codon', 'Expression', 'dG_total', 'dG_rRNA:mRNA', 'dG_mRNA', 'dG_Spacing', 'dG_Standby', 'dG_Start_Codon']
     row_format = "{:>15}" * (len(output_items))
+    print('_________________________________________________')
     for rna in keys:
-        print('_________________________________________________')
         print(f'Tested Sequence: {rna}')
         print(row_format.format(*output_items))
         for start in sorted_predictions[rna]:
@@ -261,9 +275,8 @@ def _print_output(outlist):
         pass
 
 
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='input fasta')
+def main():
+    parser = argparse.ArgumentParser(description='Open Source Transcription Initiation Rates')
 
     parser.add_argument(
         '-i', '--input',
@@ -271,7 +284,7 @@ if __name__ == "__main__":
         dest='i',
         required=False,
         type=str,
-        help="input DNA/RNA. Usage: -i [sequence]",
+        help="input DNA/RNA. Usage: -i [sequence]. Required if not using --validate.",
     )
 
     parser.add_argument(
@@ -314,27 +327,26 @@ if __name__ == "__main__":
         action='store_true',
         dest='validate',
         required=False,
-        help="Runs validation script to ensure proper installation. Usage: --validate",
+        help="Runs a consistency test to ensure proper installation. Usage: --validate",
     )
 
     parser.add_argument(
         '-j', '--threads',
         action='store',
-        dest='c',
+        dest='j',
         required=False,
         type=int,
         help="Number of threads for multiprocessing",
     )
 
-
     options = parser.parse_args()
 
     if options.validate:
-        import vienna_validation
-        vienna_validation.verify_rbs_calc_install()
+        from ostir.ostir_validation import verify_ostir_install
+        verify_ostir_install()
         exit()
     elif not options.i:
-        print('An input must be provided: -i/--input')
+        subprocess.run(['ostir', '-h'])
         exit(1)
 
     cmd_kwargs = dict()
@@ -345,16 +357,16 @@ if __name__ == "__main__":
     else:
         outfile = None
         cmd_kwargs['print_out'] = False
-    if options.c:
-        cores = options.c
+    if options.j:
+        cores = options.j
     else:
         cores = 1
     if options.v:
         cmd_kwargs['verbose'] = options.v
     if options.s:
-        cmd_kwargs['start_loc'] = options.s
+        cmd_kwargs['start'] = options.s
     if options.e:
-        cmd_kwargs['end_loc'] = options.e
+        cmd_kwargs['end'] = options.e
 
     vienna_version = subprocess.check_output(['RNAfold', '--version'])
     vienna_version = str(vienna_version.strip()).replace("'", "").split(' ')[1]
@@ -392,6 +404,10 @@ if __name__ == "__main__":
                     else:
                         single_input = {}
                         for i2, item in enumerate(row):
+                            if item == '':
+                                item = None
+                            if csv_keys[i2] == 'seq':
+                                item = item.replace(' ', '')
                             cmd_kwargs[csv_keys[i2]] = item
                         csv_values.append(copy.deepcopy(cmd_kwargs))
             with concurrent.futures.ThreadPoolExecutor(max_workers=cores) as multiprocessor:
@@ -419,3 +435,7 @@ if __name__ == "__main__":
                 dict_writer.writerows(result)
         else:
             _print_output(result)
+
+
+if __name__ == "__main__":
+    main()
