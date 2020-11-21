@@ -157,6 +157,7 @@ def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None,
         return return_var
 
 def parse_fasta(filepath):
+    '''Takes a filepath to a fasta formatted file and returns a list of [header, sequence].'''
     sequences = []
     current_seq_name = None
     current_seq = ""
@@ -176,8 +177,10 @@ def parse_fasta(filepath):
     return sequences
 
 def _parallelizer(input):
+    '''Used to process concurrent.futures input into run_ostir(), and processes the output for csv/command line out.'''
 
     def _valid_entry(key_to_test):
+        '''Returns False if command line/csv input was empty, else returns true.'''
         if key_to_test not in input.keys():
             return False
         elif input[key_to_test] == '':
@@ -229,7 +232,8 @@ def _parallelizer(input):
         sd = None
 
 
-    normal, detailed= ostir(seq, constraint_str, outfile, start_loc, end_loc, i, verbose, detailed_out, print_out, sd)
+    normal, detailed= run_ostir(seq, constraint_str, outfile, start_loc,
+                                end_loc, i, verbose, detailed_out, print_out, sd)
     normal = list(normal)
     zip_output = zip(normal, detailed)
     output_data_list = []
@@ -249,6 +253,7 @@ def _parallelizer(input):
     return output_data_list
 
 def _print_output(outlist):
+    '''Processes command line / csv input for pretty command line output'''
     sorted_predictions = {}
     keys = []
     for prediction in outlist:
@@ -276,6 +281,7 @@ def _print_output(outlist):
 
 
 def main():
+    '''Main OSTIR function ran when called as an executable. See ostir -h.'''
     parser = argparse.ArgumentParser(description='Open Source Transcription Initiation Rates')
 
     parser.add_argument(
