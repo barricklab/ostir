@@ -6,8 +6,8 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="osTIR-barricklab", # Replace with your own username
     version="0.0.1",
-    author="Example Author",
-    author_email="author@example.com",
+    author="Barrick Lab",
+    author_email="croots@utexas.edu",
     description="Open Source Transcription Initiation",
     long_description=long_description,
     long_description_content_type="text/markdown",

@@ -1,4 +1,6 @@
-# rbs-calculator
+# osTIR
+
+Open Source Translation Initiation Rates
 Customized and updated version of RBS-Calculator-v1.0
 
 Modifications begun on May 21, 2019.

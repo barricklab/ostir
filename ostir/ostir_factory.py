@@ -17,11 +17,6 @@
 # along with Ribosome Binding Site Calculator.  If not, see <http://www.gnu.org/licenses/>.
 # Copyright 2008-2009 is owned by the University of California Regents. All rights reserved.
 
-'''
-@TODO: csv parsing of multiple RNAs for parallelization (optional start codons)
-@TODO: Option/column for rRNA/organism
-'''
-
 from ostir.ViennaRNA import *
 import re
 import math

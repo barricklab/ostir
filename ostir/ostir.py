@@ -11,7 +11,7 @@ import itertools
 import csv
 import copy
 
-ostir_version = 1.0
+ostir_version = '0.0.1 (In-Development)'
 
 def calc_dG_from_file(handle, output, verbose=True, parameters={}):
     from Bio import SeqIO
@@ -120,10 +120,16 @@ def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None,
 
         Keyword arguments:
         seq -- Sequence to calculate binding energies for
-        imag -- the imaginary part (default 0.0)
-        """
-        if imag == 0.0 and real == 0.0:
-            return complex_zero
+        constraint_str --
+        outfile -- Filepath for output csv
+        start_loc -- First base to start considering start codons. Defaults to first base
+        end_loc -- Last base to start considering start codons. Defaults to end of sequence
+        i -- Returns i as part of the first return variable, useful for tagging things for downstream processing.
+        verbose -- Prints debug information
+        detailed_out -- returns components of total dG as an additional return variable
+        print_out -- prints output to the console
+        sd -- Defines anti-Shine-Dalgarno sequence. Defaults to that of E. coli's
+
     '''
     mRNA = seq
     if end_loc == None:
