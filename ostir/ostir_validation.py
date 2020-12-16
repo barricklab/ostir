@@ -17,6 +17,7 @@ class ValidationError(Exception):
 
 
 def generate_validation_table():
+    '''Runs osTIR with a hardcoded input file to generate the consistency test standard.'''
     RNAs = []
     starts = []
     csv_keys = []
@@ -46,6 +47,7 @@ def generate_validation_table():
 
 
     def _get_rbs_details(data_in):
+        '''Internal. Runs vienna on each '''
         seq, start = data_in
         findings, details = ostir.run_ostir(seq, start_loc=start, detailed_out=True)
         return seq, list(findings), details

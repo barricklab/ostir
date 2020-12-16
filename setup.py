@@ -4,9 +4,9 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="osTIR-barricklab", # Replace with your own username
+    name="osTIR",
     version="0.0.1",
-    author="Barrick Lab",
+    author="Barrick Lab/croots",
     author_email="croots@utexas.edu",
     description="Open Source Transcription Initiation",
     long_description=long_description,
