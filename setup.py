@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="osTIR",
-    version="0.0.1",
+    version="0.0.2",
     author="Barrick Lab/croots",
     author_email="croots@utexas.edu",
     description="Open Source Transcription Initiation",

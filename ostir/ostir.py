@@ -11,7 +11,7 @@ import itertools
 import csv
 import copy
 
-ostir_version = '0.0.1 (In-Development)'
+ostir_version = '0.0.2 (In-Development)'
 
 def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None, i=None, verbose=False,
                           detailed_out=False, print_out=False, sd=None):
@@ -363,7 +363,7 @@ def main():
         else:
             raise ValueError('Input file is not a supported filetype')
     else:
-        result = _parallelizer(**cmd_kwargs)
+        result = _parallelizer(cmd_kwargs)
         if outfile:
             csv_keys = result[0].keys()
             with open(outfile, 'w')  as output_file:
