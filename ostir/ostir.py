@@ -345,7 +345,8 @@ def main():
                                 item = None
                             if csv_keys[i2] == 'seq':
                                 item = item.replace(' ', '')
-                            cmd_kwargs[csv_keys[i2]] = item
+                            if item:
+                                cmd_kwargs[csv_keys[i2]] = item
                         csv_values.append(copy.deepcopy(cmd_kwargs))
             with concurrent.futures.ThreadPoolExecutor(max_workers=cores) as multiprocessor:
                 result = multiprocessor.map(_parallelizer, csv_values)

@@ -8,7 +8,7 @@ import os
 
 
 
-expected_vienna_version = '2.4.15'
+expected_vienna_version = '2.4.17'
 
 class ValidationError(Exception):
     def __init__(self, message):
@@ -80,7 +80,8 @@ def verify_ostir_install():
     vienna_version = subprocess.check_output(['RNAfold', '--version'])
     vienna_version = str(vienna_version.strip()).replace("'", "").split(' ')[1]
     if vienna_version != expected_vienna_version:
-        raise ValidationError(f'Vienna version did not match {expected_vienna_version} (was {vienna_version}).')
+        raise UserWarning(f'Vienna version did not match {expected_vienna_version} (was {vienna_version}, '
+                          f'this may invalidate test results).')
 
     # Check to make sure predefined RNAs match expected
     with open(f'{file_location}/ostir_validation_table.json', 'r') as infile:

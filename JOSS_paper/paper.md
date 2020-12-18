@@ -42,7 +42,7 @@ ViennaRNA [@Lorenz:2011] software suite to perform free energy calculations
 for binding events involved during protein translation initiation. This work is
 derived from the last open source version of the calculator described in Salis
 2009, and accuracy of osTIR was benchmarked against the same experimental data
-with comparable or better accuracy compared to previous works
+with comparable or better accuracy compared to previous works.
 [@Salis:2009; @Na:2010; @Reis:2020; @Bonde:2016].
 
 `osTIR` was written with a user-friendly interface and high throughput in mind.
