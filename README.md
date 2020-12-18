@@ -2,7 +2,7 @@
 
 ## Open Source Translation Initiation Rates
 
-`OSTIR` (open source Translation Initiation of Ribosomes) is an open source
+`OSTIR` (Open Source Translation Initiation of Ribosomes) is an open source
 Python package that integrates RNA spacing considerations and the
 ViennaRNA software suite to perform free energy calculations
 for binding events involved during protein translation initiation. This work is
