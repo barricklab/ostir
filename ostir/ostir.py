@@ -162,9 +162,10 @@ def _parallelizer(input):
                    'dG_rRNA:mRNA': output[1][0],
                    'dG_mRNA': output[1][2],
                    'dG_Spacing': output[1][4],
+                   'Spacing': str(output[1][5]) + ' bp',
                    'dG_Standby': output[1][3],
                    'dG_Start_Codon': output[1][1],
-                   'Expression': output[0][0]
+                   'Expression': output[0][0],
                    }
         output_data_list.append(outdata)
     return output_data_list
@@ -180,7 +181,7 @@ def _print_output(outlist):
             sorted_predictions[prediction['RNA']] = [prediction]
             keys.append(prediction['RNA'])
 
-    output_items = ['start_pos', 'codon', 'Expression', 'dG_total', 'dG_rRNA:mRNA', 'dG_mRNA', 'dG_Spacing', 'dG_Standby', 'dG_Start_Codon']
+    output_items = ['start_pos', 'codon', 'Expression', 'dG_total', 'dG_rRNA:mRNA', 'dG_mRNA', 'dG_Spacing', 'Spacing', 'dG_Standby', 'dG_Start_Codon']
     row_format = "{:>15}" * (len(output_items))
     print('_________________________________________________')
     for rna in keys:

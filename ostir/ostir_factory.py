@@ -220,6 +220,7 @@ class OSTIRFactory:
         # 3. Find 16S rRNA binding site that minimizes dG_spacing+dG_mRNA_rRNA.
         [dG_mRNA_rRNA_folding, index] = self.find_min(dG_mRNA_rRNA_withspacing)
         dG_spacing_final = dG_spacing_list[index]
+        spacing_value = aligned_spacing[index]
 
 
 
@@ -347,7 +348,7 @@ class OSTIRFactory:
         structure["bp_x"] = total_bp_x
         structure["bp_y"] = total_bp_y
 
-        return (total_energy_withspacing, structure)
+        return total_energy_withspacing, structure, spacing_value
 
     def calc_dG_standby_site(self, structure_old, rRNA_binding=True):
         """Calculates the dG_standby given the structure of the mRNA:rRNA complex"""
@@ -774,7 +775,7 @@ class OSTIRFactory:
                 [dG_mRNA, mRNA_structure] = self.calc_dG_mRNA(start_pos)
 
                 # Energy of mRNA:rRNA hybridization & folding
-                [dG_mRNA_rRNA_withspacing, mRNA_rRNA_structure] = self.calc_dG_mRNA_rRNA(start_pos)
+                [dG_mRNA_rRNA_withspacing, mRNA_rRNA_structure, spacing_value] = self.calc_dG_mRNA_rRNA(start_pos)
                 dG_mRNA_rRNA_withspacing -= 2.481  # Modifying hybridization penalty to match NUPACK
 
                 dG_mRNA_rRNA_nospacing = mRNA_rRNA_structure["dG_mRNA_rRNA"]
@@ -810,7 +811,8 @@ class OSTIRFactory:
                 self.dG_spacing_list.append(mRNA_rRNA_structure["dG_spacing"])
                 self.dG_standby_site_list.append(dG_standby_site)
                 self.dG_total_list.append(dG_total)
-                self.dG_details.append([dG_mRNA_rRNA_nospacing, dG_start_codon, dG_mRNA, dG_standby_site, mRNA_rRNA_structure["dG_spacing"]])
+                self.dG_details.append([dG_mRNA_rRNA_nospacing, dG_start_codon, dG_mRNA, dG_standby_site,
+                                        mRNA_rRNA_structure["dG_spacing"], spacing_value])
 
                 self.helical_loop_list_list.append(helical_loop_list)
                 self.bulge_loop_list_list.append(bulge_loop_list)
