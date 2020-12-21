@@ -17,7 +17,10 @@
 # along with Ribosome Binding Site Calculator.  If not, see <http://www.gnu.org/licenses/>.
 # Copyright 2008-2009 is owned by the University of California Regents. All rights reserved.
 
-from ostir.ViennaRNA import *
+try:
+    from ostir.ViennaRNA import *
+except ModuleNotFoundError:
+    from ViennaRNA import *
 import re
 import math
 import os
@@ -65,7 +68,7 @@ class OSTIRFactory:
 
         exp = re.compile('[ATGCU]', re.IGNORECASE)
         if exp.match(mRNA) == None:
-            raise ValueError("Invalid letters found in sequence ""%s"". Only ATGCU accepted." % mRNA)
+            raise ValueError(f"Invalid letters found in sequence {mRNA}. Only ATGCU accepted.")
 
         if start_range[0] < 0: start_range[0] = 0
         if start_range[1] > len(mRNA): start_range[1] = len(mRNA)
@@ -198,7 +201,8 @@ class OSTIRFactory:
 
         # Calculate the aligned spacing for each binding site in the list
         aligned_spacing = []
-        for (bp_x, bp_y) in zip(fold["subopt_basepairing_x"], fold["subopt_basepairing_y"]):
+        proposed_pairings = list(zip(fold["subopt_basepairing_x"], fold["subopt_basepairing_y"]))
+        for (bp_x, bp_y) in proposed_pairings:
             aligned_spacing.append(self.calc_aligned_spacing(mRNA, start_pos_in_subsequence, bp_x, bp_y))
 
         dG_spacing_list = []
@@ -212,9 +216,12 @@ class OSTIRFactory:
             dG_spacing_list.append(val)
             dG_mRNA_rRNA_withspacing.append(val + fold["subopt_energy"][counter])
 
+
         # 3. Find 16S rRNA binding site that minimizes dG_spacing+dG_mRNA_rRNA.
         [dG_mRNA_rRNA_folding, index] = self.find_min(dG_mRNA_rRNA_withspacing)
         dG_spacing_final = dG_spacing_list[index]
+
+
 
         dG_mRNA_rRNA_nospacing = dG_mRNA_rRNA[index]
 
@@ -234,12 +241,15 @@ class OSTIRFactory:
 
         bp_x = fold["subopt_basepairing_x"][index]
         bp_y = fold["subopt_basepairing_y"][index]
+
+
         for (nt_x, nt_y) in zip(bp_x, bp_y):
             if nt_y > len(mRNA):  # nt is rRNA
                 most_5p_mRNA = min(most_5p_mRNA, bp_x[bp_y.index(nt_y)])
                 most_3p_mRNA = max(most_3p_mRNA, bp_x[bp_y.index(nt_y)])
                 bp_x_target.append(nt_x)
                 bp_y_target.append(nt_y)
+
 
         # The rRNA-binding site is between the nucleotides at positions most_5p_mRNA and most_3p_mRNA
         # Now, fold the pre-sequence, rRNA-binding-sequence and post-sequence separately. Take their base pairings and combine them together. Calculate the total energy. For secondary structures, this splitting operation is allowed.
@@ -287,6 +297,7 @@ class OSTIRFactory:
             total_bp_x.append(nt_x + offset)
             total_bp_y.append(nt_y + offset)
 
+
         # Add rRNA-binding site base pairings to total base pairings
         offset = 0  # Begins at zero
         if startpos_to_end_len < self.cutoff:
@@ -312,6 +323,7 @@ class OSTIRFactory:
         for (nt_x, nt_y) in zip(bp_x_post, bp_y_post):
             total_bp_x.append(nt_x + offset)
             total_bp_y.append(nt_y + offset)
+
 
         mRNA = self.mRNA_input[begin:mRNA_len]
         fold = ViennaRNA([mRNA, self.rRNA], material=self.RNA_model)

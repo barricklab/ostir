@@ -2,7 +2,6 @@
 
 import argparse
 import math
-from ostir.ostir_factory import OSTIRFactory
 import os
 from pathlib import Path
 import subprocess
@@ -10,6 +9,10 @@ import concurrent.futures
 import itertools
 import csv
 import copy
+try:
+    from ostir.ostir_factory import OSTIRFactory
+except ModuleNotFoundError:
+    from ostir_factory import OSTIRFactory
 
 ostir_version = '0.0.2 (In-Development)'
 
@@ -343,6 +346,8 @@ def main():
                         for i2, item in enumerate(row):
                             if item == '':
                                 item = None
+                            elif '\\ufeff' in item:
+                                item = item.replace('\\ufeff', '')
                             if csv_keys[i2] == 'seq':
                                 item = item.replace(' ', '')
                             if item:

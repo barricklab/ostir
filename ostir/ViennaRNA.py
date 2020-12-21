@@ -6,6 +6,7 @@ import tempfile
 from shutil import which
 import warnings
 import os
+from shutil import copyfile
 
 #  On import check dependencies
 dependencies = [which('RNAfold') is not None,
@@ -22,7 +23,6 @@ class ViennaRNA(dict):
 
     debug_mode = 0
     RT = 0.61597 #gas constant times 310 Kelvin (in units of kcal/mol)
-    param_file = f"-P {os.path.dirname(os.path.realpath(__file__))}/rna_turner1999.par "
 
 
     def __init__(self,Sequence_List,material = "rna37"):
@@ -73,6 +73,8 @@ class ViennaRNA(dict):
 
         if material == 'rna1999':
             param_file = f"-P {self.install_location}/rna_turner1999.par "
+        elif material == 'rna2004':
+            param_file = f"-P {self.install_location}/rna_turner2004.par "
         else:
             param_file = ''
 
@@ -89,10 +91,10 @@ class ViennaRNA(dict):
             outputPS_str = " --noPS "
             
         if constraints is None:
-            args = outputPS_str + dangles + param_file + self.prefix
+            args = outputPS_str + dangles + "--noLP " + param_file + self.prefix
 
         else:
-            args = outputPS_str + dangles + "-C " + param_file + self.prefix
+            args = outputPS_str + dangles + "--noLP " + "-C " + param_file + self.prefix
 
 
         #Call ViennaRNA C programs
@@ -144,6 +146,8 @@ class ViennaRNA(dict):
         material = self["material"]
         if material == 'rna1999':
             param_file = f"-P {self.install_location}/rna_turner1999.par "
+        elif material == 'rna2004':
+            param_file = f"-P {self.install_location}/rna_turner2004.par "
         else:
             param_file = ''
 
@@ -151,9 +155,10 @@ class ViennaRNA(dict):
         #seq_string = self["sequences"][0]
 
         #print(f'SEQ STRING: {seq_string}')
+        constraints = None
         if constraints is None:
-            input_string = seq_string + "\n" 
-        else: 
+            input_string = seq_string + "\n"
+        else:
             input_string = seq_string + "\n" + constraints + "&........." "\n"
 
         #print(self.prefix)
@@ -179,9 +184,9 @@ class ViennaRNA(dict):
         cmd = "RNAsubopt"
         energy_gap = energy_gap + 2.481
         if constraints is None:
-            args = " -e " + str(energy_gap) + " -T " + str(Temp) + dangles + "--sorted --en-only " + param_file + " < " + self.prefix + '.txt'
+            args = " -e " + str(energy_gap) + " -T " + str(Temp) + dangles + "--sorted --en-only " + "--noLP " + param_file + " < " + self.prefix + '.txt'
         else:
-            args = " -e " + str(energy_gap) + " -T " + str(Temp) + dangles + "--sorted --en-only " + "-C " + param_file + " < " + self.prefix + '.txt'
+            args = " -e " + str(energy_gap) + " -T " + str(Temp) + dangles + "--sorted --en-only " + "--noLP " + "-C " + param_file + " < " + self.prefix + '.txt'
 
         #print(self.prefix)
         #print(cmd + args)
@@ -268,13 +273,14 @@ class ViennaRNA(dict):
 
         if material == 'rna1999':
             param_file = f"-P {self.install_location}/rna_turner1999.par "
+        elif material == 'rna2004':
+            param_file = f"-P {self.install_location}/rna_turner2004.par "
         else:
             param_file = ''
 
         #Call ViennaRNA C programs
         cmd = "RNAeval"
         args = dangles + param_file + self.prefix
-        #print(cmd + args)
 
         output = subprocess.Popen(cmd + args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines = True) #newlines argument was added because subprocess.popen was appending b's to the list output (byte stuff? I dont totally understand)
 
@@ -356,7 +362,7 @@ class ViennaRNA(dict):
             bp_y = [pos+1 for pos in bp_y[:]] #Shift so that 1st position is 1
             #print("subopt bp_x " + str(bp_x))
             #print("subopt bp_y " + str(bp_y))
-        
+
         return (strands,bp_x, bp_y)
 
     def convert_numbered_pairs_to_bracket(self,strands,bp_x,bp_y):
@@ -378,37 +384,3 @@ class ViennaRNA(dict):
             counter+=seq_len
 
         return "".join(bracket_notation)
-
-'''
-if __name__ == "__main__":
-
-    sequences = ["TCTGGCAGGGACCTGCACACGGATTGTGTGTGTTCCAGAGATGATAAAAAAGGAGTTAGTCTTGGTATGAGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTG"] #,"acctcctta"]
-    len(sequences) #,"acctcctta"]
-    const_str = None
-
-    test = ViennaRNA(sequences, material = "rna37")
-    print(test)
-    #dangles = "none"
-    #constraints = none
-
-    test.mfe([1], constraints = const_str , dangles = "none", Temp = 37.0)
-
-    bp_x = test["mfe_basepairing_x"][0]
-    bp_y = test["mfe_basepairing_y"][0]
-    strands = test["totalnt"]
-    bracket_string = test.convert_numbered_pairs_to_bracket(strands,bp_x,bp_y)
-    print(bracket_string)
-
-    (strands,bp_x, bp_y) = test.convert_bracket_to_numbered_pairs(bracket_string)
-
-    print("Strands = ", strands)
-    print("bp_x = ", bp_x)
-    print("bp_y = ", bp_y)
-
-    print(test.energy(strands, bp_x, bp_y, dangles = "all"))
-    test.subopt(strands,const_str,0.5,dangles = "all")
-    print(test)
-
-#    print bracket_string
-#    print test.convert_numbered_pairs_to_bracket(strands,bp_x,bp_y)
-'''
