@@ -6,20 +6,31 @@ The data is from: Salis HM, Mirsky EA, Voigt CA. 2009. Automated design of synth
 
 The fitting procedure used by OSTIR also follows the procedure from Salis et al. 2009, except with some modifications described in the R script.
 
-To run the calibration:
+Use this command to run the calibration:
 ```bash
 Rscript ostir_calibration.R
 ```
 
-## Fitting Δ_G_(spacing)
+The file `input.csv` must have the Δ*G* values that have all components except for the Δ*G*(spacing)!
 
-![Spacing Model Plot](output.spacing_dG.png)
+## Fitting Δ*G*(spacing)
 
-## Total Δ_G_ versus measured translation initiation rate
-![Spacing Model Plot](output.total_dG_versus_measured_rate.png)
+<img src="output.spacing_dG.png" width="500">
+
+## Total Δ*G* versus measured translation initiation rate
+
+<img src="output.total_dG_versus_measured_rate.png" width="500">
 
 ## Predicted versus measured translation initiation rates
-![Predicted Versus Measured Rate](output.predicted_rate_versus_measured_rate.png)
+
+<img src="output.predicted_rate_versus_measured_rate.png" width="500">
 
 ## Fold error predicted versus measured
-![Log2 Fold Error](output.log2_fold_error.png)
+
+<img src="output.log2_fold_error.png" width="500">
+
+Fraction of measurements with < 2-fold error: 0.485
+
+Fraction of measurements with < 4-fold error: 0.773 
+
+Fraction of measurements with <10-fold error: 0.917
