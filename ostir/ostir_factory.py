@@ -36,10 +36,12 @@ class CalcError(Exception):
 
 
 class OSTIRFactory:
-    # From experimental characterization of ALL Predicted RBSs as of 1/20/08
-    RT_eff = 2.222
-    logK = 7.824
-    K = 2500.0  # this have likely changed between 1.0 and 2.0
+
+    # From OSTIR calibration using Salis2009 data. See calibration directory for procedure
+    Beta = 0.409791902
+    RT_eff = 1/Beta
+    logK = 7.521443718
+    K = math.exp(logK)
 
     # Global parameters -- constants
     infinity = 1e12  # For all practical purposes, here.
@@ -51,8 +53,9 @@ class OSTIRFactory:
     temp = 37.0
     optimal_spacing = 5  # aligned spacing
 
-    dG_spacing_constant_push = [12.2, 2.5, 2.0, 3.0]
-    dG_spacing_constant_pull = [0.048, 0.24, 0.0]
+    # From OSTIR calibration using Salis2009 data. See calibration directory for procedure
+    dG_spacing_constant_push = [16.82302793, 3.485560868, 1.76538344, 3.0]
+    dG_spacing_constant_pull = [0.063430621, 0.283434306, 0.0]
     cutoff = 35  # number of nt +- start codon considering for folding
     standby_site_length = 4  # Number of nt before SD sequence that must be unpaired for ribosome binding
     energy_cutoff = 3.0
@@ -779,6 +782,8 @@ class OSTIRFactory:
                 dG_mRNA_rRNA_withspacing -= 2.481  # Modifying hybridization penalty to match NUPACK
 
                 dG_mRNA_rRNA_nospacing = mRNA_rRNA_structure["dG_mRNA_rRNA"]
+                dG_mRNA_rRNA_nospacing -= 2.481  # Modifying hybridization penalty to match NUPACK
+
 
                 # Standby site correction:
                 [dG_standby_site, corrected_structure] = self.calc_dG_standby_site(mRNA_rRNA_structure,
