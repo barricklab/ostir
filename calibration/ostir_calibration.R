@@ -41,7 +41,7 @@ X$Fluorescence.Log.Average = log(X$Fluorescence.Average)
 
 ## STEP 1: Fit Beta and LogK from sets of sequences with the same spacing
 
-method.of.interest = "OSTIR.No.Spacing.dG"
+method.of.interest = "OSTIR.ViennaRNA.Turner2004.No.Spacing.dG"
 
 X.filtered = X %>% filter(method==method.of.interest)
 

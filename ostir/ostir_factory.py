@@ -37,15 +37,15 @@ class CalcError(Exception):
 
 class OSTIRFactory:
 
-    # From OSTIR calibration using Salis2009 data. See calibration directory for procedure
-    Beta = 0.409791902
+    # From OSTIR calibration using Salis2009 data. See calibration directory for procedure.
+    Beta = 0.390170603
     RT_eff = 1/Beta
-    logK = 7.521443718
+    logK = 7.316251063
     K = math.exp(logK)
 
     # Global parameters -- constants
     infinity = 1e12  # For all practical purposes, here.
-    RNA_model = 'rna1999'
+    RNA_model = 'rna2004'
     start_codon_energies = {"ATG": -1.194, "AUG": -1.194, "GTG": -0.0748, "GUG": -0.0748, "TTG": -0.0435,
                             "UUG": -0.0435, "CTG": -0.03406, "CUG": -0.03406}  # hybridization to CAT
     auto_dangles = True
@@ -54,8 +54,8 @@ class OSTIRFactory:
     optimal_spacing = 5  # aligned spacing
 
     # From OSTIR calibration using Salis2009 data. See calibration directory for procedure
-    dG_spacing_constant_push = [16.82302793, 3.485560868, 1.76538344, 3.0]
-    dG_spacing_constant_pull = [0.063430621, 0.283434306, 0.0]
+    dG_spacing_constant_push = [17.61887531, 3.724962718, 1.939850379, 3.0]
+    dG_spacing_constant_pull = [0.063005251, 0.286289085, 0.0]
     cutoff = 35  # number of nt +- start codon considering for folding
     standby_site_length = 4  # Number of nt before SD sequence that must be unpaired for ribosome binding
     energy_cutoff = 3.0
