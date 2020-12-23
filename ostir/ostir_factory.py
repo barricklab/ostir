@@ -45,7 +45,7 @@ class OSTIRFactory:
 
     # Global parameters -- constants
     infinity = 1e12  # For all practical purposes, here.
-    RNA_model = 'rna1999'
+    RNA_model = 'rna2004'
     start_codon_energies = {"ATG": -1.194, "AUG": -1.194, "GTG": -0.0748, "GUG": -0.0748, "TTG": -0.0435,
                             "UUG": -0.0435, "CTG": -0.03406, "CUG": -0.03406}  # hybridization to CAT
     auto_dangles = True
