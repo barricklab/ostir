@@ -64,6 +64,7 @@ and referenced from text using \autoref{fig:example}.
 
 # Acknowledgements
 
-???
+We would like to thank the Texas Advanced Computing Center for maintaining computational resources for this and related projects.
+We would also like to extend a thank you to the National Institutes of Health for funding this work.
 
 # References
