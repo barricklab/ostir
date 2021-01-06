@@ -78,11 +78,11 @@ class ViennaRNA(dict):
         else:
             param_file = ''
 
-        if dangles is "none":
+        if dangles == "none":
             dangles = " -d0 "
-        elif dangles is "some":
+        elif dangles == "some":
             dangles = " -d1 "
-        elif dangles is "all":
+        elif dangles == "all":
             dangles = " -d2 "
 
         if outputPS:
@@ -168,11 +168,11 @@ class ViennaRNA(dict):
         #Set arguments
         material = self["material"]
 
-        if dangles is "none":
+        if dangles == "none":
             dangles = " -d0 "
-        elif dangles is "some":
+        elif dangles == "some":
             dangles = " -d1 "
-        elif dangles is "all":
+        elif dangles == "all":
             dangles = " -d2 "
 
         if outputPS:
@@ -329,22 +329,22 @@ class ViennaRNA(dict):
         num_strands=0
         #print(bracket_string)
         for (pos,letter) in enumerate(bracket_string[:]):
-            if letter is ".":
+            if letter == ".":
                 counter += 1
 
-            elif letter is "(":
+            elif letter == "(":
                 bp_x.append(pos-num_strands)
                 last_nt_x_list.append(pos-num_strands)
                 counter += 1
 
-            elif letter is ")":
+            elif letter == ")":
                 nt_x = last_nt_x_list.pop() #nt_x is list of "(" except last entry
                 #print('this is the last_nt_x_list ' + str(last_nt_x_list.pop()))
                 nt_x_pos = bp_x.index(nt_x) 
                 bp_y[nt_x_pos] = pos-num_strands
                 counter += 1
 
-            elif letter is "&":
+            elif letter == "&":
                 strands.append(counter)
                 counter=0
                 num_strands+=1
