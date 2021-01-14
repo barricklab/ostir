@@ -45,8 +45,8 @@ def generate_validation_table():
     def _get_rbs_details(data_in):
         '''Internal. Runs vienna on each '''
         seq, start = data_in
-        findings, details = ostir.run_ostir(seq, start_loc=start, detailed_out=True)
-        return seq, list(findings), details
+        findings = ostir.run_ostir(seq, start_loc=start, detailed_out=True)
+        return seq, list(findings)
 
     with concurrent.futures.ThreadPoolExecutor(1) as multiprocessor:
         results = multiprocessor.map(_get_rbs_details, input_sequences)
@@ -55,8 +55,7 @@ def generate_validation_table():
 
     result_table = {}
     for result in results:
-        result_table[result[0]] = {'findings': result[1],
-                                   'details': result[2]}
+        result_table[result[0]] = {'findings': result[1]}
     with open(f'{file_location}/ostir_validation_table.json', 'w') as outfile:
         json.dump(result_table, fp=outfile, indent=4)
     print(f'Updated validation table output to {file_location}/ostir_validation_table.json')

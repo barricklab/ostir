@@ -264,11 +264,11 @@ class ViennaRNA(dict):
 
         #Set arguments
         material = self["material"]
-        if dangles is "none":
+        if dangles == "none":
             dangles = " -d0 "
-        elif dangles is "some":
+        elif dangles == "some":
             dangles = " -d1 "
-        elif dangles is "all":
+        elif dangles == "all":
             dangles = " -d2 "
 
         if material == 'rna1999':

@@ -39,7 +39,7 @@ def verify_ostir_install():
     multiprocessing_in = [[index, value['details'], value['findings']] for index, value in validation_table.items()]
 
     def _verify_predefined_RNAs(table_info):
-        findings, details = ostir.run_ostir(table_info[0], detailed_out=True)
+        findings = ostir.run_ostir(table_info[0], detailed_out=True)
         if table_info[2] == details and table_info[1] == findings:
             return False
         else:
