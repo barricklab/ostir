@@ -17,6 +17,7 @@
 # along with Ribosome Binding Site Calculator.  If not, see <http://www.gnu.org/licenses/>.
 # Copyright 2008-2009 is owned by the University of California Regents. All rights reserved.
 
+
 try:
     from ostir.ViennaRNA import *
 except ModuleNotFoundError:
@@ -24,6 +25,7 @@ except ModuleNotFoundError:
 import re
 import math
 import os
+import concurrent.futures
 
 class CalcError(Exception):
     """Base class for exceptions in this module."""
@@ -169,7 +171,7 @@ class OSTIRFactory:
 
         return dG_spacing_penalty
 
-    def calc_dG_mRNA_rRNA(self, start_pos):
+    def calc_dG_mRNA_rRNA(self, start_pos, dangles):
         """Calculates the dG_mRNA_rRNA from the mRNA and rRNA sequence. Considers all feasible 16S rRNA binding sites and includes the effects of non-optimal spacing."""
 
         begin = max(0, start_pos - self.cutoff)
@@ -194,8 +196,7 @@ class OSTIRFactory:
 
         fold = ViennaRNA([mRNA, self.rRNA], material=self.RNA_model)
         # print(fold)
-        fold.subopt([1, 2], constraints, self.energy_cutoff, dangles= self.dangles, Temp=self.temp)
-        #print(f"FOLD: {fold}")
+        fold.subopt([1, 2], constraints, self.energy_cutoff, dangles=dangles, Temp=self.temp)
         if len(fold["subopt_basepairing_x"]) == 0:
             raise CalcError(
                 "Warning: The 16S rRNA has no predicted binding site. Start codon is considered as leaderless and ignored.")
@@ -287,7 +288,7 @@ class OSTIRFactory:
         # Calculate pre-sequence folding
         if len(mRNA_pre) > 0:
             fold_pre = ViennaRNA([mRNA_pre], material=self.RNA_model)
-            fold_pre.mfe([1], pre_constraints, Temp=self.temp, dangles=self.dangles, )
+            fold_pre.mfe([1], pre_constraints, Temp=self.temp, dangles=dangles, )
             bp_x_pre = fold_pre["mfe_basepairing_x"][0]
             bp_y_pre = fold_pre["mfe_basepairing_y"][0]
 
@@ -316,7 +317,7 @@ class OSTIRFactory:
         # Calculate post-sequence folding
         if len(mRNA_post) > 0:
             fold_post = ViennaRNA([mRNA_post], material=self.RNA_model)
-            fold_post.mfe([1], post_constraints, Temp=self.temp, dangles=self.dangles)
+            fold_post.mfe([1], post_constraints, Temp=self.temp, dangles=dangles)
             bp_x_post = fold_post["mfe_basepairing_x"][0]
             bp_y_post = fold_post["mfe_basepairing_y"][0]
         else:
@@ -332,7 +333,7 @@ class OSTIRFactory:
         mRNA = self.mRNA_input[begin:mRNA_len]
         fold = ViennaRNA([mRNA, self.rRNA], material=self.RNA_model)
 
-        total_energy = fold.energy([1, 2], total_bp_x, total_bp_y, Temp=self.temp, dangles=self.dangles)
+        total_energy = fold.energy([1, 2], total_bp_x, total_bp_y, Temp=self.temp, dangles=dangles)
 
         energy_nowindows = dG_mRNA_rRNA_nospacing
         total_energy_withspacing = total_energy + dG_spacing_final
@@ -353,7 +354,7 @@ class OSTIRFactory:
 
         return total_energy_withspacing, structure, spacing_value
 
-    def calc_dG_standby_site(self, structure_old, rRNA_binding=True):
+    def calc_dG_standby_site(self, structure_old, dangles, rRNA_binding=True):
         """Calculates the dG_standby given the structure of the mRNA:rRNA complex"""
 
         # To calculate the mfe structure while disallowing base pairing at the standby site, we split the folded mRNA sequence into three parts: (i) a pre-sequence (before the standby site) that can fold; (ii) the standby site, which can not fold; (iii) the 16S rRNA binding site and downstream sequence, which has been previously folded.
@@ -391,7 +392,7 @@ class OSTIRFactory:
         # Fold it and extract the base pairings
         if (len(mRNA_subsequence)) > 0:
             fold = ViennaRNA([mRNA_subsequence], material=self.RNA_model)
-            fold.mfe([1], constraint_subsequence, Temp=self.temp, dangles=self.dangles)
+            fold.mfe([1], constraint_subsequence, Temp=self.temp, dangles=dangles)
             energy_after_5p = fold["mfe_energy"][0]
             bp_x_5p = fold["mfe_basepairing_x"][0]  # [0] added 12/13/07
             bp_y_5p = fold["mfe_basepairing_y"][0]
@@ -413,7 +414,7 @@ class OSTIRFactory:
 
         # Calculate its energy
         fold = ViennaRNA([mRNA, self.rRNA], material=self.RNA_model)
-        energy_after = fold.energy([1, 2], bp_x_after, bp_y_after, dangles=self.dangles, Temp=self.temp)
+        energy_after = fold.energy([1, 2], bp_x_after, bp_y_after, dangles=dangles, Temp=self.temp)
 
         dG_standby_site = energy_before - energy_after
 
@@ -429,7 +430,7 @@ class OSTIRFactory:
 
         return (dG_standby_site, structure)
 
-    def calc_dG_mRNA(self, start_pos):
+    def calc_dG_mRNA(self, start_pos, dangles):
         """Calculates the dG_mRNA given the mRNA sequence."""
 
         mRNA = self.mRNA_input[max(0, start_pos - self.cutoff):min(len(self.mRNA_input), start_pos + self.cutoff)]
@@ -440,7 +441,7 @@ class OSTIRFactory:
                           max(0, start_pos - self.cutoff):min(len(self.mRNA_input), start_pos + self.cutoff)]
 
         fold = ViennaRNA([mRNA], self.RNA_model)
-        fold.mfe([1], constraints, Temp=self.temp, dangles=self.dangles)
+        fold.mfe([1], constraints, Temp=self.temp, dangles=dangles)
 
         structure = fold
         structure["mRNA"] = mRNA
@@ -461,7 +462,8 @@ class OSTIRFactory:
         return dG_rRNA_folding
 
     def calc_dG_SDopen(self, mRNA_structure,
-                       mRNA_rRNA_structure):  # Alex note: I havent converted this fxn since it is not used in calc_dG
+                       mRNA_rRNA_structure,
+                       dangles):  # Alex note: I havent converted this fxn since it is not used in calc_dG
         """Calculate the dG required to unfold the nucleotides in the 16S rRNA binding site."""
 
         mRNA = mRNA_structure["mRNA"]
@@ -487,11 +489,11 @@ class OSTIRFactory:
         post_mRNA_constraints = self.constraints[most_3p_mRNA + 1:len(mRNA) + 1]
 
         pre_fold = ViennaRNA([pre_mRNA], material=self.RNA_model)
-        pre_fold.mfe([1], dangles=self.dangles, Temp=self.temp)
+        pre_fold.mfe([1], dangles=dangles, Temp=self.temp)
         dG_pre = pre_fold["mfe_energy"][0]
 
         post_fold = NuPACK([post_mRNA], material=self.RNA_model)
-        post_fold.mfe([1], dangles=self.dangles, Temp=self.temp)
+        post_fold.mfe([1], dangles=dangles, Temp=self.temp)
         dG_post = post_fold["mfe_energy"][0]
 
         energy = dG_pre + dG_post
@@ -744,129 +746,51 @@ class OSTIRFactory:
         self.three_state_indicator_list = []
         self.helical_loop_list_list = []
         self.bulge_loop_list_list = []
+        self.start_codon_list = []
 
         self.dS1_list = []
         self.dS2_list = []
         self.most_5p_mRNA_list = []
         self.Expression_list = []
-        self.dg_scores = None
+        self.dg_scores = []
 
+        cores = 1
+        parallelizer_arguments = [[], [], []]
+        for _, (start_pos, codon) in enumerate(self.find_start_codons(self.mRNA_input)):
+            parallelizer_arguments[0].append(self)
+            parallelizer_arguments[1].append(start_pos)
+            parallelizer_arguments[2].append(codon)
 
-        for i, (start_pos, codon) in enumerate(self.find_start_codons(self.mRNA_input)):
-
-            try:
-
-                # print "Top of calc_dG here"
-
-                # Set dangles based on length between 5' end of mRNA and start codon
-                if self.auto_dangles:
-
-                    if start_pos > self.cutoff:
-                        self.dangles = "none"
-
-                    else:
-                        self.dangles = "all"
-
-                else:
-                    self.dangles = self.dangles_default
-                    # print "Auto Dangles set to ", self.dangles
-
-                # Start codon energy
-                dG_start_codon = self.start_codon_energies[codon]
-
-                # Energy of mRNA folding
-                [dG_mRNA, mRNA_structure] = self.calc_dG_mRNA(start_pos)
-
-                # Energy of mRNA:rRNA hybridization & folding
-                [dG_mRNA_rRNA_withspacing, mRNA_rRNA_structure, spacing_value] = self.calc_dG_mRNA_rRNA(start_pos)
-                dG_mRNA_rRNA_withspacing -= 2.481  # Modifying hybridization penalty to match NUPACK
-
-                dG_mRNA_rRNA_nospacing = mRNA_rRNA_structure["dG_mRNA_rRNA"]
-                dG_mRNA_rRNA_nospacing -= 2.481  # Modifying hybridization penalty to match NUPACK
-
-
-                # Standby site correction:
-                [dG_standby_site, corrected_structure] = self.calc_dG_standby_site(mRNA_rRNA_structure,
-                                                                                   rRNA_binding=True)
-
-                # Total energy is mRNA:rRNA + start - rRNA - mRNA - standby_site
-                dG_total = dG_mRNA_rRNA_withspacing + dG_start_codon - dG_mRNA - dG_standby_site
-
-                #print(f"{dG_total} = {dG_mRNA_rRNA_withspacing} + {dG_start_codon} - {dG_mRNA} - {dG_standby_site} - 2.481")
-
-                self.dg_scores = [dG_mRNA_rRNA_withspacing, dG_start_codon, dG_mRNA, dG_standby_site]
-
-                # Calculate 'kinetic score': directly related to probability of base pair formation
-                (kinetic_score, min_bp_prob) = self.calc_kinetic_score(mRNA_structure)
-
-                # Calculate dG to open SD sequence
-                # ddG_SD_open = self.calc_dG_SDopen(mRNA_structure, mRNA_rRNA_structure)
-
-                self.mRNA_structure_list.append(mRNA_structure)
-                self.mRNA_rRNA_uncorrected_structure_list.append(mRNA_rRNA_structure)
-                self.mRNA_rRNA_corrected_structure_list.append(corrected_structure)
-                self.most_5p_mRNA_list.append(self.calc_most_5p_mRNA(mRNA_rRNA_structure))
-
-                (helical_loop_list, bulge_loop_list) = self.calc_longest_loop_bulge(structure=mRNA_structure)
-                self.longest_helix_list.append(self.calc_longest_helix(structure=mRNA_structure))
-
-                self.dG_start_energy_list.append(dG_start_codon)
-                self.dG_mRNA_list.append(dG_mRNA)
-                self.dG_mRNA_rRNA_list.append(dG_mRNA_rRNA_nospacing)
-                self.dG_spacing_list.append(mRNA_rRNA_structure["dG_spacing"])
-                self.dG_standby_site_list.append(dG_standby_site)
-                self.dG_total_list.append(dG_total)
-                self.dG_details.append([dG_mRNA_rRNA_nospacing, dG_start_codon, dG_mRNA, dG_standby_site,
-                                        mRNA_rRNA_structure["dG_spacing"], spacing_value])
-
-                self.helical_loop_list_list.append(helical_loop_list)
-                self.bulge_loop_list_list.append(bulge_loop_list)
-
-                self.min_bp_prob_list.append(min_bp_prob)
-                self.kinetic_score_list.append(kinetic_score)
-                # self.three_state_indicator_list.append(ddG_SD_open)
-
-                # Start positions
-                self.start_pos_list.append(start_pos)
-
-                # Expression levels
-                self.Expression_list.append(self.calc_expression_level(dG_total))
-
-                # For exporting the relevant structure to a PDF
-                # index = mRNA_rRNA_structure["MinStructureID"]
-                # mRNA_rRNA_structure.export_PDF(index, name = self.name + ": Before standby site", filename =  self.name + "_Before_Standby_rRNA.pdf", program = "subopt")
-
-                # index = corrected_structure["MinStructureID"]
-                # corrected_structure.export_PDF(index, name = self.name + ": After standby site", filename =  self.name + "_After_Standby_rRNA.pdf", program = "subopt")
-
-            except CalcError as msg:
-                print(msg)
-                self.mRNA_structure_list.append([])
-                self.mRNA_rRNA_uncorrected_structure_list.append([])
-                self.mRNA_rRNA_corrected_structure_list.append([])
-
-                self.most_5p_mRNA_list.append(self.infinity)
-                self.longest_helix_list.append(self.infinity)
-
-                self.dG_start_energy_list.append(self.infinity)
-                self.dG_mRNA_list.append(self.infinity)
-                self.dG_mRNA_rRNA_list.append(self.infinity)
-                self.dG_spacing_list.append(self.infinity)
-                self.dG_standby_site_list.append(self.infinity)
-                self.dG_total_list.append(self.infinity)
-
-                self.helical_loop_list_list.append(self.infinity)
-                self.bulge_loop_list_list.append(self.infinity)
-
-                self.kinetic_score_list.append(self.infinity)
-                # self.three_state_indicator_list.append(self.infinity)
+        with concurrent.futures.ThreadPoolExecutor(max_workers=cores) as multiprocessor:
+            parallel_output = multiprocessor.map(_parallel_dG, *parallelizer_arguments)
+        parallel_output = [x for x in parallel_output]
+        for output in parallel_output:
+            self.dg_scores.append(output['dG_scores'])
+            self.mRNA_structure_list.append(output['mRNA_structure_list'])
+            self.mRNA_rRNA_uncorrected_structure_list.append(output['mRNA_rRNA_uncorrected_structure_list'])
+            self.mRNA_rRNA_corrected_structure_list.append(output['mRNA_rRNA_corrected_structure_list'])
+            self.most_5p_mRNA_list.append(output['most_5p_mRNA_list'])
+            self.longest_helix_list.append(output['longest_helix_list'])
+            self.dG_start_energy_list.append(output['dG_start_energy_list'])
+            self.dG_spacing_list.append(output['dG_spacing_list'])
+            self.dG_total_list.append(output['dG_total_list'])
+            self.dG_standby_site_list.append(output['dG_standby_site_list'])
+            self.helical_loop_list_list.append(output['helical_loop_list_list'])
+            self.min_bp_prob_list.append(output['min_bp_prob_list'])
+            self.bulge_loop_list_list.append(output['bulge_loop_list_list'])
+            self.kinetic_score_list.append(output['kinetic_score_list'])
+            if output['start_position_list']:
+                self.start_pos_list.append(output['start_position_list'])
+            if output['Expression_list']:
+                self.Expression_list.append(output['Expression_list'])
+            self.dG_details.append(output['dG_details'])
+            self.start_codon_list.append(output['codon'])
 
         self.run = 1
         end = self.cpu_time()
         self.run_time = end - start
 
     def calc_expression_level(self, dG):
-
         import math
         return self.K * math.exp(-dG / self.RT_eff)
 
@@ -962,63 +886,107 @@ class OSTIRFactory:
 
     # def output(self):
 
-    def save_data(self, handle, header=False):
-
-        infinity = 1e6
-
-        if self.run == 1:
-
-            if (header):
-                # Print header information --> all the parameters
-                parameters = "RNA model: \t%s \nDangles: \t%s \nTemperature: \t%s \nOptimal Spacing \t%s \nSpacing constant (push) \t%s\nSpacing constant (pull) \t%s\nCutoff \t%s\nStandby Site Length \t%s\nEnergy Cutoff \t%s\nrRNA sequence \t%s\n" % (
-                self.RNA_model, str(self.dangles), str(self.temp), str(self.optimal_spacing),
-                str(self.dG_spacing_constant_push), str(self.dG_spacing_constant_pull), str(self.cutoff),
-                str(self.standby_site_length), str(self.energy_cutoff), self.rRNA)
-
-                handle.writelines(parameters)
-
-            # Name, dG total, dG rRNA:mRNA, dG mRNA, dG spacing, dG standby, dG start codon, kinetic score, longest helix, longest loop, start position
-            # format = "%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\n"
-            format = "%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\t%10s\n"
-
-            for counter in range(len(self.start_position_list)):
-
-                dG_total = self.dG_total_list[counter]
-                if (dG_total >= infinity): dG_total = "Inf"
-
-                dG_mRNA = self.dG_mRNA_list[counter]
-                if (dG_mRNA >= infinity): dG_mRNA = "Inf"
-
-                dG_mRNA_rRNA = self.dG_mRNA_rRNA_list[counter]
-                if (dG_mRNA_rRNA >= infinity): dG_mRNA_rRNA = "Inf"
-
-                dG_spacing = self.dG_spacing_list[counter]
-                if (dG_spacing >= infinity): dG_spacing = "Inf"
-
-                dG_standby_site = self.dG_standby_site_list[counter]
-                if (dG_standby_site >= infinity): dG_standby_site = "Inf"
-
-                kinetic_score = self.kinetic_score_list[counter]
-
-                longest_helix = self.longest_helix_list[counter]
-                if len(self.helical_loop_list_list[counter]) > 0:
-                    longest_loop = max(self.helical_loop_list_list[counter])
-                else:
-                    longest_loop = 0
-
-                most_5p_mRNA = self.most_5p_mRNA_list[counter]
-
-                # three_state = self.three_state_indicator_list[counter]
-
-                handle.writelines(format % (
-                self.name.split(" ")[0], dG_total, dG_mRNA_rRNA, dG_mRNA, dG_spacing, dG_standby_site,
-                self.start_codon_energies[self.start_codon_list[counter]], round(kinetic_score, 2), str(longest_helix),
-                str(self.start_position_list[counter]), str(most_5p_mRNA), str(three_state)))
-
-        else:
-            raise RuntimeError("The RBS Calculator has not been run yet. Call the 'calc_dG' method.")
-
-
 # ----------------------------------------------------------------------------------------------------------
 # End RBS_Calculator class
 # ----------------------------------------------------------------------------------------------------------
+
+def _parallel_dG(ostir_factory_object, start_pos, codon):
+    try:
+
+        # print "Top of calc_dG here"
+
+        # Set dangles based on length between 5' end of mRNA and start codon
+        if ostir_factory_object.auto_dangles:
+            cutoff = int(ostir_factory_object.cutoff)
+            if start_pos > cutoff:
+                dangles = "none"
+
+            else:
+                dangles = "all"
+
+        else:
+            dangles = ostir_factory_object.dangles_default
+            # print "Auto Dangles set to ", self.dangles
+
+        # Start codon energy
+        dG_start_codon = ostir_factory_object.start_codon_energies[codon]
+
+        # Energy of mRNA folding
+        [dG_mRNA, mRNA_structure] = ostir_factory_object.calc_dG_mRNA(start_pos, dangles)
+
+        # Energy of mRNA:rRNA hybridization & folding
+        [dG_mRNA_rRNA_withspacing, mRNA_rRNA_structure, spacing_value] = ostir_factory_object.calc_dG_mRNA_rRNA(start_pos, dangles)
+        dG_mRNA_rRNA_withspacing -= 2.481  # Modifying hybridization penalty to match NUPACK
+
+        dG_mRNA_rRNA_nospacing = mRNA_rRNA_structure["dG_mRNA_rRNA"]
+        dG_mRNA_rRNA_nospacing -= 2.481  # Modifying hybridization penalty to match NUPACK
+
+
+        # Standby site correction:
+        [dG_standby_site, corrected_structure] = ostir_factory_object.calc_dG_standby_site(mRNA_rRNA_structure,
+                                                                           rRNA_binding=True, dangles=dangles)
+
+        # Total energy is mRNA:rRNA + start - rRNA - mRNA - standby_site
+        dG_total = dG_mRNA_rRNA_withspacing + dG_start_codon - dG_mRNA - dG_standby_site
+
+        #print(f"{dG_total} = {dG_mRNA_rRNA_withspacing} + {dG_start_codon} - {dG_mRNA} - {dG_standby_site} - 2.481")
+
+        # Calculate 'kinetic score': directly related to probability of base pair formation
+        (kinetic_score, min_bp_prob) = ostir_factory_object.calc_kinetic_score(mRNA_structure)
+
+        # Calculate dG to open SD sequence
+        # ddG_SD_open = self.calc_dG_SDopen(mRNA_structure, mRNA_rRNA_structure)
+
+
+        (helical_loop_list, bulge_loop_list) = ostir_factory_object.calc_longest_loop_bulge(structure=mRNA_structure)
+
+        parallel_output = {
+            'dG_scores': [dG_mRNA_rRNA_withspacing, dG_start_codon, dG_mRNA, dG_standby_site],
+            'mRNA_structure_list': mRNA_structure,
+            'mRNA_rRNA_uncorrected_structure_list': mRNA_rRNA_structure,
+            'mRNA_rRNA_corrected_structure_list': corrected_structure,
+            'most_5p_mRNA_list': ostir_factory_object.calc_most_5p_mRNA(mRNA_rRNA_structure),
+            'longest_helix_list': ostir_factory_object.calc_longest_helix(structure=mRNA_structure),
+            'dG_start_energy_list': dG_start_codon,
+            'dG_mRNA_list': dG_mRNA,
+            'dG_mRNA_rRNA_list': dG_mRNA_rRNA_nospacing,
+            'dG_spacing_list': mRNA_rRNA_structure["dG_spacing"],
+            'dG_standby_site_list': dG_standby_site,
+            'dG_total_list': dG_total,
+            'helical_loop_list_list': helical_loop_list,
+            'bulge_loop_list_list': bulge_loop_list,
+            'min_bp_prob_list': min_bp_prob,
+            'kinetic_score_list': kinetic_score,
+            'start_position_list': start_pos,
+            'Expression_list': ostir_factory_object.calc_expression_level(dG_total),
+            'dG_details': [dG_mRNA_rRNA_nospacing, dG_start_codon, dG_mRNA, dG_standby_site,
+                           mRNA_rRNA_structure["dG_spacing"], spacing_value],
+            'codon': codon
+        }
+
+    except CalcError as msg:
+        print(msg)
+        parallel_output = {
+            'dG_scores': [],
+            'mRNA_structure_list': [],
+            'mRNA_rRNA_uncorrected_structure_list': [],
+            'mRNA_rRNA_corrected_structure_list': [],
+            'most_5p_mRNA_list': ostir_factory_object.infinity,
+            'longest_helix_list': ostir_factory_object.infinity,
+            'dG_start_energy_list': ostir_factory_object.infinity,
+            'dG_mRNA_list': ostir_factory_object.infinity,
+            'dG_mRNA_rRNA_list': ostir_factory_object.infinity,
+            'dG_spacing_list': ostir_factory_object.infinity,
+            'dG_standby_site_list': ostir_factory_object.infinity,
+            'dG_total_list': ostir_factory_object.infinity,
+            'helical_loop_list_list': ostir_factory_object.infinity,
+            'bulge_loop_list_list': ostir_factory_object.infinity,
+            'min_bp_prob_list': ostir_factory_object.infinity,
+            'kinetic_score_list': ostir_factory_object.infinity,
+            'start_position_list': None,
+            'Expression_list': None,
+            'dG_details': None,
+            'codon': None
+        }
+
+    return parallel_output

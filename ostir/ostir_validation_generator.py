@@ -26,7 +26,6 @@ def generate_validation_table():
             if i1 == 0:
                 csv_keys = row
             else:
-                single_input = {}
                 for i2, item in enumerate(row):
                     if item == '':
                         item = None
@@ -40,18 +39,10 @@ def generate_validation_table():
                             item = int(item)
                         starts.append(item)
 
-    input_sequences = list(zip(RNAs, starts))
 
-    def _get_rbs_details(data_in):
-        '''Internal. Runs vienna on each '''
-        seq, start = data_in
-        findings = ostir.run_ostir(seq, start_loc=start, detailed_out=True)
-        return seq, list(findings)
-
-    with concurrent.futures.ThreadPoolExecutor(1) as multiprocessor:
-        results = multiprocessor.map(_get_rbs_details, input_sequences)
-
-    results = [x for x in results]
+    results = []
+    for RNA in RNAs:
+        results.append([RNA, ostir.run_ostir(RNA)])
 
     result_table = {}
     for result in results:

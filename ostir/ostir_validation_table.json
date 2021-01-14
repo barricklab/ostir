@@ -4,6 +4,19 @@
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
                 "codon": "ATG",
+                "start_pos": 24,
+                "dG_total": 8.64328294205496,
+                "dG_rRNA:mRNA": -15.981,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 17.61828294205496,
+                "Spacing": "0 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 51.61932643093083
+            },
+            {
+                "RNA": "TTCTAGAAAAAAAATAAGGAGGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
+                "codon": "ATG",
                 "start_pos": 57,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -31,6 +44,19 @@
     },
     "TTCTAGAAAAAAAATAAGGAGGTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAAAAAAAATAAGGAGGTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 25,
+                "dG_total": 8.619332263305957,
+                "dG_rRNA:mRNA": -15.981,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 17.594332263305958,
+                "Spacing": "1 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 52.10396223109854
+            },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -64,6 +90,19 @@
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGG",
                 "codon": "ATG",
+                "start_pos": 26,
+                "dG_total": 7.663180275330775,
+                "dG_rRNA:mRNA": -15.981,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 16.638180275330775,
+                "Spacing": "2 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 75.66406871618179
+            },
+            {
+                "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGG",
+                "codon": "ATG",
                 "start_pos": 59,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -91,6 +130,19 @@
     },
     "TTCTAGAAAAAAAATAAGGAGGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG": {
         "findings": [
+            {
+                "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
+                "codon": "ATG",
+                "start_pos": 27,
+                "dG_total": -5.9502577589776,
+                "dG_rRNA:mRNA": -15.981,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 3.0247422410224014,
+                "Spacing": "3 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 15334.595840319407
+            },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
                 "codon": "ATG",
@@ -124,6 +176,19 @@
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTAT",
                 "codon": "ATG",
+                "start_pos": 28,
+                "dG_total": -8.974557435152096,
+                "dG_rRNA:mRNA": -15.981,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 49904.15521584628
+            },
+            {
+                "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTAT",
+                "codon": "ATG",
                 "start_pos": 61,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -138,6 +203,19 @@
     },
     "TTCTAGAAAAAAAATAAGGAGGTAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
+                "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": -8.975000000000001,
+                "dG_rRNA:mRNA": -15.981,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 49912.77319948796
+            },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
                 "codon": "ATG",
@@ -158,6 +236,19 @@
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
                 "codon": "ATG",
+                "start_pos": 30,
+                "dG_total": -8.625705664000002,
+                "dG_rRNA:mRNA": -15.981,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 43553.608743566525
+            },
+            {
+                "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
+                "codon": "ATG",
                 "start_pos": 63,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -172,6 +263,19 @@
     },
     "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCG": {
         "findings": [
+            {
+                "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCG",
+                "codon": "ATG",
+                "start_pos": 31,
+                "dG_total": -8.150400826000002,
+                "dG_rRNA:mRNA": -15.981,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 36181.30644803325
+            },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCG",
                 "codon": "ATG",
@@ -192,6 +296,19 @@
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTC",
                 "codon": "ATG",
+                "start_pos": 32,
+                "dG_total": -7.549085485999999,
+                "dG_rRNA:mRNA": -15.981,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 1.425914514,
+                "Spacing": "8 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 28614.884519477746
+            },
+            {
+                "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTC",
+                "codon": "ATG",
                 "start_pos": 65,
                 "dG_total": 21.41933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -206,6 +323,19 @@
     },
     "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTT": {
         "findings": [
+            {
+                "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTT",
+                "codon": "ATG",
+                "start_pos": 33,
+                "dG_total": -6.821759644,
+                "dG_rRNA:mRNA": -15.981,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 2.153240356,
+                "Spacing": "9 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 21545.044959519644
+            },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTT",
                 "codon": "ATG",
@@ -226,6 +356,19 @@
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGT",
                 "codon": "ATG",
+                "start_pos": 34,
+                "dG_total": -5.968423300000001,
+                "dG_rRNA:mRNA": -15.981,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 3.0065767,
+                "Spacing": "10 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 15443.668321053552
+            },
+            {
+                "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGT",
+                "codon": "ATG",
                 "start_pos": 67,
                 "dG_total": 20.91933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -240,6 +383,19 @@
     },
     "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA",
+                "codon": "ATG",
+                "start_pos": 36,
+                "dG_total": -3.883719106000001,
+                "dG_rRNA:mRNA": -15.981,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 5.0912808940000005,
+                "Spacing": "12 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 6846.987739427542
+            },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA",
                 "codon": "ATG",
@@ -260,6 +416,19 @@
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTC",
                 "codon": "ATG",
+                "start_pos": 39,
+                "dG_total": -0.31158405000000045,
+                "dG_rRNA:mRNA": -14.981,
+                "dG_mRNA": -6.7,
+                "dG_Spacing": 9.16341595,
+                "Spacing": "15 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 1699.0456663386815
+            },
+            {
+                "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTC",
+                "codon": "ATG",
                 "start_pos": 72,
                 "dG_total": 20.91933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -274,6 +443,19 @@
     },
     "TTCTAGAGAAAGACAGGACCCACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAGAAAGACAGGACCCACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 28,
+                "dG_total": 1.674294336,
+                "dG_rRNA:mRNA": -6.481,
+                "dG_mRNA": -9.0,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 782.8887720493323
+            },
             {
                 "RNA": "TTCTAGAGAAAGACAGGACCCACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -307,6 +489,19 @@
             {
                 "RNA": "TTCTAGAGAAAGAAGGGACAGACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 28,
+                "dG_total": 0.6742943359999991,
+                "dG_rRNA:mRNA": -7.481,
+                "dG_mRNA": -9.0,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 1156.5089671331887
+            },
+            {
+                "RNA": "TTCTAGAGAAAGAAGGGACAGACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 61,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -334,6 +529,19 @@
     },
     "TTCTAGAGAAAGAAGAGACTCACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAGAAAGAAGAGACTCACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 28,
+                "dG_total": 4.7509145140000015,
+                "dG_rRNA:mRNA": -5.481,
+                "dG_mRNA": -9.9,
+                "dG_Spacing": 1.425914514,
+                "Spacing": "8 bp",
+                "dG_Standby": -0.10000000000000009,
+                "dG_Start_Codon": -1.194,
+                "Expression": 235.70567391625661
+            },
             {
                 "RNA": "TTCTAGAGAAAGAAGAGACTCACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -367,6 +575,19 @@
             {
                 "RNA": "TTCTAGAGAAAGAAGGGATACACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 28,
+                "dG_total": 1.7742943360000005,
+                "dG_rRNA:mRNA": -7.5809999999999995,
+                "dG_mRNA": -10.2,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 752.9309863630945
+            },
+            {
+                "RNA": "TTCTAGAGAAAGAAGGGATACACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 61,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -394,6 +615,19 @@
     },
     "TTCTAGAGAAAGACGCGAGAAACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAGAAAGACGCGAGAAACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 28,
+                "dG_total": 2.2742943359999996,
+                "dG_rRNA:mRNA": -5.481,
+                "dG_mRNA": -8.6,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 619.4848654617492
+            },
             {
                 "RNA": "TTCTAGAGAAAGACGCGAGAAACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -427,6 +661,19 @@
             {
                 "RNA": "TTCTAGAGAAAGAAACGACATACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 28,
+                "dG_total": 6.674294336,
+                "dG_rRNA:mRNA": -2.881,
+                "dG_mRNA": -9.6,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": -0.8,
+                "dG_Start_Codon": -1.194,
+                "Expression": 111.2898008287011
+            },
+            {
+                "RNA": "TTCTAGAGAAAGAAACGACATACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 61,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -457,6 +704,45 @@
             {
                 "RNA": "TTCTAGAaaatgtcaattttgctactggccttacaatATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 10,
+                "dG_total": 20.043861025327253,
+                "dG_rRNA:mRNA": -2.2809999999999997,
+                "dG_mRNA": -5.9,
+                "dG_Spacing": 17.618861025327252,
+                "Spacing": "-1 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 0.6039437106367894
+            },
+            {
+                "RNA": "TTCTAGAaaatgtcaattttgctactggccttacaatATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "TTG",
+                "start_pos": 19,
+                "dG_total": 7.700099174,
+                "dG_rRNA:mRNA": -1.9809999999999999,
+                "dG_mRNA": -8.9,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 74.58196523648262
+            },
+            {
+                "RNA": "TTCTAGAaaatgtcaattttgctactggccttacaatATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 38,
+                "dG_total": 7.625000000000001,
+                "dG_rRNA:mRNA": -2.881,
+                "dG_mRNA": -10.5,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": -1.2000000000000002,
+                "dG_Start_Codon": -1.194,
+                "Expression": 76.79966015855338
+            },
+            {
+                "RNA": "TTCTAGAaaatgtcaattttgctactggccttacaatATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 71,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -484,6 +770,32 @@
     },
     "TTCTAGAaacttccgttaatcagttataaggtggattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAaacttccgttaatcagttataaggtggattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "GTG",
+                "start_pos": 31,
+                "dG_total": 6.0442,
+                "dG_rRNA:mRNA": -1.581,
+                "dG_mRNA": -7.7,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0748,
+                "Expression": 142.30631815376137
+            },
+            {
+                "RNA": "TTCTAGAaacttccgttaatcagttataaggtggattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 38,
+                "dG_total": 3.625000000000001,
+                "dG_rRNA:mRNA": -4.981,
+                "dG_mRNA": -9.8,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 365.7253446085117
+            },
             {
                 "RNA": "TTCTAGAaacttccgttaatcagttataaggtggattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -517,6 +829,19 @@
             {
                 "RNA": "TTCTAGActttaatttaacgtaaataaggaagtcattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 38,
+                "dG_total": 2.0254425648479017,
+                "dG_rRNA:mRNA": -8.381,
+                "dG_mRNA": -11.6,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 682.6504321180421
+            },
+            {
+                "RNA": "TTCTAGActttaatttaacgtaaataaggaagtcattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 71,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -544,6 +869,19 @@
     },
     "TTCTAGAattaaagAGGAgaaatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAattaaagAGGAgaaatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 27,
+                "dG_total": -4.174999999999999,
+                "dG_rRNA:mRNA": -11.581,
+                "dG_mRNA": -8.6,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 7671.084892095243
+            },
             {
                 "RNA": "TTCTAGAattaaagAGGAgaaatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -577,6 +915,19 @@
             {
                 "RNA": "TTCTAGAattaaagAGGAgatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 25,
+                "dG_total": -1.150257758977597,
+                "dG_rRNA:mRNA": -11.581,
+                "dG_mRNA": -8.6,
+                "dG_Spacing": 3.0247422410224014,
+                "Spacing": "3 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 2356.7712017706026
+            },
+            {
+                "RNA": "TTCTAGAattaaagAGGAgatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 58,
                 "dG_total": 26.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -604,6 +955,19 @@
     },
     "TTCTAGAattaaagAGGAgaaattattagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAattaaagAGGAgaaattattagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 31,
+                "dG_total": -2.021759644000001,
+                "dG_rRNA:mRNA": -11.581,
+                "dG_mRNA": -8.6,
+                "dG_Spacing": 2.153240356,
+                "Spacing": "9 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 3311.2539795761068
+            },
             {
                 "RNA": "TTCTAGAattaaagAGGAgaaattattagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -637,6 +1001,19 @@
             {
                 "RNA": "TTCTAGAattaaagAGGAgaaattataatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 33,
+                "dG_total": -0.18907645400000028,
+                "dG_rRNA:mRNA": -11.581,
+                "dG_mRNA": -8.6,
+                "dG_Spacing": 3.985923546,
+                "Spacing": "11 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 1619.7435886214028
+            },
+            {
+                "RNA": "TTCTAGAattaaagAGGAgaaattataatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 66,
                 "dG_total": 26.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -664,6 +1041,19 @@
     },
     "TTCTAGAattaaTAAGGAGGaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAattaaTAAGGAGGaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": -5.450400826000001,
+                "dG_rRNA:mRNA": -14.681,
+                "dG_mRNA": -9.6,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 12617.464944314743
+            },
             {
                 "RNA": "TTCTAGAattaaTAAGGAGGaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -697,6 +1087,19 @@
             {
                 "RNA": "TTCTAGAattaaTAAGGAGGaatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 27,
+                "dG_total": -7.675000000000001,
+                "dG_rRNA:mRNA": -14.681,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 30055.785213714516
+            },
+            {
+                "RNA": "TTCTAGAattaaTAAGGAGGaatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 60,
                 "dG_total": 26.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -724,6 +1127,19 @@
     },
     "TTCTAGAattaaTAAGGAGGaattattagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAattaaTAAGGAGGaattattagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 31,
+                "dG_total": -3.5217596439999994,
+                "dG_rRNA:mRNA": -14.681,
+                "dG_mRNA": -10.2,
+                "dG_Spacing": 2.153240356,
+                "Spacing": "9 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 5945.1922513036925
+            },
             {
                 "RNA": "TTCTAGAattaaTAAGGAGGaattattagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -757,6 +1173,32 @@
             {
                 "RNA": "TTCTAGAattaaTGAGGAAAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 12,
+                "dG_total": 2.2497422410224015,
+                "dG_rRNA:mRNA": -1.9809999999999999,
+                "dG_mRNA": -2.4,
+                "dG_Spacing": 3.0247422410224014,
+                "Spacing": "3 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 625.4477393556948
+            },
+            {
+                "RNA": "TTCTAGAattaaTGAGGAAAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": 1.4495991740000012,
+                "dG_rRNA:mRNA": -8.780999999999999,
+                "dG_mRNA": -10.6,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 854.622695026633
+            },
+            {
+                "RNA": "TTCTAGAattaaTGAGGAAAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 62,
                 "dG_total": 26.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -784,6 +1226,19 @@
     },
     "TTCTAGAattaaATAGGACAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAattaaATAGGACAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": 3.3495991739999997,
+                "dG_rRNA:mRNA": -6.381,
+                "dG_mRNA": -10.1,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 407.212814067237
+            },
             {
                 "RNA": "TTCTAGAattaaATAGGACAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -817,6 +1272,19 @@
             {
                 "RNA": "TTCTAGAattaaTTAGGAGCaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": 1.3495991740000015,
+                "dG_rRNA:mRNA": -8.981,
+                "dG_mRNA": -10.7,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 888.6266130535319
+            },
+            {
+                "RNA": "TTCTAGAattaaTTAGGAGCaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 62,
                 "dG_total": 26.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -844,6 +1312,19 @@
     },
     "TTCTAGAattaaGGAGGATAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAattaaGGAGGATAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": -4.168423299999999,
+                "dG_rRNA:mRNA": -14.581,
+                "dG_mRNA": -8.6,
+                "dG_Spacing": 3.0065767,
+                "Spacing": "10 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 7651.425853415558
+            },
             {
                 "RNA": "TTCTAGAattaaGGAGGATAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -877,6 +1358,19 @@
             {
                 "RNA": "TTCTAGAattaaGAAGGACTaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": 0.14959917400000045,
+                "dG_rRNA:mRNA": -7.881,
+                "dG_mRNA": -8.4,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 1419.2471913372342
+            },
+            {
+                "RNA": "TTCTAGAattaaGAAGGACTaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 62,
                 "dG_total": 26.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -904,6 +1398,32 @@
     },
     "TTCTAGAattaaTGAGGATAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAattaaTGAGGATAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 12,
+                "dG_total": 2.2497422410224015,
+                "dG_rRNA:mRNA": -1.9809999999999999,
+                "dG_mRNA": -2.4,
+                "dG_Spacing": 3.0247422410224014,
+                "Spacing": "3 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 625.4477393556948
+            },
+            {
+                "RNA": "TTCTAGAattaaTGAGGATAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": 1.6495991740000004,
+                "dG_rRNA:mRNA": -8.581,
+                "dG_mRNA": -10.6,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 790.4686192926895
+            },
             {
                 "RNA": "TTCTAGAattaaTGAGGATAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -937,6 +1457,19 @@
             {
                 "RNA": "TTCTAGAattaaTCAGGATCaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": 2.3495991740000015,
+                "dG_rRNA:mRNA": -6.5809999999999995,
+                "dG_mRNA": -9.3,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 601.5481225609187
+            },
+            {
+                "RNA": "TTCTAGAattaaTCAGGATCaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 62,
                 "dG_total": 26.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -964,6 +1497,19 @@
     },
     "TTCTAGAattaaACAGGATAataagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAattaaACAGGATAataagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 27,
+                "dG_total": 0.4249999999999998,
+                "dG_rRNA:mRNA": -6.5809999999999995,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 1274.6520988673235
+            },
             {
                 "RNA": "TTCTAGAattaaACAGGATAataagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -997,6 +1543,19 @@
             {
                 "RNA": "TTCTAGAattaaagaggagaaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": -3.3504008259999996,
+                "dG_rRNA:mRNA": -11.581,
+                "dG_mRNA": -8.6,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 5560.6983038286335
+            },
+            {
+                "RNA": "TTCTAGAattaaagaggagaaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 62,
                 "dG_total": 26.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -1024,6 +1583,19 @@
     },
     "TTCTAGAtcacacaggaaaccggttcgATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAtcacacaggaaaccggttcgATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 28,
+                "dG_total": 1.9495991740000003,
+                "dG_rRNA:mRNA": -7.281,
+                "dG_mRNA": -9.6,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 703.1531904490121
+            },
             {
                 "RNA": "TTCTAGAtcacacaggaaaccggttcgATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -1057,6 +1629,19 @@
             {
                 "RNA": "TTCTAGAtcacacaggaaaggcctcgATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 27,
+                "dG_total": 4.674294336000001,
+                "dG_rRNA:mRNA": -7.381,
+                "dG_mRNA": -12.9,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 242.85846457052259
+            },
+            {
+                "RNA": "TTCTAGAtcacacaggaaaggcctcgATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 60,
                 "dG_total": 14.049742241022402,
                 "dG_rRNA:mRNA": -5.5809999999999995,
@@ -1084,6 +1669,19 @@
     },
     "TTCTAGAtcacacaggacggccggATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAtcacacaggacggccggATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 25,
+                "dG_total": 2.2254425648479046,
+                "dG_rRNA:mRNA": -8.981,
+                "dG_mRNA": -12.4,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 631.4058211607517
+            },
             {
                 "RNA": "TTCTAGAtcacacaggacggccggATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -1117,6 +1715,32 @@
             {
                 "RNA": "TTCTAGAAACAAAATGAGGAGGTACTGAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
                 "codon": "ATG",
+                "start_pos": 14,
+                "dG_total": -0.7749999999999999,
+                "dG_rRNA:mRNA": -1.9809999999999999,
+                "dG_mRNA": -2.4,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 2035.777889920769
+            },
+            {
+                "RNA": "TTCTAGAAACAAAATGAGGAGGTACTGAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
+                "codon": "ATG",
+                "start_pos": 30,
+                "dG_total": -8.725705664,
+                "dG_rRNA:mRNA": -16.081,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 45286.52942319543
+            },
+            {
+                "RNA": "TTCTAGAAACAAAATGAGGAGGTACTGAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
+                "codon": "ATG",
                 "start_pos": 63,
                 "dG_total": 14.049742241022402,
                 "dG_rRNA:mRNA": -5.5809999999999995,
@@ -1134,6 +1758,19 @@
             {
                 "RNA": "TTCTAGAAAGCTGATAAGGAGGTATAACGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
                 "codon": "ATG",
+                "start_pos": 30,
+                "dG_total": -8.125705664000002,
+                "dG_rRNA:mRNA": -15.981,
+                "dG_mRNA": -8.7,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 35834.36190242105
+            },
+            {
+                "RNA": "TTCTAGAAAGCTGATAAGGAGGTATAACGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
+                "codon": "ATG",
                 "start_pos": 63,
                 "dG_total": 14.049742241022402,
                 "dG_rRNA:mRNA": -5.5809999999999995,
@@ -1148,6 +1785,19 @@
     },
     "TTCTAGAACAACTTAAGGAGGTATTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG": {
         "findings": [
+            {
+                "RNA": "TTCTAGAACAACTTAAGGAGGTATTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
+                "codon": "ATG",
+                "start_pos": 27,
+                "dG_total": -7.574557435152098,
+                "dG_rRNA:mRNA": -15.881,
+                "dG_mRNA": -9.5,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 28900.68871921948
+            },
             {
                 "RNA": "TTCTAGAACAACTTAAGGAGGTATTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
                 "codon": "ATG",
@@ -1180,6 +1830,32 @@
         "findings": [
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGTGCGGCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
+                "codon": "GTG",
+                "start_pos": 19,
+                "dG_total": 12.663074965539227,
+                "dG_rRNA:mRNA": -11.681,
+                "dG_mRNA": -6.8,
+                "dG_Spacing": 17.618874965539227,
+                "Spacing": "-2 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0748,
+                "Expression": 10.756298262150455
+            },
+            {
+                "RNA": "TTCTAGAAAAGTAAGGAGGTGCGGCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
+                "codon": "ATG",
+                "start_pos": 27,
+                "dG_total": -7.2257056639999995,
+                "dG_rRNA:mRNA": -15.881,
+                "dG_mRNA": -9.5,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 25222.93551413131
+            },
+            {
+                "RNA": "TTCTAGAAAAGTAAGGAGGTGCGGCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
                 "codon": "ATG",
                 "start_pos": 60,
                 "dG_total": 25.81933226330596,
@@ -1208,6 +1884,45 @@
     },
     "TTCTAGACTGGTGAGGAGGTGAGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGACTGGTGAGGAGGTGAGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "GTG",
+                "start_pos": 11,
+                "dG_total": 19.582380275330777,
+                "dG_rRNA:mRNA": -1.9809999999999999,
+                "dG_mRNA": -5.0,
+                "dG_Spacing": 16.638180275330775,
+                "Spacing": "2 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0748,
+                "Expression": 0.7230925496499259
+            },
+            {
+                "RNA": "TTCTAGACTGGTGAGGAGGTGAGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "GTG",
+                "start_pos": 19,
+                "dG_total": -0.0065056639999996335,
+                "dG_rRNA:mRNA": -5.281,
+                "dG_mRNA": -5.0,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0748,
+                "Expression": 1508.3767956491506
+            },
+            {
+                "RNA": "TTCTAGACTGGTGAGGAGGTGAGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 25,
+                "dG_total": -6.374557435152095,
+                "dG_rRNA:mRNA": -15.981,
+                "dG_mRNA": -10.8,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 18095.45320098646
+            },
             {
                 "RNA": "TTCTAGACTGGTGAGGAGGTGAGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -1241,6 +1956,19 @@
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
                 "codon": "ATG",
+                "start_pos": 27,
+                "dG_total": -5.925705663999999,
+                "dG_rRNA:mRNA": -14.581,
+                "dG_mRNA": -9.5,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 15188.399355054868
+            },
+            {
+                "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
+                "codon": "ATG",
                 "start_pos": 60,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -1271,6 +1999,19 @@
             {
                 "RNA": "TTCTAGACACAGAAAAAGGAGGGTCGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
                 "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": -5.175000000000001,
+                "dG_rRNA:mRNA": -15.181,
+                "dG_mRNA": -10.6,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": -0.5999999999999996,
+                "dG_Start_Codon": -1.194,
+                "Expression": 11331.978158436343
+            },
+            {
+                "RNA": "TTCTAGACACAGAAAAAGGAGGGTCGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
+                "codon": "ATG",
                 "start_pos": 62,
                 "dG_total": 14.049742241022402,
                 "dG_rRNA:mRNA": -5.5809999999999995,
@@ -1285,6 +2026,32 @@
     },
     "TTCTAGAAGGAGGTTTGGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGTT": {
         "findings": [
+            {
+                "RNA": "TTCTAGAAGGAGGTTTGGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGTT",
+                "codon": "TTG",
+                "start_pos": 15,
+                "dG_total": 9.19378294205496,
+                "dG_rRNA:mRNA": -14.881,
+                "dG_mRNA": -6.5,
+                "dG_Spacing": 17.61828294205496,
+                "Spacing": "0 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 41.6419148552851
+            },
+            {
+                "RNA": "TTCTAGAAGGAGGTTTGGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGTT",
+                "codon": "ATG",
+                "start_pos": 20,
+                "dG_total": -4.574999999999999,
+                "dG_rRNA:mRNA": -14.881,
+                "dG_mRNA": -11.5,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 8966.77691074622
+            },
             {
                 "RNA": "TTCTAGAAGGAGGTTTGGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGTT",
                 "codon": "ATG",
@@ -1318,6 +2085,45 @@
             {
                 "RNA": "TTCTAGATGGGGAGTGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
                 "codon": "ATG",
+                "start_pos": 7,
+                "dG_total": 19.34387496553923,
+                "dG_rRNA:mRNA": -1.9809999999999999,
+                "dG_mRNA": -4.9,
+                "dG_Spacing": 17.618874965539227,
+                "Spacing": "-2 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 0.7936122424461284
+            },
+            {
+                "RNA": "TTCTAGATGGGGAGTGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
+                "codon": "GTG",
+                "start_pos": 14,
+                "dG_total": 2.8689422410224017,
+                "dG_rRNA:mRNA": -4.981,
+                "dG_mRNA": -4.9,
+                "dG_Spacing": 3.0247422410224014,
+                "Spacing": "3 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0748,
+                "Expression": 491.21118082910783
+            },
+            {
+                "RNA": "TTCTAGATGGGGAGTGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
+                "codon": "ATG",
+                "start_pos": 21,
+                "dG_total": -4.074557435152096,
+                "dG_rRNA:mRNA": -11.481,
+                "dG_mRNA": -8.6,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 7376.271657144726
+            },
+            {
+                "RNA": "TTCTAGATGGGGAGTGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
+                "codon": "ATG",
                 "start_pos": 54,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -1345,6 +2151,19 @@
     },
     "TTCTAGAGGGGGTTAACAAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT": {
         "findings": [
+            {
+                "RNA": "TTCTAGAGGGGGTTAACAAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
+                "codon": "ATG",
+                "start_pos": 21,
+                "dG_total": -5.950400826000003,
+                "dG_rRNA:mRNA": -14.281,
+                "dG_mRNA": -8.7,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 15335.451849729276
+            },
             {
                 "RNA": "TTCTAGAGGGGGTTAACAAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
                 "codon": "ATG",
@@ -1378,6 +2197,19 @@
             {
                 "RNA": "TTCTAGAAGCGAGGAGGCAGTCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
                 "codon": "ATG",
+                "start_pos": 24,
+                "dG_total": -5.375000000000002,
+                "dG_rRNA:mRNA": -14.281,
+                "dG_mRNA": -10.1,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 12251.676382057463
+            },
+            {
+                "RNA": "TTCTAGAAGCGAGGAGGCAGTCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
+                "codon": "ATG",
                 "start_pos": 57,
                 "dG_total": 14.049742241022402,
                 "dG_rRNA:mRNA": -5.5809999999999995,
@@ -1405,6 +2237,19 @@
     },
     "TTCTAGATAGGGGGCGGTACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT": {
         "findings": [
+            {
+                "RNA": "TTCTAGATAGGGGGCGGTACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
+                "codon": "ATG",
+                "start_pos": 21,
+                "dG_total": -2.8750000000000018,
+                "dG_rRNA:mRNA": -11.781,
+                "dG_mRNA": -10.1,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 4619.268076960921
+            },
             {
                 "RNA": "TTCTAGATAGGGGGCGGTACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
                 "codon": "ATG",
@@ -1437,6 +2282,32 @@
         "findings": [
             {
                 "RNA": "TTCTAGAGATAAGTGAAGGAGGCCCGGCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
+                "codon": "GTG",
+                "start_pos": 13,
+                "dG_total": 5.444642564847903,
+                "dG_rRNA:mRNA": -1.9809999999999999,
+                "dG_mRNA": -7.5,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0748,
+                "Expression": 179.8119514004624
+            },
+            {
+                "RNA": "TTCTAGAGATAAGTGAAGGAGGCCCGGCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
+                "codon": "ATG",
+                "start_pos": 30,
+                "dG_total": -3.7257056639999995,
+                "dG_rRNA:mRNA": -14.181,
+                "dG_mRNA": -11.3,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 6437.605212471933
+            },
+            {
+                "RNA": "TTCTAGAGATAAGTGAAGGAGGCCCGGCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
                 "codon": "ATG",
                 "start_pos": 63,
                 "dG_total": 25.81933226330596,
@@ -1452,6 +2323,19 @@
     },
     "TTCTAGAGGAGGATAACCACTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG": {
         "findings": [
+            {
+                "RNA": "TTCTAGAGGAGGATAACCACTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
+                "codon": "ATG",
+                "start_pos": 22,
+                "dG_total": -4.2490854859999985,
+                "dG_rRNA:mRNA": -14.481,
+                "dG_mRNA": -10.0,
+                "dG_Spacing": 1.425914514,
+                "Spacing": "8 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 7896.061021770179
+            },
             {
                 "RNA": "TTCTAGAGGAGGATAACCACTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
                 "codon": "ATG",
@@ -1484,6 +2368,32 @@
         "findings": [
             {
                 "RNA": "TTCTAGAGATAAGTGAAGGAGGCCGGCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
+                "codon": "GTG",
+                "start_pos": 13,
+                "dG_total": 6.344642564847903,
+                "dG_rRNA:mRNA": -1.9809999999999999,
+                "dG_mRNA": -8.4,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0748,
+                "Expression": 126.56525787159502
+            },
+            {
+                "RNA": "TTCTAGAGATAAGTGAAGGAGGCCGGCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
+                "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": -2.0749999999999993,
+                "dG_rRNA:mRNA": -14.181,
+                "dG_mRNA": -13.3,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 3380.75746088916
+            },
+            {
+                "RNA": "TTCTAGAGATAAGTGAAGGAGGCCGGCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
                 "codon": "ATG",
                 "start_pos": 62,
                 "dG_total": 25.81933226330596,
@@ -1499,6 +2409,19 @@
     },
     "TTCTAGAACACTAAGGAGACCAACTTGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAACACTAAGGAGACCAACTTGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
+                "codon": "TTG",
+                "start_pos": 25,
+                "dG_total": -4.024057435152097,
+                "dG_rRNA:mRNA": -11.581,
+                "dG_mRNA": -7.6,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 7232.354932907473
+            },
             {
                 "RNA": "TTCTAGAACACTAAGGAGACCAACTTGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
                 "codon": "ATG",
@@ -1532,6 +2455,19 @@
             {
                 "RNA": "TTCTAGAAAGTTAAGAGGCAAGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
                 "codon": "ATG",
+                "start_pos": 24,
+                "dG_total": -0.8745574351520968,
+                "dG_rRNA:mRNA": -8.280999999999999,
+                "dG_mRNA": -8.6,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 2116.412389021651
+            },
+            {
+                "RNA": "TTCTAGAAAGTTAAGAGGCAAGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
+                "codon": "ATG",
                 "start_pos": 57,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -1559,6 +2495,19 @@
     },
     "TTCTAGATTAACTGGGGGCTATCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA": {
         "findings": [
+            {
+                "RNA": "TTCTAGATTAACTGGGGGCTATCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
+                "codon": "ATG",
+                "start_pos": 24,
+                "dG_total": 1.2254425648479028,
+                "dG_rRNA:mRNA": -10.881,
+                "dG_mRNA": -13.3,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 932.7333845407226
+            },
             {
                 "RNA": "TTCTAGATTAACTGGGGGCTATCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
                 "codon": "ATG",
@@ -1592,6 +2541,32 @@
             {
                 "RNA": "TTCTAGATGAGAATAAGGTTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
                 "codon": "ATG",
+                "start_pos": 7,
+                "dG_total": 15.543874965539226,
+                "dG_rRNA:mRNA": -1.9809999999999999,
+                "dG_mRNA": -1.1,
+                "dG_Spacing": 17.618874965539227,
+                "Spacing": "-2 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 3.495540435370599
+            },
+            {
+                "RNA": "TTCTAGATGAGAATAAGGTTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
+                "codon": "ATG",
+                "start_pos": 21,
+                "dG_total": 2.0254425648479026,
+                "dG_rRNA:mRNA": -5.281,
+                "dG_mRNA": -8.5,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 682.6504321180419
+            },
+            {
+                "RNA": "TTCTAGATGAGAATAAGGTTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
+                "codon": "ATG",
                 "start_pos": 54,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -1619,6 +2594,19 @@
     },
     "TTCTAGATAAGCAGGACCGGCGGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGG": {
         "findings": [
+            {
+                "RNA": "TTCTAGATAAGCAGGACCGGCGGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGG",
+                "codon": "ATG",
+                "start_pos": 26,
+                "dG_total": 1.9742943359999998,
+                "dG_rRNA:mRNA": -7.381,
+                "dG_mRNA": -10.2,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 696.4106156747574
+            },
             {
                 "RNA": "TTCTAGATAAGCAGGACCGGCGGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGG",
                 "codon": "ATG",
@@ -1652,6 +2640,19 @@
             {
                 "RNA": "TTCTAGAAACCTCAAGGAATTCCCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGG",
                 "codon": "ATG",
+                "start_pos": 26,
+                "dG_total": 1.7254425648479028,
+                "dG_rRNA:mRNA": -7.881,
+                "dG_mRNA": -10.8,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 767.4198906661088
+            },
+            {
+                "RNA": "TTCTAGAAACCTCAAGGAATTCCCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGG",
+                "codon": "ATG",
                 "start_pos": 59,
                 "dG_total": 27.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -1682,6 +2683,19 @@
             {
                 "RNA": "TTCTAGAGGCGACAGGCGGATCTATCCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
                 "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": 4.825,
+                "dG_rRNA:mRNA": -7.481,
+                "dG_mRNA": -11.8,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": -1.7000000000000002,
+                "dG_Start_Codon": -1.194,
+                "Expression": 228.98990131598188
+            },
+            {
+                "RNA": "TTCTAGAGGCGACAGGCGGATCTATCCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
+                "codon": "ATG",
                 "start_pos": 62,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -1696,6 +2710,19 @@
     },
     "TTCTAGAATAAAAAGGGACGCTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAATAAAAAGGGACGCTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
+                "codon": "ATG",
+                "start_pos": 24,
+                "dG_total": 2.874294336000001,
+                "dG_rRNA:mRNA": -5.5809999999999995,
+                "dG_mRNA": -9.3,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 490.18648911212046
+            },
             {
                 "RNA": "TTCTAGAATAAAAAGGGACGCTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
                 "codon": "ATG",
@@ -1729,6 +2756,19 @@
             {
                 "RNA": "TTCTAGAATAGAGTCGACGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
                 "codon": "ATG",
+                "start_pos": 21,
+                "dG_total": 3.425,
+                "dG_rRNA:mRNA": -4.881,
+                "dG_mRNA": -9.5,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 395.4074482153972
+            },
+            {
+                "RNA": "TTCTAGAATAGAGTCGACGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
+                "codon": "ATG",
                 "start_pos": 54,
                 "dG_total": 26.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -1756,6 +2796,19 @@
     },
     "TTCTAGAGAGTAATATTTCACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG": {
         "findings": [
+            {
+                "RNA": "TTCTAGAGAGTAATATTTCACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
+                "codon": "ATG",
+                "start_pos": 22,
+                "dG_total": 5.674294336000001,
+                "dG_rRNA:mRNA": -3.2809999999999997,
+                "dG_mRNA": -9.8,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 164.40094328080238
+            },
             {
                 "RNA": "TTCTAGAGAGTAATATTTCACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
                 "codon": "ATG",
@@ -1789,6 +2842,19 @@
             {
                 "RNA": "TTCTAGACGAGCTGGTACTTAAAAACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
                 "codon": "ATG",
+                "start_pos": 27,
+                "dG_total": 4.731576700000001,
+                "dG_rRNA:mRNA": -7.481,
+                "dG_mRNA": -10.4,
+                "dG_Spacing": 3.0065767,
+                "Spacing": "10 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 237.49081019736832
+            },
+            {
+                "RNA": "TTCTAGACGAGCTGGTACTTAAAAACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
+                "codon": "ATG",
                 "start_pos": 60,
                 "dG_total": 26.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -1816,6 +2882,19 @@
     },
     "TTCTAGATTCGCAGGGGGAAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG": {
         "findings": [
+            {
+                "RNA": "TTCTAGATTCGCAGGGGGAAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
+                "codon": "ATG",
+                "start_pos": 22,
+                "dG_total": 4.850914514,
+                "dG_rRNA:mRNA": -6.5809999999999995,
+                "dG_mRNA": -11.2,
+                "dG_Spacing": 1.425914514,
+                "Spacing": "8 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 226.68623167067486
+            },
             {
                 "RNA": "TTCTAGATTCGCAGGGGGAAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
                 "codon": "ATG",
@@ -1849,6 +2928,19 @@
             {
                 "RNA": "TTCTAGATTTCTCCCATAATAACTCGAACCATTACCGAGCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
                 "codon": "ATG",
+                "start_pos": 42,
+                "dG_total": 14.510923546,
+                "dG_rRNA:mRNA": -0.2809999999999997,
+                "dG_mRNA": -12.0,
+                "dG_Spacing": 3.985923546,
+                "Spacing": "11 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 5.230543921574789
+            },
+            {
+                "RNA": "TTCTAGATTTCTCCCATAATAACTCGAACCATTACCGAGCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
+                "codon": "ATG",
                 "start_pos": 75,
                 "dG_total": 27.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -1876,6 +2968,19 @@
     },
     "TTCTAGAGGGAACGATTTAGGCCAATTATTAAAACCGACCCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG": {
         "findings": [
+            {
+                "RNA": "TTCTAGAGGGAACGATTTAGGCCAATTATTAAAACCGACCCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
+                "codon": "ATG",
+                "start_pos": 43,
+                "dG_total": 15.497815305999998,
+                "dG_rRNA:mRNA": -1.8809999999999998,
+                "dG_mRNA": -7.8,
+                "dG_Spacing": 10.772815305999998,
+                "Spacing": "16 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 3.55892708874988
+            },
             {
                 "RNA": "TTCTAGAGGGAACGATTTAGGCCAATTATTAAAACCGACCCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
                 "codon": "TTG",
@@ -1918,13 +3023,67 @@
         ]
     },
     "TTCTAGATTAGGCCTGATCTAAGCCATTAACTTTAGTTATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGATTAGGCCTGATCTAAGCCATTAACTTTAGTTATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 39,
+                "dG_total": 14.2315767,
+                "dG_rRNA:mRNA": -3.581,
+                "dG_mRNA": -12.4,
+                "dG_Spacing": 3.0065767,
+                "Spacing": "10 bp",
+                "dG_Standby": -3.6,
+                "dG_Start_Codon": -1.194,
+                "Expression": 5.832864399193048
+            }
+        ]
     },
     "TTCTAGACCAGTCGCGTACCGCTATTGGTCCAGCTACAATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGACCAGTCGCGTACCGCTATTGGTCCAGCTACAATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
+                "codon": "TTG",
+                "start_pos": 25,
+                "dG_total": 18.301414514,
+                "dG_rRNA:mRNA": -1.581,
+                "dG_mRNA": -18.5,
+                "dG_Spacing": 1.425914514,
+                "Spacing": "8 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 1.1919339145823804
+            },
+            {
+                "RNA": "TTCTAGACCAGTCGCGTACCGCTATTGGTCCAGCTACAATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 39,
+                "dG_total": 14.849742241022401,
+                "dG_rRNA:mRNA": -11.181,
+                "dG_mRNA": -16.3,
+                "dG_Spacing": 3.0247422410224014,
+                "Spacing": "3 bp",
+                "dG_Standby": -7.8999999999999995,
+                "dG_Start_Codon": -1.194,
+                "Expression": 4.582836723903428
+            }
+        ]
     },
     "TTCTAGATTCTAaaggaggAGTCCGGGATGGCTGAAGCGCAAAATGATCCCCTGATGGCGAGCTCTGAAGACGTT": {
         "findings": [
+            {
+                "RNA": "TTCTAGATTCTAaaggaggAGTCCGGGATGGCTGAAGCGCAAAATGATCCCCTGATGGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 28,
+                "dG_total": -3.8504008259999996,
+                "dG_rRNA:mRNA": -14.081,
+                "dG_mRNA": -10.6,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 6758.55423142343
+            },
             {
                 "RNA": "TTCTAGATTCTAaaggaggAGTCCGGGATGGCTGAAGCGCAAAATGATCCCCTGATGGCGAGCTCTGAAGACGTT",
                 "codon": "ATG",
@@ -1954,40 +3113,285 @@
         ]
     },
     "TTCTAGAAAAGGAAGTAAAGGGGATATTAATGGCTGAAGCGCAAAACGATCCCGCCGCGAGCTCTGAAGACGTT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGAAAAGGAAGTAAAGGGGATATTAATGGCTGAAGCGCAAAACGATCCCGCCGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 30,
+                "dG_total": -1.574557435152097,
+                "dG_rRNA:mRNA": -11.081,
+                "dG_mRNA": -9.9,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": -0.7999999999999998,
+                "dG_Start_Codon": -1.194,
+                "Expression": 2781.086859488064
+            }
+        ]
     },
     "TTCTAGACGTAAATAACAATTCATTCAGTCTGAAGCTAATCAATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGACGTAAATAACAATTCATTCAGTCTGAAGCTAATCAATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 43,
+                "dG_total": 6.2250000000000005,
+                "dG_rRNA:mRNA": 0.019000000000000128,
+                "dG_mRNA": -7.4,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 132.61352344617075
+            }
+        ]
     },
     "TTCTAGAAATATTAACCGAAAGACGGAAAACCACTTCCCCATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGAAATATTAACCGAAAGACGGAAAACCACTTCCCCATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 41,
+                "dG_total": 3.2315767,
+                "dG_rRNA:mRNA": -3.581,
+                "dG_mRNA": -5.0,
+                "dG_Spacing": 3.0065767,
+                "Spacing": "10 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 426.4029679541467
+            }
+        ]
     },
     "TTCTAGACTGACACAATATACGTAGAATTGGACACCACTATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGACTGACACAATATACGTAGAATTGGACACCACTATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
+                "codon": "TTG",
+                "start_pos": 28,
+                "dG_total": 2.975942564847903,
+                "dG_rRNA:mRNA": -1.8809999999999998,
+                "dG_mRNA": -4.9,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 471.12608660047977
+            },
+            {
+                "RNA": "TTCTAGACTGACACAATATACGTAGAATTGGACACCACTATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 40,
+                "dG_total": -0.574557435152097,
+                "dG_rRNA:mRNA": -3.581,
+                "dG_mRNA": -4.2,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 1882.632766596093
+            }
+        ]
     },
     "TTCTAGATATACCTATAAATCTAAGGACCTATTTTTATCTATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGATATACCTATAAATCTAAGGACCTATTTTTATCTATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 41,
+                "dG_total": -2.2684233000000003,
+                "dG_rRNA:mRNA": -7.381,
+                "dG_mRNA": -3.3,
+                "dG_Spacing": 3.0065767,
+                "Spacing": "10 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 3645.7710186353765
+            }
+        ]
     },
     "TTCTAGATACCCACTTAAGGAGAGTAATATATCATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGATACCCACTTAAGGAGAGTAATATATCATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 34,
+                "dG_total": -4.7217596440000005,
+                "dG_rRNA:mRNA": -12.081,
+                "dG_mRNA": -6.4,
+                "dG_Spacing": 2.153240356,
+                "Spacing": "9 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 9495.211240217895
+            }
+        ]
     },
     "TTCTAGACTGAAATTTACTTTGTAATAAGAGAGGAATATATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGACTGAAATTTACTTTGTAATAAGAGAGGAATATATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
+                "codon": "TTG",
+                "start_pos": 20,
+                "dG_total": 0.9755000000000003,
+                "dG_rRNA:mRNA": -2.081,
+                "dG_mRNA": -3.1,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 1028.2767684341206
+            },
+            {
+                "RNA": "TTCTAGACTGAAATTTACTTTGTAATAAGAGAGGAATATATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 40,
+                "dG_total": -6.375000000000001,
+                "dG_rRNA:mRNA": -9.481,
+                "dG_mRNA": -4.3,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 18098.57811751898
+            }
+        ]
     },
     "TTCTAGAACAACAACAAATAAGGAGTAAATAGATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGAACAACAACAAATAAGGAGTAAATAGATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 33,
+                "dG_total": -8.675,
+                "dG_rRNA:mRNA": -11.281,
+                "dG_mRNA": -3.8,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 44399.39152901737
+            }
+        ]
     },
     "TTCTAGAACCCCACGACTAAACTATAAAATAAGGAGGTACGCATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGAACCCCACGACTAAACTATAAAATAAGGAGGTACGCATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 43,
+                "dG_total": -9.074557435152096,
+                "dG_rRNA:mRNA": -14.981,
+                "dG_mRNA": -7.1,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 51889.75285213228
+            }
+        ]
     },
     "TTCTAGAGGTATTACGTTTCAGGCCAGCGTCACCCAGATCGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGAGGTATTACGTTTCAGGCCAGCGTCACCCAGATCGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "ATG",
+                "start_pos": 42,
+                "dG_total": 7.616280894000001,
+                "dG_rRNA:mRNA": -1.1809999999999998,
+                "dG_mRNA": -4.9,
+                "dG_Spacing": 5.0912808940000005,
+                "Spacing": "12 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 77.061372818607
+            },
+            {
+                "RNA": "TTCTAGAGGTATTACGTTTCAGGCCAGCGTCACCCAGATCGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "TTG",
+                "start_pos": 67,
+                "dG_total": 2.275942564847903,
+                "dG_rRNA:mRNA": -1.1809999999999998,
+                "dG_mRNA": -3.5,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 619.0866087361701
+            }
+        ]
     },
     "TTCTAGACGTTACCACGTCGGCCGAAAATCGTTTCAGCTGCCATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGACGTTACCACGTCGGCCGAAAATCGTTTCAGCTGCCATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "ATG",
+                "start_pos": 43,
+                "dG_total": 32.191904854,
+                "dG_rRNA:mRNA": 1.319,
+                "dG_mRNA": -6.5,
+                "dG_Spacing": 25.566904853999997,
+                "Spacing": "23 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 0.005278655437912361
+            },
+            {
+                "RNA": "TTCTAGACGTTACCACGTCGGCCGAAAATCGTTTCAGCTGCCATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "TTG",
+                "start_pos": 68,
+                "dG_total": 3.375942564847903,
+                "dG_rRNA:mRNA": -0.08099999999999996,
+                "dG_mRNA": -3.5,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 403.0487477458757
+            }
+        ]
     },
     "TTCTAGAGTGCAtaaggagTGCTCGATGTCCAGATTAGATAAAAGTAAAGTGATGGCGAGCTCTGAAGACG": {
         "findings": [
+            {
+                "RNA": "TTCTAGAGTGCAtaaggagTGCTCGATGTCCAGATTAGATAAAAGTAAAGTGATGGCGAGCTCTGAAGACG",
+                "codon": "GTG",
+                "start_pos": 8,
+                "dG_total": 21.763061025327254,
+                "dG_rRNA:mRNA": -1.9809999999999999,
+                "dG_mRNA": -6.2,
+                "dG_Spacing": 17.618861025327252,
+                "Spacing": "-1 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0748,
+                "Expression": 0.3088018158894673
+            },
+            {
+                "RNA": "TTCTAGAGTGCAtaaggagTGCTCGATGTCCAGATTAGATAAAAGTAAAGTGATGGCGAGCTCTGAAGACG",
+                "codon": "GTG",
+                "start_pos": 19,
+                "dG_total": 2.970114514,
+                "dG_rRNA:mRNA": -4.881,
+                "dG_mRNA": -6.5,
+                "dG_Spacing": 1.425914514,
+                "Spacing": "8 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0748,
+                "Expression": 472.1986152482163
+            },
+            {
+                "RNA": "TTCTAGAGTGCAtaaggagTGCTCGATGTCCAGATTAGATAAAAGTAAAGTGATGGCGAGCTCTGAAGACG",
+                "codon": "ATG",
+                "start_pos": 26,
+                "dG_total": -4.774557435152096,
+                "dG_rRNA:mRNA": -11.281,
+                "dG_mRNA": -7.7,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 9692.842606720149
+            },
             {
                 "RNA": "TTCTAGAGTGCAtaaggagTGCTCGATGTCCAGATTAGATAAAAGTAAAGTGATGGCGAGCTCTGAAGACG",
                 "codon": "GTG",
@@ -2021,6 +3425,32 @@
             {
                 "RNA": "TTCTAGATTGATAGATAAGGACAAAGTTATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
                 "codon": "TTG",
+                "start_pos": 8,
+                "dG_total": 23.894361025327253,
+                "dG_rRNA:mRNA": -1.9809999999999999,
+                "dG_mRNA": -8.3,
+                "dG_Spacing": 17.618861025327252,
+                "Spacing": "-1 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 0.1344414908905414
+            },
+            {
+                "RNA": "TTCTAGATTGATAGATAAGGACAAAGTTATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": -1.2745574351520963,
+                "dG_rRNA:mRNA": -10.280999999999999,
+                "dG_mRNA": -8.3,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": -1.8999999999999995,
+                "dG_Start_Codon": -1.194,
+                "Expression": 2473.8870720948557
+            },
+            {
+                "RNA": "TTCTAGATTGATAGATAAGGACAAAGTTATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "TTG",
                 "start_pos": 54,
                 "dG_total": 1.8759425648479038,
                 "dG_rRNA:mRNA": -4.981,
@@ -2035,6 +3465,32 @@
     },
     "TTCTAGAGTCAAGGACCTCTTGGCGGTTATCTTAAGGCACAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG": {
         "findings": [
+            {
+                "RNA": "TTCTAGAGTCAAGGACCTCTTGGCGGTTATCTTAAGGCACAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "TTG",
+                "start_pos": 20,
+                "dG_total": 3.7247943359999995,
+                "dG_rRNA:mRNA": -5.781,
+                "dG_mRNA": -9.2,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 351.75883426905983
+            },
+            {
+                "RNA": "TTCTAGAGTCAAGGACCTCTTGGCGGTTATCTTAAGGCACAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "ATG",
+                "start_pos": 42,
+                "dG_total": 4.725,
+                "dG_rRNA:mRNA": -5.181,
+                "dG_mRNA": -8.1,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": -3.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 238.1010024822032
+            },
             {
                 "RNA": "TTCTAGAGTCAAGGACCTCTTGGCGGTTATCTTAAGGCACAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
                 "codon": "TTG",
@@ -2054,6 +3510,45 @@
         "findings": [
             {
                 "RNA": "TTCTAGATGACCACCATAGGTTGGATACAAATACCACAGGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "ATG",
+                "start_pos": 7,
+                "dG_total": 17.643874965539226,
+                "dG_rRNA:mRNA": -1.9809999999999999,
+                "dG_mRNA": -3.2,
+                "dG_Spacing": 17.618874965539227,
+                "Spacing": "-2 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 1.5405349533931567
+            },
+            {
+                "RNA": "TTCTAGATGACCACCATAGGTTGGATACAAATACCACAGGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "TTG",
+                "start_pos": 21,
+                "dG_total": 6.6000991739999995,
+                "dG_rRNA:mRNA": -1.781,
+                "dG_mRNA": -7.6,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 114.55858922614762
+            },
+            {
+                "RNA": "TTCTAGATGACCACCATAGGTTGGATACAAATACCACAGGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "ATG",
+                "start_pos": 41,
+                "dG_total": 5.116280894000001,
+                "dG_rRNA:mRNA": -5.981,
+                "dG_mRNA": -4.8,
+                "dG_Spacing": 5.0912808940000005,
+                "Spacing": "12 bp",
+                "dG_Standby": -2.4,
+                "dG_Start_Codon": -1.194,
+                "Expression": 204.3897400195506
+            },
+            {
+                "RNA": "TTCTAGATGACCACCATAGGTTGGATACAAATACCACAGGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
                 "codon": "TTG",
                 "start_pos": 66,
                 "dG_total": 17.985469616,
@@ -2069,6 +3564,19 @@
     },
     "TTCTAGATAAGAAAACCACCCTACAAAGAAAACCCTAATTAGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG": {
         "findings": [
+            {
+                "RNA": "TTCTAGATAAGAAAACCACCCTACAAAGAAAACCCTAATTAGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "ATG",
+                "start_pos": 43,
+                "dG_total": 0.8782403560000003,
+                "dG_rRNA:mRNA": -0.8809999999999998,
+                "dG_mRNA": -0.8,
+                "dG_Spacing": 2.153240356,
+                "Spacing": "9 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 1068.0474995022762
+            },
             {
                 "RNA": "TTCTAGATAAGAAAACCACCCTACAAAGAAAACCCTAATTAGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
                 "codon": "TTG",
@@ -2088,6 +3596,19 @@
         "findings": [
             {
                 "RNA": "TTCTAGACTAGATTAGAAAGGAGGTACCACACCACAAAAGTAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "ATG",
+                "start_pos": 43,
+                "dG_total": -0.5667748360000002,
+                "dG_rRNA:mRNA": -13.681,
+                "dG_mRNA": -1.8,
+                "dG_Spacing": 12.508225163999999,
+                "Spacing": "17 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 1876.924744959602
+            },
+            {
+                "RNA": "TTCTAGACTAGATTAGAAAGGAGGTACCACACCACAAAAGTAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
                 "codon": "TTG",
                 "start_pos": 68,
                 "dG_total": 3.375942564847903,
@@ -2103,6 +3624,19 @@
     },
     "TTCTAGATTAGACCTGACTAACAAGAGGTAGGGGGATCATATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG": {
         "findings": [
+            {
+                "RNA": "TTCTAGATTAGACCTGACTAACAAGAGGTAGGGGGATCATATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "ATG",
+                "start_pos": 41,
+                "dG_total": -5.674557435152096,
+                "dG_rRNA:mRNA": -12.281,
+                "dG_mRNA": -5.7,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": -2.1000000000000005,
+                "dG_Start_Codon": -1.194,
+                "Expression": 13770.6742991044
+            },
             {
                 "RNA": "TTCTAGATTAGACCTGACTAACAAGAGGTAGGGGGATCATATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
                 "codon": "TTG",
@@ -2122,6 +3656,19 @@
         "findings": [
             {
                 "RNA": "TTCTAGAAGAACAATACAGGAGGACAATTCGCCCTATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "ATG",
+                "start_pos": 36,
+                "dG_total": -4.689076453999999,
+                "dG_rRNA:mRNA": -12.781,
+                "dG_mRNA": -5.3,
+                "dG_Spacing": 3.985923546,
+                "Spacing": "11 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 9374.89687305162
+            },
+            {
+                "RNA": "TTCTAGAAGAACAATACAGGAGGACAATTCGCCCTATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
                 "codon": "TTG",
                 "start_pos": 61,
                 "dG_total": 3.375942564847903,
@@ -2137,6 +3684,19 @@
     },
     "TTCTAGATAAGTCATTCACAGAACAAACACGAGGTATCATATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG": {
         "findings": [
+            {
+                "RNA": "TTCTAGATAAGTCATTCACAGAACAAACACGAGGTATCATATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "ATG",
+                "start_pos": 41,
+                "dG_total": -7.574999999999999,
+                "dG_rRNA:mRNA": -7.881,
+                "dG_mRNA": -1.5,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 28905.67959946856
+            },
             {
                 "RNA": "TTCTAGATAAGTCATTCACAGAACAAACACGAGGTATCATATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
                 "codon": "TTG",
@@ -2156,6 +3716,32 @@
         "findings": [
             {
                 "RNA": "TTCTAGAACGACTATTTTTTCCACTATTGAGGTATAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGT",
+                "codon": "TTG",
+                "start_pos": 27,
+                "dG_total": 9.5755,
+                "dG_rRNA:mRNA": 0.41900000000000004,
+                "dG_mRNA": -9.2,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 35.87972791520227
+            },
+            {
+                "RNA": "TTCTAGAACGACTATTTTTTCCACTATTGAGGTATAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGT",
+                "codon": "ATG",
+                "start_pos": 38,
+                "dG_total": 1.425442564847902,
+                "dG_rRNA:mRNA": -7.881,
+                "dG_mRNA": -10.5,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 862.7157632680528
+            },
+            {
+                "RNA": "TTCTAGAACGACTATTTTTTCCACTATTGAGGTATAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGT",
                 "codon": "ATG",
                 "start_pos": 71,
                 "dG_total": 20.91933226330596,
@@ -2170,10 +3756,50 @@
         ]
     },
     "TTCTAGAACGACTATTTTTTCCACTATTGAGGTATAAGTGAAACCAGTAACGTTATACGGCGTCGCGAGCTCTGAAGACGTTAT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGAACGACTATTTTTTCCACTATTGAGGTATAAGTGAAACCAGTAACGTTATACGGCGTCGCGAGCTCTGAAGACGTTAT",
+                "codon": "TTG",
+                "start_pos": 27,
+                "dG_total": 4.3755,
+                "dG_rRNA:mRNA": 0.41900000000000004,
+                "dG_mRNA": -4.0,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 272.88749105807324
+            },
+            {
+                "RNA": "TTCTAGAACGACTATTTTTTCCACTATTGAGGTATAAGTGAAACCAGTAACGTTATACGGCGTCGCGAGCTCTGAAGACGTTAT",
+                "codon": "GTG",
+                "start_pos": 38,
+                "dG_total": -0.35535743515209806,
+                "dG_rRNA:mRNA": -7.881,
+                "dG_mRNA": -7.6,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0748,
+                "Expression": 1728.3130354881368
+            }
+        ]
     },
     "TTCTAGAACACTTTACTTTTTAATTAGCAGGAGATTTAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTC": {
         "findings": [
+            {
+                "RNA": "TTCTAGAACACTTTACTTTTTAATTAGCAGGAGATTTAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTC",
+                "codon": "ATG",
+                "start_pos": 43,
+                "dG_total": -1.4504008259999983,
+                "dG_rRNA:mRNA": -7.781,
+                "dG_mRNA": -6.7,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 2649.5757925202306
+            },
             {
                 "RNA": "TTCTAGAACACTTTACTTTTTAATTAGCAGGAGATTTAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTC",
                 "codon": "ATG",
@@ -2190,10 +3816,37 @@
         ]
     },
     "TTCTAGAACACTTTACTTTTTAATTAGCAGGAGATTTAAAAAGTGAAACCAGTAACGTTATACGGCGTCGCGAGCTCTGAAGAC": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGAACACTTTACTTTTTAATTAGCAGGAGATTTAAAAAGTGAAACCAGTAACGTTATACGGCGTCGCGAGCTCTGAAGAC",
+                "codon": "GTG",
+                "start_pos": 43,
+                "dG_total": 3.168799174,
+                "dG_rRNA:mRNA": -7.781,
+                "dG_mRNA": -10.2,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0748,
+                "Expression": 436.97622059233464
+            }
+        ]
     },
     "TTCTAGATTCACGTCAACATTTAAGGAGGATATCGACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGT": {
         "findings": [
+            {
+                "RNA": "TTCTAGATTCACGTCAACATTTAAGGAGGATATCGACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGT",
+                "codon": "ATG",
+                "start_pos": 38,
+                "dG_total": -5.450400826000003,
+                "dG_rRNA:mRNA": -13.281,
+                "dG_mRNA": -8.2,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 12617.464944314754
+            },
             {
                 "RNA": "TTCTAGATTCACGTCAACATTTAAGGAGGATATCGACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGT",
                 "codon": "ATG",
@@ -2210,10 +3863,37 @@
         ]
     },
     "TTCTAGATTCACGTCAACATTTAAGGAGGATATCGACGTGAAACCAGTAACGTTATACGGCGTCGCGAGCTCTGAAGACGTTAT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGATTCACGTCAACATTTAAGGAGGATATCGACGTGAAACCAGTAACGTTATACGGCGTCGCGAGCTCTGAAGACGTTAT",
+                "codon": "GTG",
+                "start_pos": 38,
+                "dG_total": -0.531200826000001,
+                "dG_rRNA:mRNA": -13.281,
+                "dG_mRNA": -12.0,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0748,
+                "Expression": 1851.0531189480844
+            }
+        ]
     },
     "TTCTAGACAGAAAAAATAGAATAAGGAGGTTTCACTATCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA": {
         "findings": [
+            {
+                "RNA": "TTCTAGACAGAAAAAATAGAATAAGGAGGTTTCACTATCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA",
+                "codon": "ATG",
+                "start_pos": 40,
+                "dG_total": -7.321759643999999,
+                "dG_rRNA:mRNA": -14.981,
+                "dG_mRNA": -6.7,
+                "dG_Spacing": 2.153240356,
+                "Spacing": "9 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 26186.16346747535
+            },
             {
                 "RNA": "TTCTAGACAGAAAAAATAGAATAAGGAGGTTTCACTATCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA",
                 "codon": "ATG",
@@ -2230,10 +3910,37 @@
         ]
     },
     "TTCTAGACAGAAAAAATAGAATAAGGAGGTTTCACTATCGTGAAACCAGTAACGTTATACGGCGTCGCGAGCTCTGAAGACGTT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGACAGAAAAAATAGAATAAGGAGGTTTCACTATCGTGAAACCAGTAACGTTATACGGCGTCGCGAGCTCTGAAGACGTT",
+                "codon": "GTG",
+                "start_pos": 40,
+                "dG_total": -0.20255964400000082,
+                "dG_rRNA:mRNA": -14.981,
+                "dG_mRNA": -12.7,
+                "dG_Spacing": 2.153240356,
+                "Spacing": "9 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0748,
+                "Expression": 1628.287098497385
+            }
+        ]
     },
     "TTCTAGATTCCCCCGGAAACCAATAAAAGAAGGCCATCGTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCA": {
         "findings": [
+            {
+                "RNA": "TTCTAGATTCCCCCGGAAACCAATAAAAGAAGGCCATCGTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCA",
+                "codon": "ATG",
+                "start_pos": 42,
+                "dG_total": 5.649599174000001,
+                "dG_rRNA:mRNA": -5.781,
+                "dG_mRNA": -11.8,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 165.99265602624178
+            },
             {
                 "RNA": "TTCTAGATTCCCCCGGAAACCAATAAAAGAAGGCCATCGTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCA",
                 "codon": "ATG",
@@ -2251,6 +3958,19 @@
     },
     "TTCTAGATTCCCCCGGAAACCAATAAAAGAAGGCCATCGTCATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG": {
         "findings": [
+            {
+                "RNA": "TTCTAGATTCCCCCGGAAACCAATAAAAGAAGGCCATCGTCATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
+                "codon": "ATG",
+                "start_pos": 42,
+                "dG_total": -3.3504008259999996,
+                "dG_rRNA:mRNA": -5.781,
+                "dG_mRNA": -2.8,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 5560.6983038286335
+            },
             {
                 "RNA": "TTCTAGATTCCCCCGGAAACCAATAAAAGAAGGCCATCGTCATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
                 "codon": "TTG",
@@ -2271,6 +3991,32 @@
             {
                 "RNA": "TTCTAGATGGAGAAGCCATTAATATTAAGGAAGGTAACAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA",
                 "codon": "ATG",
+                "start_pos": 7,
+                "dG_total": 18.343874965539225,
+                "dG_rRNA:mRNA": -1.9809999999999999,
+                "dG_mRNA": -3.9,
+                "dG_Spacing": 17.618874965539227,
+                "Spacing": "-2 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 1.172350029255231
+            },
+            {
+                "RNA": "TTCTAGATGGAGAAGCCATTAATATTAAGGAAGGTAACAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA",
+                "codon": "ATG",
+                "start_pos": 40,
+                "dG_total": -2.2749999999999986,
+                "dG_rRNA:mRNA": -14.081,
+                "dG_mRNA": -13.0,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 3655.138207816281
+            },
+            {
+                "RNA": "TTCTAGATGGAGAAGCCATTAATATTAAGGAAGGTAACAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA",
+                "codon": "ATG",
                 "start_pos": 73,
                 "dG_total": 20.01933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -2285,6 +4031,32 @@
     },
     "TTCTAGATGGAGAAGCCATTAATATTAAGGAAGGTAACAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTT": {
         "findings": [
+            {
+                "RNA": "TTCTAGATGGAGAAGCCATTAATATTAAGGAAGGTAACAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 7,
+                "dG_total": 18.343874965539225,
+                "dG_rRNA:mRNA": -1.9809999999999999,
+                "dG_mRNA": -3.9,
+                "dG_Spacing": 17.618874965539227,
+                "Spacing": "-2 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 1.172350029255231
+            },
+            {
+                "RNA": "TTCTAGATGGAGAAGCCATTAATATTAAGGAAGGTAACAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 40,
+                "dG_total": -10.374999999999998,
+                "dG_rRNA:mRNA": -14.081,
+                "dG_mRNA": -4.9,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 86186.69282244868
+            },
             {
                 "RNA": "TTCTAGATGGAGAAGCCATTAATATTAAGGAAGGTAACAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTT",
                 "codon": "TTG",
@@ -2305,6 +4077,19 @@
             {
                 "RNA": "TTCTAGACCCACGTACCGATTAAAGGAGGCCTAGTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTT",
                 "codon": "ATG",
+                "start_pos": 37,
+                "dG_total": -3.325705664000001,
+                "dG_rRNA:mRNA": -11.981,
+                "dG_mRNA": -9.5,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 5507.376460708371
+            },
+            {
+                "RNA": "TTCTAGACCCACGTACCGATTAAAGGAGGCCTAGTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTT",
+                "codon": "ATG",
                 "start_pos": 70,
                 "dG_total": 20.01933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -2319,6 +4104,19 @@
     },
     "TTCTAGACCCACGTACCGATTAAAGGAGGCCTAGTAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTTATC": {
         "findings": [
+            {
+                "RNA": "TTCTAGACCCACGTACCGATTAAAGGAGGCCTAGTAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTTATC",
+                "codon": "ATG",
+                "start_pos": 37,
+                "dG_total": -9.125705664000002,
+                "dG_rRNA:mRNA": -11.981,
+                "dG_mRNA": -3.7,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 52935.69450889302
+            },
             {
                 "RNA": "TTCTAGACCCACGTACCGATTAAAGGAGGCCTAGTAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTTATC",
                 "codon": "TTG",
@@ -2339,6 +4137,19 @@
             {
                 "RNA": "TTCTAGAATAACCAGGGTAATAAGGAAGTACACAGACCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG",
                 "codon": "ATG",
+                "start_pos": 39,
+                "dG_total": 2.378240356,
+                "dG_rRNA:mRNA": -8.381,
+                "dG_mRNA": -9.8,
+                "dG_Spacing": 2.153240356,
+                "Spacing": "9 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 594.8632749979954
+            },
+            {
+                "RNA": "TTCTAGAATAACCAGGGTAATAAGGAAGTACACAGACCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG",
+                "codon": "ATG",
                 "start_pos": 72,
                 "dG_total": 19.31933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -2353,6 +4164,19 @@
     },
     "TTCTAGAATAACCAGGGTAATAAGGAAGTACACAGACCATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTTA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAATAACCAGGGTAATAAGGAAGTACACAGACCATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTTA",
+                "codon": "ATG",
+                "start_pos": 39,
+                "dG_total": -6.521759644,
+                "dG_rRNA:mRNA": -8.381,
+                "dG_mRNA": -0.9,
+                "dG_Spacing": 2.153240356,
+                "Spacing": "9 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 19165.172066171803
+            },
             {
                 "RNA": "TTCTAGAATAACCAGGGTAATAAGGAAGTACACAGACCATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTTA",
                 "codon": "TTG",
@@ -2373,6 +4197,19 @@
             {
                 "RNA": "TTCTAGAAAAACACCATATAAGTACAGAGAGGTAGAATATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG",
                 "codon": "ATG",
+                "start_pos": 39,
+                "dG_total": 1.9742943359999998,
+                "dG_rRNA:mRNA": -8.981,
+                "dG_mRNA": -11.8,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 696.4106156747574
+            },
+            {
+                "RNA": "TTCTAGAAAAACACCATATAAGTACAGAGAGGTAGAATATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG",
+                "codon": "ATG",
                 "start_pos": 72,
                 "dG_total": 19.31933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -2387,6 +4224,19 @@
     },
     "TTCTAGAAAAACACCATATAAGTACAGAGAGGTAGAATATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTTA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAAAAACACCATATAAGTACAGAGAGGTAGAATATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTTA",
+                "codon": "ATG",
+                "start_pos": 39,
+                "dG_total": -8.025705664,
+                "dG_rRNA:mRNA": -8.981,
+                "dG_mRNA": -1.8,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 34463.135015023334
+            },
             {
                 "RNA": "TTCTAGAAAAACACCATATAAGTACAGAGAGGTAGAATATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTTA",
                 "codon": "TTG",
@@ -2406,6 +4256,32 @@
         "findings": [
             {
                 "RNA": "TTCTAGAACTGTCCATAGATTTGAAAAGACCTTATCCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG",
+                "codon": "TTG",
+                "start_pos": 21,
+                "dG_total": 8.100099174,
+                "dG_rRNA:mRNA": -0.6809999999999998,
+                "dG_mRNA": -8.0,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 63.80493152034291
+            },
+            {
+                "RNA": "TTCTAGAACTGTCCATAGATTTGAAAAGACCTTATCCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG",
+                "codon": "ATG",
+                "start_pos": 39,
+                "dG_total": 5.725,
+                "dG_rRNA:mRNA": -0.8809999999999998,
+                "dG_mRNA": -7.8,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 161.18042034648553
+            },
+            {
+                "RNA": "TTCTAGAACTGTCCATAGATTTGAAAAGACCTTATCCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG",
                 "codon": "ATG",
                 "start_pos": 72,
                 "dG_total": 19.31933226330596,
@@ -2420,7 +4296,34 @@
         ]
     },
     "TTCTAGAACTGTCCATAGATTTGAAAAGACCTTATCCCATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTTA": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGAACTGTCCATAGATTTGAAAAGACCTTATCCCATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTTA",
+                "codon": "TTG",
+                "start_pos": 21,
+                "dG_total": 2.7000991740000004,
+                "dG_rRNA:mRNA": -0.6809999999999998,
+                "dG_mRNA": -2.6,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -0.0435,
+                "Expression": 524.6606854017974
+            },
+            {
+                "RNA": "TTCTAGAACTGTCCATAGATTTGAAAAGACCTTATCCCATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTTA",
+                "codon": "ATG",
+                "start_pos": 39,
+                "dG_total": 2.8250000000000006,
+                "dG_rRNA:mRNA": -0.8809999999999998,
+                "dG_mRNA": -4.9,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 499.7055922613598
+            }
+        ]
     },
     "TTCTAGAAACCACACTCCGTTTTTAGTAGGAGACCAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA": {
         "findings": [
@@ -2453,7 +4356,21 @@
         ]
     },
     "TTCTAGAAACCACACTCCGTTTTTAGTAGGAGACCAAAAATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGAAACCACACTCCGTTTTTAGTAGGAGACCAAAAATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
+                "codon": "ATG",
+                "start_pos": 40,
+                "dG_total": -0.2749999999999986,
+                "dG_rRNA:mRNA": -8.780999999999999,
+                "dG_mRNA": -9.1,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": -0.5999999999999996,
+                "dG_Start_Codon": -1.194,
+                "Expression": 1674.9657207485411
+            }
+        ]
     },
     "TTCTAGAAATTATAAACTTTCGGAACAAACGGAGTCATCAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCA": {
         "findings": [
@@ -2486,10 +4403,37 @@
         ]
     },
     "TTCTAGAAATTATAAACTTTCGGAACAAACGGAGTCATCAAATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACG": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGAAATTATAAACTTTCGGAACAAACGGAGTCATCAAATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACG",
+                "codon": "ATG",
+                "start_pos": 42,
+                "dG_total": -2.2750000000000004,
+                "dG_rRNA:mRNA": -6.181,
+                "dG_mRNA": -5.1,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 3655.1382078162837
+            }
+        ]
     },
     "TTCTAGAACGATCTGCACAACTCAAAATAAGGTAGGCGGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAACGATCTGCACAACTCAAAATAAGGTAGGCGGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAA",
+                "codon": "ATG",
+                "start_pos": 41,
+                "dG_total": -0.874557435152095,
+                "dG_rRNA:mRNA": -9.481,
+                "dG_mRNA": -9.8,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 2116.4123890216497
+            },
             {
                 "RNA": "TTCTAGAACGATCTGCACAACTCAAAATAAGGTAGGCGGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAA",
                 "codon": "ATG",
@@ -2506,10 +4450,37 @@
         ]
     },
     "TTCTAGAACGATCTGCACAACTCAAAATAAGGTAGGCGGCATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGT": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGAACGATCTGCACAACTCAAAATAAGGTAGGCGGCATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGT",
+                "codon": "ATG",
+                "start_pos": 41,
+                "dG_total": -4.274557435152095,
+                "dG_rRNA:mRNA": -9.481,
+                "dG_mRNA": -6.4,
+                "dG_Spacing": 0.00044256484790265217,
+                "Spacing": "4 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 7974.926529681019
+            }
+        ]
     },
     "TTCTAGATTTATACATCCGACTTTAAGGAGGCGACCTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG": {
         "findings": [
+            {
+                "RNA": "TTCTAGATTTATACATCCGACTTTAAGGAGGCGACCTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG",
+                "codon": "ATG",
+                "start_pos": 39,
+                "dG_total": -4.725705664000001,
+                "dG_rRNA:mRNA": -13.281,
+                "dG_mRNA": -9.4,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 9509.841526527865
+            },
             {
                 "RNA": "TTCTAGATTTATACATCCGACTTTAAGGAGGCGACCTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG",
                 "codon": "ATG",
@@ -2526,10 +4497,37 @@
         ]
     },
     "TTCTAGATTTATACATCCGACTTTAAGGAGGCGACCTCATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTTA": {
-        "findings": []
+        "findings": [
+            {
+                "RNA": "TTCTAGATTTATACATCCGACTTTAAGGAGGCGACCTCATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTTA",
+                "codon": "ATG",
+                "start_pos": 39,
+                "dG_total": -8.125705664000002,
+                "dG_rRNA:mRNA": -13.281,
+                "dG_mRNA": -6.0,
+                "dG_Spacing": 0.349294336,
+                "Spacing": "6 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 35834.36190242105
+            }
+        ]
     },
     "TTCTAGAAAAGTAAGGAGGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAAAAGTAAGGAGGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 22,
+                "dG_total": 11.81933226330596,
+                "dG_rRNA:mRNA": -14.581,
+                "dG_mRNA": -10.0,
+                "dG_Spacing": 17.594332263305958,
+                "Spacing": "1 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 14.949757317601103
+            },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -2563,6 +4561,19 @@
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 23,
+                "dG_total": 10.763180275330775,
+                "dG_rRNA:mRNA": -14.581,
+                "dG_mRNA": -9.9,
+                "dG_Spacing": 16.638180275330775,
+                "Spacing": "2 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 22.5734519831407
+            },
+            {
+                "RNA": "TTCTAGAAAAGTAAGGAGGCGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 56,
                 "dG_total": 26.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -2590,6 +4601,19 @@
     },
     "TTCTAGAAAAGTAAGGAGGCGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAAAAGTAAGGAGGCGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 24,
+                "dG_total": -2.5502577589775974,
+                "dG_rRNA:mRNA": -14.581,
+                "dG_mRNA": -10.2,
+                "dG_Spacing": 3.0247422410224014,
+                "Spacing": "3 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 4069.5457815571795
+            },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -2623,6 +4647,19 @@
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 26,
+                "dG_total": -5.674999999999999,
+                "dG_rRNA:mRNA": -14.581,
+                "dG_mRNA": -10.1,
+                "dG_Spacing": 0.0,
+                "Spacing": "5 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 13773.052366528467
+            },
+            {
+                "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 59,
                 "dG_total": 26.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -2650,6 +4687,19 @@
     },
     "TTCTAGAAAAGTAAGGAGGCGCGGCTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 28,
+                "dG_total": -4.950400825999999,
+                "dG_rRNA:mRNA": -14.581,
+                "dG_mRNA": -10.0,
+                "dG_Spacing": 0.824599174,
+                "Spacing": "7 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 10381.2018831269
+            },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -2683,6 +4733,19 @@
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 29,
+                "dG_total": -4.349085486,
+                "dG_rRNA:mRNA": -14.581,
+                "dG_mRNA": -10.0,
+                "dG_Spacing": 1.425914514,
+                "Spacing": "8 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 8210.231255350624
+            },
+            {
+                "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 62,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -2710,6 +4773,19 @@
     },
     "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 33,
+                "dG_total": 0.5162808940000012,
+                "dG_rRNA:mRNA": -14.581,
+                "dG_mRNA": -11.2,
+                "dG_Spacing": 5.0912808940000005,
+                "Spacing": "12 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 1230.054105082087
+            },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -2743,6 +4819,19 @@
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 35,
+                "dG_total": 3.005027096000001,
+                "dG_rRNA:mRNA": -14.581,
+                "dG_mRNA": -11.1,
+                "dG_Spacing": 7.680027096,
+                "Spacing": "14 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 465.8100015190776
+            },
+            {
+                "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 68,
                 "dG_total": 27.719332263305958,
                 "dG_rRNA:mRNA": -4.381,
@@ -2770,6 +4859,19 @@
     },
     "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 36,
+                "dG_total": 4.18841595,
+                "dG_rRNA:mRNA": -14.581,
+                "dG_mRNA": -10.8,
+                "dG_Spacing": 9.16341595,
+                "Spacing": "15 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 293.5518504462489
+            },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
@@ -2803,6 +4905,19 @@
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCTTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",
+                "start_pos": 37,
+                "dG_total": 8.197815305999999,
+                "dG_rRNA:mRNA": -13.281,
+                "dG_mRNA": -11.9,
+                "dG_Spacing": 10.772815305999998,
+                "Spacing": "16 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 61.41809642486259
+            },
+            {
+                "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCTTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
                 "start_pos": 70,
                 "dG_total": 25.81933226330596,
                 "dG_rRNA:mRNA": -4.381,
@@ -2830,6 +4945,19 @@
     },
     "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCTTATCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA": {
         "findings": [
+            {
+                "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCTTATCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
+                "codon": "ATG",
+                "start_pos": 40,
+                "dG_total": 13.782076386,
+                "dG_rRNA:mRNA": -13.281,
+                "dG_mRNA": -11.9,
+                "dG_Spacing": 16.357076386,
+                "Spacing": "19 bp",
+                "dG_Standby": 0.0,
+                "dG_Start_Codon": -1.194,
+                "Expression": 6.951031104153952
+            },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCTTATCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
                 "codon": "ATG",

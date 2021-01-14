@@ -17,7 +17,7 @@ except ModuleNotFoundError:
 ostir_version = '0.0.2 (In-Development)'
 
 def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None, i=None, verbose=False,
-                          detailed_out=False, print_out=False, sd=None):
+                          detailed_out=False, sd=None, threads=1):
     '''Takes an RNA with optional paramaters and returns binding energies.
 
         Keyword arguments:
@@ -29,8 +29,8 @@ def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None,
         i -- Returns i as part of the first return variable, useful for tagging things for downstream processing.
         verbose -- Prints debug information
         detailed_out -- returns components of total dG as an additional return variable
-        print_out -- prints output to the console
         sd -- Defines anti-Shine-Dalgarno sequence. Defaults to that of E. coli's
+        threads -- Defines parallel processing workers, roughly equivalent to multithreading cores.
 
     '''
     mRNA = seq
@@ -54,7 +54,6 @@ def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None,
     expr_list = []
     for dG in dG_total_list:
         expr_list.append(calcObj.K * math.exp(-dG / calcObj.RT_eff))
-
     return_var = zip(expr_list, start_pos_list, kinetic_score_list, dG_total_list, standby_site_list, start_codon_list)
 
     if outfile:
@@ -64,7 +63,7 @@ def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None,
                 out_file.writelines(['1\n', f"{start_pos} {expr} {ks}, {i}\n"])
         if detailed_out:
             second_out = outfile + '.detailed'
-            with open(second_out, 'w') as outfile:
+            with open(second_out, 'w') as outfile:  # Clears the file if it exists
                 pass
     return_var = list(return_var)
     zip_output = zip(return_var, dG_details)
@@ -83,6 +82,7 @@ def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None,
                    'Expression': output[0][0],
                    }
         output_data_list.append(outdata)
+    output_data_list = sorted(output_data_list, key=lambda x: x['start_pos'])
     return output_data_list
 
 def parse_fasta(filepath):
@@ -104,83 +104,6 @@ def parse_fasta(filepath):
     if current_seq_name:
         sequences.append([current_seq_name, current_seq])
     return sequences
-
-def _parallelizer(input):
-    '''Used to process concurrent.futures input into run_ostir(), and processes the output for csv/command line out.'''
-
-    def _valid_entry(key_to_test):
-        '''Returns False if command line/csv input was empty, else returns true.'''
-        if key_to_test not in input.keys():
-            raise ValueError(f'Unrecognized Key {key_to_test}')
-        elif input[key_to_test] == '':
-            raise ValueError(f'Unexpected Empty Key {key_to_test}')
-        elif not input[key_to_test]:
-            raise ValueError(f'Unexpected Empty Key {key_to_test}')
-        else:
-            return True
-
-    #unpack args:
-    seq = input['seq']
-    if 'constraint_str' in input.keys():
-        constraint_str = input['constraint_str']
-    else:
-        constraint_str = None
-    if 'outfile' in input.keys():
-        outfile = input['outfile']
-    else:
-        outfile = None
-    if _valid_entry('start'):
-        start_loc = int(input['start'])-1
-    else:
-        start_loc = 0
-    if _valid_entry('end'):
-        end_loc = int(input['end'])-1
-    elif _valid_entry('start'):
-        end_loc = int(input['start'])+1
-    else:
-        end_loc = len(seq)
-    if 'i' in input.keys():
-        i = input['i']
-    else:
-        i = None
-    if 'verbose' in input.keys():
-        verbose = input['verbose']
-    else:
-        verbose = None
-    if 'detailed_out' in input.keys():
-        detailed_out = input['detailed_out']
-    else:
-        detailed_out = None
-    if 'print_out' in input.keys():
-        print_out = input['print_out']
-    else:
-        print_out = False
-    if 'sd' in input.keys():
-        sd = input['sd']
-    else:
-        sd = None
-
-
-    normal, detailed= run_ostir(seq, constraint_str, outfile, start_loc,
-                                end_loc, i, verbose, detailed_out, print_out, sd)
-    normal = list(normal)
-    zip_output = zip(normal, detailed)
-    output_data_list = []
-    for output in list(zip_output):
-        outdata = {'RNA': seq,
-                   'codon': output[0][5],
-                   'start_pos': output[0][1]+1,
-                   'dG_total': output[0][3],
-                   'dG_rRNA:mRNA': output[1][0],
-                   'dG_mRNA': output[1][2],
-                   'dG_Spacing': output[1][4],
-                   'Spacing': str(output[1][5]) + ' bp',
-                   'dG_Standby': output[1][3],
-                   'dG_Start_Codon': output[1][1],
-                   'Expression': output[0][0],
-                   }
-        output_data_list.append(outdata)
-    return output_data_list
 
 def _print_output(outlist):
     '''Processes command line / csv input for pretty command line output'''
@@ -363,7 +286,7 @@ def main():
                 else:
                     sd = None
                 output_dict = run_ostir(cmd_kwargs['seq'], constraint_str, outfile, start_loc,
-                                        end_loc, i, verbose, detailed_out, print_out, sd)
+                                        end_loc, i, verbose, detailed_out, sd)
                 result.append(output_dict)
             result = list(itertools.chain.from_iterable(result))
 
@@ -475,7 +398,7 @@ def main():
             sd = None
 
         output_dict = run_ostir(cmd_kwargs['seq'], constraint_str, outfile, start_loc,
-                                end_loc, i, verbose, detailed_out, print_out, sd)
+                                end_loc, i, verbose, detailed_out, sd)
         if outfile:
             csv_keys = output_dict[0].keys()
             with open(outfile, 'w') as output_file:
