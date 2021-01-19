@@ -71,9 +71,11 @@ class OSTIRFactory:
 
         # NuPACK.__init__(self,sequences,self.RNA_model)
 
-        exp = re.compile('[ATGCU]', re.IGNORECASE)
+        exp = re.compile('[ATGCU._]', re.IGNORECASE)
         if exp.match(mRNA) == None:
             raise ValueError(f"Invalid letters found in sequence {mRNA}. Only ATGCU accepted.")
+        mRNA['seq'] = mRNA['seq'].replace('.', '')
+        mRNA['seq'] = mRNA['seq'].replace('_', '')
 
         if start_range[0] < 0: start_range[0] = 0
         if start_range[1] > len(mRNA): start_range[1] = len(mRNA)

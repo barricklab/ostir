@@ -268,6 +268,7 @@ def main():
 
     # Determine file input type
     input_type = None
+    valid_string_check = re.compile('[ATGCU.-]', re.IGNORECASE)
     if options.t:
         if options.t == 'fasta':
             input_type = 'fasta'
@@ -291,7 +292,7 @@ def main():
                     input_type = 'fasta'
                 elif 'seq' in first_line[0]:
                     input_type = 'csv'
-    elif re.compile('[ATGCU]', re.IGNORECASE):
+    elif valid_string_check.match(cmd_kwargs['seq']):
         input_type = 'string'
 
     if input_type == None:
