@@ -80,6 +80,7 @@ def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None,
                    'dG_Standby': output[1][3],
                    'dG_Start_Codon': output[1][1],
                    'Expression': output[0][0],
+                   'i': i
                    }
         output_data_list.append(outdata)
     output_data_list = sorted(output_data_list, key=lambda x: x['start_pos'])
@@ -114,7 +115,11 @@ def _print_output(outlist):
             sorted_predictions[prediction['RNA']].append(prediction)
         else:
             sorted_predictions[prediction['RNA']] = [prediction]
-            keys.append(prediction['RNA'])
+            out_names = []
+            out_names.append(prediction['RNA'])
+            if prediction.get('i'):
+                out_names.append(prediction.get('i'))
+            keys.append(out_names)
 
 
 
@@ -122,7 +127,11 @@ def _print_output(outlist):
     row_format = "{:>15}" * (len(output_items))
     print('_________________________________________________')
     for rna in keys:
-        print(f'Tested Sequence: {rna}')
+        if len(rna) == 2:
+            print(f'Tested Sequence: {rna[1]}')
+            print(f'Sequence RNA: {rna[0]}')
+        elif len(rna) == 1:
+            print(f'Sequence RNA: {rna[0]}')
         print(row_format.format(*output_items))
         for start in sorted_predictions[rna]:
             output_data = [start[key] for key in output_items]
@@ -277,10 +286,9 @@ def main():
                     constraint_str = cmd_kwargs['constraint_str']
                 else:
                     constraint_str = None
-                i = None #@TODO: Impement sequence ID tagging for fastas and CSVs
+                i = sequence[0]
                 verbose = False
                 detailed_out = False
-                print_out = False
                 if 'sd' in cmd_kwargs.keys():
                     sd = cmd_kwargs['sd']
                 else:
@@ -291,7 +299,7 @@ def main():
             result = list(itertools.chain.from_iterable(result))
 
             if outfile:
-                csv_keys = result[0].keys()
+                csv_keys = result[0].keys()  #@TODO: Sort this so the columns are cleaner
                 with open(outfile, 'w')  as output_file:
                     dict_writer = csv.DictWriter(output_file, csv_keys)
                     dict_writer.writeheader()
@@ -342,7 +350,10 @@ def main():
                     constraint_str = csv_input['constraint_str']
                 else:
                     constraint_str = None
-                i = None #@TODO: Impement sequence ID tagging for fastas and CSVs
+                if csv_input.get('i'):
+                    i = csv_input.get('i')
+                else:
+                    i = None
                 verbose = False
                 detailed_out = False
                 print_out = False
@@ -357,7 +368,7 @@ def main():
 
             results = list(itertools.chain.from_iterable(results))
             if outfile:
-                csv_keys = results[0].keys()
+                csv_keys = results[0].keys()  #@TODO: Sort this so the columns are cleaner
                 with open(outfile, 'w') as output_file:
                     dict_writer = csv.DictWriter(output_file, csv_keys)
                     dict_writer.writeheader()
@@ -388,7 +399,7 @@ def main():
             constraint_str = cmd_kwargs['constraint_str']
         else:
             constraint_str = None
-        i = None #@TODO: Impement sequence ID tagging for fastas and CSVs
+        i = None
         verbose = False
         detailed_out = False
         print_out = False
