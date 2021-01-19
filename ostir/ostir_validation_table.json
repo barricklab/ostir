@@ -13,7 +13,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 51.61932643093083,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
@@ -27,7 +27,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
@@ -41,7 +41,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -59,7 +59,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 52.10396223109854,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -73,7 +73,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -87,7 +87,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -105,7 +105,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 75.66406871618179,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGG",
@@ -119,7 +119,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGG",
@@ -133,7 +133,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 411.0690199838416,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -151,7 +151,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 15334.595840319407,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
@@ -165,7 +165,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
@@ -179,7 +179,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 607.2446363964559,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -197,7 +197,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 49904.15521584628,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTAT",
@@ -211,7 +211,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -229,7 +229,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 49912.77319948796,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
@@ -243,7 +243,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -261,7 +261,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 43553.608743566525,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
@@ -275,7 +275,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -293,7 +293,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 36181.30644803325,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCG",
@@ -307,7 +307,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.13843530571535287,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -325,7 +325,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 28614.884519477746,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTC",
@@ -339,7 +339,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.35312162945561376,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -357,7 +357,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 21545.044959519644,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTT",
@@ -371,7 +371,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.42918920476609285,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -389,7 +389,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 15443.668321053552,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGT",
@@ -403,7 +403,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.42918920476609285,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -421,7 +421,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6846.987739427542,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA",
@@ -435,7 +435,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.42918920476609285,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -453,7 +453,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 1699.0456663386815,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAAAAATAAGGAGGTAAAAAAAAAAAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTC",
@@ -467,7 +467,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.42918920476609285,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -485,7 +485,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 782.8887720493323,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGAAAGACAGGACCCACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -499,7 +499,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGAAAGACAGGACCCACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -513,7 +513,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -531,7 +531,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 1156.5089671331887,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGAAAGAAGGGACAGACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -545,7 +545,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGAAAGAAGGGACAGACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -559,7 +559,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -577,7 +577,7 @@
                 "dG_Standby": -0.10000000000000009,
                 "dG_Start_Codon": -1.194,
                 "Expression": 235.70567391625661,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGAAAGAAGAGACTCACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -591,7 +591,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGAAAGAAGAGACTCACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -605,7 +605,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -623,7 +623,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 752.9309863630945,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGAAAGAAGGGATACACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -637,7 +637,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGAAAGAAGGGATACACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -651,7 +651,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -669,7 +669,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 619.4848654617492,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGAAAGACGCGAGAAACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -683,7 +683,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGAAAGACGCGAGAAACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -697,7 +697,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -715,7 +715,7 @@
                 "dG_Standby": -0.8,
                 "dG_Start_Codon": -1.194,
                 "Expression": 111.2898008287011,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGAAAGAAACGACATACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -729,7 +729,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGAAAGAAACGACATACTAGTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -743,7 +743,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -761,7 +761,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.6039437106367894,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAaaatgtcaattttgctactggccttacaatATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -775,7 +775,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 74.58196523648262,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAaaatgtcaattttgctactggccttacaatATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -789,7 +789,7 @@
                 "dG_Standby": -1.2000000000000002,
                 "dG_Start_Codon": -1.194,
                 "Expression": 76.79966015855338,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAaaatgtcaattttgctactggccttacaatATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -803,7 +803,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAaaatgtcaattttgctactggccttacaatATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -817,7 +817,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -835,7 +835,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0748,
                 "Expression": 142.30631815376137,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAaacttccgttaatcagttataaggtggattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -849,7 +849,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 365.7253446085117,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAaacttccgttaatcagttataaggtggattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -863,7 +863,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAaacttccgttaatcagttataaggtggattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -877,7 +877,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -895,7 +895,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 682.6504321180421,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGActttaatttaacgtaaataaggaagtcattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -909,7 +909,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGActttaatttaacgtaaataaggaagtcattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -923,7 +923,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -941,7 +941,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 7671.084892095243,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaagAGGAgaaatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -955,7 +955,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaagAGGAgaaatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -969,7 +969,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -987,7 +987,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 2356.7712017706026,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaagAGGAgatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1001,7 +1001,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaagAGGAgatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1015,7 +1015,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1033,7 +1033,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 3311.2539795761068,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaagAGGAgaaattattagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1047,7 +1047,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaagAGGAgaaattattagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1061,7 +1061,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1079,7 +1079,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 1619.7435886214028,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaagAGGAgaaattataatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1093,7 +1093,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaagAGGAgaaattataatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1107,7 +1107,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1125,7 +1125,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 12617.464944314743,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTAAGGAGGaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1139,7 +1139,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTAAGGAGGaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1153,7 +1153,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1171,7 +1171,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 30055.785213714516,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTAAGGAGGaatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1185,7 +1185,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTAAGGAGGaatagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1199,7 +1199,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1217,7 +1217,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 5945.1922513036925,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTAAGGAGGaattattagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1231,7 +1231,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTAAGGAGGaattattagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1245,7 +1245,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1263,7 +1263,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 625.4477393556948,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTGAGGAAAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1277,7 +1277,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 854.622695026633,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTGAGGAAAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1291,7 +1291,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTGAGGAAAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1305,7 +1305,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1323,7 +1323,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 407.212814067237,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaATAGGACAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1337,7 +1337,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaATAGGACAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1351,7 +1351,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1369,7 +1369,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 888.6266130535319,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTTAGGAGCaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1383,7 +1383,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTTAGGAGCaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1397,7 +1397,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1415,7 +1415,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 7651.425853415558,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaGGAGGATAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1429,7 +1429,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaGGAGGATAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1443,7 +1443,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1461,7 +1461,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 1419.2471913372342,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaGAAGGACTaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1475,7 +1475,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaGAAGGACTaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1489,7 +1489,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1507,7 +1507,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 625.4477393556948,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTGAGGATAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1521,7 +1521,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 790.4686192926895,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTGAGGATAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1535,7 +1535,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTGAGGATAaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1549,7 +1549,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1567,7 +1567,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 601.5481225609187,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTCAGGATCaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1581,7 +1581,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaTCAGGATCaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1595,7 +1595,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1613,7 +1613,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 1274.6520988673235,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaACAGGATAataagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1627,7 +1627,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaACAGGATAataagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1641,7 +1641,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1659,7 +1659,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 5560.6983038286335,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaagaggagaaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1673,7 +1673,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAattaaagaggagaaattaagcATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1687,7 +1687,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1705,7 +1705,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 703.1531904490121,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAtcacacaggaaaccggttcgATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1719,7 +1719,7 @@
                 "dG_Standby": -4.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6.261718453793955,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAtcacacaggaaaccggttcgATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1733,7 +1733,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1751,7 +1751,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 242.85846457052259,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAtcacacaggaaaggcctcgATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1765,7 +1765,7 @@
                 "dG_Standby": -4.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6.261718453793955,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAtcacacaggaaaggcctcgATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1779,7 +1779,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1797,7 +1797,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 631.4058211607517,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAtcacacaggacggccggATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1811,7 +1811,7 @@
                 "dG_Standby": -2.9,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220794,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAtcacacaggacggccggATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -1825,7 +1825,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1843,7 +1843,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 2035.777889920769,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAACAAAATGAGGAGGTACTGAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
@@ -1857,7 +1857,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 45286.52942319543,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAACAAAATGAGGAGGTACTGAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
@@ -1871,7 +1871,7 @@
                 "dG_Standby": -4.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6.261718453793955,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1889,7 +1889,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 35834.36190242105,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAGCTGATAAGGAGGTATAACGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
@@ -1903,7 +1903,7 @@
                 "dG_Standby": -4.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6.261718453793955,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1921,7 +1921,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 28900.68871921948,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAACAACTTAAGGAGGTATTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
@@ -1935,7 +1935,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAACAACTTAAGGAGGTATTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
@@ -1949,7 +1949,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 607.2446363964559,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -1967,7 +1967,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0748,
                 "Expression": 10.756298262150455,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGTGCGGCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
@@ -1981,7 +1981,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 25222.93551413131,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGTGCGGCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
@@ -1995,7 +1995,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGTGCGGCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
@@ -2009,7 +2009,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 607.2446363964559,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2027,7 +2027,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0748,
                 "Expression": 0.7230925496499259,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACTGGTGAGGAGGTGAGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -2041,7 +2041,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0748,
                 "Expression": 1508.3767956491506,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACTGGTGAGGAGGTGAGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -2055,7 +2055,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 18095.45320098646,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACTGGTGAGGAGGTGAGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -2069,7 +2069,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACTGGTGAGGAGGTGAGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -2083,7 +2083,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2101,7 +2101,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 15188.399355054868,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
@@ -2115,7 +2115,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
@@ -2129,7 +2129,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 607.2446363964559,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2147,7 +2147,7 @@
                 "dG_Standby": -0.5999999999999996,
                 "dG_Start_Codon": -1.194,
                 "Expression": 11331.978158436343,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACACAGAAAAAGGAGGGTCGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
@@ -2161,7 +2161,7 @@
                 "dG_Standby": -4.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6.261718453793955,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2179,7 +2179,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 41.6419148552851,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAGGAGGTTTGGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGTT",
@@ -2193,7 +2193,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 8966.77691074622,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAGGAGGTTTGGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGTT",
@@ -2207,7 +2207,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAGGAGGTTTGGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGTT",
@@ -2221,7 +2221,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2239,7 +2239,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.7936122424461284,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATGGGGAGTGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
@@ -2253,7 +2253,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0748,
                 "Expression": 491.21118082910783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATGGGGAGTGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
@@ -2267,7 +2267,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 7376.271657144726,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATGGGGAGTGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
@@ -2281,7 +2281,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATGGGGAGTGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
@@ -2295,7 +2295,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2313,7 +2313,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 15335.451849729276,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGGGGGTTAACAAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
@@ -2327,7 +2327,7 @@
                 "dG_Standby": -4.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6.261718453793955,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGGGGGTTAACAAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
@@ -2341,7 +2341,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2359,7 +2359,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 12251.676382057463,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAGCGAGGAGGCAGTCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
@@ -2373,7 +2373,7 @@
                 "dG_Standby": -4.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6.261718453793955,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAGCGAGGAGGCAGTCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
@@ -2387,7 +2387,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2405,7 +2405,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 4619.268076960921,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATAGGGGGCGGTACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
@@ -2419,7 +2419,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATAGGGGGCGGTACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
@@ -2433,7 +2433,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2451,7 +2451,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0748,
                 "Expression": 179.8119514004624,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGATAAGTGAAGGAGGCCCGGCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
@@ -2465,7 +2465,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6437.605212471933,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGATAAGTGAAGGAGGCCCGGCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT",
@@ -2479,7 +2479,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2497,7 +2497,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 7896.061021770179,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGGAGGATAACCACTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
@@ -2511,7 +2511,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.03022706629847077,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGGAGGATAACCACTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
@@ -2525,7 +2525,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2543,7 +2543,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0748,
                 "Expression": 126.56525787159502,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGATAAGTGAAGGAGGCCGGCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
@@ -2557,7 +2557,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 3380.75746088916,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGATAAGTGAAGGAGGCCGGCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
@@ -2571,7 +2571,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2589,7 +2589,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 7232.354932907473,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAACACTAAGGAGACCAACTTGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
@@ -2603,7 +2603,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 3218.680984170846,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAACACTAAGGAGACCAACTTGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
@@ -2617,7 +2617,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2635,7 +2635,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 2116.412389021651,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAGTTAAGAGGCAAGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
@@ -2649,7 +2649,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAGTTAAGAGGCAAGAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
@@ -2663,7 +2663,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2681,7 +2681,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 932.7333845407226,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTAACTGGGGGCTATCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
@@ -2695,7 +2695,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.03022706629847077,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTAACTGGGGGCTATCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
@@ -2709,7 +2709,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2727,7 +2727,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 3.495540435370599,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATGAGAATAAGGTTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
@@ -2741,7 +2741,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 682.6504321180419,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATGAGAATAAGGTTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
@@ -2755,7 +2755,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATGAGAATAAGGTTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
@@ -2769,7 +2769,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2787,7 +2787,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 696.4106156747574,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATAAGCAGGACCGGCGGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGG",
@@ -2801,7 +2801,7 @@
                 "dG_Standby": -4.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6.261718453793955,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATAAGCAGGACCGGCGGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGG",
@@ -2815,7 +2815,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 411.0690199838416,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2833,7 +2833,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 767.4198906661088,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAACCTCAAGGAATTCCCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGG",
@@ -2847,7 +2847,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.03022706629847077,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAACCTCAAGGAATTCCCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGG",
@@ -2861,7 +2861,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 411.0690199838416,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2879,7 +2879,7 @@
                 "dG_Standby": -1.7000000000000002,
                 "dG_Start_Codon": -1.194,
                 "Expression": 228.98990131598188,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGGCGACAGGCGGATCTATCCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTA",
@@ -2893,7 +2893,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2911,7 +2911,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 490.18648911212046,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAATAAAAAGGGACGCTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
@@ -2925,7 +2925,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAATAAAAAGGGACGCTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAA",
@@ -2939,7 +2939,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -2957,7 +2957,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 395.4074482153972,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAATAGAGTCGACGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
@@ -2971,7 +2971,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAATAGAGTCGACGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT",
@@ -2985,7 +2985,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3003,7 +3003,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 164.40094328080238,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGAGTAATATTTCACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
@@ -3017,7 +3017,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGAGTAATATTTCACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
@@ -3031,7 +3031,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3049,7 +3049,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 237.49081019736832,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACGAGCTGGTACTTAAAAACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
@@ -3063,7 +3063,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACGAGCTGGTACTTAAAAACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG",
@@ -3077,7 +3077,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 607.2446363964559,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3095,7 +3095,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 226.68623167067486,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTCGCAGGGGGAAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
@@ -3109,7 +3109,7 @@
                 "dG_Standby": -4.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6.261718453793955,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTCGCAGGGGGAAGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
@@ -3123,7 +3123,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3141,7 +3141,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 5.230543921574789,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTTCTCCCATAATAACTCGAACCATTACCGAGCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
@@ -3155,7 +3155,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.03022706629847077,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTTCTCCCATAATAACTCGAACCATTACCGAGCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
@@ -3169,7 +3169,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3187,7 +3187,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 3.55892708874988,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGGGAACGATTTAGGCCAATTATTAAAACCGACCCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
@@ -3201,7 +3201,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 1.068302555375635,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGGGAACGATTTAGGCCAATTATTAAAACCGACCCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
@@ -3215,7 +3215,7 @@
                 "dG_Standby": -1.6999999999999997,
                 "dG_Start_Codon": -1.194,
                 "Expression": 86.32150191904935,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGGGAACGATTTAGGCCAATTATTAAAACCGACCCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGG",
@@ -3229,7 +3229,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3247,7 +3247,7 @@
                 "dG_Standby": -3.6,
                 "dG_Start_Codon": -1.194,
                 "Expression": 5.832864399193048,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3265,7 +3265,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 1.1919339145823804,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACCAGTCGCGTACCGCTATTGGTCCAGCTACAATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
@@ -3279,7 +3279,7 @@
                 "dG_Standby": -7.8999999999999995,
                 "dG_Start_Codon": -1.194,
                 "Expression": 4.582836723903428,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3297,7 +3297,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6758.55423142343,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTCTAaaggaggAGTCCGGGATGGCTGAAGCGCAAAATGATCCCCTGATGGCGAGCTCTGAAGACGTT",
@@ -3311,7 +3311,7 @@
                 "dG_Standby": -1.2000000000000002,
                 "dG_Start_Codon": -1.194,
                 "Expression": 77.061372818607,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTCTAaaggaggAGTCCGGGATGGCTGAAGCGCAAAATGATCCCCTGATGGCGAGCTCTGAAGACGTT",
@@ -3325,7 +3325,7 @@
                 "dG_Standby": -1.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 35.31334535831536,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3343,7 +3343,7 @@
                 "dG_Standby": -0.7999999999999998,
                 "dG_Start_Codon": -1.194,
                 "Expression": 2781.086859488064,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3361,7 +3361,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 132.61352344617075,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3379,7 +3379,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 426.4029679541467,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3397,7 +3397,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 471.12608660047977,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACTGACACAATATACGTAGAATTGGACACCACTATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
@@ -3411,7 +3411,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 1882.632766596093,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3429,7 +3429,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 3645.7710186353765,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3447,7 +3447,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 9495.211240217895,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3465,7 +3465,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 1028.2767684341206,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACTGAAATTTACTTTGTAATAAGAGAGGAATATATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTT",
@@ -3479,7 +3479,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 18098.57811751898,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3497,7 +3497,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 44399.39152901737,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3515,7 +3515,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 51889.75285213228,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3533,7 +3533,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 77.061372818607,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGGTATTACGTTTCAGGCCAGCGTCACCCAGATCGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -3547,7 +3547,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 619.0866087361701,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3565,7 +3565,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.005278655437912361,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACGTTACCACGTCGGCCGAAAATCGTTTCAGCTGCCATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -3579,7 +3579,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 403.0487477458757,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3597,7 +3597,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0748,
                 "Expression": 0.3088018158894673,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGTGCAtaaggagTGCTCGATGTCCAGATTAGATAAAAGTAAAGTGATGGCGAGCTCTGAAGACG",
@@ -3611,7 +3611,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0748,
                 "Expression": 472.1986152482163,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGTGCAtaaggagTGCTCGATGTCCAGATTAGATAAAAGTAAAGTGATGGCGAGCTCTGAAGACG",
@@ -3625,7 +3625,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 9692.842606720149,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGTGCAtaaggagTGCTCGATGTCCAGATTAGATAAAAGTAAAGTGATGGCGAGCTCTGAAGACG",
@@ -3639,7 +3639,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0748,
                 "Expression": 0.00010392689779891078,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGTGCAtaaggagTGCTCGATGTCCAGATTAGATAAAAGTAAAGTGATGGCGAGCTCTGAAGACG",
@@ -3653,7 +3653,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 44.4765182855837,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3671,7 +3671,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 0.1344414908905414,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTGATAGATAAGGACAAAGTTATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -3685,7 +3685,7 @@
                 "dG_Standby": -1.8999999999999995,
                 "dG_Start_Codon": -1.194,
                 "Expression": 2473.8870720948557,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTGATAGATAAGGACAAAGTTATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -3699,7 +3699,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 723.6540316074426,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3717,7 +3717,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 351.75883426905983,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGTCAAGGACCTCTTGGCGGTTATCTTAAGGCACAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -3731,7 +3731,7 @@
                 "dG_Standby": -3.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 238.1010024822032,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAGTCAAGGACCTCTTGGCGGTTATCTTAAGGCACAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -3745,7 +3745,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 435.7600018757324,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3763,7 +3763,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 1.5405349533931567,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATGACCACCATAGGTTGGATACAAATACCACAGGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -3777,7 +3777,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 114.55858922614762,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATGACCACCATAGGTTGGATACAAATACCACAGGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -3791,7 +3791,7 @@
                 "dG_Standby": -2.4,
                 "dG_Start_Codon": -1.194,
                 "Expression": 204.3897400195506,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATGACCACCATAGGTTGGATACAAATACCACAGGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -3805,7 +3805,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 1.348306738859624,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3823,7 +3823,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 1068.0474995022762,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATAAGAAAACCACCCTACAAAGAAAACCCTAATTAGATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -3837,7 +3837,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 419.0853410389755,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3855,7 +3855,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 1876.924744959602,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACTAGATTAGAAAGGAGGTACCACACCACAAAAGTAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -3869,7 +3869,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 403.0487477458757,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3887,7 +3887,7 @@
                 "dG_Standby": -2.1000000000000005,
                 "dG_Start_Codon": -1.194,
                 "Expression": 13770.6742991044,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTAGACCTGACTAACAAGAGGTAGGGGGATCATATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -3901,7 +3901,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 0.006720712577223279,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3919,7 +3919,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 9374.89687305162,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAGAACAATACAGGAGGACAATTCGCCCTATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -3933,7 +3933,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 403.0487477458757,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3951,7 +3951,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 28905.67959946856,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATAAGTCATTCACAGAACAAACACGAGGTATCATATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -3965,7 +3965,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 0.0013596736091133388,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -3983,7 +3983,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 35.87972791520227,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAACGACTATTTTTTCCACTATTGAGGTATAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGT",
@@ -3997,7 +3997,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 862.7157632680528,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAACGACTATTTTTTCCACTATTGAGGTATAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGT",
@@ -4011,7 +4011,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.42918920476609285,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4029,7 +4029,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 272.88749105807324,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAACGACTATTTTTTCCACTATTGAGGTATAAGTGAAACCAGTAACGTTATACGGCGTCGCGAGCTCTGAAGACGTTAT",
@@ -4043,7 +4043,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0748,
                 "Expression": 1728.3130354881368,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4061,7 +4061,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 2649.5757925202306,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAACACTTTACTTTTTAATTAGCAGGAGATTTAAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTC",
@@ -4075,7 +4075,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.42918920476609285,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4093,7 +4093,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0748,
                 "Expression": 436.97622059233464,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4111,7 +4111,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 12617.464944314754,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTCACGTCAACATTTAAGGAGGATATCGACATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGT",
@@ -4125,7 +4125,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.8012482492833354,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4143,7 +4143,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0748,
                 "Expression": 1851.0531189480844,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4161,7 +4161,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 26186.16346747535,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACAGAAAAAATAGAATAAGGAGGTTTCACTATCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA",
@@ -4175,7 +4175,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.8012482492833354,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4193,7 +4193,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0748,
                 "Expression": 1628.287098497385,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4211,7 +4211,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 165.99265602624178,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTCCCCCGGAAACCAATAAAAGAAGGCCATCGTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCA",
@@ -4225,7 +4225,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.8012482492833354,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4243,7 +4243,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 5560.6983038286335,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTCCCCCGGAAACCAATAAAAGAAGGCCATCGTCATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACG",
@@ -4257,7 +4257,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 489.8713562057962,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4275,7 +4275,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 1.172350029255231,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATGGAGAAGCCATTAATATTAAGGAAGGTAACAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA",
@@ -4289,7 +4289,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 3655.138207816281,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATGGAGAAGCCATTAATATTAAGGAAGGTAACAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA",
@@ -4303,7 +4303,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.6097514414840369,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4321,7 +4321,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 1.172350029255231,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATGGAGAAGCCATTAATATTAAGGAAGGTAACAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTT",
@@ -4335,7 +4335,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 86186.69282244868,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATGGAGAAGCCATTAATATTAAGGAAGGTAACAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTT",
@@ -4349,7 +4349,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 164.2952525932595,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4367,7 +4367,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 5507.376460708371,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACCCACGTACCGATTAAAGGAGGCCTAGTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTT",
@@ -4381,7 +4381,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.6097514414840369,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4399,7 +4399,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 52935.69450889302,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGACCCACGTACCGATTAAAGGAGGCCTAGTAATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTTATC",
@@ -4413,7 +4413,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 57.29449247749521,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4431,7 +4431,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 594.8632749979954,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAATAACCAGGGTAATAAGGAAGTACACAGACCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG",
@@ -4445,7 +4445,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.8012482492833354,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4463,7 +4463,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 19165.172066171803,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAATAACCAGGGTAATAAGGAAGTACACAGACCATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTTA",
@@ -4477,7 +4477,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 233.4151604589431,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4495,7 +4495,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 696.4106156747574,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAACACCATATAAGTACAGAGAGGTAGAATATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG",
@@ -4509,7 +4509,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.8012482492833354,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4527,7 +4527,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 34463.135015023334,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAACACCATATAAGTACAGAGAGGTAGAATATGTCCAGATTAGATAAAAGTAAAGTTGCGAGCTCTGAAGACGTTA",
@@ -4541,7 +4541,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 0.001034714202303972,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4559,7 +4559,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 63.80493152034291,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAACTGTCCATAGATTTGAAAAGACCTTATCCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG",
@@ -4573,7 +4573,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 161.18042034648553,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAACTGTCCATAGATTTGAAAAGACCTTATCCCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG",
@@ -4587,7 +4587,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.8012482492833354,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4605,7 +4605,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -0.0435,
                 "Expression": 524.6606854017974,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAACTGTCCATAGATTTGAAAAGACCTTATCCCATGGCTGAAGCGCAAAACGATCCCCTGGCGAGCTCTGAAGACGTTA",
@@ -4619,7 +4619,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 499.7055922613598,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4637,7 +4637,7 @@
                 "dG_Standby": -0.5999999999999996,
                 "dG_Start_Codon": -1.194,
                 "Expression": 395.4074482153968,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAACCACACTCCGTTTTTAGTAGGAGACCAAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAA",
@@ -4651,7 +4651,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.42918920476609285,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4669,7 +4669,7 @@
                 "dG_Standby": -0.5999999999999996,
                 "dG_Start_Codon": -1.194,
                 "Expression": 1674.9657207485411,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4687,7 +4687,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 738.1814876001919,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAATTATAAACTTTCGGAACAAACGGAGTCATCAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCA",
@@ -4701,7 +4701,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.42918920476609285,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4719,7 +4719,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 3655.1382078162837,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4737,7 +4737,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 2116.4123890216497,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAACGATCTGCACAACTCAAAATAAGGTAGGCGGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAA",
@@ -4751,7 +4751,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.31411569581401755,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4769,7 +4769,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 7974.926529681019,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4787,7 +4787,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 9509.841526527865,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGATTTATACATCCGACTTTAAGGAGGCGACCTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAG",
@@ -4801,7 +4801,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.8012482492833354,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4819,7 +4819,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 35834.36190242105,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4837,7 +4837,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 14.949757317601103,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -4851,7 +4851,7 @@
                 "dG_Standby": -4.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6.261718453793955,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -4865,7 +4865,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4883,7 +4883,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 22.5734519831407,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -4897,7 +4897,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -4911,7 +4911,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4929,7 +4929,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 4069.5457815571795,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -4943,7 +4943,7 @@
                 "dG_Standby": -4.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6.261718453793955,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -4957,7 +4957,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -4975,7 +4975,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 13773.052366528467,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -4989,7 +4989,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.044652413564194124,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5003,7 +5003,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -5021,7 +5021,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 10381.2018831269,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5035,7 +5035,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5049,7 +5049,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -5067,7 +5067,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 8210.231255350624,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5081,7 +5081,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5095,7 +5095,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -5113,7 +5113,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 1230.054105082087,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5127,7 +5127,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.03022706629847077,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5141,7 +5141,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -5159,7 +5159,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 465.8100015190776,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5173,7 +5173,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.03022706629847077,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5187,7 +5187,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -5205,7 +5205,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 293.5518504462489,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5219,7 +5219,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.03022706629847077,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5233,7 +5233,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -5251,7 +5251,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 61.41809642486259,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCTTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5265,7 +5265,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.06343792722220783,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCTTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5279,7 +5279,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     },
@@ -5297,7 +5297,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 6.951031104153952,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCTTATCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5311,7 +5311,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 0.03022706629847077,
-                "i": null
+                "identifier": null
             },
             {
                 "RNA": "TTCTAGAAAAGTAAGGAGGCGCGGCTAAATCTTCTTATCATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA",
@@ -5325,7 +5325,7 @@
                 "dG_Standby": 0.0,
                 "dG_Start_Codon": -1.194,
                 "Expression": 247.5318717168217,
-                "i": null
+                "identifier": null
             }
         ]
     }
