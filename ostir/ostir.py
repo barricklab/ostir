@@ -9,6 +9,7 @@ import concurrent.futures
 import itertools
 import csv
 import copy
+import re
 try:
     from ostir.ostir_factory import OSTIRFactory
 except ModuleNotFoundError:
@@ -43,6 +44,7 @@ def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None,
 
     calcObj = OSTIRFactory(mRNA, start_range, sd, constraint_str, verbose=verbose)
     calcObj.calc_dG()
+    calcObj.threads = threads
 
     dG_total_list = calcObj.dG_total_list[:]
     dG_details = calcObj.dG_details[:]
@@ -216,6 +218,16 @@ def main():
     )
 
     parser.add_argument(
+        '-t', '--type',
+        action='store',
+        metavar='[seq|csv|fasta]',
+        dest='t',
+        required=False,
+        type=str,
+        help="Input filetype",
+    )
+
+    parser.add_argument(
         '--validate',
         action='store_true',
         dest='validate',
@@ -228,7 +240,7 @@ def main():
     if options.validate:
         from ostir.ostir_validation import verify_ostir_install
         verify_ostir_install()
-        exit()
+        exit(0)
     elif not options.i:
         subprocess.run(['ostir', '-h'])
         exit(1)
@@ -242,9 +254,9 @@ def main():
         outfile = None
         cmd_kwargs['print_out'] = False
     if options.j:
-        cores = options.j
+        threads = options.j
     else:
-        cores = 1
+        threads = 1
     if options.v:
         cmd_kwargs['verbose'] = options.v
     if options.s:
@@ -260,125 +272,156 @@ def main():
 
     # Output data: RNA, Codon, position, dg_total, dg rRNA:mRNA, dg mRNA, dG Spacing, dg Standby, Kinetic Score
 
-    if os.path.isfile(cmd_kwargs['seq']):
-        if Path(cmd_kwargs['seq']).suffix == '.fasta':
-            sequences = parse_fasta(cmd_kwargs['seq'])
-            result = []
-            for sequence in sequences:
-                cmd_kwargs['seq'] = sequence[1]
-                if 'start' in cmd_kwargs.keys():
-                    if cmd_kwargs['start']:
-                        start_loc = int(cmd_kwargs['start'])-1
-                    else:
-                        start_loc = 0
-                else:
-                    start_loc = 0
-                if 'end' in cmd_kwargs.keys():
-                    if cmd_kwargs['end']:
-                        end_loc = int(cmd_kwargs['end'])-1
-                    else:
-                        end_loc = start_loc+1
-                elif 'start' in cmd_kwargs.keys():
-                    end_loc = start_loc+1
-                else:
-                    end_loc = len(cmd_kwargs['seq'])
-                if 'constraint_str' in cmd_kwargs.keys():
-                    constraint_str = cmd_kwargs['constraint_str']
-                else:
-                    constraint_str = None
-                i = sequence[0]
-                verbose = False
-                detailed_out = False
-                if 'sd' in cmd_kwargs.keys():
-                    sd = cmd_kwargs['sd']
-                else:
-                    sd = None
-                output_dict = run_ostir(cmd_kwargs['seq'], constraint_str, outfile, start_loc,
-                                        end_loc, i, verbose, detailed_out, sd)
-                result.append(output_dict)
-            result = list(itertools.chain.from_iterable(result))
-
-            if outfile:
-                csv_keys = result[0].keys()  #@TODO: Sort this so the columns are cleaner
-                with open(outfile, 'w')  as output_file:
-                    dict_writer = csv.DictWriter(output_file, csv_keys)
-                    dict_writer.writeheader()
-                    dict_writer.writerows(result)
-            else:
-                _print_output(result)
-
-        elif Path(cmd_kwargs['seq']).suffix == '.csv':
-            csv_keys = []
-            csv_values = []
-            with open(cmd_kwargs['seq'], 'r') as csv_input:
-                reader = csv.reader(csv_input, delimiter=',')
-                for i1, row in enumerate(reader):
-                    if i1 == 0:
-                        csv_keys = row
-                    else:
-                        for i2, item in enumerate(row):
-                            if item == '':
-                                item = None
-                            elif '\\ufeff' in item:
-                                item = item.replace('\\ufeff', '')
-                            if csv_keys[i2] == 'seq':
-                                item = item.replace(' ', '')
-                            if item:
-                                cmd_kwargs[csv_keys[i2]] = item
-                        csv_values.append(copy.deepcopy(cmd_kwargs))
-
-            results = []
-            for csv_input in csv_values:
-                sequence = csv_input['seq']
-                if 'start' in csv_input.keys():
-                    if csv_input['start']:
-                        start_loc = int(csv_input['start'])-1
-                    else:
-                        start_loc = 0
-                else:
-                    start_loc = 0
-                if 'end' in csv_input.keys():
-                    if csv_input['end']:
-                        end_loc = int(csv_input['end'])-1
-                    else:
-                        end_loc = start_loc+1
-                elif 'start' in csv_input.keys():
-                    end_loc = start_loc+1
-                else:
-                    end_loc = len(sequence)
-                if 'constraint_str' in csv_input.keys():
-                    constraint_str = csv_input['constraint_str']
-                else:
-                    constraint_str = None
-                if csv_input.get('i'):
-                    i = csv_input.get('i')
-                else:
-                    i = None
-                verbose = False
-                detailed_out = False
-                print_out = False
-                if 'sd' in csv_input.keys():
-                    sd = csv_input['sd']
-                else:
-                    sd = None
-                output_dict = run_ostir(sequence, constraint_str, outfile, start_loc,
-                                        end_loc, i, verbose, detailed_out, print_out, sd)
-
-                results.append(output_dict)
-
-            results = list(itertools.chain.from_iterable(results))
-            if outfile:
-                csv_keys = results[0].keys()  #@TODO: Sort this so the columns are cleaner
-                with open(outfile, 'w') as output_file:
-                    dict_writer = csv.DictWriter(output_file, csv_keys)
-                    dict_writer.writeheader()
-                    dict_writer.writerows(results)
-            else:
-                _print_output(results)
-
+    # Determine file input type
+    input_type = None
+    if options.t:
+        if options.t == 'fasta':
+            input_type = 'fasta'
+        elif options.t == 'csv':
+            input_type = 'csv'
+        elif options.t == 'seq':
+            input_type = 'string'
         else:
-            raise ValueError('Input file is not a supported filetype')
-    else:
+            print(f'Unsupported file type {options.t}.')
+            exit(1)
+    elif os.path.isfile(cmd_kwargs['seq']) and not input_type:
+        filepath_test = Path(cmd_kwargs['seq']).suffix
+        if filepath_test == '.fasta':
+            input_type = 'fasta'
+        elif filepath_test == '.csv':
+            input_type = 'csv'
+        else:
+            with open(cmd_kwargs['seq'], 'r') as in_file:
+                first_line = in_file.readline()
+                if first_line[0] == '>':
+                    input_type = 'fasta'
+                elif 'seq' in first_line[0]:
+                    input_type = 'csv'
+    elif re.compile('[ATGCU]', re.IGNORECASE):
+        input_type = 'string'
+
+    if input_type == None:
+        print(f'Unable to identify the input type. Please define this using the flag "-t"')
+        exit(1)
+
+
+    # Run OSTIR
+    if input_type == 'fasta':
+        sequences = parse_fasta(cmd_kwargs['seq'])
+        result = []
+        for sequence in sequences:
+            cmd_kwargs['seq'] = sequence[1]
+            if 'start' in cmd_kwargs.keys():
+                if cmd_kwargs['start']:
+                    start_loc = int(cmd_kwargs['start'])-1
+                else:
+                    start_loc = 0
+            else:
+                start_loc = 0
+            if 'end' in cmd_kwargs.keys():
+                if cmd_kwargs['end']:
+                    end_loc = int(cmd_kwargs['end'])-1
+                else:
+                    end_loc = start_loc+1
+            elif 'start' in cmd_kwargs.keys():
+                end_loc = start_loc+1
+            else:
+                end_loc = len(cmd_kwargs['seq'])
+            if 'constraint_str' in cmd_kwargs.keys():
+                constraint_str = cmd_kwargs['constraint_str']
+            else:
+                constraint_str = None
+            i = sequence[0]
+            verbose = False
+            detailed_out = False
+            if 'sd' in cmd_kwargs.keys():
+                sd = cmd_kwargs['sd']
+            else:
+                sd = None
+            output_dict = run_ostir(cmd_kwargs['seq'], constraint_str, outfile, start_loc,
+                                    end_loc, i, verbose, detailed_out, sd, threads)
+            result.append(output_dict)
+        result = list(itertools.chain.from_iterable(result))
+
+        if outfile:
+            csv_keys = result[0].keys()  #@TODO: Sort this so the columns are cleaner
+            with open(outfile, 'w')  as output_file:
+                dict_writer = csv.DictWriter(output_file, csv_keys)
+                dict_writer.writeheader()
+                dict_writer.writerows(result)
+        else:
+            _print_output(result)
+
+    elif input_type == 'csv':
+        csv_keys = []
+        csv_values = []
+        with open(cmd_kwargs['seq'], 'r') as csv_input:
+            reader = csv.reader(csv_input, delimiter=',')
+            for i1, row in enumerate(reader):
+                if i1 == 0:
+                    csv_keys = row
+                else:
+                    for i2, item in enumerate(row):
+                        if item == '':
+                            item = None
+                        elif '\\ufeff' in item:
+                            item = item.replace('\\ufeff', '')
+                        if csv_keys[i2] == 'seq':
+                            item = item.replace(' ', '')
+                        if item:
+                            cmd_kwargs[csv_keys[i2]] = item
+                    csv_values.append(copy.deepcopy(cmd_kwargs))
+
+        results = []
+        for csv_input in csv_values:
+            sequence = csv_input['seq']
+            if 'start' in csv_input.keys():
+                if csv_input['start']:
+                    start_loc = int(csv_input['start'])-1
+                else:
+                    start_loc = 0
+            else:
+                start_loc = 0
+            if 'end' in csv_input.keys():
+                if csv_input['end']:
+                    end_loc = int(csv_input['end'])-1
+                else:
+                    end_loc = start_loc+1
+            elif 'start' in csv_input.keys():
+                end_loc = start_loc+1
+            else:
+                end_loc = len(sequence)
+            if 'constraint_str' in csv_input.keys():
+                constraint_str = csv_input['constraint_str']
+            else:
+                constraint_str = None
+            if csv_input.get('i'):
+                i = csv_input.get('i')
+            else:
+                i = None
+            verbose = False
+            detailed_out = False
+            print_out = False
+            if 'sd' in csv_input.keys():
+                sd = csv_input['sd']
+            else:
+                sd = None
+            output_dict = run_ostir(sequence, constraint_str, outfile, start_loc,
+                                    end_loc, i, verbose, detailed_out, sd, threads)
+
+            results.append(output_dict)
+
+        results = list(itertools.chain.from_iterable(results))
+        if outfile:
+            csv_keys = results[0].keys()  #@TODO: Sort this so the columns are cleaner
+            with open(outfile, 'w') as output_file:
+                dict_writer = csv.DictWriter(output_file, csv_keys)
+                dict_writer.writeheader()
+                dict_writer.writerows(results)
+        else:
+            _print_output(results)
+
+    elif input_type == 'string':
         if 'start' in cmd_kwargs.keys():
             if cmd_kwargs['start']:
                 start_loc = int(cmd_kwargs['start'])-1
@@ -409,7 +452,7 @@ def main():
             sd = None
 
         output_dict = run_ostir(cmd_kwargs['seq'], constraint_str, outfile, start_loc,
-                                end_loc, i, verbose, detailed_out, sd)
+                                end_loc, i, verbose, detailed_out, sd, threads)
         if outfile:
             csv_keys = output_dict[0].keys()
             with open(outfile, 'w') as output_file:

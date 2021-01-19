@@ -91,6 +91,7 @@ class OSTIRFactory:
         self.run = 0
         self.start_range = start_range
         self.verbose = verbose
+        self.threads = 1
 
     def find_min(self, input_list):
         """Finds the minimum of a list of numbers."""
@@ -754,15 +755,15 @@ class OSTIRFactory:
         self.Expression_list = []
         self.dg_scores = []
 
-        cores = 1
         parallelizer_arguments = [[], [], []]
         for _, (start_pos, codon) in enumerate(self.find_start_codons(self.mRNA_input)):
             parallelizer_arguments[0].append(self)
             parallelizer_arguments[1].append(start_pos)
             parallelizer_arguments[2].append(codon)
 
-        with concurrent.futures.ThreadPoolExecutor(max_workers=cores) as multiprocessor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=self.threads) as multiprocessor:
             parallel_output = multiprocessor.map(_parallel_dG, *parallelizer_arguments)
+
         parallel_output = [x for x in parallel_output]
         for output in parallel_output:
             self.dg_scores.append(output['dG_scores'])

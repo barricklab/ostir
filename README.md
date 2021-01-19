@@ -41,7 +41,6 @@ From Source:
 OSTIR is executable as a command-line python script, `ostir`.
 
 Flags:
-
 - `-h, --help`: Shows a help message
 - `-i str/filepath`, --input str/filepath: Defines the input sequence, FASTA filepath, or CSV filepath.
 - `[-o filepath, --output filepath]`: Defines the output filepath (csv formatted). If not provided, results will output
@@ -52,6 +51,7 @@ Flags:
   upstream, otherwise defaults to the end of the sequence
 - `[-r str, --rRNA str]`: Defines the rRNA anti-Shine Dalgarno sequence. Defaults to that of E. coli
 - `[j int, --threads int]'`: Defines how many mRNAs will be analyzed in parallel at a time
+- `[t str, --threads str]'`: Defines input type (seq|fasta|csv). If not provided, OSTIR will attempt to autodetect.
 
 CSV-based inputs support overriding command-line flags `start`, `end`, and `sd` (Anti Shine Dalgarno) through csv
 columns. The column `seq` is required.
