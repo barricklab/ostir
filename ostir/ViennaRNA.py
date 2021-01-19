@@ -1,12 +1,8 @@
-#!/usr/bin/python
-
-
 import subprocess, time
 import tempfile
 from shutil import which
 import warnings
 import os
-from shutil import copyfile
 
 #  On import check dependencies
 dependencies = [which('RNAfold') is not None,
@@ -31,7 +27,6 @@ class ViennaRNA(dict):
 
         import re
         import random
-        import string
 
         exp = re.compile('[ATGCU]',re.IGNORECASE)
 

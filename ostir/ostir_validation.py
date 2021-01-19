@@ -37,7 +37,7 @@ def verify_ostir_install():
 
     results = []
     for RNA, finding in RNA_checks:
-        return_results = ostir.run_ostir(RNA)
+        return_results = ostir.run_ostir(RNA, pos_index=1)
         if return_results == finding:
             results.append(1)
         else:

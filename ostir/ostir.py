@@ -16,26 +16,23 @@ except ModuleNotFoundError:
 
 ostir_version = '0.0.2 (In-Development)'
 
-def run_ostir(seq, outfile=None, start_loc=0, end_loc=None, name=None, verbose=False,
-              sd=None, threads=1):
-    '''Takes an RNA with optional paramaters and returns binding energies.
+def run_ostir(seq, outfile=None, start_loc=0, end_loc=None, name=None, sd='ACCTCCTTA', threads=1, verbose=False, pos_index=0):
+    '''Takes an RNA with optional parameters and returns binding energies.
         Keyword arguments:
         seq -- Sequence to calculate binding energies for
         outfile -- Filepath for output csv
         start_loc -- First base to start considering start codons. Defaults to first base
         end_loc -- Last base to start considering start codons. Defaults to end of sequence
-        name -- Returns itself, useful for tagging things for downstream processing.
-        verbose -- Prints debug information
+        name -- Returns itself, useful for tagging things for downstream processing
         sd -- Defines anti-Shine-Dalgarno sequence. Defaults to that of E. coli's
-        threads -- Defines parallel processing workers, roughly equivalent to multithreading cores.
+        threads -- Defines parallel processing workers, roughly equivalent to multithreading cores
+        verbose -- Prints debug information
     '''
     mRNA = seq
     if end_loc == None:
         end_loc = len(mRNA)
-    start_range = [start_loc, end_loc]
+    start_range = [start_loc-pos_index, end_loc-pos_index]
 
-    if not sd:
-        sd = 'ACCTCCTTA'
 
     calcObj = OSTIRFactory(mRNA, start_range, sd, verbose=verbose)
     calcObj.calc_dG()
@@ -52,19 +49,13 @@ def run_ostir(seq, outfile=None, start_loc=0, end_loc=None, name=None, verbose=F
     for dG in dG_total_list:
         expr_list.append(calcObj.K * math.exp(-dG / calcObj.RT_eff))
     return_var = zip(expr_list, start_pos_list, kinetic_score_list, dG_total_list, standby_site_list, start_codon_list)
-
-    if outfile:
-        with open(outfile, 'w') as out_file:
-            for (expr, start_pos, ks, dG, dstandby, codon) in zip(expr_list, start_pos_list, kinetic_score_list, dG_total_list,
-                                                           standby_site_list, start_codon_list):
-                out_file.writelines(['1\n', f"{start_pos} {expr} {ks}, {name}\n"])
     return_var = list(return_var)
     zip_output = zip(return_var, dG_details)
     output_data_list = []
     for output in list(zip_output):
         outdata = {'RNA': seq,
                    'codon': output[0][5],
-                   'start_pos': output[0][1]+1,
+                   'start_pos': output[0][1]+pos_index,
                    'dG_total': output[0][3],
                    'dG_rRNA:mRNA': output[1][0],
                    'dG_mRNA': output[1][2],
@@ -77,6 +68,10 @@ def run_ostir(seq, outfile=None, start_loc=0, end_loc=None, name=None, verbose=F
                    }
         output_data_list.append(outdata)
     output_data_list = sorted(output_data_list, key=lambda x: x['start_pos'])
+
+    if outfile:
+        save_to_csv(output_data_list, outfile)
+
     return output_data_list
 
 def parse_fasta(filepath):
@@ -99,11 +94,11 @@ def parse_fasta(filepath):
         sequences.append([current_seq_name, current_seq])
     return sequences
 
-def _print_output(outlist):
+def _print_output(outdict):
     '''Processes command line / csv input for pretty command line output'''
     sorted_predictions = {}
     keys = []
-    for prediction in outlist:
+    for prediction in outdict:
         if prediction['RNA'] in sorted_predictions.keys():
             sorted_predictions[prediction['RNA']].append(prediction)
         else:
@@ -137,6 +132,13 @@ def _print_output(outlist):
                     output_data[i] = data_point
             print(row_format.format(*output_data))
         print('_________________________________________________')
+
+def save_to_csv(outdict, outfile):
+    csv_keys = outdict[0].keys()
+    with open(outfile, 'w') as output_file:
+        dict_writer = csv.DictWriter(output_file, csv_keys)
+        dict_writer.writeheader()
+        dict_writer.writerows(outdict)
 
 
 def main():
@@ -308,14 +310,14 @@ def main():
             cmd_kwargs['seq'] = sequence[1]
             if 'start' in cmd_kwargs.keys():
                 if cmd_kwargs['start']:
-                    start_loc = int(cmd_kwargs['start'])-1
+                    start_loc = int(cmd_kwargs['start'])
                 else:
-                    start_loc = 0
+                    start_loc = 1
             else:
-                start_loc = 0
+                start_loc = 1
             if 'end' in cmd_kwargs.keys():
                 if cmd_kwargs['end']:
-                    end_loc = int(cmd_kwargs['end'])-1
+                    end_loc = int(cmd_kwargs['end'])
                 else:
                     end_loc = start_loc+1
             elif 'start' in cmd_kwargs.keys():
@@ -329,16 +331,12 @@ def main():
             else:
                 sd = None
             output_dict = run_ostir(cmd_kwargs['seq'], outfile, start_loc,
-                                    end_loc, name, verbose, sd, threads)
+                                    end_loc, name, sd, threads, verbose, pos_index=1)
             result.append(output_dict)
         result = list(itertools.chain.from_iterable(result))
 
         if outfile:
-            csv_keys = result[0].keys()  #@TODO: Sort this so the columns are cleaner
-            with open(outfile, 'w')  as output_file:
-                dict_writer = csv.DictWriter(output_file, csv_keys)
-                dict_writer.writeheader()
-                dict_writer.writerows(result)
+            save_to_csv(result, outfile)
         else:
             _print_output(result)
 
@@ -367,14 +365,14 @@ def main():
             sequence = csv_input['seq']
             if 'start' in csv_input.keys():
                 if csv_input['start']:
-                    start_loc = int(csv_input['start'])-1
+                    start_loc = int(csv_input['start'])
                 else:
-                    start_loc = 0
+                    start_loc = 1
             else:
-                start_loc = 0
+                start_loc = 1
             if 'end' in csv_input.keys():
                 if csv_input['end']:
-                    end_loc = int(csv_input['end'])-1
+                    end_loc = int(csv_input['end'])
                 else:
                     end_loc = start_loc+1
             elif 'start' in csv_input.keys():
@@ -391,31 +389,27 @@ def main():
             else:
                 sd = None
             output_dict = run_ostir(sequence, outfile, start_loc,
-                                    end_loc, name, verbose, sd, threads)
+                                    end_loc, name,sd, threads, verbose, pos_index=1)
 
             results.append(output_dict)
 
         results = list(itertools.chain.from_iterable(results))
         if outfile:
-            csv_keys = results[0].keys()
-            with open(outfile, 'w') as output_file:
-                dict_writer = csv.DictWriter(output_file, csv_keys)
-                dict_writer.writeheader()
-                dict_writer.writerows(results)
+            save_to_csv(results, outfile)
         else:
             _print_output(results)
 
     elif input_type == 'string':
         if 'start' in cmd_kwargs.keys():
             if cmd_kwargs['start']:
-                start_loc = int(cmd_kwargs['start'])-1
+                start_loc = int(cmd_kwargs['start'])
             else:
-                start_loc = 0
+                start_loc = 1
         else:
-            start_loc = 0
+            start_loc = 1
         if 'end' in cmd_kwargs.keys():
             if cmd_kwargs['end']:
-                end_loc = int(cmd_kwargs['end'])-1
+                end_loc = int(cmd_kwargs['end'])
             else:
                 end_loc = start_loc+1
         elif 'start' in cmd_kwargs.keys():
@@ -430,13 +424,9 @@ def main():
             sd = None
 
         output_dict = run_ostir(cmd_kwargs['seq'], outfile, start_loc,
-                                end_loc, name, verbose, sd, threads)
+                                end_loc, name, sd, threads, verbose, pos_index=1)
         if outfile:
-            csv_keys = output_dict[0].keys()
-            with open(outfile, 'w') as output_file:
-                dict_writer = csv.DictWriter(output_file, csv_keys)
-                dict_writer.writeheader()
-                dict_writer.writerows(output_dict)
+            save_to_csv(output_dict, outfile)
         else:
             _print_output(output_dict)
 
