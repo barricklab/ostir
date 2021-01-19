@@ -123,12 +123,15 @@ def _print_output(outlist):
                 out_names.append(prediction.get('i'))
             keys.append(out_names)
 
-
+    if not keys:
+        print('No binding sites were identified.')
+        exit(0)
 
     output_items = ['start_pos', 'codon', 'Expression', 'dG_total', 'dG_rRNA:mRNA', 'dG_mRNA', 'dG_Spacing', 'Spacing', 'dG_Standby', 'dG_Start_Codon']
     row_format = "{:>15}" * (len(output_items))
     print('_________________________________________________')
     for rna in keys:
+        rna = rna[0]
         if len(rna) == 2:
             print(f'Tested Sequence: {rna[1]}')
             print(f'Sequence RNA: {rna[0]}')
@@ -413,7 +416,7 @@ def main():
 
         results = list(itertools.chain.from_iterable(results))
         if outfile:
-            csv_keys = results[0].keys()  #@TODO: Sort this so the columns are cleaner
+            csv_keys = results[0].keys()
             with open(outfile, 'w') as output_file:
                 dict_writer = csv.DictWriter(output_file, csv_keys)
                 dict_writer.writeheader()
