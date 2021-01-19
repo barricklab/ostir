@@ -5,7 +5,6 @@ import math
 import os
 from pathlib import Path
 import subprocess
-import concurrent.futures
 import itertools
 import csv
 import copy
@@ -17,22 +16,18 @@ except ModuleNotFoundError:
 
 ostir_version = '0.0.2 (In-Development)'
 
-def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None, i=None, verbose=False,
-                          detailed_out=False, sd=None, threads=1):
+def run_ostir(seq, outfile=None, start_loc=0, end_loc=None, identifier=None, verbose=False,
+              sd=None, threads=1):
     '''Takes an RNA with optional paramaters and returns binding energies.
-
         Keyword arguments:
         seq -- Sequence to calculate binding energies for
-        constraint_str --
         outfile -- Filepath for output csv
         start_loc -- First base to start considering start codons. Defaults to first base
         end_loc -- Last base to start considering start codons. Defaults to end of sequence
-        i -- Returns i as part of the first return variable, useful for tagging things for downstream processing.
+        identifier -- Returns itself, useful for tagging things for downstream processing.
         verbose -- Prints debug information
-        detailed_out -- returns components of total dG as an additional return variable
         sd -- Defines anti-Shine-Dalgarno sequence. Defaults to that of E. coli's
         threads -- Defines parallel processing workers, roughly equivalent to multithreading cores.
-
     '''
     mRNA = seq
     if end_loc == None:
@@ -42,7 +37,7 @@ def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None,
     if not sd:
         sd = 'ACCTCCTTA'
 
-    calcObj = OSTIRFactory(mRNA, start_range, sd, constraint_str, verbose=verbose)
+    calcObj = OSTIRFactory(mRNA, start_range, sd, verbose=verbose)
     calcObj.calc_dG()
     calcObj.threads = threads
 
@@ -62,11 +57,7 @@ def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None,
         with open(outfile, 'w') as out_file:
             for (expr, start_pos, ks, dG, dstandby, codon) in zip(expr_list, start_pos_list, kinetic_score_list, dG_total_list,
                                                            standby_site_list, start_codon_list):
-                out_file.writelines(['1\n', f"{start_pos} {expr} {ks}, {i}\n"])
-        if detailed_out:
-            second_out = outfile + '.detailed'
-            with open(second_out, 'w') as outfile:  # Clears the file if it exists
-                pass
+                out_file.writelines(['1\n', f"{start_pos} {expr} {ks}, {identifier}\n"])
     return_var = list(return_var)
     zip_output = zip(return_var, dG_details)
     output_data_list = []
@@ -82,7 +73,7 @@ def run_ostir(seq, constraint_str=None, outfile=None, start_loc=0, end_loc=None,
                    'dG_Standby': output[1][3],
                    'dG_Start_Codon': output[1][1],
                    'Expression': output[0][0],
-                   'i': i
+                   'identifier': identifier
                    }
         output_data_list.append(outdata)
     output_data_list = sorted(output_data_list, key=lambda x: x['start_pos'])
@@ -330,19 +321,14 @@ def main():
                 end_loc = start_loc+1
             else:
                 end_loc = len(cmd_kwargs['seq'])
-            if 'constraint_str' in cmd_kwargs.keys():
-                constraint_str = cmd_kwargs['constraint_str']
-            else:
-                constraint_str = None
-            i = sequence[0]
+            identifier = sequence[0]
             verbose = False
-            detailed_out = False
             if 'sd' in cmd_kwargs.keys():
                 sd = cmd_kwargs['sd']
             else:
                 sd = None
-            output_dict = run_ostir(cmd_kwargs['seq'], constraint_str, outfile, start_loc,
-                                    end_loc, i, verbose, detailed_out, sd, threads)
+            output_dict = run_ostir(cmd_kwargs['seq'], outfile, start_loc,
+                                    end_loc, identifier, verbose, sd, threads)
             result.append(output_dict)
         result = list(itertools.chain.from_iterable(result))
 
@@ -394,23 +380,17 @@ def main():
                 end_loc = start_loc+1
             else:
                 end_loc = len(sequence)
-            if 'constraint_str' in csv_input.keys():
-                constraint_str = csv_input['constraint_str']
+            if csv_input.get('identifier'):
+                identifier = csv_input.get('identifier')
             else:
-                constraint_str = None
-            if csv_input.get('i'):
-                i = csv_input.get('i')
-            else:
-                i = None
+                identifier = None
             verbose = False
-            detailed_out = False
-            print_out = False
             if 'sd' in csv_input.keys():
                 sd = csv_input['sd']
             else:
                 sd = None
-            output_dict = run_ostir(sequence, constraint_str, outfile, start_loc,
-                                    end_loc, i, verbose, detailed_out, sd, threads)
+            output_dict = run_ostir(sequence, outfile, start_loc,
+                                    end_loc, identifier, verbose, sd, threads)
 
             results.append(output_dict)
 
@@ -441,21 +421,15 @@ def main():
             end_loc = start_loc+1
         else:
             end_loc = len(cmd_kwargs['seq'])
-        if 'constraint_str' in cmd_kwargs.keys():
-            constraint_str = cmd_kwargs['constraint_str']
-        else:
-            constraint_str = None
-        i = None
+        identifier = None
         verbose = False
-        detailed_out = False
-        print_out = False
         if 'sd' in cmd_kwargs.keys():
             sd = cmd_kwargs['sd']
         else:
             sd = None
 
-        output_dict = run_ostir(cmd_kwargs['seq'], constraint_str, outfile, start_loc,
-                                end_loc, i, verbose, detailed_out, sd, threads)
+        output_dict = run_ostir(cmd_kwargs['seq'], outfile, start_loc,
+                                end_loc, identifier, verbose, sd, threads)
         if outfile:
             csv_keys = output_dict[0].keys()
             with open(outfile, 'w') as output_file:
