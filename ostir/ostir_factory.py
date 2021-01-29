@@ -70,7 +70,6 @@ class OSTIRFactory:
         """Initializes the RBS Calculator class with the mRNA sequence and the range of start codon positions considered."""
 
         # NuPACK.__init__(self,sequences,self.RNA_model)
-
         exp = re.compile('[ATGCU._]', re.IGNORECASE)
         if exp.match(mRNA) == None:
             raise ValueError(f"Invalid letters found in sequence {mRNA}. Only ATGCU accepted.")
@@ -194,8 +193,7 @@ class OSTIRFactory:
         # print(fold)
         fold.subopt([1, 2], None, self.energy_cutoff, dangles=dangles, Temp=self.temp)
         if len(fold["subopt_basepairing_x"]) == 0:
-            raise CalcError(
-                "Warning: The 16S rRNA has no predicted binding site. Start codon is considered as leaderless and ignored.")
+            return None, None, None
 
         # 2. Calculate dG_spacing for each 16S rRNA binding site
 
@@ -655,12 +653,17 @@ class OSTIRFactory:
             parallelizer_arguments[0].append(self)
             parallelizer_arguments[1].append(start_pos)
             parallelizer_arguments[2].append(codon)
+            checked_codon = self.mRNA_input[start_pos:start_pos+3]
+            if checked_codon != codon:
+                raise ValueError(f'Codon mismatch at {start_pos}: {codon, checked_codon}')
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=self.threads) as multiprocessor:
             parallel_output = multiprocessor.map(self._parallel_dG, *parallelizer_arguments)
 
-        parallel_output = [x for x in parallel_output]
+        parallel_output = [x for x in parallel_output if x is not None]
         for output in parallel_output:
+            if not output['start_position_list'] or output['start_position_list'] == None:
+                continue
             self.dg_scores.append(output['dG_scores'])
             self.mRNA_structure_list.append(output['mRNA_structure_list'])
             self.mRNA_rRNA_uncorrected_structure_list.append(output['mRNA_rRNA_uncorrected_structure_list'])
@@ -713,6 +716,9 @@ class OSTIRFactory:
 
             # Energy of mRNA:rRNA hybridization & folding
             [dG_mRNA_rRNA_withspacing, mRNA_rRNA_structure, spacing_value] = ostir_factory_object.calc_dG_mRNA_rRNA(start_pos, dangles)
+            if not dG_mRNA_rRNA_withspacing:
+                return None
+
             dG_mRNA_rRNA_withspacing -= 2.481  # Modifying hybridization penalty to match NUPACK
 
             dG_mRNA_rRNA_nospacing = mRNA_rRNA_structure["dG_mRNA_rRNA"]
