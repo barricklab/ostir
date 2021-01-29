@@ -35,8 +35,8 @@ def run_ostir(seq, outfile=None, start_loc=0, end_loc=None, name=None, sd='ACCTC
 
 
     calcObj = OSTIRFactory(mRNA, start_range, sd, verbose=verbose)
-    calcObj.calc_dG()
     calcObj.threads = threads
+    calcObj.calc_dG()
 
     dG_total_list = calcObj.dG_total_list[:]
     dG_details = calcObj.dG_details[:]
@@ -329,7 +329,7 @@ def main():
             if 'sd' in cmd_kwargs.keys():
                 sd = cmd_kwargs['sd']
             else:
-                sd = None
+                sd = 'ACCTCCTTA'
             output_dict = run_ostir(cmd_kwargs['seq'], outfile, start_loc,
                                     end_loc, name, sd, threads, verbose, pos_index=1)
             result.append(output_dict)
@@ -387,7 +387,7 @@ def main():
             if 'sd' in csv_input.keys():
                 sd = csv_input['sd']
             else:
-                sd = None
+                sd = 'ACCTCCTTA'
             output_dict = run_ostir(sequence, outfile, start_loc,
                                     end_loc, name,sd, threads, verbose, pos_index=1)
 
@@ -421,7 +421,7 @@ def main():
         if 'sd' in cmd_kwargs.keys():
             sd = cmd_kwargs['sd']
         else:
-            sd = None
+            sd = 'ACCTCCTTA'
 
         output_dict = run_ostir(cmd_kwargs['seq'], outfile, start_loc,
                                 end_loc, name, sd, threads, verbose, pos_index=1)
