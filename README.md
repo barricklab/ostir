@@ -52,7 +52,7 @@ Flags:
   upstream, otherwise defaults to the end of the sequence
 - `[-r str, --rRNA str]`: Defines the rRNA anti-Shine Dalgarno sequence. Defaults to that of E. coli
 - `[j int, --threads int]'`: Defines how many mRNAs will be analyzed in parallel at a time
-- `[t str, --threads str]'`: Defines input type (seq|fasta|csv). If not provided, OSTIR will attempt to autodetect.
+- `[t str, --type str]'`: Defines input type (seq|fasta|csv). If not provided, OSTIR will attempt to autodetect.
 
 CSV-based inputs support overriding command-line flags `start`, `end`, and `sd` (Anti Shine Dalgarno) through csv
 columns. The column `seq` is required. `name` is also supported, which simply returns itself in the output.
@@ -62,7 +62,7 @@ Running OSTIR this way is pythonic and both expects and returns zero indexed sta
 
 ```python3
 from ostir.ostir import run_ostir
-run_ostir(seq, outfile, start_loc, end_loc, name=None, sd, threads, verbose, posindex)
+run_ostir(seq, outfile, start_loc, end_loc, name, sd, threads, verbose, posindex)
 ```
 
 Arguments:
