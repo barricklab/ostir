@@ -1,0 +1,4 @@
+name,start_codon,start_position,expression,RBS_distance_bp,dG_total,dG_rRNA:mRNA,dG_mRNA,dG_spacing,dG_standby,dG_start_codon
+sequence_1,ATG,38,682.65043,4,2.02544,-8.381,-11.6,0.00044,0.0,-1.194
+sequence_1,ATG,71,0.06344,1,25.81933,-4.381,-13.8,17.59433,0.0,-1.194
+sequence_1,ATG,89,247.53187,4,4.62544,-0.681,-6.5,0.00044,0.0,-1.194

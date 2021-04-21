@@ -27,6 +27,8 @@ import math
 import os
 import concurrent.futures
 
+
+
 class CalcError(Exception):
     """Base class for exceptions in this module."""
 
@@ -66,8 +68,11 @@ class OSTIRFactory:
 
     footprint = 1000  # Footprint of the 30S complex that prevents formation of secondary structures downstream of the start codon. Here, we assume that the entire post-start RNA sequence does not form secondary structures once the 30S complex has bound.
 
-    def __init__(self, mRNA, start_range, rRNA, verbose=False):
-        """Initializes the RBS Calculator class with the mRNA sequence and the range of start codon positions considered."""
+    def __init__(self, mRNA, start_range_1, rRNA, verbose=False):
+        """
+        Initializes the RBS Calculator class with the mRNA sequence and the range of start codon positions considered.
+        start_range_1 is a pair of 1-indexed positions
+        """
 
         # NuPACK.__init__(self,sequences,self.RNA_model)
         exp = re.compile('[ATGCU._]', re.IGNORECASE)
@@ -76,8 +81,8 @@ class OSTIRFactory:
         mRNA = mRNA.replace('.', '')
         mRNA = mRNA.replace('_', '')
 
-        if start_range[0] < 0: start_range[0] = 0
-        if start_range[1] > len(mRNA): start_range[1] = len(mRNA)
+        if start_range_1[0] < 1: start_range_1[0] = 1
+        if start_range_1[1] > len(mRNA): start_range_1[1] = len(mRNA)
 
 
         self.install_location = os.path.dirname(os.path.realpath(__file__))
@@ -89,7 +94,7 @@ class OSTIRFactory:
         self.total_sequence_length = len(mRNA) + len(self.rRNA)
         self.dG_rRNA = self.calc_dG_rRNA()
         self.run = 0
-        self.start_range = start_range
+        self.start_range_1 = start_range_1
         self.verbose = verbose
         self.threads = 1
 
@@ -113,10 +118,12 @@ class OSTIRFactory:
         self.start_codon_list = []
 
         seq_len = len(sequence)
-        end = min(self.start_range[1], seq_len - 2)
-        begin = min(self.start_range[0], end)
 
-        for i in range(begin, end + 1):
+        #Switch to zero-indexed positions happens here
+        end_0 = min(self.start_range_1[1]-1, seq_len - 2)
+        begin_0 = min(self.start_range_1[0]-1, end_0)
+
+        for i in range(begin_0, end_0 + 1):
             codon = sequence[i:i + 3]
             if codon.upper() in self.start_codons:
                 self.start_position_list.append(i)
@@ -169,6 +176,7 @@ class OSTIRFactory:
             ds = aligned_spacing - self.optimal_spacing
             dG_spacing_penalty = self.dG_spacing_constant_pull[0] * ds * ds + self.dG_spacing_constant_pull[1] * ds + \
                                  self.dG_spacing_constant_pull[2]
+
 
         return dG_spacing_penalty
 

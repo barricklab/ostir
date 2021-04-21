@@ -42,7 +42,7 @@ def generate_validation_table():
 
     results = []
     for RNA in RNAs:
-        results.append([RNA, ostir.run_ostir(RNA, posindex=1)])
+        results.append([RNA, ostir.run_ostir(RNA)])
 
     result_table = {}
     for result in results:

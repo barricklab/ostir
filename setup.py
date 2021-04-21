@@ -20,8 +20,11 @@ setuptools.setup(
     ],
     python_requires='>=3.7',
     include_package_data=True,
-    entry_points='''
-        [console_scripts]
-        ostir=ostir.ostir:main
-        '''
+    test_suite="tests",
+    entry_points={
+        'console_scripts' : [
+          'ostir = ostir.ostir:main',
+        ],
+    }
+
 )
