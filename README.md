@@ -36,6 +36,7 @@ From Source:
 - Package the code with `python3 setup.py sdist bdist_wheel`
 - Install the package with `python3 -m pip install ./`
 - Download and install ViennaRNA, following the instructions [here](https://www.tbi.univie.ac.at/RNA/).
+- To test your install run `python -m unittest`
 
 ### Usage
 
