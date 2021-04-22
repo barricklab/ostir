@@ -19,7 +19,7 @@ try:
 except ModuleNotFoundError:
     from ostir_factory import OSTIRFactory
 
-ostir_version = '0.0.2 (In-Development)'
+ostir_version = '1.0.0'
 
 # The E. coli sequence
 default_Shine_Dalgarno = 'ACCTCCTTA'
@@ -203,9 +203,9 @@ def main():
         action='store',
         metavar='str/filepath',
         dest='i',
-        required=False,
+        required=True,
         type=str,
-        help="input DNA/RNA. Required if not using --validate.",
+        help="input DNA/RNA.",
     )
 
     parser.add_argument(
@@ -284,20 +284,7 @@ def main():
         help="Input filetype",
     )
 
-    parser.add_argument(
-        '--validate',
-        action='store_true',
-        dest='validate',
-        required=False,
-        help="Runs a consistency test to ensure proper installation.",
-    )
-
     options = parser.parse_args()
-
-    if options.validate:
-        from ostir.ostir_validation import verify_ostir_install
-        verify_ostir_install()
-        exit(0)
 
     if not options.i:
         print("Input (-i) required.")
