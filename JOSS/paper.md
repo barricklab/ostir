@@ -71,7 +71,7 @@ other than *Escherichia coli*; (4) `OSTIR` supports multi-FASTA and CSV input
 files.
 
 ![Comparison of experimentally measured translation initiation rates versus
-predictions made by `OSTIR v1.0.0` using `ViennaRNA version 2.4.17` for RNA
+predictions made by `OSTIR v1.0.0` using `ViennaRNA version 2.4.15` for RNA
 energy calculations. Details of the experimental data, including a description
 of the different sets of sequences tested, are available in the original
 publication describing the `RBS Calculator v1.0` [@Salis:2009].
@@ -81,9 +81,9 @@ Updating `OSTIR` to be compatible with `ViennaRNA` and newer RNA folding energy
 parameters required refitting coefficients in the underlying thermodynamic model
 [@Salis:2009; @Salis:2011; @Reis:2020]. After making these changes, we verified
 that `OSTIR` has similar accuracy to the original `RBS Calculator v1.0`
-\autoref{fig1}. `OSTIR` predicts translation initiation rates for 51% of the
-test sequences within 2-fold of the experimentally measured values and for 93%
-of these sequences the predictiona are within 10-fold of the measured values.
+\autoref{fig1}. `OSTIR` predicts translation initiation rates for 52% of the
+test sequences within 2-fold of the experimentally measured values and for 91%
+of these sequences the predictions are within 10-fold of the measured values.
 Training data and `R` code for this statistical procedure are provided for users
 who want to work on further improving the model. In summary, we expect that
 `OSTIR` will be useful to researchers who want to model and engineer bacterial

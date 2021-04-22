@@ -230,3 +230,4 @@ write_csv(params, paste0(output.prefix, ".fit_parameters.csv"))
 ## Output the fit information
 X.stats$Predicted.Translation.Initiation.Rate = exp(X.stats$Log.Predicted.Translation.Initiation.Rate)
 write_csv(X.stats, paste0(output.prefix, ".fit_values.csv"))
+

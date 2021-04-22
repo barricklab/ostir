@@ -42,9 +42,9 @@ class CalcError(Exception):
 class OSTIRFactory:
 
     # From OSTIR calibration using Salis2009 data. See calibration directory for procedure.
-    Beta = 0.390170603
+    Beta = 0.400223995
     RT_eff = 1/Beta
-    logK = 7.316251063
+    logK = 7.26597449
     K = math.exp(logK)
 
     # Global parameters -- constants
@@ -58,8 +58,8 @@ class OSTIRFactory:
     optimal_spacing = 5  # aligned spacing
 
     # From OSTIR calibration using Salis2009 data. See calibration directory for procedure
-    dG_spacing_constant_push = [17.61887531, 3.724962718, 1.939850379, 3.0]
-    dG_spacing_constant_pull = [0.063005251, 0.286289085, 0.0]
+    dG_spacing_constant_push = [17.1709266, 3.469412007, 1.792540165, 3.0]
+    dG_spacing_constant_pull = [0.063964402, 0.274341654, 0.0]
     cutoff = 35  # number of nt +- start codon considering for folding
     standby_site_length = 4  # Number of nt before SD sequence that must be unpaired for ribosome binding
     energy_cutoff = 3.0

@@ -51,10 +51,10 @@ def csv_are_identical(csv_file_path_1, csv_file_path_2):
     identical = True
 
 
-    #for i in range(long_length):
-    #    if (csv_1_rows[i] != csv_2_rows[i]):
-    #       print(csv_1_rows[i], "\n!=\n",csv_1_rows[i])
-    #       identical = False
+    for i in range(long_length):
+        if (csv_1_rows[i] != csv_2_rows[i]):
+           #print(csv_1_rows[i], "\n!=\n",csv_1_rows[i])
+           identical = False
 
     return identical
 
@@ -68,7 +68,7 @@ class test_unit_run_ostir_one_sequence(unittest.TestCase):
         Test run_ostir on one sequence
         """
 
-        print ("Unit test: run_ostir_one_sequence")
+        print ("\n" + "Unit test: run_ostir_one_sequence")
 
         test_data_path = os.path.join(THIS_DIR, 'one_RNA_seq.test.csv')
 
@@ -81,12 +81,12 @@ class test_unit_run_ostir_one_sequence(unittest.TestCase):
                 'name': 'unnamed',
                 'start_codon': 'AUG',
                 'start_position': 31,
-                'expression': 2.60471,
+                'expression': 2.11562,
                 'RBS_distance_bp': 16,     
-                'dG_total': 16.29782,
+                'dG_total': 16.28245,
                 'dG_rRNA:mRNA': -0.481,
                 'dG_mRNA': -7.2, 
-                'dG_spacing': 10.77282,
+                'dG_spacing': 10.75745,
                 'dG_standby': 0.0,
                 'dG_start_codon': -1.194,
             },
@@ -94,12 +94,12 @@ class test_unit_run_ostir_one_sequence(unittest.TestCase):
                 'name': 'unnamed',
                 'start_codon': 'GUG',
                 'start_position': 41,
-                'expression': 881.54201,
+                'expression': 835.9024,
                 'RBS_distance_bp': 8,
-                'dG_total': 1.37011,
+                'dG_total':  1.3429,
                 'dG_rRNA:mRNA': -3.581,
                 'dG_mRNA': -3.6,
-                'dG_spacing': 1.42591,
+                'dG_spacing': 1.3987,
                 'dG_standby': 0.0,
                 'dG_start_codon': -0.0748,
             },
@@ -107,7 +107,7 @@ class test_unit_run_ostir_one_sequence(unittest.TestCase):
                 'name': 'unnamed',
                 'start_codon': 'AUG',
                 'start_position': 49,
-                'expression': 12251.67638,
+                'expression': 12297.83443,
                 'RBS_distance_bp': 5,
                 'dG_total': -5.375,
                 'dG_rRNA:mRNA': -7.981,
