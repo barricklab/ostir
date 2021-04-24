@@ -2,27 +2,22 @@
 
 ## Open Source Translation Initiation Rates
 
-`OSTIR` (Open Source Translation Initiation of Ribosomes) is an open source
-Python package that integrates RNA spacing considerations and the
-ViennaRNA software suite to perform free energy calculations
-for binding events involved during protein translation initiation. This work is
-derived from the
-[last open source version of the calculator](https://github.com/hsalis/Ribosome-Binding-Site-Calculator-v1.0)
-described in [Salis 2009](https://doi.org/10.1038/nbt.1568).
+`OSTIR` (Open Source Translation Initiation Rates) is a
+Python package for predicting the rates at which ribosomes will bind to and initiate
+translation from different start codons in bacterial mRNAs. It uses the ViennaRNA software
+suite to perform the necessary free energy calculations. The code builds on the last open
+source version of the
+[RBS calculator](https://github.com/hsalis/Ribosome-Binding-Site-Calculator-v1.0)
+that implements the calculations described in [Salis 2009](https://doi.org/10.1038/nbt.1568).
 
-`OSTIR` was written with a user-friendliness and high throughput in mind.
-Unlike related tools, this work allows for user installation through Bioconda or PyPi (requires installing dependencies),
-requiring no commercial licensing or export to a webserver. `OSTIR` supports multi-FASTA
-input with command line parameters or CSV input with support for defining
-parameters on a per-sample basis. Additionally, `OSTIR` supports asynchronous
-processing, accelerating use cases that require screening very large mRNAs.
+`OSTIR` includes several improvements in usability. It supports multi-FASTA
+input with command line parameters or CSV input that can define
+parameters on a per-sequence basis. Additionally, `OSTIR` supports multi-threaded
+execution, accelerating use cases that require the analysis of very large sequences.
 
-### Installation:
+### Installation
 
-This package was tested on Ubuntu 20.04.1 LTS (under WSL). Installation steps and support may vary depending on platform. It is recommended
-that you run `ostir --validate` after installation to ensure dependencies are properly installed and that a consistency test is passed.
-
-From Conda (coming soon):
+From Conda:
 - Run `conda install --bioconda ostir`
 
 From Pip:
@@ -40,39 +35,56 @@ From Source:
 
 ### Usage
 
-OSTIR is executable as a command-line python script, `ostir`.
+OSTIR can be executed via the included command-line script, `ostir`.
 
-Flags:
-- `-h, --help`: Shows a help message
-- `-i str/filepath`, --input str/filepath: Defines the input sequence, FASTA filepath, or CSV filepath.
-- `[-o filepath, --output filepath]`: Defines the output filepath (csv formatted). If not provided, results will output
-  to console
-- `[-v, --verbose]`: Prints additional run information to the console
-- `[-s int, --start int]`: Defines the most 5' position to consider start codons. Defaults to the first base.
-- `[-e int, --end int]`: Defines the most 3' position to consider start codons. If `-s` is set, this defaults to 3 bases
-  upstream, otherwise defaults to the end of the sequence
-- `[-r str, --rRNA str]`: Defines the rRNA anti-Shine Dalgarno sequence. Defaults to that of E. coli
-- `[j int, --threads int]'`: Defines how many mRNAs will be analyzed in parallel at a time
-- `[t str, --type str]'`: Defines input type (seq|fasta|csv). If not provided, OSTIR will attempt to autodetect.
+```
+usage: ostir [-h] -i str/filepath [-o filepath] [-v] [-s int] [-e int] [-a str] [-p] [-q] [-j int] [-t [string|csv|fasta]]
 
-CSV-based inputs support overriding command-line flags `start`, `end`, and `sd` (Anti Shine Dalgarno) through csv
-columns. The column `seq` is required. `name` is also supported, which simply returns itself in the output.
+Open Source Transcription Initiation Rates
 
-OSTIR can also be imported into a python script. Most users will want to call the `run_ostir` function.
-Running OSTIR this way is pythonic and both expects and returns zero indexed start/end positions unless otherwise defined.
+optional arguments:
+  -h, --help            show this help message and exit
+  -i str/filepath, --input str/filepath
+                        Input filename (FASTA/CSV) or DNA/RNA sequence. For CSV input files, there must be a 'seq' or 'sequence'
+                        column. Other columns will override any options provided at the command line if they are present:
+                        'name/id', 'start', 'end', 'anti-Shine-Dalgarno'.
+  -o filepath, --output filepath
+                        Output file path. If not provided, results will output to the console.
+  -v, --verbose         Prints verbose output.
+  -s int, --start int   Most 5' position to consider a start codon beginning.
+  -e int, --end int     Most 3' position to consider a start codon beginning
+  -a str, --anti-Shine-Dalgarno str
+                        anti-Shine-Dalgarno sequence: the 9 bases located at the 3' end of 16S rRNA. May be provided as DNA or
+                        RNA. Defaults to that of E. coli (ACCTCCTTA).
+  -p, --print-sequence  Include the input mRNA sequence in output CSV files
+  -q, --print-anti-Shine-Dalgarno
+                        Include the anti-Shine-Dalgarno sequence in output CSV files
+  -j int, --threads int
+                        Number of threads for multiprocessing
+  -t [string|csv|fasta], --type [string|csv|fasta]
+                        Input type (overrides autodetection)
+```
 
+OSTIR can also be called from within a user's Python script via the `run_ostir` function. This function returns a list of
+the translation initiation rates (expression levels) predicted for each start codon in the sequence.
+
+Example usage:
 ```python3
 from ostir.ostir import run_ostir
-run_ostir(seq, outfile, start_loc, end_loc, name, sd, threads, verbose, posindex)
+
+seq = "ACUUCUAAUUUAUUCUAUUUAUUCGCGGAUAUGCAUAGGAGUGCUUCGAUGUCAU"
+results = run_ostir(seq, name="my_sequence", aSD="ACCTCCTTA", threads=8)
+print(results)
+
+results = run_ostir(seq, start=31, end=31, aSD="ACCCCCTTA", verbose=True)
+print(results)
 ```
 
 Arguments:
-- `seq`: Sequence to calculate binding energies for
-- `outfile`: Filepath for output csv
-- `start_loc`: First base to start considering start codons. Defaults to first base
-- `end_loc`: Last base to start considering start codons. Defaults to end of sequence
-- `name`: Returns itself, useful for tagging things for downstream processing.
-- `sd`: Defines anti-Shine-Dalgarno sequence. Defaults to that of E. coli's
-- `threads`: Defines parallel processing workers, roughly equivalent to multithreading cores
+- `seq`: mRNA sequence to search for translation initiation sites (REQUIRED)
+- `start`: Most 5' position to consider a start codon beginning (1-indexed)
+- `end`: "Most 3' position to consider a start codon beginning (1-indexed)"
+- `name`: Name or id of the sequence to include in output.
+- `aSD`: anti-Shine-Dalgarno sequence. Defaults to that of E. coli.
+- `threads`: Number of parallel processes to launch during prediction.
 - `verbose`: Prints debug information
-- `posindex`: Determines indexing for input/return start/end positions. Generally 0 or 1.

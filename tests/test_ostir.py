@@ -126,7 +126,7 @@ class test_unit_run_ostir_one_sequence_new_aSD(unittest.TestCase):
 
         print ("\n" + "Unit test: run_ostir_one_sequence_new_aSD")
 
-        test_result = ostir.run_ostir("ACUUCUAAUUUAUUCUAUUUAUUCGCGGAUAUGCAUAGGAGUGCUUCGAUGUCAU", in_start_loc_1=31, aSD="ACGTCCCTA")
+        test_result = ostir.run_ostir("ACUUCUAAUUUAUUCUAUUUAUUCGCGGAUAUGCAUAGGAGUGCUUCGAUGUCAU", start=31, aSD="ACGTCCCTA")
 
         #print(test_result)
 

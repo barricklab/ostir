@@ -24,13 +24,13 @@ ostir_version = '1.0.0'
 # The E. coli sequence
 Ecoli_anti_Shine_Dalgarno = 'ACCTCCTTA'
 
-def run_ostir(in_seq, in_start_loc_1=None, in_end_loc_1=None, name=None, aSD=None, threads=1, decimal_places=5, verbose=False):
+def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, decimal_places=5, verbose=False):
     '''Takes an RNA with optional parameters and returns binding energies.
         Keyword arguments:
         seq -- Sequence to calculate binding energies for
         outfile -- Filepath for output csv
-        start_loc_1 -- First base to start considering start codons. 1-indexed. Defaults to first base
-        end_loc_1 -- Last base to start considering start codons. 1-indexed.
+        start -- First base to start considering start codons. 1-indexed. Defaults to first base
+        end -- Last base to start considering start codons. 1-indexed.
                      If start_loc_1 is provided, defaults to start_loc_1
                      Otherwise, defaults to end of sequence
         name -- Returns itself, useful for tagging things for downstream processing
@@ -39,6 +39,10 @@ def run_ostir(in_seq, in_start_loc_1=None, in_end_loc_1=None, name=None, aSD=Non
         decimal_places -- Precision of numerical output (number of places to the right of the decimal)
         verbose -- Prints debug information
     '''
+
+    #rename to more descriptive vars
+    in_start_loc_1 = start
+    in_end_loc_1 = end
 
     # Set up a default name and sd if not provided
     if name == None:
@@ -230,7 +234,7 @@ def main():
         dest='i',
         required=True,
         type=str,
-        help="Input filename (FASTA/CSV) or DNA/RNA sequence. For CSV input files, there must be a 'seq' or 'sequence' column. Other columns will override any options provided at the command line if they are present: 'name/id', 'start', 'end', 'anti-Shine-Dalgarno'.",
+        help="Input filename (FASTA/CSV) or DNA/RNA sequence. For CSV input files, there must be a 'seq' or 'sequence' column. Other columns will override any options provided at the command line if they are present: 'name/id', 'start', 'end', 'anti-Shine-Dalgarno'",
     )
 
     parser.add_argument(
@@ -240,7 +244,7 @@ def main():
         dest='o',
         required=False,
         type=str,
-        help="Output file path. If not provided, results will output to the console.",
+        help="Output file path. If not provided, results will output to the console",
     )
 
     parser.add_argument(
@@ -258,7 +262,7 @@ def main():
         dest='s',
         required=False,
         type=int,
-        help="Most 5' position to consider a start codon beginning.",
+        help="Most 5' position to consider a start codon beginning (1-indexed)",
     )
 
     parser.add_argument(
@@ -268,7 +272,7 @@ def main():
         dest='e',
         required=False,
         type=int,
-        help="Most 3' position to consider a start codon beginning",
+        help="Most 3' position to consider a start codon beginning (1-indexed)",
     )
 
     parser.add_argument(
@@ -414,7 +418,7 @@ def main():
         aSD = cmd_kwargs.get('aSD')
         verbose = False
         
-        output_dict_list = run_ostir(sequence, in_start_loc_1=start_loc_1, in_end_loc_1=end_loc_1, name=name, aSD=aSD, threads=threads, verbose=verbose)
+        output_dict_list = run_ostir(sequence, start=start_loc_1, end=end_loc_1, name=name, aSD=aSD, threads=threads, verbose=verbose)
 
         for output_dict in output_dict_list:
             if cmd_kwargs.get('print_mRNA_sequence'):
@@ -437,7 +441,7 @@ def main():
             aSD = cmd_kwargs.get('aSD')
             verbose = False
 
-            output_dict_list = run_ostir(sequence, in_start_loc_1=start_loc_1, in_end_loc_1=end_loc_1, name=name, aSD=aSD, threads=threads, verbose=verbose)
+            output_dict_list = run_ostir(sequence, start=start_loc_1, end=end_loc_1, name=name, aSD=aSD, threads=threads, verbose=verbose)
      
             for output_dict in output_dict_list:
                 if cmd_kwargs.get('print_mRNA_sequence'):
@@ -495,7 +499,7 @@ def main():
 
             verbose = False
 
-            output_dict_list = run_ostir(sequence, in_start_loc_1=start_loc_1, in_end_loc_1=end_loc_1, name=name, aSD=aSD, threads=threads, verbose=verbose)
+            output_dict_list = run_ostir(sequence, start=start_loc_1, end=end_loc_1, name=name, aSD=aSD, threads=threads, verbose=verbose)
 
             for output_dict in output_dict_list:
                 if cmd_kwargs.get('print_mRNA_sequence'):
