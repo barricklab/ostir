@@ -1,0 +1,6 @@
+# test having a header comment,,,
+id,seq,anti-Shine-Dalgarno,expression
+first_sequence,TTCTAGActttaatttaacgtaaataaggaagtcattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA,ACCTCCTTA,635.25633
+# test internal comment line,,,
+second_sequence,TTCTAGActttaatttaacgtaaataaggaagtcattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA,,0.05567
+,TTCTAGActttaatttaacgtaaataaggaagtcattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA,CCCCCCCCC,224.4036

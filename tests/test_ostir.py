@@ -70,8 +70,6 @@ class test_unit_run_ostir_one_sequence(unittest.TestCase):
 
         print ("\n" + "Unit test: run_ostir_one_sequence")
 
-        test_data_path = os.path.join(THIS_DIR, 'one_RNA_seq.test.csv')
-
         test_result = ostir.run_ostir("ACUUCUAAUUUAUUCUAUUUAUUCGCGGAUAUGCAUAGGAGUGCUUCGAUGUCAU")
 
         #print(test_result)
@@ -116,6 +114,36 @@ class test_unit_run_ostir_one_sequence(unittest.TestCase):
                 'dG_standby': -0.2,
                 'dG_start_codon': -1.194,
             }
+        ]
+
+        self.assertEqual(test_result, expected_result)
+
+class test_unit_run_ostir_one_sequence_new_aSD(unittest.TestCase):
+    def test_unit_run_ostir_one_sequence_new_aSD(self):
+        """
+        Test run_ostir on one sequence
+        """
+
+        print ("\n" + "Unit test: run_ostir_one_sequence_new_aSD")
+
+        test_result = ostir.run_ostir("ACUUCUAAUUUAUUCUAUUUAUUCGCGGAUAUGCAUAGGAGUGCUUCGAUGUCAU", in_start_loc_1=31, aSD="ACGTCCCTA")
+
+        #print(test_result)
+
+        expected_result = [
+            {
+                'name': 'unnamed', 
+                'start_codon': 'AUG', 
+                'start_position': 31, 
+                'expression': 362.7504, 
+                'RBS_distance_bp': 4, 
+                'dG_total': 3.42873, 
+                'dG_rRNA:mRNA': -2.581, 
+                'dG_mRNA': -7.2, 
+                'dG_spacing': 0.00373, 
+                'dG_standby': 0.0, 
+                'dG_start_codon': -1.194
+            },
         ]
 
         #print(list(test_result))
@@ -176,6 +204,17 @@ class test_integration_command_line_CSV_input(unittest.TestCase):
         output_path = os.path.join(THIS_DIR, 'output', 'command_line_CSV_input.csv')
         expected_path = os.path.join(THIS_DIR, 'expected', 'command_line_CSV_input.csv')
         the_command = f"ostir -j 4 -i {input_path} -o {output_path}"
+        print("\n" + the_command)
+        subprocess.call(the_command, shell=True)
+        self.assertEqual(True, csv_are_identical(output_path, expected_path))
+
+class test__integration_command_line_CSV_input_alternate_columns_and_defaults(unittest.TestCase):
+    def test_integration_command_line_CSV_input(self):
+        
+        input_path = os.path.join(THIS_DIR, 'input', 'command_line_CSV_input_alternate_columns_and_defaults.csv')
+        output_path = os.path.join(THIS_DIR, 'output', 'command_line_CSV_input_alternate_columns_and_defaults.csv')
+        expected_path = os.path.join(THIS_DIR, 'expected', 'command_line_CSV_input_alternate_columns_and_defaults.csv')
+        the_command = f"ostir -j 4 -a TCTGAAGAC -p -q -i {input_path} -o {output_path}"
         print("\n" + the_command)
         subprocess.call(the_command, shell=True)
         self.assertEqual(True, csv_are_identical(output_path, expected_path))
