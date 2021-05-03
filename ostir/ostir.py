@@ -19,7 +19,7 @@ try:
 except ModuleNotFoundError:
     from ostir_factory import OSTIRFactory
 
-ostir_version = '1.0.1'
+ostir_version = '1.0.2'
 
 # The E. coli sequence
 Ecoli_anti_Shine_Dalgarno = 'ACCTCCTTA'
@@ -169,12 +169,12 @@ def _print_output(outdict):
     sorted_predictions = {}
     keys = []
     for prediction in outdict:
-        if prediction['RNA'] in sorted_predictions.keys():
-            sorted_predictions[prediction['RNA']].append(prediction)
+        if prediction['name'] in sorted_predictions.keys():
+            sorted_predictions[prediction['name']].append(prediction)
         else:
-            sorted_predictions[prediction['RNA']] = [prediction]
+            sorted_predictions[prediction['name']] = [prediction]
             out_names = []
-            out_names.append(prediction['RNA'])
+            out_names.append(prediction['name'])
             if prediction.get('i'):
                 out_names.append(prediction.get('i'))
             keys.append(out_names)
@@ -183,8 +183,8 @@ def _print_output(outdict):
         print('No binding sites were identified.')
         exit(0)
 
-    output_items = ['start_pos', 'codon', 'Expression', 'dG_total', 'dG_rRNA:mRNA', 'dG_mRNA', 'dG_Spacing', 'Spacing', 'dG_Standby', 'dG_Start_Codon']
-    row_format = "{:>15}" * (len(output_items))
+    output_items = ['start_position', 'start_codon', 'expression', 'dG_total', 'dG_rRNA:mRNA', 'dG_mRNA', 'dG_spacing', 'RBS_distance_bp', 'dG_standby', 'dG_start_codon']
+    row_format = "{:>16}" * (len(output_items))
     print('_________________________________________________')
     for rna in keys:
         rna = rna[0]
