@@ -367,7 +367,7 @@ def main():
             input_type = 'fasta'
         elif options.t == 'csv':
             input_type = 'csv'
-        elif options.t == 'seq':
+        elif options.t == 'string':
             input_type = 'string'
         else:
             print(f'Unsupported file type {options.t}.')
