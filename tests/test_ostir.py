@@ -12,10 +12,8 @@ import ostir.ostir as ostir
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 output_directory_path = os.path.join(THIS_DIR, 'output')
 
-# Utility function for comparing output
-# Returns whether files are identical as bool
 def csv_are_identical(csv_file_path_1, csv_file_path_2):
-
+    'Utility function for comparing output, Returns whether files are identical as bool'
     csv_1_rows = []
     try:
         csvfile_1 = open(csv_file_path_1)
@@ -154,11 +152,8 @@ class test_unit_run_ostir_one_sequence_new_aSD(unittest.TestCase):
 # Integration tests (command line calls)
 ##############################################################################################
 
-# Handles creation of the output directory and removal of
-# any stale files from a previous test run.
-#
 def setUpModule():
-    
+    'Handles creation of the output directory and removal of any stale files from a previous test run.'
     # Delete existing directory
     try:
         shutil.rmtree(output_directory_path)

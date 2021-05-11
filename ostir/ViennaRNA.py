@@ -62,7 +62,6 @@ class ViennaRNA(dict):
         handle = open(self.prefix,"w")
         handle.write(input_string)
         handle.close()
-
         #Set arguments
         material = self["material"]
 
@@ -81,7 +80,7 @@ class ViennaRNA(dict):
             dangles = " -d2 "
 
         if outputPS:
-            outputPS_str = " "
+            outputPS_str = ""
         else:
             outputPS_str = " --noPS "
             
@@ -94,8 +93,6 @@ class ViennaRNA(dict):
 
         #Call ViennaRNA C programs
         cmd = "RNAfold"
-        #print(cmd + args)
-
         output = subprocess.Popen(cmd + args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines = True) #newlines argument was added because subprocess.popen was appending b's to the list output (byte stuff? I dont totally understand)
         std_out = output.communicate()[0]
         #output.tochild.write(input_string)

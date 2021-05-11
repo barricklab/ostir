@@ -24,12 +24,12 @@ ostir_version = '1.0.2'
 # The E. coli sequence
 Ecoli_anti_Shine_Dalgarno = 'ACCTCCTTA'
 
-def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, decimal_places=5, verbose=False):
+def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, decimal_places=4, verbose=False):
     '''Takes an RNA with optional parameters and returns binding energies.
         Keyword arguments:
         seq -- Sequence to calculate binding energies for
         outfile -- Filepath for output csv
-        start -- First base to start considering start codons. 1-indexed. Defaults to first base
+        start -- First base to start considering start cofdons. 1-indexed. Defaults to first base
         end -- Last base to start considering start codons. 1-indexed.
                      If start_loc_1 is provided, defaults to start_loc_1
                      Otherwise, defaults to end of sequence
