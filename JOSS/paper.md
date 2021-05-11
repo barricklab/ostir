@@ -1,5 +1,5 @@
 ---
-title: 'OSTIR: open source translation initiation rate prediction'
+title: '`OSTIR`: open source translation initiation rate prediction'
 tags:
   - Python
   - synthetic biology
@@ -17,11 +17,11 @@ authors:
     orcid: 0000-0003-0888-7358
     affiliation: "1"
 affiliations:
-  - Department of Molecular Biosciences, Center for Systems and Synthetic Biology, The University of Texas at Austin
-    index: 1
-  - McKetta Department of Chemical Engineering, The University of Texas at Austin
-    index: 2
-date: 9 January 2021
+ - name: Department of Molecular Biosciences, Center for Systems and Synthetic Biology, The University of Texas at Austin
+   index: 1
+ - name: McKetta Department of Chemical Engineering, The University of Texas at Austin
+   index: 2
+date: 11 May 2021
 bibliography: paper.bib
 ---
 
