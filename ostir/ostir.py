@@ -34,7 +34,7 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
                      If start_loc_1 is provided, defaults to start_loc_1
                      Otherwise, defaults to end of sequence
         name -- Returns itself, useful for tagging things for downstream processing
-        aSD -- Defines anti-Shine-Dalgarno sequence: the 9 bp at the 3' end of the 16S rRNA. Defaults to the E. coli sequence. 
+        aSD -- Defines anti-Shine-Dalgarno sequence: the 9 bp at the 3' end of the 16S rRNA. Defaults to the E. coli sequence.
         threads -- Defines parallel processing workers, roughly equivalent to multithreading cores
         decimal_places -- Precision of numerical output (number of places to the right of the decimal)
         verbose -- Prints debug information
@@ -87,7 +87,7 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
     if start_loc_1==None:
         start_loc_1 = 1
     start_loc_1 = int(start_loc_1)
-    
+
     end_loc_1 = in_end_loc_1
     if end_loc_1==None:
         if in_start_loc_1==None:
@@ -350,11 +350,11 @@ def main():
         cmd_kwargs['print_mRNA_sequence'] = options.p
     if options.q:
         cmd_kwargs['print_aSD_sequence'] = options.q
-        
+
 
     vienna_version = subprocess.check_output(['RNAfold', '--version'])
     vienna_version = str(vienna_version.strip()).replace("'", "").split(' ')[1]
-    print(f'Running OSTIR version {ostir_version} (with Vienna version: {vienna_version})', file=sys.stderr)
+    print(f'Running OSTIR version {ostir_version} (with ViennaRNA version: {vienna_version})', file=sys.stderr)
 
     # Output data: RNA, Codon, position, dg_total, dg rRNA:mRNA, dg mRNA, dG Spacing, dg Standby, Kinetic Score
 
@@ -417,7 +417,7 @@ def main():
         end_loc_1 = cmd_kwargs.get('end')
         aSD = cmd_kwargs.get('aSD')
         verbose = False
-        
+
         output_dict_list = run_ostir(sequence, start=start_loc_1, end=end_loc_1, name=name, aSD=aSD, threads=threads, verbose=verbose)
 
         for output_dict in output_dict_list:
@@ -433,7 +433,7 @@ def main():
         input_file = cmd_kwargs['seq']
         print(f'Reading FASTA file {input_file}', file=sys.stderr)
         sequence_entries = parse_fasta(input_file)
-        for sequence_entry in sequence_entries:            
+        for sequence_entry in sequence_entries:
             sequence = sequence_entry[1]
             name = sequence_entry[0]
             start_loc_1 = cmd_kwargs.get('start')
@@ -442,7 +442,7 @@ def main():
             verbose = False
 
             output_dict_list = run_ostir(sequence, start=start_loc_1, end=end_loc_1, name=name, aSD=aSD, threads=threads, verbose=verbose)
-     
+
             for output_dict in output_dict_list:
                 if cmd_kwargs.get('print_mRNA_sequence'):
                     output_dict['sequence'] = sequence
@@ -475,7 +475,7 @@ def main():
             else:
                 print("Required column 'sequence' or 'seq' not found for CSV file row:")
                 print(row)
-                exit(1)    
+                exit(1)
 
             # Assign a name if one is not given from name/id columns
             # If empty assign one based on the index
@@ -506,7 +506,7 @@ def main():
                     output_dict['sequence'] = sequence
                 if cmd_kwargs.get('print_aSD_sequence'):
                     output_dict['anti-Shine-Dalgarno'] = aSD
-                    
+
             results.extend(output_dict_list)
 
     ## Output - for all ways of running ##############################################################
