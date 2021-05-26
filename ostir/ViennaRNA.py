@@ -398,9 +398,7 @@ class ViennaRNA(dict):
         for value in energy_values:
             dict_index = value[1]
             partitioned_findings = findings_by_energy[str(dict_index)]
-            SEED = 76587143658723465  #  We randomize (consistantly) ouputs of equal energy to avoid biasing results by string
-            random.seed(SEED)
-            random.shuffle(partitioned_findings)
+            partitioned_findings = sorted(partitioned_findings, key=itemgetter(0))
             sorted_findings = sorted_findings + partitioned_findings
 
         return sorted_findings

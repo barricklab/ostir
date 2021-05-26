@@ -506,7 +506,7 @@ name,start_codon,start_position,expression,RBS_distance_bp,dG_total,dG_rRNA:mRNA
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,10212,0.0448,-5,25.9151,-4.781,-10.2,17.1709,-3.4,-0.0748
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,10231,0.3203,3,20.9992,-4.181,-20.0,5.2237,0.0,-0.0435
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,10233,2.064,5,16.3442,-4.181,-20.6,0.0,0.0,-0.0748
-"Enterobacteria phage T7, complete genome. (NC_001604.1)",GTG,10257,3411.7115,4,-2.1713,-9.081,-7.2,0.0037,-0.9,-1.194
+"Enterobacteria phage T7, complete genome. (NC_001604.1)",GTG,10257,2379.7906,4,-1.2713,-9.081,-7.2,0.0037,-1.8,-1.194
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",TTG,10291,4.715,7,14.28,-7.081,-19.6,0.8045,-1.0,-0.0435
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",GTG,10335,302.805,7,3.88,-7.281,-7.3,0.8045,-3.1,-0.0435
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,10363,3.4017,10,15.0958,-4.181,-17.5,2.9708,0.0,-1.194
@@ -741,7 +741,7 @@ name,start_codon,start_position,expression,RBS_distance_bp,dG_total,dG_rRNA:mRNA
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",GTG,14851,4.7269,11,14.2738,-3.581,-15.1,3.9488,0.0,-1.194
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",TTG,14854,9.8917,4,12.4287,-5.081,-15.1,0.0037,-3.6,-1.194
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,14876,5.1173,5,14.0755,-1.081,-15.2,0.0,0.0,-0.0435
-"Enterobacteria phage T7, complete genome. (NC_001604.1)",GTG,14878,8.0358,4,12.9479,-4.281,-16.3,0.0037,-1.0,-0.0748
+"Enterobacteria phage T7, complete genome. (NC_001604.1)",GTG,14878,4.2357,4,14.5479,-4.281,-16.3,0.0037,-2.6,-0.0748
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",GTG,14897,211.286,4,4.7792,-3.581,-8.4,0.0037,0.0,-0.0435
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,14939,6.7596,7,13.38,1.319,-11.3,0.8045,0.0,-0.0435
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,14984,14.2659,6,11.5138,-11.781,-18.0,0.3383,-5.0,-0.0435
@@ -827,7 +827,7 @@ name,start_codon,start_position,expression,RBS_distance_bp,dG_total,dG_rRNA:mRNA
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,16313,41.8461,5,8.825,-6.381,-15.0,0.0,-1.4,-1.194
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",TTG,16346,7.4224,10,13.1463,-0.081,-10.3,2.9708,0.0,-0.0435
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,16354,10.2135,7,12.3487,-2.881,-14.5,0.8045,0.0,-0.0748
-"Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,16361,4.9165,5,14.1755,-5.181,-19.4,0.0,0.0,-0.0435
+"Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,16361,4.5383,5,14.3755,-5.181,-19.4,0.0,-0.2,-0.0435
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,16381,0.6992,3,19.0487,-7.581,-19.6,5.2237,-3.0,-1.194
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,16391,5.5337,7,13.88,-5.981,-19.1,0.8045,0.0,-0.0435
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",TTG,16413,2.0609,4,16.3479,-5.881,-20.4,0.0037,-1.9,-0.0748
@@ -1760,7 +1760,7 @@ name,start_codon,start_position,expression,RBS_distance_bp,dG_total,dG_rRNA:mRNA
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,33733,31.5745,4,9.5287,-8.681,-17.9,0.0037,-1.5,-1.194
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",TTG,33743,57.1965,5,8.0442,-3.381,-11.5,0.0,0.0,-0.0748
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,33787,4.0445,6,14.6633,-2.081,-16.7,0.3383,-0.9,-1.194
-"Enterobacteria phage T7, complete genome. (NC_001604.1)",GTG,33802,104.8673,7,6.5295,-6.181,-13.1,0.8045,0.0,-1.194
+"Enterobacteria phage T7, complete genome. (NC_001604.1)",GTG,33802,37.0443,7,9.1295,-6.181,-13.1,0.8045,-2.6,-1.194
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",GTG,33810,0.0355,0,26.4952,-6.481,-15.5,17.1702,-1.5,-1.194
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",GTG,33836,59.9913,5,7.925,-5.181,-14.3,0.0,0.0,-1.194
 "Enterobacteria phage T7, complete genome. (NC_001604.1)",ATG,33844,14.9557,10,11.3958,-4.881,-14.5,2.9708,0.0,-1.194
