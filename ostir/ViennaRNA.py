@@ -3,6 +3,8 @@ import tempfile
 from shutil import which
 import warnings
 import os
+from operator import itemgetter
+import random
 
 #  On import check dependencies
 dependencies = [which('RNAfold') is not None,
@@ -28,7 +30,7 @@ class ViennaRNA(dict):
         import re
         import random
 
-        exp = re.compile('[ATGCU]',re.IGNORECASE)
+        exp = re.compile('[ATGCU]', re.IGNORECASE)
 
         for seq in Sequence_List:
             if exp.match(seq) == None:
@@ -171,6 +173,7 @@ class ViennaRNA(dict):
             outputPS_str = ""
         else:
             outputPS_str = " -noPS "
+
         #Call ViennaRNA C programs
 
         cmd = "RNAsubopt"
@@ -193,7 +196,8 @@ class ViennaRNA(dict):
             except:
                 break
 
-        if debug == 1: print(output.stdout.read())
+        if debug == 1:
+            print(output.stdout.read())
 
         #Skip unnecessary line
         #line = output.std_out.readline()
@@ -202,41 +206,23 @@ class ViennaRNA(dict):
         self["subopt_basepairing_x"] = []
         self["subopt_basepairing_y"] = []
         self["subopt_energy"] = []
-        self["totalnt"]=[]
+        self["totalnt"] = []
 
-        counter=0  # TODO: Test to see if the latest version of VIENNA requires this workaround
         #print(f"Line: {line}")
         findings = line.split("\n")
         findings = findings[1:]
         findings = [x.split() for x in findings]
         #print(findings)
+        identified_findings = []
+        findings = self.process_fold_outputs(findings)
+
         for finding in findings:
-            if len(finding) != 2:
-                continue
-            if len(self["sequences"]) > 1:
-                binding_positions = finding[0]
-                binding_positions = binding_positions.split("&")
-                if ")" not in binding_positions[1] and "(" not in binding_positions[1]:
-                    #print("This binding site is fake")
-                    continue
-                else:
-                    self["subopt_energy"].append(float(finding[1]))
-                    (strands, bp_x, bp_y) = self.convert_bracket_to_numbered_pairs(finding[0])
-                    #print(strands, bp_x, bp_y)
-                    self["subopt_basepairing_x"].append(bp_x)
-                    self["subopt_basepairing_y"].append(bp_y)
-            else:
-                self["subopt_energy"].append(float(finding[1]))
-                (strands, bp_x, bp_y) = self.convert_bracket_to_numbered_pairs(finding[0])
-                self["subopt_basepairing_x"].append(bp_x)
-                self["subopt_basepairing_y"].append(bp_y)
-
-
-        self["subopt_NumStructs"] = counter
+            self["subopt_energy"].append(float(finding[1]))
+            self["subopt_basepairing_x"].append(finding[2])
+            self["subopt_basepairing_y"].append(finding[3])
 
         self["program"] = "subopt"
 
-        #print "Minimum free energy and suboptimal secondary structures have been calculated."
 
     def energy(self, strands, base_pairing_x, base_pairing_y, Temp = 37.0, dangles = "all"):
 
@@ -250,7 +236,7 @@ class ViennaRNA(dict):
 
         #print(seq_string,strands, bracket_string, input_string)
 
-        handle = open(self.prefix,"w")
+        handle = open(self.prefix, "w")
         handle.write(input_string)
         handle.close()
 
@@ -295,7 +281,7 @@ class ViennaRNA(dict):
         #print(line, words)
         if not words:
             raise ValueError('Could not catch the output of RNAeval. Is Vienna installed and in your PATH?')
-        energy = float(words[-1].replace("(","").replace(")","").replace("\n",""))
+        energy = float(words[-1].replace("(", "").replace(")", "").replace("\n", ""))
 
         self["program"] = "energy"
         self["energy_energy"].append(energy)
@@ -304,7 +290,7 @@ class ViennaRNA(dict):
 
         return energy
 
-    def convert_bracket_to_numbered_pairs(self,bracket_string):
+    def convert_bracket_to_numbered_pairs(self, bracket_string):
 
         all_seq_len = len(bracket_string)
         #print(all_seq_len)
@@ -338,8 +324,8 @@ class ViennaRNA(dict):
 
             elif letter == "&":
                 strands.append(counter)
-                counter=0
-                num_strands+=1
+                counter = 0
+                num_strands += 1
 
             else:
                 print("Error! Invalid character in bracket notation.")
@@ -357,22 +343,66 @@ class ViennaRNA(dict):
 
         return (strands,bp_x, bp_y)
 
-    def convert_numbered_pairs_to_bracket(self,strands,bp_x,bp_y):
+    def convert_numbered_pairs_to_bracket(self, strands, bp_x, bp_y):
 
         bp_x = [pos-1 for pos in bp_x[:]] #Shift so that 1st position is 0
         bp_y = [pos-1 for pos in bp_y[:]] #Shift so that 1st position is 0
 
         bracket_notation = []
-        counter=0
-        for (strand_number,seq_len) in enumerate(strands):
+        counter = 0
+        for (strand_number, seq_len) in enumerate(strands):
             if strand_number > 0: bracket_notation.append("&")
-            for pos in range(counter,seq_len+counter):
+            for pos in range(counter, seq_len+counter):
                 if pos in bp_x:
                     bracket_notation.append("(")
                 elif pos in bp_y:
                     bracket_notation.append(")")
                 else:
                     bracket_notation.append(".")
-            counter+=seq_len
+            counter += seq_len
 
         return "".join(bracket_notation)
+
+    def process_fold_outputs(self, findings):
+        filtered_findings = []
+        # Earlier vienna versions would report 'folds' without any actual folding when running under WSL.
+        # This code provides backwards compatibility for versions with that bug
+        for finding in findings:
+            if len(finding) != 2:
+                continue
+            if len(self["sequences"]) > 1:
+                binding_positions = finding[0]
+                binding_positions = binding_positions.split("&")
+                if ")" not in binding_positions[1] and "(" not in binding_positions[1]:
+                    #print("This binding site is fake")
+                    continue
+                else:
+                    (strands, bp_x, bp_y) = self.convert_bracket_to_numbered_pairs(finding[0])
+                    #print(strands, bp_x, bp_y)
+                    filtered_findings.append([finding[0], finding[1], bp_x, bp_y])
+            else:
+                (strands, bp_x, bp_y) = self.convert_bracket_to_numbered_pairs(finding[0])
+                filtered_findings.append([finding[0], finding[1], bp_x, bp_y])
+        # Linux distributions of Vienna RNA tiebreak the sorting of outputs differently than Mac. This code aims to
+        # make sorting of the output consistent, which rarely affects downstream predictions by sorting by energy with
+        # the string of the fold as the tiebreaker
+        findings_by_energy = {}
+        for finding in filtered_findings:  # Sorts by energy
+            if finding[1] in findings_by_energy.keys():
+                findings_by_energy[finding[1]].append(finding)
+            else:
+                findings_by_energy[finding[1]] = [finding]
+        energy_values = [[float(i), i] for i in findings_by_energy.keys()]  # real keys may have hanging 0's
+        energy_values = sorted(energy_values, key=itemgetter(1))
+        sorted_findings = []
+        for value in energy_values:
+            dict_index = value[1]
+            partitioned_findings = findings_by_energy[str(dict_index)]
+            SEED = 76587143658723465  #  We randomize (consistantly) ouputs of equal energy to avoid biasing results by string
+            random.seed(SEED)
+            random.shuffle(partitioned_findings)
+            sorted_findings = sorted_findings + partitioned_findings
+
+        return sorted_findings
+
+
