@@ -19,7 +19,7 @@ try:
 except ModuleNotFoundError:
     from ostir_factory import OSTIRFactory
 
-ostir_version = '1.0.2'
+ostir_version = '1.0.3'
 
 # The E. coli sequence
 Ecoli_anti_Shine_Dalgarno = 'ACCTCCTTA'
