@@ -10,16 +10,19 @@ import os
 import sys
 from pathlib import Path
 import subprocess
-import itertools
 import csv
-import copy
 import re
+from shutil import which
+import warnings
+
+
 try:
     from ostir.ostir_factory import OSTIRFactory
 except ModuleNotFoundError:
     from ostir_factory import OSTIRFactory
 
 ostir_version = '1.0.3'
+oldest_vienna = '2.4.17'
 
 # The E. coli sequence
 Ecoli_anti_Shine_Dalgarno = 'ACCTCCTTA'
@@ -351,11 +354,27 @@ def main():
     if options.q:
         cmd_kwargs['print_aSD_sequence'] = options.q
 
+        # Check if viennaRNA is installed
+        dependencies = [which('RNAfold') is not None,
+                        which('RNAsubopt') is not None,
+                        which('RNAeval') is not None]
 
-    vienna_version = subprocess.check_output(['RNAfold', '--version'])
-    vienna_version = str(vienna_version.strip()).replace("'", "").split(' ')[1]
-    print(f'Running OSTIR version {ostir_version} (with ViennaRNA version: {vienna_version})', file=sys.stderr)
+        if False in dependencies:
+            raise EnvironmentError('ViennaRNA is not properly installed or in PATH')
 
+        vienna_version = subprocess.check_output(['RNAfold', '--version'])
+        vienna_version = str(vienna_version.strip()).replace("'", "").split(' ')[1]
+        print(f'Running OSTIR version {ostir_version} (with Vienna version: {vienna_version})', file=sys.stderr)
+
+        # Check if the viennaRNA version is recent enough
+        vienna_version_split = vienna_version.split('.')
+        global oldest_vienna
+        oldest_vienna_split = oldest_vienna.split('.')
+        warning_string = f'The installed version of ViennaRNA (f{vienna_version}) is older than what is supported (f{oldest_vienna}). This may cause unintended results.'
+        for i in range(0, len(vienna_version_split)):
+            if vienna_version_split[i] < oldest_vienna_split[i]:
+                warnings.warn(warning_string)
+                break
     # Output data: RNA, Codon, position, dg_total, dg rRNA:mRNA, dg mRNA, dG Spacing, dg Standby, Kinetic Score
 
     # Determine input type
