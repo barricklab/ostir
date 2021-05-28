@@ -366,15 +366,14 @@ def main():
         vienna_version = str(vienna_version.strip()).replace("'", "").split(' ')[1]
         print(f'Running OSTIR version {ostir_version} (with Vienna version: {vienna_version})', file=sys.stderr)
 
-        # Check if the viennaRNA version is recent enough
+        # Check if the viennaRNA version is recent enougholdest
         vienna_version_split = vienna_version.split('.')
         global oldest_vienna
         oldest_vienna_split = oldest_vienna.split('.')
-        warning_string = f'The installed version of ViennaRNA (f{vienna_version}) is older than what is supported (f{oldest_vienna}). This may cause unintended results.'
+        warning_string = f'The installed version of ViennaRNA ({vienna_version}) is older than what is supported ({oldest_vienna}).'
         for i in range(0, len(vienna_version_split)):
             if vienna_version_split[i] < oldest_vienna_split[i]:
-                warnings.warn(warning_string)
-                break
+                raise EnvironmentError(warning_string)
     # Output data: RNA, Codon, position, dg_total, dg rRNA:mRNA, dg mRNA, dG Spacing, dg Standby, Kinetic Score
 
     # Determine input type
