@@ -22,7 +22,7 @@ except ModuleNotFoundError:
     from ostir_factory import OSTIRFactory
 
 ostir_version = '1.0.3'
-oldest_vienna = '2.4.17'
+oldest_vienna = '2.4.18'
 
 # The E. coli sequence
 Ecoli_anti_Shine_Dalgarno = 'ACCTCCTTA'
