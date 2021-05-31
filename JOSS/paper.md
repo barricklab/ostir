@@ -45,7 +45,7 @@ rates in bacteria.
 Several software programs exist for predicting translation initiation rates in
 bacteria [@Reis:2020], but none of these alternatives is a fully open source
 solution. Though the `RBS Calculator v1.0` [@Salis:2009; @Salis:2011;
-@rbscalculator:1.0] is open source (GPLv2), it is not maintained and is only
+@rbscalculator:1.0] is open source (GPLv3), it is not maintained and is only
 functional when using the `NUPACK` software suite for RNA structure energy
 calculations [@Zadeh:2011]. `NUPACK` is not open source and has licensing
 restrictions. Further updates to the `RBS Calculator` code beyond version 1.0
