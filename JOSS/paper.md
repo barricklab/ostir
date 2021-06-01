@@ -98,6 +98,6 @@ Development of `OSTIR` was supported by the National Institutes of Health
 (R01GM088344). We acknowledge the Texas Advanced Computing Center (TACC) at the
 University of Texas at Austin for providing high performance computing
 resources. A. Lukasiewicz acknowledges support from the National Science
-Foundation Graduate Research Fellowship Program (<<<GRANT NUMBER>>>).
+Foundation Graduate Research Fellowship Program (DGE-1610403).
 
 # References
