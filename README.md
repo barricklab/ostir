@@ -1,8 +1,6 @@
-# OSTIR
+# OSTIR (Open Source Translation Initiation Rates)
 
-## Open Source Translation Initiation Rates
-
-`OSTIR` (Open Source Translation Initiation Rates) is a
+`OSTIR` is a
 Python package for predicting the rates at which ribosomes will bind to and initiate
 translation from different start codons in bacterial mRNAs. It uses the ViennaRNA software
 suite to perform the necessary free energy calculations. The code builds on the last open
@@ -15,10 +13,11 @@ input with command line parameters or CSV input that can define
 parameters on a per-sequence basis. Additionally, `OSTIR` supports multi-threaded
 execution, accelerating use cases that require the analysis of very large sequences.
 
-### Installation
+## Installation
+[![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](http://bioconda.github.io/recipes/ostir/README.html)
 
-From Conda:
-- Run `conda install --bioconda ostir`
+From Bioconda:
+- Run `conda install -c bioconda ostir`
 
 From Pip:
 - Download and install ViennaRNA, following the instructions [here](https://www.tbi.univie.ac.at/RNA/).
@@ -33,7 +32,7 @@ From Source:
 - Download and install ViennaRNA, following the instructions [here](https://www.tbi.univie.ac.at/RNA/).
 - To test your install run `python -m unittest`
 
-### Command Line Usage
+## Command Line Usage
 
 OSTIR can be executed via the included command-line script, `ostir`.
 
@@ -65,7 +64,7 @@ optional arguments:
                         Input type (overrides autodetection)
 ```
 
-#### Example of Command Line Input/Output
+### Example of Command Line Input/Output
 
 Example command for specifying the mRNA sequence to search as a parameter:
 ```bash
@@ -83,7 +82,7 @@ _________________________________________________
 _________________________________________________
 ```
 
-#### Example of CSV Input/Output
+### Example of CSV Input/Output
 
 Example CSV input file (file: `input.csv`):
 | id              | seq                                                                                           | anti-Shine-Dalgarno |
@@ -112,7 +111,7 @@ Example CSV output (file: `output.csv`):
 | sequence_3      | CCCCCCCCC           | ATG         | 71             | 0.0017     | 22              | 34.1706  | -1.681       | -13.8   | 23.2456    | 0.0        | -1.194         |
 
 
-#### Output Column Descriptions
+### Output Column Descriptions
 - `name`: Name of input sequence.
 - `anti-Shine-Dalgarno`: Anti-Shine-Dalgarno sequence.
 - `start_codon`: Start codon for predicted translation initiation rate.
@@ -126,7 +125,7 @@ Example CSV output (file: `output.csv`):
 - `dG_standby`: Free energy term for unfolding mRNA secondary structures that occlude the standby site (the four bases upstream of the RBS).
 - `dG_start_codon`: Free energy term for initiator tRNA binding to the start codons.
 
-### Python Usage
+## Python Module Usage
 
 OSTIR can also be called from within a user's Python script via the `run_ostir` function. This function returns a list of
 the translation initiation rates (expression levels) predicted for each start codon in the sequence.
