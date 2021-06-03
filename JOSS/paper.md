@@ -10,6 +10,7 @@ tags:
   - calculator
 authors:
   - name: Cameron T. Roots
+    orcid: 0000-0001-6219-3168
     affiliation: "1"
   - name: Alexandra Lukasiewicz
     affiliation: "2"
