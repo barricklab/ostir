@@ -1,6 +1,6 @@
 # OSTIR Calibration
 
-This directory contains the input file and R script used to calibrate the energy model parameters used by OSTIR with ViennaRNA 2.4.17 and the default turner2004 energy parameters.
+This directory contains the input file and R script used to calibrate the energy model parameters used by OSTIR with ViennaRNA 2.4.18 and the default turner2004 energy parameters.
 
 The data is from: Salis HM, Mirsky EA, Voigt CA. 2009. Automated design of synthetic ribosome binding sites to control protein expression. _Nat. Biotechnol._ **27**:946–950.
 
@@ -29,8 +29,8 @@ The file `input.csv` must have the Δ*G* values that have all components except 
 
 <img src="output.log2_fold_error.png" width="500">
 
-Fraction of measurements with < 2-fold error: 0.523
+Fraction of measurements with < 2-fold error: 0.530303
 
-Fraction of measurements with < 4-fold error: 0.758
+Fraction of measurements with < 4-fold error: 0.75
 
-Fraction of measurements with <10-fold error: 0.909
+Fraction of measurements with <10-fold error: 0.9090909

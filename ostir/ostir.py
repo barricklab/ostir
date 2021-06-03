@@ -13,7 +13,6 @@ import subprocess
 import csv
 import re
 from shutil import which
-import warnings
 
 
 try:
@@ -366,7 +365,7 @@ def main():
     vienna_version = str(vienna_version.strip()).replace("'", "").split(' ')[1]
     print(f'Running OSTIR version {ostir_version} (with Vienna version: {vienna_version})', file=sys.stderr)
 
-    # Check if the viennaRNA version is recent enougholdest
+    # Check if the viennaRNA version is recent enough
     vienna_version_split = vienna_version.split('.')
     global oldest_vienna
     oldest_vienna_split = oldest_vienna.split('.')
@@ -491,8 +490,7 @@ def main():
             elif 'sequence' in row.keys():
                 sequence = row['sequence']
             else:
-                print("Required column 'sequence' or 'seq' not found for CSV file row:")
-                print(row)
+                print(f"Required column 'sequence' or 'seq' not found for CSV file row: {row}")
                 exit(1)
 
             # Assign a name if one is not given from name/id columns
