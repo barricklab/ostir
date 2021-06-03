@@ -80,7 +80,7 @@ results = run_ostir(seq, start=31, end=31, aSD="ACCCCCTTA", verbose=True)
 print(results)
 ```
 
-Arguments:
+Parameters:
 - `seq`: mRNA sequence to search for translation initiation sites (REQUIRED)
 - `start`: Most 5' position to consider a start codon beginning (1-indexed)
 - `end`: "Most 3' position to consider a start codon beginning (1-indexed)"
