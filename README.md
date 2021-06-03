@@ -33,7 +33,7 @@ From Source:
 - Download and install ViennaRNA, following the instructions [here](https://www.tbi.univie.ac.at/RNA/).
 - To test your install run `python -m unittest`
 
-### Usage
+### Command Line Usage
 
 OSTIR can be executed via the included command-line script, `ostir`.
 
@@ -65,6 +65,81 @@ optional arguments:
                         Input type (overrides autodetection)
 ```
 
+#### Example of command line input and output
+
+Example command for specifying the mRNA sequence to search as a parameter:
+```bash
+ostir -i TTCTAGATGAGAATAAGGTTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGT 
+```
+
+Output of this command:
+```bash
+_________________________________________________
+  start_position     start_codon      expression        dG_total    dG_rRNA:mRNA         dG_mRNA      dG_spacing RBS_distance_bp      dG_standby  dG_start_codon
+               7             ATG          3.4015         15.0959         -1.9810         -1.1000         17.1709              -2          0.0000         -1.1940
+              21             ATG        635.2563          2.0287         -5.2810         -8.5000          0.0037               4          0.0000         -1.1940
+              54             ATG          0.0557         25.3716         -4.3810        -13.8000         17.1466               1          0.0000         -1.1940
+              72             ATG        224.4036          4.6287         -0.6810         -6.5000          0.0037               4          0.0000         -1.1940
+_________________________________________________
+```
+
+Column descriptions:
+- `start_position`: Nucleotide position of first start codon base in input sequence. (1-indexed).
+- `start_codon`: Start codon for predicted translation initiation rate.
+- `expression`: Predicted translation initation rate at this start codon.
+- `dG_total`: Total change in free energy (ΔG) for translation initiation at this RBS.
+- `dG_rRNA:mRNA`: Free energy term for ribosome binding to the mRNA.
+- `dG_mRNA`: Free energy term for unfolding mRNA secondary structures that overlap the RBS and start codon region.
+- `dG_spacing`: Free energy term that accounts for the effect of spacing (the number of nucleotides) between an RBS and start codon.
+- `RBS_distance_bp`: Number of nucleotides between the predicted ribosome-binding site (RBS) and the start codon.
+- `dG_standby`: Free energy term for unfolding mRNA secondary structures that occlude the standby site (the four bases upstream of the RBS).
+- `dG_start_codon`: Free energy term for initiator tRNA binding to the start codons.
+
+#### Example of CSV input and output
+
+Example CSV input file (file: `input.csv`):
+| id              | seq                                                                                           | anti-Shine-Dalgarno |
+|-----------------|-----------------------------------------------------------------------------------------------|---------------------|
+| first_sequence  | TTCTAGActttaatttaacgtaaataaggaagtcattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA | ACCTCCTTA           |
+| second_sequence | TTCTAGActttaatttaacgtaaataaggaagtcattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA |                     |
+|                 | TTCTAGActttaatttaacgtaaataaggaagtcattATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGA | CCCCCCCCC           |
+
+This example demonstrates that if a column corresponding to a parameter is missing or blank for one input sequence, then the default value for that parameter will be substituted for the missing value. Additional examples of CSV input files can be found in [tests/input](tests/input). 
+
+Example command that specifies CSV input and output files, assigns `TCTGAAGAC` as the default anti-Shine-Dalgarno sequence, includes the anti-Shine-Dalgarno sequence as a column in the output, and uses four threads for parallelization:
+```bash
+ostir -j 4 -a TCTGAAGAC -q -i input.csv -o output.csv
+```
+
+Example CSV output (file: `output.csv`):
+| name            | anti-Shine-Dalgarno | start_codon | start_position | expression | RBS_distance_bp | dG_total | dG_rRNA:mRNA | dG_mRNA | dG_spacing | dG_standby | dG_start_codon |
+|-----------------|---------------------|-------------|----------------|------------|-----------------|----------|--------------|---------|------------|------------|----------------|
+| first_sequence  | ACCTCCTTA           | ATG         | 38             | 643.9384   | 4               | 2.0289   | -8.381       | -11.6   | 0.0039     | 0.0        | -1.194         |
+| first_sequence  | ACCTCCTTA           | ATG         | 71             | 0.0558     | 1               | 25.4101  | -4.381       | -13.8   | 17.1851    | 0.0        | -1.194         |
+| first_sequence  | ACCTCCTTA           | ATG         | 89             | 227.5882   | 4               | 4.6289   | -0.681       | -6.5    | 0.0039     | 0.0        | -1.194         |
+| second_sequence | TCTGAAGAC           | ATG         | 38             | 34.6638    | 7               | 9.3332   | -1.881       | -11.6   | 0.8082     | 0.0        | -1.194         |
+| second_sequence | TCTGAAGAC           | ATG         | 71             | 40.1662    | 6               | 8.9649   | -3.981       | -13.8   | 0.3399     | 0.0        | -1.194         |
+| second_sequence | TCTGAAGAC           | ATG         | 89             | 460.8985   | 6               | 2.8649   | -3.381       | -6.5    | 0.3399     | -0.6       | -1.194         |
+| sequence_3      | CCCCCCCCC           | ATG         | 38             | 44.2111    | 5               | 8.725    | -1.681       | -11.6   | 0.0        | 0.0        | -1.194         |
+| sequence_3      | CCCCCCCCC           | ATG         | 71             | 0.0017     | 22              | 34.1706  | -1.681       | -13.8   | 23.2456    | 0.0        | -1.194         |
+
+
+Column descriptions:
+- `name`: Name of input sequence.
+- `anti-Shine-Dalgarno`: Anti-Shine-Dalgarno sequence.
+- `start_codon`: Start codon for predicted translation initiation rate.
+- `start_position`: Nucleotide position of first start codon base in input sequence. (1-indexed).
+- `expression`: Predicted translation initation rate at this start codon.
+- `RBS_distance_bp`: Number of nucleotides between the predicted ribosome-binding site (RBS) and the start codon.
+- `dG_total`: Total change in free energy (ΔG) for translation initiation at this RBS.
+- `dG_rRNA:mRNA`: Free energy term for ribosome binding to the mRNA.
+- `dG_mRNA`: Free energy term for unfolding mRNA secondary structures that overlap the RBS and start codon region.
+- `dG_spacing`: Free energy term that accounts for the effect of spacing (the number of nucleotides) between an RBS and start codon.
+- `dG_standby`: Free energy term for unfolding mRNA secondary structures that occlude the standby site (the four bases upstream of the RBS).
+- `dG_start_codon`: Free energy term for initiator tRNA binding to the start codons.
+
+### Python Usage
+
 OSTIR can also be called from within a user's Python script via the `run_ostir` function. This function returns a list of
 the translation initiation rates (expression levels) predicted for each start codon in the sequence.
 
@@ -81,10 +156,10 @@ print(results)
 ```
 
 Parameters:
-- `seq`: mRNA sequence to search for translation initiation sites (REQUIRED)
-- `start`: Most 5' position to consider a start codon beginning (1-indexed)
-- `end`: "Most 3' position to consider a start codon beginning (1-indexed)"
+- `seq`: mRNA sequence to search for translation initiation sites. (REQUIRED)
+- `start`: Most 5' position to consider a start codon beginning. (1-indexed)
+- `end`: "Most 3' position to consider a start codon beginning. (1-indexed)"
 - `name`: Name or id of the sequence to include in output.
-- `aSD`: anti-Shine-Dalgarno sequence. Defaults to that of E. coli.
+- `aSD`: anti-Shine-Dalgarno sequence. Defaults to that of *E. coli*.
 - `threads`: Number of parallel processes to launch during prediction.
 - `verbose`: Prints debug information
