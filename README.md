@@ -65,7 +65,7 @@ optional arguments:
                         Input type (overrides autodetection)
 ```
 
-#### Example of command line input and output
+#### Example of Command Line Input/Output
 
 Example command for specifying the mRNA sequence to search as a parameter:
 ```bash
@@ -75,27 +75,15 @@ ostir -i TTCTAGATGAGAATAAGGTTATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGT
 Output of this command:
 ```bash
 _________________________________________________
-  start_position     start_codon      expression        dG_total    dG_rRNA:mRNA         dG_mRNA      dG_spacing RBS_distance_bp      dG_standby  dG_start_codon
-               7             ATG          3.4015         15.0959         -1.9810         -1.1000         17.1709              -2          0.0000         -1.1940
-              21             ATG        635.2563          2.0287         -5.2810         -8.5000          0.0037               4          0.0000         -1.1940
-              54             ATG          0.0557         25.3716         -4.3810        -13.8000         17.1466               1          0.0000         -1.1940
-              72             ATG        224.4036          4.6287         -0.6810         -6.5000          0.0037               4          0.0000         -1.1940
+     start_codon  start_position      expression RBS_distance_bp        dG_total    dG_rRNA:mRNA         dG_mRNA      dG_spacing      dG_standby  dG_start_codon
+             ATG               7          3.4040              -2         15.1346         -1.9810         -1.1000         17.2096          0.0000         -1.1940
+             ATG              21        643.9384               4          2.0289         -5.2810         -8.5000          0.0039          0.0000         -1.1940
+             ATG              54          0.0558               1         25.4101         -4.3810        -13.8000         17.1851          0.0000         -1.1940
+             ATG              72        227.5882               4          4.6289         -0.6810         -6.5000          0.0039          0.0000         -1.1940
 _________________________________________________
 ```
 
-Column descriptions:
-- `start_position`: Nucleotide position of first start codon base in input sequence. (1-indexed).
-- `start_codon`: Start codon for predicted translation initiation rate.
-- `expression`: Predicted translation initation rate at this start codon.
-- `dG_total`: Total change in free energy (ΔG) for translation initiation at this RBS.
-- `dG_rRNA:mRNA`: Free energy term for ribosome binding to the mRNA.
-- `dG_mRNA`: Free energy term for unfolding mRNA secondary structures that overlap the RBS and start codon region.
-- `dG_spacing`: Free energy term that accounts for the effect of spacing (the number of nucleotides) between an RBS and start codon.
-- `RBS_distance_bp`: Number of nucleotides between the predicted ribosome-binding site (RBS) and the start codon.
-- `dG_standby`: Free energy term for unfolding mRNA secondary structures that occlude the standby site (the four bases upstream of the RBS).
-- `dG_start_codon`: Free energy term for initiator tRNA binding to the start codons.
-
-#### Example of CSV input and output
+#### Example of CSV Input/Output
 
 Example CSV input file (file: `input.csv`):
 | id              | seq                                                                                           | anti-Shine-Dalgarno |
@@ -124,7 +112,7 @@ Example CSV output (file: `output.csv`):
 | sequence_3      | CCCCCCCCC           | ATG         | 71             | 0.0017     | 22              | 34.1706  | -1.681       | -13.8   | 23.2456    | 0.0        | -1.194         |
 
 
-Column descriptions:
+#### Output Column Descriptions
 - `name`: Name of input sequence.
 - `anti-Shine-Dalgarno`: Anti-Shine-Dalgarno sequence.
 - `start_codon`: Start codon for predicted translation initiation rate.
