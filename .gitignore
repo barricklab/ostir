@@ -4,6 +4,7 @@ tests/output/
 
 # R
 .Rhistory
+Rplots.pdf
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
