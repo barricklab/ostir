@@ -185,7 +185,7 @@ def _print_output(outdict):
         print('No binding sites were identified.')
         exit(0)
 
-    output_items = ['start_position', 'start_codon', 'expression', 'dG_total', 'dG_rRNA:mRNA', 'dG_mRNA', 'dG_spacing', 'RBS_distance_bp', 'dG_standby', 'dG_start_codon']
+    output_items = ['start_codon', 'start_position', 'expression', 'RBS_distance_bp', 'dG_total', 'dG_rRNA:mRNA', 'dG_mRNA', 'dG_spacing', 'dG_standby', 'dG_start_codon']
     row_format = "{:>16}" * (len(output_items))
     print('_________________________________________________')
     for rna in keys:
@@ -227,14 +227,14 @@ class BlankCommentCSVFile:
 
 def main():
     '''Main OSTIR function ran when called as an executable. See ostir -h.'''
-    parser = argparse.ArgumentParser(description='Open Source Transcription Initiation Rates')
+    parser = argparse.ArgumentParser(description=f'OSTIR (Open Source Translation Initiation Rates) version {ostir_version}')
 
     parser.add_argument(
         '-i', '--input',
         action='store',
         metavar='str/filepath',
         dest='i',
-        required=True,
+        required=False,
         type=str,
         help="Input filename (FASTA/CSV) or DNA/RNA sequence. For CSV input files, there must be a 'seq' or 'sequence' column. Other columns will override any options provided at the command line if they are present: 'name/id', 'start', 'end', 'anti-Shine-Dalgarno'",
     )
@@ -264,7 +264,7 @@ def main():
         dest='s',
         required=False,
         type=int,
-        help="Most 5' position to consider a start codon beginning (1-indexed)",
+        help="Most 5' nucleotide position to consider a start codon beginning (1-indexed)",
     )
 
     parser.add_argument(
@@ -274,7 +274,7 @@ def main():
         dest='e',
         required=False,
         type=int,
-        help="Most 3' position to consider a start codon beginning (1-indexed)",
+        help="Most 3' nucleotide position to consider a start codon beginning (1-indexed)",
     )
 
     parser.add_argument(
@@ -323,7 +323,19 @@ def main():
         help="Input type (overrides autodetection)",
     )
 
+    parser.add_argument(
+        '--version',
+        action='store_true',
+        dest='version',
+        required=False,
+        help="Print version and quit.",
+    )
+
     options = parser.parse_args()
+
+    if options.version:
+        print(f'OSTIR version {ostir_version}', file=sys.stderr)
+        exit(1)
 
     if not options.i:
         print("Input (-i) required.")
@@ -426,7 +438,7 @@ def main():
     ## String input ##############################################################
     if input_type == 'string':
 
-        print(f'Reading input sequnce from command line', file=sys.stderr)
+        print(f'Reading input sequence from command line', file=sys.stderr)
 
         sequence = cmd_kwargs.get('seq')
         name = None
