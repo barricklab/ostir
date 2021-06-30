@@ -2,7 +2,6 @@
 
 import unittest
 import os
-import json
 import subprocess
 import csv
 import shutil
@@ -12,49 +11,36 @@ import ostir.ostir as ostir
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 output_directory_path = os.path.join(THIS_DIR, 'output')
 
+
 def csv_are_identical(csv_file_path_1, csv_file_path_2):
     'Utility function for comparing output, Returns whether files are identical as bool'
-    csv_1_rows = []
     try:
-        csvfile_1 = open(csv_file_path_1)
-        for row in csvfile_1:
-            csv_1_rows.append(row)
-        csvfile_1.close()
+        with open(csv_file_path_1) as csv1:
+            reader = csv.reader(csv1)
+            csv_1_contents = [row for row in reader]
     except:
+        print(f'Failed to open {str(csv_file_path_1)}')
         return False
 
-    csv_2_rows = []
     try:
-        csvfile_2 = open(csv_file_path_2)
-        for row in csvfile_2:
-            csv_2_rows.append(row)
-        csvfile_2.close()
+        with open(csv_file_path_2) as csv2:
+            reader = csv.reader(csv2)
+            csv_2_contents = [row for row in reader]
     except:
+        print(f'Failed to open {str(csv_file_path_2)}')
         return False
 
-    # Pad the shorter one with empty rows
-    short_length = min(len(csv_1_rows), len(csv_2_rows)) 
-    long_length = max(len(csv_1_rows), len(csv_2_rows)) 
+    if len(csv_1_contents) != len(csv_2_contents):
+        print(f'CSVs are different lengths')
+        return False
 
-    for i in range(short_length, long_length):
-        if (i >= len(csv_1_rows)):
-            csv_1_rows.append("")
-        if (i >= len(csv_2_rows)):
-            csv_2_rows.append("")
+    for i in range(0, len(csv_1_contents)):
+        if csv_1_contents[i] != csv_2_contents[i]:
+            # print(csv_1_rows[i], "\n!=\n",csv_1_rows[i])
+            print(f'CSVs have different values at row {i}')
+            return False
 
-    #debug
-    #print(csv_1_rows)
-    #print(csv_2_rows)
-
-    identical = True
-
-
-    for i in range(long_length):
-        if (csv_1_rows[i] != csv_2_rows[i]):
-           #print(csv_1_rows[i], "\n!=\n",csv_1_rows[i])
-           identical = False
-
-    return identical
+    return True
 
 
 ##############################################################################################
@@ -66,11 +52,11 @@ class test_unit_run_ostir_one_sequence(unittest.TestCase):
         Test run_ostir on one sequence
         """
 
-        print ("\n" + "Unit test: run_ostir_one_sequence")
+        print("\n" + "Unit test: run_ostir_one_sequence")
 
         test_result = ostir.run_ostir("ACUUCUAAUUUAUUCUAUUUAUUCGCGGAUAUGCAUAGGAGUGCUUCGAUGUCAU")
 
-        #print(test_result)
+        # print(test_result)
 
         expected_result = [
             {
@@ -78,10 +64,10 @@ class test_unit_run_ostir_one_sequence(unittest.TestCase):
                 'start_codon': 'AUG',
                 'start_position': 31,
                 'expression': 2.1121,
-                'RBS_distance_bp': 16,     
+                'RBS_distance_bp': 16,
                 'dG_total': 16.3277,
                 'dG_rRNA:mRNA': -0.481,
-                'dG_mRNA': -7.2, 
+                'dG_mRNA': -7.2,
                 'dG_spacing': 10.8027,
                 'dG_standby': 0.0,
                 'dG_start_codon': -1.194,
@@ -92,7 +78,7 @@ class test_unit_run_ostir_one_sequence(unittest.TestCase):
                 'start_position': 41,
                 'expression': 845.1532,
                 'RBS_distance_bp': 8,
-                'dG_total':  1.3491,
+                'dG_total': 1.3491,
                 'dG_rRNA:mRNA': -3.581,
                 'dG_mRNA': -3.6,
                 'dG_spacing': 1.4049,
@@ -116,37 +102,40 @@ class test_unit_run_ostir_one_sequence(unittest.TestCase):
 
         self.assertEqual(test_result, expected_result)
 
+
 class test_unit_run_ostir_one_sequence_new_aSD(unittest.TestCase):
     def test_unit_run_ostir_one_sequence_new_aSD(self):
         """
         Test run_ostir on one sequence
         """
 
-        print ("\n" + "Unit test: run_ostir_one_sequence_new_aSD")
+        print("\n" + "Unit test: run_ostir_one_sequence_new_aSD")
 
-        test_result = ostir.run_ostir("ACUUCUAAUUUAUUCUAUUUAUUCGCGGAUAUGCAUAGGAGUGCUUCGAUGUCAU", start=31, aSD="ACGTCCCTA")
+        test_result = ostir.run_ostir("ACUUCUAAUUUAUUCUAUUUAUUCGCGGAUAUGCAUAGGAGUGCUUCGAUGUCAU", start=31,
+                                      aSD="ACGTCCCTA")
 
-        #print(test_result)
+        # print(test_result)
 
         expected_result = [
             {
-                'name': 'unnamed', 
-                'start_codon': 'AUG', 
-                'start_position': 31, 
-                'expression': 367.8105, 
-                'RBS_distance_bp': 4, 
+                'name': 'unnamed',
+                'start_codon': 'AUG',
+                'start_position': 31,
+                'expression': 367.8105,
+                'RBS_distance_bp': 4,
                 'dG_total': 3.4289,
-                'dG_rRNA:mRNA': -2.581, 
-                'dG_mRNA': -7.2, 
+                'dG_rRNA:mRNA': -2.581,
+                'dG_mRNA': -7.2,
                 'dG_spacing': 0.0039,
-                'dG_standby': 0.0, 
+                'dG_standby': 0.0,
                 'dG_start_codon': -1.194
             },
         ]
 
-        #print(list(test_result))
-        #print(list(expected_result))
+        # print(list(test_result))
+        # print(list(expected_result))
         self.assertEqual(test_result, expected_result)
+
 
 ##############################################################################################
 # Integration tests (command line calls)
@@ -161,7 +150,7 @@ def setUpModule():
     except OSError as e:
         pass
 
-    #Create fresh output directory
+    # Create fresh output directory
     try:
         os.mkdir(output_directory_path)
         print(f"Created 'output' directory: {output_directory_path}")
@@ -172,7 +161,6 @@ def setUpModule():
 
 class test_integration_command_line_FASTA_input(unittest.TestCase):
     def test_integration_command_line_FASTA_input(self):
-        
         input_path = os.path.join(THIS_DIR, 'input', 'command_line_FASTA_input.fa')
         output_path = os.path.join(THIS_DIR, 'output', 'command_line_FASTA_input.csv')
         expected_path = os.path.join(THIS_DIR, 'expected', 'command_line_FASTA_input.csv')
@@ -181,9 +169,9 @@ class test_integration_command_line_FASTA_input(unittest.TestCase):
         subprocess.call(the_command, shell=True)
         self.assertEqual(True, csv_are_identical(output_path, expected_path))
 
+
 class test_integration_command_line_string_input(unittest.TestCase):
     def test_integration_command_line_string_input(self):
-        
         output_path = os.path.join(THIS_DIR, 'output', 'command_line_string_input.csv')
         expected_path = os.path.join(THIS_DIR, 'expected', 'command_line_string_input.csv')
         input_sequence = "TTCTAGAAAAAAAATAAGGAGGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG"
@@ -192,9 +180,9 @@ class test_integration_command_line_string_input(unittest.TestCase):
         subprocess.call(the_command, shell=True)
         self.assertEqual(True, csv_are_identical(output_path, expected_path))
 
+
 class test_integration_command_line_CSV_input(unittest.TestCase):
     def test_integration_command_line_CSV_input(self):
-        
         input_path = os.path.join(THIS_DIR, 'input', 'command_line_CSV_input.csv')
         output_path = os.path.join(THIS_DIR, 'output', 'command_line_CSV_input.csv')
         expected_path = os.path.join(THIS_DIR, 'expected', 'command_line_CSV_input.csv')
@@ -203,9 +191,9 @@ class test_integration_command_line_CSV_input(unittest.TestCase):
         subprocess.call(the_command, shell=True)
         self.assertEqual(True, csv_are_identical(output_path, expected_path))
 
+
 class test__integration_command_line_CSV_input_alternate_columns_and_defaults(unittest.TestCase):
     def test_integration_command_line_CSV_input(self):
-        
         input_path = os.path.join(THIS_DIR, 'input', 'command_line_CSV_input_alternate_columns_and_defaults.csv')
         output_path = os.path.join(THIS_DIR, 'output', 'command_line_CSV_input_alternate_columns_and_defaults.csv')
         expected_path = os.path.join(THIS_DIR, 'expected', 'command_line_CSV_input_alternate_columns_and_defaults.csv')
@@ -213,6 +201,7 @@ class test__integration_command_line_CSV_input_alternate_columns_and_defaults(un
         print("\n" + the_command)
         subprocess.call(the_command, shell=True)
         self.assertEqual(True, csv_are_identical(output_path, expected_path))
+
 
 class test_integration_Salis2009(unittest.TestCase):
     def test_integration_Salis2009(self):
@@ -242,6 +231,7 @@ class test_integration_T7_genome(unittest.TestCase):
         print("\n" + the_command)
         subprocess.call(the_command, shell=True)
         self.assertEqual(True, csv_are_identical(output_path, expected_path))
+
 
 if __name__ == "__main__":
     unittest.main()
