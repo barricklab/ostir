@@ -207,7 +207,7 @@ def _print_output(outdict):
 
 def save_to_csv(column_names, outdict, outfile):
     with open(outfile, 'w') as output_file:
-        dict_writer = csv.DictWriter(output_file, column_names)
+        dict_writer = csv.DictWriter(output_file, column_names, lineterminator="\n")
         dict_writer.writeheader()
         dict_writer.writerows(outdict)
 
