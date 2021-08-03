@@ -1,4 +1,6 @@
 # OSTIR (Open Source Translation Initiation Rates)
+[![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](http://bioconda.github.io/recipes/ostir/README.html) ![workflow](https://github.com/barricklab/ostir/actions/workflows/package_and_test.yml/badge.svg)
+
 
 `OSTIR` is a
 Python package for predicting the rates at which ribosomes will bind to and initiate
