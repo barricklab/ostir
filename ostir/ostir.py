@@ -20,7 +20,7 @@ try:
 except ModuleNotFoundError:
     from ostir_factory import OSTIRFactory
 
-ostir_version = '1.0.4'
+ostir_version = '1.0.5'
 oldest_vienna = '2.4.18'
 
 # The E. coli sequence
@@ -207,7 +207,7 @@ def _print_output(outdict):
 
 def save_to_csv(column_names, outdict, outfile):
     with open(outfile, 'w') as output_file:
-        dict_writer = csv.DictWriter(output_file, column_names)
+        dict_writer = csv.DictWriter(output_file, column_names, lineterminator="\n")
         dict_writer.writeheader()
         dict_writer.writerows(outdict)
 

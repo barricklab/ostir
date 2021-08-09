@@ -1,0 +1,10 @@
+name: ostir
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python>=3.8.1
+  - viennarna>=2.4.18
+  - setuptools
+  - wheel

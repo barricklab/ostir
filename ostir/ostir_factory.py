@@ -618,14 +618,8 @@ class OSTIRFactory:
         else:
             return (helical_loop_list, bulge_loop_list)
 
-    def cpu_time(self):
-        import resource
-        return resource.getrusage(resource.RUSAGE_SELF)[0]
-
     def calc_dG(self):
         """Calculates each dG term in the free energy model and sums them together to create dG_total"""
-
-        start = self.cpu_time()
 
         # Initialization of data structures
         self.start_pos_list = []
@@ -694,8 +688,6 @@ class OSTIRFactory:
             self.start_codon_list.append(output['codon'])
 
         self.run = 1
-        end = self.cpu_time()
-        self.run_time = end - start
 
     @staticmethod
     def _parallel_dG(ostir_factory_object, start_pos, codon):
