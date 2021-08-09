@@ -18,7 +18,7 @@ execution, accelerating use cases that require the analysis of very large sequen
 ## Installation
 [![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](http://bioconda.github.io/recipes/ostir/README.html)
 
-OSTIR is a Python module and associated command line script. We recommend installing OSTIR using [Bioconda](https://bioconda.github.io/) on Linux or macOS. This will automatically install OSTIR and all of its dependencies, including [ViennaRNA](https://www.tbi.univie.ac.at/RNA/) and the required Python modules.
+`OSTIR` is a Python module and associated command line script. We recommend installing `OSTIR` using [Bioconda](https://bioconda.github.io/) on Linux or macOS. This will automatically install `OSTIR` and all of its dependencies, including [ViennaRNA](https://www.tbi.univie.ac.at/RNA/) and the required Python modules.
 
 From Bioconda (recommended; Linux, macOS):
 - Run `conda install -c bioconda ostir`
