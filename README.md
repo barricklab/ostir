@@ -6,13 +6,12 @@
 Python package for predicting the rates at which ribosomes will bind to and initiate
 translation from different start codons in bacterial mRNAs. It uses the ViennaRNA Package to perform 
 the necessary free energy calculations. The code builds on the last open source version of the
-[RBS calculator](https://github.com/hsalis/Ribosome-Binding-Site-Calculator-v1.0)
-that implements the calculations described in [Salis 2009](https://doi.org/10.1038/nbt.1568).
+[RBS calculator](https://github.com/hsalis/Ribosome-Binding-Site-Calculator-v1.0).
 
 `OSTIR` includes several improvements in usability. It supports multi-FASTA
 input with command line parameters or CSV input that can define
 parameters on a per-sequence basis. Additionally, `OSTIR` supports multi-threaded
-execution, accelerating use cases that require the analysis of very large sequences.
+execution, accelerating the analysis of very large sequences.
 
 ### [Please see the OSTIR Wiki for full documentation](https://github.com/barricklab/ostir/wiki)
 
