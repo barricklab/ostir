@@ -20,7 +20,7 @@ try:
 except ModuleNotFoundError:
     from ostir_factory import OSTIRFactory
 
-ostir_version = '1.0.5'
+ostir_version = '1.0.6'
 oldest_vienna = '2.4.18'
 
 # The E. coli sequence
