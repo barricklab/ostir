@@ -84,7 +84,7 @@ Updating `OSTIR` to be compatible with `ViennaRNA` and newer RNA folding energy
 parameters required refitting coefficients in the underlying thermodynamic model
 [@Salis:2009; @Salis:2011; @Reis:2020]. After making these changes, we verified
 that `OSTIR` has similar accuracy to the original `RBS Calculator v1.0`
-\autoref{fig1}. `OSTIR` predicts translation initiation rates for 53% of the
+(\autoref{fig1}). `OSTIR` predicts translation initiation rates for 53% of the
 test sequences within 2-fold of the experimentally measured values and for 91%
 of these sequences the predictions are within 10-fold of the measured values.
 Training data and `R` code for this statistical procedure are provided for users
