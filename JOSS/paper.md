@@ -67,7 +67,7 @@ necessary RNA structure energy calculations so that its entire workflow is open
 source. `OSTIR` also features several improvements in usability and flexibility
 over the `RBS Calculator v1.0` and related tools that include: (1) `OSTIR` and
 its `ViennaRNA` dependency can be easily installed through `Bioconda`
-[@Zadeh:2018]; (2) `OSTIR` supports multithreading to accelerate the analysis of
+[@Grüning:2018]; (2) `OSTIR` supports multithreading to accelerate the analysis of
 large sequences and genomes; (3) `OSTIR` allows the user to specify the
 anti-Shine-Dalgarno sequence used for the ribosome so that predictions can be
 made for bacterial species other than *Escherichia coli*; (4) `OSTIR` supports
