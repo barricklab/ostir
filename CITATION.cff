@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: If you use this software, please cite it using these metadata.
-title: OSTIR: open source translation initiation rates prediction
+title: "OSTIR: open source translation initiation rates prediction"
 abstract: Translation of messenger RNAs into proteins by the ribosome is a fundamental step in gene expression. In bacteria, it is possible to accurately predict the rate of translation initiation from the sequence surrounding a gene's start codon using thermodynamic models of RNA folding and ribosome binding. These predictions have applications in a range of fields, from systems biology studies that aim to understand and model bacterial physiology to synthetic biology studies that seek to reprogram bacterial cells. For example, metabolic engineers can design ribosome binding site (RBS) sequences to tune the expression of different enzymes in a pathway and thereby optimize the production of a desired chemical compound by cells. OSTIR (Open Source Translation Initiation Rates) is a Python package and command line tool for predicting translation initiation rates in bacteria.
 authors:
 - family-names: "Roots"
