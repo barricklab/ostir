@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it using these metadata.
+title: "OSTIR: open source translation initiation rates prediction"
+abstract: Translation of messenger RNAs into proteins by the ribosome is a fundamental step in gene expression. In bacteria, it is possible to accurately predict the rate of translation initiation from the sequence surrounding a gene's start codon using thermodynamic models of RNA folding and ribosome binding. These predictions have applications in a range of fields, from systems biology studies that aim to understand and model bacterial physiology to synthetic biology studies that seek to reprogram bacterial cells. For example, metabolic engineers can design ribosome binding site (RBS) sequences to tune the expression of different enzymes in a pathway and thereby optimize the production of a desired chemical compound by cells. OSTIR (Open Source Translation Initiation Rates) is a Python package and command line tool for predicting translation initiation rates in bacteria.
+authors:
+- family-names: "Roots"
+  given-names: "Cameron T."
+  orcid: "https://orcid.org/0000-0001-6219-3168"
+- family-names: "Lukasiewicz"
+  given-names: "Alexandra"
+- family-names: "Barrick"
+  given-names: "Jeffrey E."
+  orcid: "https://orcid.org/0000-0003-0888-7358"
+version: 1.0.6
+date-released: "2021-08-20"
+identifiers:
+  - description: This is the collection of archived snapshots of all versions of OSTIR
+    type: doi
+    value: "10.5281/zenodo.5227844"
+  - description: This is the archived snapshot of the JOSS published version 1.0.6 of OSTIR
+    type: doi
+    value: "10.5281/zenodo.5227845"
+license: GPL-3.0
+repository-code: "https://github.com/barricklab/ostir"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Roots"
+    given-names: "Cameron T."
+    orcid: "https://orcid.org/0000-0001-6219-3168"
+  - family-names: "Lukasiewicz"
+    given-names: "Alexandra"
+  - family-names: "Barrick"
+    given-names: "Jeffrey E."
+    orcid: "https://orcid.org/0000-0003-0888-7358"
+  doi: "10.21105/joss.03362"
+  journal: "Journal of Open Source Software"
+  month: 8
+  start: 3362 # First page number
+  title: "OSTIR: open source translation initiation rate prediction"
+  issue: 6
+  volume: 64
+  year: 2021

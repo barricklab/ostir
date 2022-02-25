@@ -1,0 +1,22 @@
+{
+    "license": "GNU General Public License v3.0",
+    "title": "OSTIR: open source translation initiation rate prediction",
+    "upload_type": "software",
+    "creators": [
+        {
+            "name": "Roots, Cameron T.",
+            "affiliation": "Department of Molecular Biosciences, Center for Systems and Synthetic Biology, The University of Texas at Austin",
+            "orcid":"0000-0001-6219-3168"
+        },
+        {
+            "name": "Lukasiewicz, Alexandra",
+            "affiliation": "McKetta Department of Chemical Engineering, The University of Texas at Austin"
+        },
+        {
+            "name": "Barrick, Jeffrey E.",
+            "affiliation": "Department of Molecular Biosciences, Center for Systems and Synthetic Biology, The University of Texas at Austin",
+            "orcid":"0000-0003-0888-7358"
+        }
+    ],
+    "access_right": "open"
+}

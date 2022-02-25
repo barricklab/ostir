@@ -67,7 +67,7 @@ necessary RNA structure energy calculations so that its entire workflow is open
 source. `OSTIR` also features several improvements in usability and flexibility
 over the `RBS Calculator v1.0` and related tools that include: (1) `OSTIR` and
 its `ViennaRNA` dependency can be easily installed through `Bioconda`
-[@Zadeh:2018]; (2) `OSTIR` supports multithreading to accelerate the analysis of
+[@Grüning:2018]; (2) `OSTIR` supports multithreading to accelerate the analysis of
 large sequences and genomes; (3) `OSTIR` allows the user to specify the
 anti-Shine-Dalgarno sequence used for the ribosome so that predictions can be
 made for bacterial species other than *Escherichia coli*; (4) `OSTIR` supports
@@ -84,7 +84,7 @@ Updating `OSTIR` to be compatible with `ViennaRNA` and newer RNA folding energy
 parameters required refitting coefficients in the underlying thermodynamic model
 [@Salis:2009; @Salis:2011; @Reis:2020]. After making these changes, we verified
 that `OSTIR` has similar accuracy to the original `RBS Calculator v1.0`
-\autoref{fig1}. `OSTIR` predicts translation initiation rates for 53% of the
+(\autoref{fig1}). `OSTIR` predicts translation initiation rates for 53% of the
 test sequences within 2-fold of the experimentally measured values and for 91%
 of these sequences the predictions are within 10-fold of the measured values.
 Training data and `R` code for this statistical procedure are provided for users
