@@ -5,6 +5,7 @@ import warnings
 import os
 from operator import itemgetter
 import random
+import atexit
 
 #  On import check dependencies
 dependencies = [which('RNAfold') is not None,
@@ -45,6 +46,7 @@ class ViennaRNA(dict):
 
         with tempfile.NamedTemporaryFile(delete=False) as temp_file_maker:
             self.prefix = temp_file_maker.name
+        atexit.register(clean_temp_file, self.prefix)
 
     def mfe(self, strands, constraints, Temp , dangles, outputPS = False):
 
@@ -330,7 +332,6 @@ class ViennaRNA(dict):
             else:
                 print("Error! Invalid character in bracket notation.")
     
-
         if len(last_nt_x_list) > 0:
             print("Error! Leftover unpaired nucleotides when converting from bracket notation to numbered base pairs.")
 
@@ -404,3 +405,6 @@ class ViennaRNA(dict):
         return sorted_findings
 
 
+def clean_temp_file(file):
+    if os.path.isfile(file):
+        os.remove(file)
