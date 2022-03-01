@@ -13,6 +13,7 @@ import subprocess
 import csv
 import re
 from shutil import which
+from warnings import warn
 
 
 try:
@@ -99,14 +100,6 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
     end_loc_1 = int(end_loc_1)
 
     start_range_1 = [start_loc_1, end_loc_1]
-
-
-    #for debugging
-    #print(in_seq)
-    #print(str(start_range_1[0]))
-    #print(str(start_range_1[1]))
-    #print(name)
-    #print(sd)
 
     calcObj = OSTIRFactory(seq, start_range_1, aSD, verbose=verbose)
     calcObj.threads = threads
@@ -385,6 +378,9 @@ def main():
     oldest_vienna_split = oldest_vienna.split('.')
     warning_string = f'The installed version of ViennaRNA ({vienna_version}) is older than what is supported ({oldest_vienna}).'
     for i in range(0, len(vienna_version_split)):
+        if vienna_version_split[i] > oldest_vienna_split[i]:
+            warn(f'The installed version of ViennaRNA ({vienna_version}) is new than what is last validated ({oldest_vienna}).')
+            break
         if vienna_version_split[i] < oldest_vienna_split[i]:
             raise EnvironmentError(warning_string)
     # Output data: RNA, Codon, position, dg_total, dg rRNA:mRNA, dg mRNA, dG Spacing, dg Standby, Kinetic Score
