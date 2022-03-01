@@ -143,6 +143,8 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
         }
         output_data_list.append(outdata)
     output_data_list = sorted(output_data_list, key=lambda x: x['start_position'])
+    
+    del calcObj  # Send OSTIRFactory to garbage collection, clears temp files
 
     return output_data_list
 

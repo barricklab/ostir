@@ -4,7 +4,6 @@ from shutil import which
 import warnings
 import os
 from operator import itemgetter
-import random
 import atexit
 
 #  On import check dependencies
@@ -403,6 +402,9 @@ class ViennaRNA(dict):
             sorted_findings = sorted_findings + partitioned_findings
 
         return sorted_findings
+
+    def __del__(self):
+        clean_temp_file(self.prefix)
 
 
 def clean_temp_file(file):
