@@ -4,7 +4,6 @@ from shutil import which
 import warnings
 import os
 from operator import itemgetter
-import atexit
 
 #  On import check dependencies
 dependencies = [which('RNAfold') is not None,
@@ -38,14 +37,16 @@ class ViennaRNA(dict):
                 raise ValueError(error_string)
 
         self["sequences"] = Sequence_List
-        self["material"] = material
+
         self.install_location = os.path.dirname(os.path.realpath(__file__))
+        if material == 'rna1999':
+            self["material"] = f"-P {self.install_location}/rna_turner1999.par "
+        elif material == 'rna2004':
+            self["material"] = f"-P {self.install_location}/rna_turner2004.par "
+        else:
+            self["material"] = ''
 
         random.seed(time.time())
-
-        with tempfile.NamedTemporaryFile(delete=False) as temp_file_maker:
-            self.prefix = temp_file_maker.name
-        atexit.register(clean_temp_file, self.prefix)
 
     def mfe(self, strands, constraints, Temp , dangles, outputPS = False):
 
@@ -61,76 +62,80 @@ class ViennaRNA(dict):
         else: 
             input_string = seq_string + "\n" + constraints + "\n"
 
-        #write sequence file 
-        handle = open(self.prefix,"w")
-        handle.write(input_string)
-        handle.close()
-        #Set arguments
-        material = self["material"]
+        try:
+            #write sequence file 
+            handle, infile = tempfile.mkstemp()
+            handle = os.fdopen(handle, "w")
+            handle.write(input_string)
+            handle.close()
+            #Set arguments
+            material = self["material"]
 
-        if material == 'rna1999':
-            param_file = f"-P {self.install_location}/rna_turner1999.par "
-        elif material == 'rna2004':
-            param_file = f"-P {self.install_location}/rna_turner2004.par "
-        else:
-            param_file = ''
+            if material == 'rna1999':
+                param_file = f"-P {self.install_location}/rna_turner1999.par"
+            elif material == 'rna2004':
+                param_file = f"-P {self.install_location}/rna_turner2004.par"
+            else:
+                param_file = ''
 
-        if dangles == "none":
-            dangles = " -d0 "
-        elif dangles == "some":
-            dangles = " -d1 "
-        elif dangles == "all":
-            dangles = " -d2 "
+            if dangles == "none":
+                dangles = " -d0"
+            elif dangles == "some":
+                dangles = " -d1"
+            elif dangles == "all":
+                dangles = " -d2"
 
-        if outputPS:
-            outputPS_str = ""
-        else:
-            outputPS_str = " --noPS "
-            
-        if constraints is None:
-            args = outputPS_str + dangles + "--noLP " + param_file + self.prefix
+            if outputPS:
+                outputPS_str = ""
+            else:
+                outputPS_str = " --noPS "
+                
+            if constraints is None:
+                args = f'{outputPS_str} {dangles} --noLP {param_file} "{infile}"'
+            else:
+                args = f'{outputPS_str} {dangles} --noLP -C {param_file} "{infile}"'
 
-        else:
-            args = outputPS_str + dangles + "--noLP " + "-C " + param_file + self.prefix
+            #Call ViennaRNA C programs
+            cmd = "RNAfold "
+            output = subprocess.Popen(cmd + args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines = True) #newlines argument was added because subprocess.popen was appending b's to the list output (byte stuff? I dont totally understand)
+            std_out = output.communicate()[0]
+            #output.tochild.write(input_string)
 
+            while output.poll() is None:
+                try:
+                    output.wait()
+                    time.sleep(0.001)
+                except:
+                    break
 
-        #Call ViennaRNA C programs
-        cmd = "RNAfold"
-        output = subprocess.Popen(cmd + args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines = True) #newlines argument was added because subprocess.popen was appending b's to the list output (byte stuff? I dont totally understand)
-        std_out = output.communicate()[0]
-        #output.tochild.write(input_string)
+            #if debug == 1: print(output.stdout.read())
 
-        while output.poll() is None:
-            try:
-                output.wait()
-                time.sleep(0.001)
-            except:
-                break
+            #Skip the unnecessary output lines
+            #line = output.stdout.read()
+            #print(std_out)
 
-        #if debug == 1: print(output.stdout.read())
+            line = std_out
+            words = line.split()
+            #print("These are the mfe value for " + str(words))
+            bracket_string = words[1]
+            #print(bracket_string)
+            #print("This is the bracket string " + str(bracket_string))
+            (strands,bp_x, bp_y) = self.convert_bracket_to_numbered_pairs(bracket_string)
+            #print(strands, bp_x, bp_y)
 
-        #Skip the unnecessary output lines
-        #line = output.stdout.read()
-        #print(std_out)
+            energy = float(words[len(words)-1].replace(")","").replace("(","").replace("\n",""))
 
-        line = std_out
-        words = line.split()
-        #print("These are the mfe value for " + str(words))
-        bracket_string = words[1]
-        #print(bracket_string)
-        #print("This is the bracket string " + str(bracket_string))
-        (strands,bp_x, bp_y) = self.convert_bracket_to_numbered_pairs(bracket_string)
-        #print(strands, bp_x, bp_y)
+            self["program"] = "mfe"
+            self["mfe_basepairing_x"] = [bp_x]
+            self["mfe_basepairing_y"] = [bp_y]
+            self["mfe_energy"] = [energy]
+            self["totalnt"]=strands
 
-        energy = float(words[len(words)-1].replace(")","").replace("(","").replace("\n",""))
-
-        self["program"] = "mfe"
-        self["mfe_basepairing_x"] = [bp_x]
-        self["mfe_basepairing_y"] = [bp_y]
-        self["mfe_energy"] = [energy]
-        self["totalnt"]=strands
-
-        #print "Minimum free energy secondary structure has been calculated."
+            #print "Minimum free energy secondary structure has been calculated."
+        finally:
+            # Delete temp
+            if os.path.exists(infile):
+                os.remove(infile)
 
     def subopt(self, strands, constraints, energy_gap, Temp = 37.0, dangles = "some", outputPS = False):
 
@@ -138,13 +143,7 @@ class ViennaRNA(dict):
 
         if Temp <= 0: raise ValueError("The specified temperature must be greater than zero.")
 
-        material = self["material"]
-        if material == 'rna1999':
-            param_file = f"-P {self.install_location}/rna_turner1999.par "
-        elif material == 'rna2004':
-            param_file = f"-P {self.install_location}/rna_turner2004.par "
-        else:
-            param_file = ''
+        param_file = self["material"]
 
         seq_string = "&".join(self["sequences"])
         #seq_string = self["sequences"][0]
@@ -156,73 +155,77 @@ class ViennaRNA(dict):
         else:
             input_string = seq_string + "\n" + constraints + "&........." "\n"
 
-        #print(self.prefix)
-        with open(self.prefix + '.txt', 'w') as handle:
+        try:
+            handle, infile = tempfile.mkstemp()
+            handle = os.fdopen(handle, "w")
             handle.write(input_string)
+            handle.close()
 
-        #Set arguments
-        material = self["material"]
+            #Set arguments
+            material = self["material"]
 
-        if dangles == "none":
-            dangles = " -d0 "
-        elif dangles == "some":
-            dangles = " -d1 "
-        elif dangles == "all":
-            dangles = " -d2 "
+            if dangles == "none":
+                dangles = " -d0 "
+            elif dangles == "some":
+                dangles = " -d1 "
+            elif dangles == "all":
+                dangles = " -d2 "
 
-        if outputPS:
-            outputPS_str = ""
-        else:
-            outputPS_str = " -noPS "
+            if outputPS:
+                outputPS_str = ""
+            else:
+                outputPS_str = " -noPS "
 
-        #Call ViennaRNA C programs
+            #Call ViennaRNA C programs
 
-        cmd = "RNAsubopt"
-        energy_gap = energy_gap + 2.481
-        if constraints is None:
-            args = " -e " + str(energy_gap) + " -T " + str(Temp) + dangles + "--sorted --en-only " + "--noLP " + param_file + " < " + self.prefix + '.txt'
-        else:
-            args = " -e " + str(energy_gap) + " -T " + str(Temp) + dangles + "--sorted --en-only " + "--noLP " + "-C " + param_file + " < " + self.prefix + '.txt'
+            cmd = "RNAsubopt"
+            energy_gap = energy_gap + 2.481
+            if constraints is None:
+                args = f' -e {str(energy_gap)} -T {str(Temp)} {dangles} --sorted --en-only --noLP {param_file} < "{infile}"'
+            else:
+                args = f' -e {str(energy_gap)} -T {str(Temp)} {dangles} --sorted --en-only --noLP -C {param_file} < "{infile}"'
 
-        #print(self.prefix)
-        #print(cmd + args)
-        output = subprocess.Popen(cmd + args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines = True) #newlines argument was added because subprocess.popen was appending b's to the list output (byte stuff? I dont totally understand)
-        std_out = output.communicate()[0]
-        #output.tochild.write(input_string)
+            #print(cmd + args)
+            output = subprocess.Popen(cmd + args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines = True) #newlines argument was added because subprocess.popen was appending b's to the list output (byte stuff? I dont totally understand)
+            std_out = output.communicate()[0]
+            #output.tochild.write(input_string)
 
-        while output.poll() is None:
-            try:
-                output.wait()
-                time.sleep(0.001)
-            except:
-                break
+            while output.poll() is None:
+                try:
+                    output.wait()
+                    time.sleep(0.001)
+                except:
+                    break
 
-        if debug == 1:
-            print(output.stdout.read())
+            if debug == 1:
+                print(output.stdout.read())
 
-        #Skip unnecessary line
-        #line = output.std_out.readline()
-        line = std_out
+            #Skip unnecessary line
+            #line = output.std_out.readline()
+            line = std_out
 
-        self["subopt_basepairing_x"] = []
-        self["subopt_basepairing_y"] = []
-        self["subopt_energy"] = []
-        self["totalnt"] = []
+            self["subopt_basepairing_x"] = []
+            self["subopt_basepairing_y"] = []
+            self["subopt_energy"] = []
+            self["totalnt"] = []
 
-        #print(f"Line: {line}")
-        findings = line.split("\n")
-        findings = findings[1:]
-        findings = [x.split() for x in findings]
-        #print(findings)
-        identified_findings = []
-        findings = self.process_fold_outputs(findings)
+            #print(f"Line: {line}")
+            findings = line.split("\n")
+            findings = findings[1:]
+            findings = [x.split() for x in findings]
+            #print(findings)
+            identified_findings = []
+            findings = self.process_fold_outputs(findings)
 
-        for finding in findings:
-            self["subopt_energy"].append(float(finding[1]))
-            self["subopt_basepairing_x"].append(finding[2])
-            self["subopt_basepairing_y"].append(finding[3])
+            for finding in findings:
+                self["subopt_energy"].append(float(finding[1]))
+                self["subopt_basepairing_x"].append(finding[2])
+                self["subopt_basepairing_y"].append(finding[3])
 
-        self["program"] = "subopt"
+            self["program"] = "subopt"
+        finally:
+            if os.path.exists(infile):
+                os.remove(infile)
 
 
     def energy(self, strands, base_pairing_x, base_pairing_y, Temp = 37.0, dangles = "all"):
@@ -236,58 +239,56 @@ class ViennaRNA(dict):
         input_string = seq_string + "\n" + bracket_string + "\n"
 
         #print(seq_string,strands, bracket_string, input_string)
+        try:
+            handle, infile = tempfile.mkstemp()
+            handle = os.fdopen(handle, "w")
+            handle.write(input_string)
+            handle.close()
+        
+            #Set arguments
+            param_file = self["material"]
+            if dangles == "none":
+                dangles = "-d0"
+            elif dangles == "some":
+                dangles = "-d1"
+            elif dangles == "all":
+                dangles = "-d2"
 
-        handle = open(self.prefix, "w")
-        handle.write(input_string)
-        handle.close()
+            #Call ViennaRNA C programs
+            cmd = "RNAeval"
+            args = f' {dangles} {param_file} "{infile}"'
 
-        #Set arguments
-        material = self["material"]
-        if dangles == "none":
-            dangles = " -d0 "
-        elif dangles == "some":
-            dangles = " -d1 "
-        elif dangles == "all":
-            dangles = " -d2 "
-
-        if material == 'rna1999':
-            param_file = f"-P {self.install_location}/rna_turner1999.par "
-        elif material == 'rna2004':
-            param_file = f"-P {self.install_location}/rna_turner2004.par "
-        else:
-            param_file = ''
-
-        #Call ViennaRNA C programs
-        cmd = "RNAeval"
-        args = dangles + param_file + self.prefix
-
-        output = subprocess.Popen(cmd + args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines = True) #newlines argument was added because subprocess.popen was appending b's to the list output (byte stuff? I dont totally understand)
+            output = subprocess.Popen(cmd + args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines = True) #newlines argument was added because subprocess.popen was appending b's to the list output (byte stuff? I dont totally understand)
 
 
-        while output.poll() is None:
-            try:
-                output.wait()
-                time.sleep(0.001)
-            except:
-                break
+            while output.poll() is None:
+                try:
+                    output.wait()
+                    time.sleep(0.001)
+                except:
+                    break
 
-        #if debug == 1: print output.fromchild.read()
-        std_out = output.communicate()[0]
-        #print(std_out)
+            #if debug == 1: print output.fromchild.read()
+            std_out = output.communicate()[0]
+            #print(std_out)
 
-        self["energy_energy"] = []        
+            self["energy_energy"] = []        
 
-        line = std_out
-        words = line.split()
-        #print(line, words)
-        if not words:
-            raise ValueError('Could not catch the output of RNAeval. Is Vienna installed and in your PATH?')
-        energy = float(words[-1].replace("(", "").replace(")", "").replace("\n", ""))
+            line = std_out
+            words = line.split()
+            #print(line, words)
+            if not words:
+                raise ValueError('Could not catch the output of RNAeval. Is Vienna installed and in your PATH?')
+            energy = float(words[-1].replace("(", "").replace(")", "").replace("\n", ""))
 
-        self["program"] = "energy"
-        self["energy_energy"].append(energy)
-        self["energy_basepairing_x"] = [base_pairing_x]
-        self["energy_basepairing_y"] = [base_pairing_y]
+            self["program"] = "energy"
+            self["energy_energy"].append(energy)
+            self["energy_basepairing_x"] = [base_pairing_x]
+            self["energy_basepairing_y"] = [base_pairing_y]
+        
+        finally:
+            if os.path.exists(infile):
+                os.remove(infile)
 
         return energy
 
@@ -403,8 +404,6 @@ class ViennaRNA(dict):
 
         return sorted_findings
 
-    def __del__(self):
-        clean_temp_file(self.prefix)
 
 
 def clean_temp_file(file):
