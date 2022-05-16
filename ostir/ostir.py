@@ -107,38 +107,7 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
     calcObj.name = name
     calcObj.calc_dG()
 
-    dG_total_list = calcObj.dG_total_list[:]
-    dG_details = calcObj.dG_details[:]
-    start_pos_list = calcObj.start_pos_list[:]
-    kinetic_score_list = calcObj.kinetic_score_list[:]
-    standby_site_list = calcObj.dG_standby_site_list[:]
-    start_codon_list = calcObj.start_codon_list[:]
-
-    expr_list = []
-    for dG in dG_total_list:
-        expr_list.append(calcObj.K * math.exp(-dG / calcObj.RT_eff))
-    return_var = zip(expr_list, start_pos_list, kinetic_score_list, dG_total_list, standby_site_list, start_codon_list)
-    return_var = list(return_var)
-    zip_output = zip(return_var, dG_details)
-    output_data_list = []
-    for output in list(zip_output):
-        outdata = {
-            'name': name,
-            #'sequence': seq,   #Don't pass back and print sequence, this will be very big for some inputs
-            'start_codon': output[0][5],
-            'start_position': output[0][1]+1, #Convert back to 1-indexed
-            'expression': round(output[0][0], decimal_places),
-            'RBS_distance_bp': output[1][5],
-            'dG_total': round(output[0][3], decimal_places),
-            'dG_rRNA:mRNA': round(output[1][0], decimal_places),
-            'dG_mRNA': round(output[1][2], decimal_places),
-            'dG_spacing': round(output[1][4], decimal_places),
-            'dG_standby': round(output[1][3], decimal_places),
-            'dG_start_codon': round(output[1][1], decimal_places),
-        }
-        output_data_list.append(outdata)
-
-    #output_data_list = [result.results() for result in calcObj.results]
+    output_data_list = [result.results() for result in calcObj.results]
     
     output_data_list = sorted(output_data_list, key=lambda x: x['start_position'])
     
