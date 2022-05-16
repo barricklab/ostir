@@ -26,7 +26,8 @@ import re
 import math
 import os
 import concurrent.futures
-
+from dataclasses import dataclass
+from copy import copy
 
 
 class CalcError(Exception):
@@ -37,6 +38,7 @@ class CalcError(Exception):
 
     def __str__(self):
         return repr(self.value)
+
 
 
 class OSTIRFactory:
@@ -68,7 +70,7 @@ class OSTIRFactory:
 
     footprint = 1000  # Footprint of the 30S complex that prevents formation of secondary structures downstream of the start codon. Here, we assume that the entire post-start RNA sequence does not form secondary structures once the 30S complex has bound.
 
-    def __init__(self, mRNA, start_range_1, rRNA, verbose=False):
+    def __init__(self, mRNA, start_range_1, rRNA, verbose=False, decimal_places=4, name="unnamed"):
         """
         Initializes the RBS Calculator class with the mRNA sequence and the range of start codon positions considered.
         start_range_1 is a pair of 1-indexed positions
@@ -86,7 +88,7 @@ class OSTIRFactory:
 
 
         self.install_location = os.path.dirname(os.path.realpath(__file__))
-        self.name = mRNA
+        self.name = name
         self.mRNA_input = mRNA.upper()
         self.rRNA = rRNA
         self.rRNA_len = len(self.rRNA)
@@ -97,6 +99,8 @@ class OSTIRFactory:
         self.start_range_1 = start_range_1
         self.verbose = verbose
         self.threads = 1
+        self.decimal_places = decimal_places
+        self.results = []
 
     def find_min(self, input_list):
         """Finds the minimum of a list of numbers."""
@@ -115,7 +119,6 @@ class OSTIRFactory:
         """Finds all start codons in an mRNA sequence. Creates a list."""
 
         self.start_position_list = []
-        self.start_codon_list = []
 
         seq_len = len(sequence)
 
@@ -127,7 +130,6 @@ class OSTIRFactory:
             codon = sequence[i:i + 3]
             if codon.upper() in self.start_codons:
                 self.start_position_list.append(i)
-                self.start_codon_list.append(codon)
                 yield (i, codon)
             else:
                 pass
@@ -627,8 +629,6 @@ class OSTIRFactory:
         self.dG_details = []
         self.dG_mRNA_list = []
         self.dG_mRNA_rRNA_list = []
-        self.fold_x_list = []
-        self.fold_y_list = []
         self.dG_start_energy_list = []
         self.dG_spacing_list = []
         self.mRNA_structure_list = []
@@ -644,11 +644,8 @@ class OSTIRFactory:
         self.bulge_loop_list_list = []
         self.start_codon_list = []
 
-        self.dS1_list = []
-        self.dS2_list = []
         self.most_5p_mRNA_list = []
         self.Expression_list = []
-        self.dg_scores = []
 
         parallelizer_arguments = [[], [], []]
         for _, (start_pos, codon) in enumerate(self.find_start_codons(self.mRNA_input)):
@@ -664,9 +661,9 @@ class OSTIRFactory:
 
         parallel_output = [x for x in parallel_output if x is not None]
         for output in parallel_output:
+            #  Legacy output
             if not output['start_position_list'] or output['start_position_list'] == None:
                 continue
-            self.dg_scores.append(output['dG_scores'])
             self.mRNA_structure_list.append(output['mRNA_structure_list'])
             self.mRNA_rRNA_uncorrected_structure_list.append(output['mRNA_rRNA_uncorrected_structure_list'])
             self.mRNA_rRNA_corrected_structure_list.append(output['mRNA_rRNA_corrected_structure_list'])
@@ -687,7 +684,9 @@ class OSTIRFactory:
             self.dG_details.append(output['dG_details'])
             self.start_codon_list.append(output['codon'])
 
+
         self.run = 1
+
 
     @staticmethod
     def _parallel_dG(ostir_factory_object, start_pos, codon):

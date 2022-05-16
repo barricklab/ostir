@@ -103,6 +103,8 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
 
     calcObj = OSTIRFactory(seq, start_range_1, aSD, verbose=verbose)
     calcObj.threads = threads
+    calcObj.decimal_places = decimal_places
+    calcObj.name = name
     calcObj.calc_dG()
 
     dG_total_list = calcObj.dG_total_list[:]
@@ -135,6 +137,9 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
             'dG_start_codon': round(output[1][1], decimal_places),
         }
         output_data_list.append(outdata)
+
+    #output_data_list = [result.results() for result in calcObj.results]
+    
     output_data_list = sorted(output_data_list, key=lambda x: x['start_position'])
     
     del calcObj  # Send OSTIRFactory to garbage collection, clears temp files
