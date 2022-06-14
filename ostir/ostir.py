@@ -101,7 +101,7 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
 
     start_range_1 = [start_loc_1, end_loc_1]
 
-    calcObj = OSTIRFactory(seq, start_range_1, aSD, verbose=verbose)
+    calcObj = OSTIRFactory(seq, start_range_1, constraints = None, aSD, verbose=verbose) #accounts for constraints argument in OSTIRFactory class
     calcObj.threads = threads
     calcObj.decimal_places = decimal_places
     calcObj.name = name
