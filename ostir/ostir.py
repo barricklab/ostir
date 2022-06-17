@@ -99,9 +99,11 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
             end_loc_1 = start_loc_1
     end_loc_1 = int(end_loc_1)
 
-    start_range_1 = [start_loc_1, end_loc_1]
+    start_range_1 = [start_loc_1, end_loc_1]   
 
-    calcObj = OSTIRFactory(seq, start_range_1, constraints = None, aSD, verbose=verbose) #accounts for constraints argument in OSTIRFactory class
+    constraints = None #set to account for constrains positional argument in OSTIRFactory class
+
+    calcObj = OSTIRFactory(seq, start_range_1, aSD, constraints, verbose=verbose) 
     calcObj.threads = threads
     calcObj.decimal_places = decimal_places
     calcObj.name = name
