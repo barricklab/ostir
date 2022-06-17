@@ -104,7 +104,7 @@ class OSTIRResult():
 
 class OSTIRFactory:
     """Class for calculating the rate of translation initiation of a given mRNA sequence"""
-    def __init__(self, mRNA, start_range_1, rRNA, verbose=False, decimal_places=4, name="unnamed"):
+    def __init__(self, mRNA, start_range_1, rRNA, constraints, verbose=False, decimal_places=4, name="unnamed"):
         """
         Initializes the RBS Calculator class with the mRNA sequence and the range of start codon positions considered.
         start_range_1 is a pair of 1-indexed positions
@@ -162,6 +162,7 @@ class OSTIRFactory:
         self.name = name
         self.mRNA_input = mRNA.upper()
         self.rRNA = rRNA
+        self.constraints = constraints
         self.rRNA_len = len(self.rRNA)
         self.mRNA_len = len(self.mRNA_input)
         self.total_sequence_length = len(mRNA) + len(self.rRNA)
@@ -267,6 +268,13 @@ class OSTIRFactory:
         # Constraints: the entire rRNA-binding site must be upstream of the start codon
         mRNA = self.mRNA_input[begin:start_pos]
 
+        #include viennaRNA folding constraints due to binding of global regulator 
+        if self.constraints is None:
+            constraints = None
+        else:
+            constraints = self.constraints[begin:start_pos] #added so constraints file will be the same as the sequence
+
+
         if len(mRNA) == 0:
             raise CalcError("Warning: There is a leaderless start codon, which is being ignored.")
 
@@ -274,7 +282,7 @@ class OSTIRFactory:
 
         fold = ViennaRNA([mRNA, self.rRNA], material=self.RNA_model)
         # print(fold)
-        fold.subopt([1, 2], None, self.energy_cutoff, dangles=dangles, Temp=self.temp)
+        fold.subopt([1, 2], constraints , self.energy_cutoff, dangles=dangles, Temp=self.temp)
         if len(fold["subopt_basepairing_x"]) == 0:
             return None, None, None
 
@@ -355,10 +363,17 @@ class OSTIRFactory:
         total_bp_x = []
         total_bp_y = []
 
+        if self.constraints is None:
+            pre_constraints = None
+            post_constraints = None
+        else:
+            pre_constraints = self.constraints[begin:begin+most_5p_mRNA-1]
+            post_constraints = self.constraints[post_window_begin:post_window_end]
+
         # Calculate pre-sequence folding
         if len(mRNA_pre) > 0:
             fold_pre = ViennaRNA([mRNA_pre], material=self.RNA_model)
-            fold_pre.mfe([1], None, Temp=self.temp, dangles=dangles, )
+            fold_pre.mfe([1], pre_constraints, Temp=self.temp, dangles=dangles, )
             bp_x_pre = fold_pre["mfe_basepairing_x"][0]
             bp_y_pre = fold_pre["mfe_basepairing_y"][0]
 
@@ -387,7 +402,7 @@ class OSTIRFactory:
         # Calculate post-sequence folding
         if len(mRNA_post) > 0:
             fold_post = ViennaRNA([mRNA_post], material=self.RNA_model)
-            fold_post.mfe([1], None, Temp=self.temp, dangles=dangles)
+            fold_post.mfe([1], post_constraints, Temp=self.temp, dangles=dangles)
             bp_x_post = fold_post["mfe_basepairing_x"][0]
             bp_y_post = fold_post["mfe_basepairing_y"][0]
         else:
@@ -452,8 +467,13 @@ class OSTIRFactory:
                 bp_x_3p.append(nt_x)
                 bp_y_3p.append(nt_y)
 
-        # Create the mRNA subsequence
-        mRNA_subsequence = mRNA[0:max(0, most_5p_mRNA - self.standby_site_length - 1)]
+        #Create the mRNA subsequence
+        mRNA_subsequence = mRNA[0:max(0,most_5p_mRNA - self.standby_site_length - 1)]
+        if self.constraints is None:
+            constraint_subsequence = None
+        else:
+            constraint_subsequence = self.constraints[0:max(0,most_5p_mRNA - self.standby_site_length - 1)]
+        standby_site = mRNA[most_5p_mRNA - self.standby_site_length - 1:most_5p_mRNA]
 
         # Fold it and extract the base pairings
         if (len(mRNA_subsequence)) > 0:
@@ -498,8 +518,14 @@ class OSTIRFactory:
     def calc_dG_mRNA(self, start_pos, dangles):
         """Calculates the dG_mRNA given the mRNA sequence."""
         mRNA = self.mRNA_input[max(0, start_pos - self.cutoff):min(len(self.mRNA_input), start_pos + self.cutoff)]
+        
+        if self.constraints is None:
+            constraints = None
+        else:
+            constraints = self.constraints[max(0,start_pos-self.cutoff):min(len(self.mRNA_input),start_pos+self.cutoff)]
+        
         fold = ViennaRNA([mRNA], self.RNA_model)
-        fold.mfe([1], None, Temp=self.temp, dangles=dangles)
+        fold.mfe([1], constraints, Temp=self.temp, dangles=dangles)
 
         structure = fold
         structure["mRNA"] = mRNA
