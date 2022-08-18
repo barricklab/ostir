@@ -14,12 +14,13 @@ import csv
 import re
 from shutil import which
 from warnings import warn
+import numpy as np
 
 
 try:
     from ostir.ostir_factory import OSTIRFactory
 except ModuleNotFoundError:
-    from ostir_factory import OSTIRFactory
+    from .ostir_factory import OSTIRFactory
 
 ostir_version = '1.0.6'
 oldest_vienna = '2.4.18'
@@ -42,7 +43,6 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
         decimal_places -- Precision of numerical output (number of places to the right of the decimal)
         verbose -- Prints debug information
     '''
-
     #rename to more descriptive vars
     in_start_loc_1 = start
     in_end_loc_1 = end

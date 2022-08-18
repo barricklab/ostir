@@ -1,4 +1,5 @@
 import setuptools
+from Cython.Build import cythonize
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -25,6 +26,7 @@ setuptools.setup(
         'console_scripts' : [
           'ostir = ostir.ostir:main',
         ],
-    }
+    },
+    ext_modules = cythonize(['ostir/ostir_cython.pyx', 'ostir/ViennaRNA.pyx'])
 
 )
