@@ -48,80 +48,28 @@ class ViennaRNA(dict):
 
 
 def mfe(list sequences, str constraints, double temp , str dangles, int basepair=0):
-    
-    temp = float(temp)
-    if temp <= 0: raise ValueError("The specified temperature must be greater than zero.")
+    '''
+    Calculate the MFE of a sequence using ViennaRNA as a module
+    '''
 
-    cdef str seq_string = "&".join(sequences)
-    constraints = None
-    if constraints is None:
-        input_string = seq_string + "\n" 
-    else: 
-        input_string = seq_string + "\n" + constraints + "\n"
+    cdef object params = get_paramater_object(vienna_constants.material, temp, dangles, noLP = 1)
+    cdef str seq_string = "&".join(sequences).upper().replace("T", "U")
 
-    try:
-        #write sequence file 
-        handle, infile = tempfile.mkstemp()
-        handle = os.fdopen(handle, "w")
-        handle.write(input_string)
-        handle.close()
-        #Set arguments
+    cdef object rna = RNA.fold_compound(seq_string, params)
 
-        param_file = vienna_constants.material
-        param_file = f"-P {param_file}" if param_file else ""
+    if constraints:
+        rna.constraints_add(constraints)
 
-        if dangles == "none":
-            dangles = " -d0"
-        elif dangles == "some":
-            dangles = " -d1"
-        elif dangles == "all":
-            dangles = " -d2"
-            
-        if constraints is None:
-            args = f'--noPS {dangles} --noLP {param_file} "{infile}"'
-        else:
-            args = f'--noPS {dangles} --noLP -C {param_file} "{infile}"'
+    cdef list mfe = rna.mfe()
+    cdef str bracket_string = mfe[0]
+    cdef double energy = round(mfe[1], 2)
 
-        #Call ViennaRNA C programs
-        cmd = "RNAfold "
-        output = subprocess.Popen(cmd + args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines = True) #newlines argument was added because subprocess.popen was appending b's to the list output (byte stuff? I dont totally understand)
-        std_out = output.communicate()[0]
-        #output.tochild.write(input_string)
-
-        while output.poll() is None:
-            try:
-                output.wait()
-                time.sleep(0.001)
-            except:
-                break
-
-        #if debug == 1: print(output.stdout.read())
-
-        #Skip the unnecessary output lines
-        #line = output.stdout.read()
-        #print(std_out)
-
-        line = std_out
-        words = line.split()
-        #print("These are the mfe value for " + str(words))
-        bracket_string = words[1]
-        #print(bracket_string)
-        #print("This is the bracket string " + str(bracket_string))
-        bp_x, bp_y = convert_bracket_to_numbered_pairs(bracket_string)
-        #print(strands, bp_x, bp_y)
-
-        energy = float(words[len(words)-1].replace(")","").replace("(","").replace("\n",""))
-
-        #print "Minimum free energy secondary structure has been calculated."
-    finally:
-        # Delete temp
-        if os.path.exists(infile):
-            os.remove(infile)
+    bp_x, bp_y = convert_bracket_to_numbered_pairs(bracket_string)
 
     cdef array.array mfe_basepairing_x = array.array('i', bp_x)
     cdef array.array mfe_basepairing_y = array.array('i', bp_y)
     cdef double mfe_energy = energy
-            
+
     return mfe_basepairing_x, mfe_basepairing_y, mfe_energy
 
 
@@ -344,12 +292,10 @@ cdef convert_bracket_to_numbered_pairs(bracket_string):
         print("Error! Leftover unpaired nucleotides when converting from bracket notation to numbered base pairs.")
 
     if len(bp_y) > 1:
-        bp_x = [pos+1 for pos in bp_x[:]] #Shift so that 1st position is 1
-        bp_y = [pos+1 for pos in bp_y[:]] #Shift so that 1st position is 1
+        bp_x = [int(pos+1) for pos in bp_x[:]] #Shift so that 1st position is 1
+        bp_y = [int(pos+1) for pos in bp_y[:]] #Shift so that 1st position is 1
         #print("subopt bp_x " + str(bp_x))
         #print("subopt bp_y " + str(bp_y))
-        bp_x = np.array(bp_x)
-        bp_y = np.array(bp_y)
 
     return bp_x, bp_y
 

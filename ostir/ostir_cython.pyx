@@ -251,10 +251,12 @@ def calc_dG_standby_site(structure_old, dangles, standby_site_length, constraint
     mRNA = structure["mRNA"]
     bp_x = structure["bp_x"]
     bp_y = structure["bp_y"]
-    energy_before = structure["dG_mRNA_rRNA"]  # without spacing effects
+    cdef float energy_before = structure["dG_mRNA_rRNA"]  # without spacing effects
+
+    cdef int nt_x, nt_y
 
     # Identify the most 5p mRNA nt that is bound to rRNA
-    most_5p_mRNA = 0
+    cdef int most_5p_mRNA = 0
     for (nt_x, nt_y) in zip(bp_x, bp_y):
         if nt_x <= len(mRNA) and nt_y > len(mRNA):  # nt_x is mRNA, nt_y is rRNA, they are bound.
             most_5p_mRNA = nt_x  # starts counting from 0
@@ -299,9 +301,9 @@ def calc_dG_standby_site(structure_old, dangles, standby_site_length, constraint
 
     # Calculate its energy
     fold = ViennaRNA([mRNA, rRNA], material=RNA_model)
-    energy_after = energy([mRNA, rRNA], bp_x_after, bp_y_after, dangles=dangles, Temp=ostir_constants.temp)
+    cdef double energy_after = energy([mRNA, rRNA], bp_x_after, bp_y_after, dangles=dangles, Temp=ostir_constants.temp)
 
-    dG_standby_site = energy_before - energy_after
+    cdef double dG_standby_site = energy_before - energy_after
 
     if dG_standby_site > 0.0:
         dG_standby_site = 0.0
@@ -435,7 +437,7 @@ def calc_dG_mRNA_rRNA(str mRNA_in, str rRNA, int start_pos, str dangles, str con
         nt_x = bp_x[i]
         nt_y = bp_y[i]
         if nt_y > len(mRNA):  # nt is rRNA
-            index_match = np.where(bp_y == nt_y)[0][0]
+            index_match = bp_y.index(nt_y)
             most_5p_mRNA = min(most_5p_mRNA, bp_x[index_match])
             most_3p_mRNA = max(most_3p_mRNA, bp_x[index_match])
             bp_x_target.append(nt_x)
@@ -562,15 +564,13 @@ cdef double calc_dG_spacing(double aligned_spacing): # TODO: cythonize
     return dG_spacing_penalty
 
 
-cdef double calc_aligned_spacing(str rRNA, str mRNA, int start_pos, bp_x, bp_y):  # TODO: cythonize
+cdef double calc_aligned_spacing(str rRNA, str mRNA, int start_pos, list bp_x, list bp_y):  # TODO: cythonize
     """Calculates the aligned spacing between the 16S rRNA binding site and the start codon."""
 
     # rRNA is the concatenated at the end of the sequence in 5' to 3' direction
     # first: identify the farthest 3' nt in the rRNA that binds to the mRNA and return its mRNA base pairer
     cdef bint Ok
-    cdef int rRNA_len, rRNA_nt, seq_len, loop_end, distance_to_start, mRNA_nt, farthest_3_prime_rRNA
-
-
+    cdef int rRNA_len, rRNA_nt, seq_len, loop_end, distance_to_start, mRNA_nt, farthest_3_prime_rRNA, rRNA_pos, x_start
 
     rRNA_len = len(rRNA)
     Ok = False
@@ -581,8 +581,9 @@ cdef double calc_aligned_spacing(str rRNA, str mRNA, int start_pos, bp_x, bp_y):
     for rRNA_nt in range(seq_len, loop_end, -1):
 
         if rRNA_nt in bp_y:
-            rRNA_pos = np.where(bp_y == rRNA_nt)
-            if bp_x[rRNA_pos] < start_pos:
+            rRNA_pos = bp_y.index(rRNA_nt)
+            x_start = bp_x[rRNA_pos]
+            if x_start < start_pos:
                 Ok = True
                 farthest_3_prime_rRNA = rRNA_nt - len(mRNA)
 
@@ -592,6 +593,8 @@ cdef double calc_aligned_spacing(str rRNA, str mRNA, int start_pos, bp_x, bp_y):
                 break
             else:
                 break
+    
+    cdef double aligned_spacing
     
     if Ok:
         aligned_spacing = distance_to_start - farthest_3_prime_rRNA
