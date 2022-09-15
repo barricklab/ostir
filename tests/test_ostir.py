@@ -35,11 +35,14 @@ def csv_are_identical(csv_file_path_1, csv_file_path_2):
         print(f'CSVs are different lengths')
         failed = True
 
+    differences = []
     for i in range(0, len(csv_1_contents)):
         if csv_1_contents[i] != csv_2_contents[i]:
             # print(csv_1_rows[i], "\n!=\n",csv_1_rows[i])
-            print(f'CSVs have different values at row {i}')
-            failed = True
+            differences.append(i)
+    if differences:
+        print(f'CSVs have {len(differences)} different values at rows {differences}')
+        failed = True
 
     if failed == True:
         return False

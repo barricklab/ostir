@@ -3,10 +3,9 @@
 import math
 from dataclasses import dataclass
 from copy import deepcopy
-from .ViennaRNA import ViennaRNA, subopt, mfe
+from .ViennaRNA import ViennaRNA, subopt, mfe, energy
 import numpy as np
 from datetime import datetime
-from .ViennaRNA cimport energy
 
 @dataclass
 class OstirConstants():
@@ -251,7 +250,7 @@ def calc_dG_standby_site(structure_old, dangles, standby_site_length, constraint
     mRNA = structure["mRNA"]
     bp_x = structure["bp_x"]
     bp_y = structure["bp_y"]
-    cdef float energy_before = structure["dG_mRNA_rRNA"]  # without spacing effects
+    cdef double energy_before = structure["dG_mRNA_rRNA"]  # without spacing effects
 
     cdef int nt_x, nt_y
 
@@ -304,9 +303,9 @@ def calc_dG_standby_site(structure_old, dangles, standby_site_length, constraint
     cdef double energy_after = energy([mRNA, rRNA], bp_x_after, bp_y_after, dangles=dangles, Temp=ostir_constants.temp)
 
     cdef double dG_standby_site = energy_before - energy_after
-
     if dG_standby_site > 0.0:
         dG_standby_site = 0.0
+    # catch negative 0
 
     index = structure["MinStructureID"]
 
