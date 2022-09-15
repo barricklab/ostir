@@ -83,6 +83,17 @@ def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some", ou
     #seq_string = self["sequences"][0]
 
     #print(f'SEQ STRING: {seq_string}')
+
+    cdef object params = get_paramater_object(vienna_constants.material, temp, dangles, noLP = 1)
+    seq_string = "&".join(sequences).upper().replace("T", "U")
+
+    cdef object rna = RNA.fold_compound(seq_string, params)
+    subopt = rna.subopt(int((energy_gap+2.481)*100))
+    subopt_output = [[str(output.structure), str(round(output.energy, 3))] for output in subopt]
+
+
+
+
     constraints = None
     if constraints is None:
         input_string = seq_string + "\n"
@@ -148,6 +159,8 @@ def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some", ou
         findings = line.split("\n")
         findings = findings[1:]
         findings = [x.split() for x in findings]
+
+        findings = subopt_output
         
         identified_findings = []
         if len(sequences) > 1:
@@ -168,7 +181,7 @@ def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some", ou
     return subopt_energy, subopt_basepairing_x, subopt_basepairing_y
 
 
-cpdef double energy(list sequences, list base_pairing_x, list base_pairing_y, float Temp, str dangles): 
+def energy(list sequences, list base_pairing_x, list base_pairing_y, float Temp, str dangles): 
     if Temp <= 0: raise ValueError("The specified temperature must be greater than zero.")
     cdef str seq_string, cmd
     cdef object args
