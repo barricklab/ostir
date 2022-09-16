@@ -11,6 +11,9 @@ import RNA
 from functools import cache
 from cpython cimport array
 import array
+import math
+from pkgutil import get_data
+import sys
 
 #  On import check dependencies
 dependencies = [which('RNAfold') is not None,
@@ -27,7 +30,6 @@ class ViennaConstants():
     debug = 0
     RT = 0.61597
     material = 'rna2004'
-    install_location = os.path.dirname(os.path.realpath(__file__))
 
 vienna_constants = ViennaConstants()
 
@@ -91,100 +93,31 @@ def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some", ou
     subopt = rna.subopt(int((energy_gap+2.481)*100))
     subopt_output = [[str(output.structure), str(round(output.energy, 3))] for output in subopt]
 
+    subopt_energy = []
+    subopt_basepairing_x = []
+    subopt_basepairing_y = []
 
-
-
-    constraints = None
-    if constraints is None:
-        input_string = seq_string + "\n"
+    identified_findings = []
+    if len(sequences) > 1:
+        subopt_output = process_fold_outputs(subopt_output, multi_sequence=True)
     else:
-        input_string = seq_string + "\n" + constraints + "&........." "\n"
+        subopt_output = process_fold_outputs(subopt_output, multi_sequence=False)
 
-    try:
-        handle, infile = tempfile.mkstemp()
-        handle = os.fdopen(handle, "w")
-        handle.write(input_string)
-        handle.close()
-
-        #Set arguments
-        param_file = vienna_constants.material
-        param_file = f"-P {param_file}" if param_file else ""
-
-        if dangles == "none":
-            dangles = " -d0 "
-        elif dangles == "some":
-            dangles = " -d1 "
-        elif dangles == "all":
-            dangles = " -d2 "
-
-        if outputPS:
-            outputPS_str = ""
-        else:
-            outputPS_str = " -noPS "
-
-        #Call ViennaRNA C programs
-
-        cmd = "RNAsubopt"
-        energy_gap = energy_gap + 2.481
-        if constraints is None:
-            args = f' -e {str(energy_gap)} -T {str(temp)} {dangles} --sorted --en-only --noLP {param_file} < "{infile}"'
-        else:
-            args = f' -e {str(energy_gap)} -T {str(temp)} {dangles} --sorted --en-only --noLP -C {param_file} < "{infile}"'
-
-        #print(cmd + args + f" ({input_string})")
-        output = subprocess.Popen(cmd + args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines = True) #newlines argument was added because subprocess.popen was appending b's to the list output (byte stuff? I dont totally understand)
-        std_out = output.communicate()[0]
-        #output.tochild.write(input_string)
-
-        while output.poll() is None:
-            try:
-                output.wait()
-                time.sleep(0.001)
-            except:
-                break
-
-        if debug == 1:
-            print(output.stdout.read())
-
-        #Skip unnecessary line
-        #line = output.std_out.readline()
-        line = std_out
-
-        subopt_energy = []
-        subopt_basepairing_x = []
-        subopt_basepairing_y = []
-
-
-        #print(f"Line: {line}")
-        findings = line.split("\n")
-        findings = findings[1:]
-        findings = [x.split() for x in findings]
-
-        findings = subopt_output
+    for finding in subopt_output:
         
-        identified_findings = []
-        if len(sequences) > 1:
-            findings = process_fold_outputs(findings, multi_sequence=True)
-        else:
-            findings = process_fold_outputs(findings, multi_sequence=False)
+        subopt_energy.append(float(finding[1]))
+        subopt_basepairing_x.append(finding[2])
+        subopt_basepairing_y.append(finding[3])
 
-        for finding in findings:
 
-            subopt_energy.append(float(finding[1]))
-            subopt_basepairing_x.append(finding[2])
-            subopt_basepairing_y.append(finding[3])
-
-    finally:
-        if os.path.exists(infile):
-            os.remove(infile)
-    #print(subopt_energy[0], subopt_basepairing_x[0], subopt_basepairing_y[0])
     return subopt_energy, subopt_basepairing_x, subopt_basepairing_y
 
 
 def energy(list sequences, list base_pairing_x, list base_pairing_y, float Temp, str dangles): 
     if Temp <= 0: raise ValueError("The specified temperature must be greater than zero.")
+    temp = Temp
     cdef str seq_string, cmd
-    cdef object args
+    cdef object args, params, rna
 
 
     seq_string = "&".join(sequences)
@@ -192,57 +125,14 @@ def energy(list sequences, list base_pairing_x, list base_pairing_y, float Temp,
     bracket_string = convert_numbered_pairs_to_bracket(strands,base_pairing_x,base_pairing_y)
     input_string = seq_string + "\n" + bracket_string + "\n"
 
-    #print(seq_string,strands, bracket_string, input_string)
-    try:
-        handle, infile = tempfile.mkstemp()
-        handle = os.fdopen(handle, "w")
-        handle.write(input_string)
-        handle.close()
-    
-        #Set arguments
-        param_file = vienna_constants.material
-        param_file = f"-P {param_file}" if param_file else ""
 
-        if dangles == "none":
-            dangles = "-d0"
-        elif dangles == "some":
-            dangles = "-d1"
-        elif dangles == "all":
-            dangles = "-d2"
+    params = get_paramater_object(vienna_constants.material, temp, dangles, noLP = 1)
+    seq_string = "&".join(sequences).upper().replace("T", "U")
 
-        #Call ViennaRNA C programs
-        cmd = "RNAeval"
-        args = f' {dangles} {param_file} "{infile}"'
-        #print(cmd + args)
+    rna = RNA.fold_compound(seq_string, params)
+    result = rna.eval_structure(bracket_string.replace("&", ""))
 
-        output = subprocess.Popen(cmd + args, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines = True) #newlines argument was added because subprocess.popen was appending b's to the list output (byte stuff? I dont totally understand)
-
-
-        while output.poll() is None:
-            try:
-                output.wait()
-                time.sleep(0.001)
-            except:
-                break
-
-        #if debug == 1: print output.fromchild.read()
-        std_out = output.communicate()[0]
-        #print(std_out)
-
-
-        line = std_out
-        words = line.split()
-        #print(line, words)
-        if not words:
-            raise ValueError('Could not catch the output of RNAeval. Is Vienna installed and in your PATH?')
-        energy = float(words[-1].replace("(", "").replace(")", "").replace("\n", ""))
-
-    finally:
-        if os.path.exists(infile):
-            os.remove(infile)
-
-    if type(energy) != float:
-        print(type(energy), energy)
+    energy = round(result, 2)
     return energy
 
 
@@ -354,11 +244,10 @@ cdef process_fold_outputs(findings, multi_sequence = False):
 
 cdef object get_paramater_file(object parameter):
     cdef object filepath
-    cdef object install_location = vienna_constants.install_location
     if parameter == 'rna1999':
-        filepath = f"{install_location}/rna_turner1999.par"
+        filepath = os.path.dirname(sys.modules['ostir'].__file__)+'/rna_turner1999.par'
     elif parameter == 'rna2004':
-        filepath = f"{install_location}/rna_turner2004.par"
+        filepath = os.path.dirname(sys.modules['ostir'].__file__)+'/rna_turner2004.par'
     else:
         filepath = ''
     return filepath
