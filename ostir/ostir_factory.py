@@ -19,17 +19,13 @@ Copyright 2008-2009 is owned by the University of California Regents. All rights
 """
 
 
-from lib2to3.pytree import convert
 import re
 import math
 import os
 import concurrent.futures
-from dataclasses import dataclass
-from copy import copy, deepcopy
 import pyximport; pyximport.install()
+from dataclasses import dataclass
 from .ostir_cython import calc_longest_loop_bulge, calc_longest_helix, calc_kinetic_score, calc_dG_standby_site, find_start_codons, calc_dG_mRNA, calc_dG_mRNA_rRNA, calc_expression_level, cutoff_mRNA
-from .ViennaRNA import ViennaRNA
-import numpy as np
 
 class CalcError(Exception):
     """Base class for exceptions in this module."""
@@ -104,7 +100,7 @@ class OSTIRResult():
 
 class OSTIRFactory:
     """Class for calculating the rate of translation initiation of a given mRNA sequence"""
-    def __init__(self, mRNA, start_range, rRNA, constraints, verbose=False, decimal_places=4, name="unnamed"):
+    def __init__(self, mRNA, start_range, rRNA, constraints, verbose=False, decimal_places=4, circular=False, name="unnamed"):
         """
         Initializes the RBS Calculator class with the mRNA sequence and the range of start codon positions considered.
         start_range is a pair of 1-indexed positions
@@ -144,6 +140,7 @@ class OSTIRFactory:
         downstream of the start codon. Here, we assume that the entire post-start RNA
         sequence does not form secondary structures once the 30S complex has bound.
         """
+        self.circular = circular
 
         # NuPACK.__init__(self,sequences,self.RNA_model)
         exp = re.compile('[ATGCU._]', re.IGNORECASE)
@@ -177,8 +174,15 @@ class OSTIRFactory:
     def calc_dG(self):
         """Calculates each dG term in the free energy model and sums them together to create dG_total"""
 
+        mRNA_length = len(self.mRNA_input)
+        if self.circular:
+            if mRNA_length > 200:
+                self.mRNA_input = self.mRNA_input + self.mRNA_input[:200]
+            else:
+                self.mRNA_input = self.mRNA_input + self.mRNA_input[:mRNA_length]
+
         parallelizer_arguments = [[], [], []]
-        for _, (start_pos, codon) in enumerate(find_start_codons(self.mRNA_input, self.start_range)):
+        for _, (start_pos, codon) in enumerate(find_start_codons(self.mRNA_input[:mRNA_length], self.start_range)):
             parallelizer_arguments[0].append(self)
             parallelizer_arguments[1].append(start_pos)
             parallelizer_arguments[2].append(codon)

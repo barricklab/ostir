@@ -1,5 +1,4 @@
 import subprocess, time
-import tempfile
 from shutil import which
 import warnings
 import os

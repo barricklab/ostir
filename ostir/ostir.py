@@ -5,16 +5,14 @@
 
 
 import argparse
-import math
 import os
 import sys
-from pathlib import Path
 import subprocess
 import csv
 import re
 from shutil import which
 from warnings import warn
-import numpy as np
+from pathlib import Path
 
 
 try:
@@ -28,7 +26,7 @@ oldest_vienna = '2.4.18'
 # The E. coli sequence
 Ecoli_anti_Shine_Dalgarno = 'ACCTCCTTA'
 
-def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, decimal_places=4, verbose=False):
+def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, decimal_places=4, circular=False, verbose=False):
     '''Takes an RNA with optional parameters and returns binding energies.
         Keyword arguments:
         seq -- Sequence to calculate binding energies for
@@ -103,7 +101,7 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
 
     constraints = None #set to account for constrains positional argument in OSTIRFactory class
 
-    calcObj = OSTIRFactory(seq, start_range_1, aSD, constraints, verbose=verbose) 
+    calcObj = OSTIRFactory(seq, start_range_1, aSD, constraints, circular=circular, verbose=verbose) 
     calcObj.threads = threads
     calcObj.decimal_places = decimal_places
     calcObj.name = name
@@ -154,7 +152,7 @@ def _print_output(outdict):
 
     if not keys:
         print('No binding sites were identified.')
-        exit(0)
+        sys.exit(0)
 
     output_items = ['start_codon', 'start_position', 'expression', 'RBS_distance_bp', 'dG_total', 'dG_rRNA:mRNA', 'dG_mRNA', 'dG_spacing', 'dG_standby', 'dG_start_codon']
     row_format = "{:>16}" * (len(output_items))
@@ -267,6 +265,14 @@ def main():
     )
 
     parser.add_argument(
+        '-c', '--circular',
+        action='store_true',
+        dest='c',
+        required=False,
+        help="Flag the input as circular",
+    )
+
+    parser.add_argument(
         '-q', '--print-anti-Shine-Dalgarno',
         action='store_true',
         dest='q',
@@ -306,16 +312,15 @@ def main():
 
     if options.version:
         print(f'OSTIR version {ostir_version}', file=sys.stderr)
-        exit(1)
+        sys.exit(0)
 
     if not options.i:
         print("Input (-i) required.")
         parser.print_help()
-        exit(1)
+        sys.exit(1)
 
     cmd_kwargs = dict()
     cmd_kwargs['seq'] = options.i
-    cmd_kwargs['detailed_out'] = True
     if options.o:
         outfile = options.o
     else:
@@ -335,6 +340,8 @@ def main():
         cmd_kwargs['print_mRNA_sequence'] = options.p
     if options.q:
         cmd_kwargs['print_aSD_sequence'] = options.q
+    if options.c:
+        cmd_kwargs['circular'] = options.c
 
     # Check if viennaRNA is installed
     dependencies = [which('RNAfold') is not None,
@@ -365,7 +372,7 @@ def main():
     input_type = None
     specified_file_exists = False
     valid_string_check = re.compile('[ATGCU.-]', re.IGNORECASE)
-    if options.t:
+    if options.t:  # Manual override
         if options.t == 'fasta':
             input_type = 'fasta'
         elif options.t == 'csv':
@@ -374,36 +381,32 @@ def main():
             input_type = 'string'
         else:
             print(f'Unsupported file type {options.t}.')
-            exit(1)
-    elif os.path.isfile(cmd_kwargs['seq']) and not input_type:
+            sys.exit(1)
+
+    elif os.path.isfile(cmd_kwargs['seq']) and not input_type:  # Get input type from file name
         filepath_test = Path(cmd_kwargs['seq']).suffix
-        if filepath_test == '.fasta':
-            input_type = 'fasta'
-        elif filepath_test == '.fa':
-            input_type = 'fasta'
-        elif filepath_test == '.fna':
+        if filepath_test in ['.fasta', '.fa', '.fna']:
             input_type = 'fasta'
         elif filepath_test == '.csv':
             input_type = 'csv'
         else:
-            with open(cmd_kwargs['seq'], 'r') as in_file:
+            with open(cmd_kwargs['seq'], 'r') as in_file:   # Try to determine input type from file contents
                 specified_file_exists = True
                 first_line = in_file.readline()
                 if first_line[0] == '>':
                     input_type = 'fasta'
                 elif 'seq' in first_line[0]:
                     input_type = 'csv'
-    elif valid_string_check.match(cmd_kwargs['seq']):
+
+    elif valid_string_check.match(cmd_kwargs['seq']):  # Check to see if input is a valid sequence
         input_type = 'string'
 
-
-
-    if input_type == None:
+    if input_type is None:   # Error out
         if specified_file_exists:
-            print(f'Unable to identify the type of file specified as inout (-i). Please define it using "-t".', file=sys.stderr)
+            print('Unable to identify the type of file specified as inout (-i). Please define it using "-t".', file=sys.stderr)
         else:
-            print(f'Fix input (-i). Provided value does not specify an existing file and is not a valid nucleotide sequence.', file=sys.stderr)
-        exit(1)
+            print('Fix input (-i). Provided value does not specify an existing file and is not a valid nucleotide sequence.', file=sys.stderr)
+        sys.exit(1)
 
 
     # Run OSTIR
@@ -412,7 +415,7 @@ def main():
     ## String input ##############################################################
     if input_type == 'string':
 
-        print(f'Reading input sequence from command line', file=sys.stderr)
+        print('Reading input sequence from command line', file=sys.stderr)
 
         sequence = cmd_kwargs.get('seq')
         name = None
@@ -420,8 +423,16 @@ def main():
         end_loc_1 = cmd_kwargs.get('end')
         aSD = cmd_kwargs.get('aSD')
         verbose = False
+        circular = cmd_kwargs.get('circular')
 
-        output_dict_list = run_ostir(sequence, start=start_loc_1, end=end_loc_1, name=name, aSD=aSD, threads=threads, verbose=verbose)
+        output_dict_list = run_ostir(sequence,
+                                     start=start_loc_1,
+                                     end=end_loc_1,
+                                     name=name,
+                                     aSD=aSD,
+                                     threads=threads,
+                                     circular=circular,
+                                     verbose=verbose)
 
         for output_dict in output_dict_list:
             if cmd_kwargs.get('print_mRNA_sequence'):
@@ -442,9 +453,17 @@ def main():
             start_loc_1 = cmd_kwargs.get('start')
             end_loc_1 = cmd_kwargs.get('end')
             aSD = cmd_kwargs.get('aSD')
+            circular = cmd_kwargs.get('circular')
             verbose = False
 
-            output_dict_list = run_ostir(sequence, start=start_loc_1, end=end_loc_1, name=name, aSD=aSD, threads=threads, verbose=verbose)
+            output_dict_list = run_ostir(sequence,
+                                         start=start_loc_1,
+                                         end=end_loc_1,
+                                         name=name,
+                                         aSD=aSD,
+                                         threads=threads,
+                                         circular=circular,
+                                         verbose=verbose)
 
             for output_dict in output_dict_list:
                 if cmd_kwargs.get('print_mRNA_sequence'):
@@ -477,7 +496,7 @@ def main():
                 sequence = row['sequence']
             else:
                 print(f"Required column 'sequence' or 'seq' not found for CSV file row: {row}")
-                exit(1)
+                sys.exit(1)
 
             # Assign a name if one is not given from name/id columns
             # If empty assign one based on the index
@@ -490,6 +509,7 @@ def main():
             aSD = row.get('anti-shine-dalgarno') #remember, keys lowercased here
             start_loc_1 = row.get('start')
             end_loc_1 = row.get('end')
+            circular = row.get('circular')
 
             # If any of these are not defined or are empty, use command line values as the defaults
             if not aSD:
@@ -498,10 +518,19 @@ def main():
                 start_loc_1 = cmd_kwargs.get('start')
             if not end_loc_1:
                 end_loc_1 = cmd_kwargs.get('end')
+            if not circular:
+                circular = cmd_kwargs.get('circular')
 
             verbose = False
 
-            output_dict_list = run_ostir(sequence, start=start_loc_1, end=end_loc_1, name=name, aSD=aSD, threads=threads, verbose=verbose)
+            output_dict_list = run_ostir(sequence,
+                                         start=start_loc_1,
+                                         end=end_loc_1,
+                                         name=name,
+                                         aSD=aSD,
+                                         threads=threads,
+                                         circular=circular,
+                                         verbose=verbose)
 
             for output_dict in output_dict_list:
                 if cmd_kwargs.get('print_mRNA_sequence'):
