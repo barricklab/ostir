@@ -26,7 +26,7 @@ oldest_vienna = '2.4.18'
 # The E. coli sequence
 Ecoli_anti_Shine_Dalgarno = 'ACCTCCTTA'
 
-def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, decimal_places=4, circular=False, verbose=False):
+def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, decimal_places=4, circular=False, constraints=None, verbose=False):
     '''Takes an RNA with optional parameters and returns binding energies.
         Keyword arguments:
         seq -- Sequence to calculate binding energies for
@@ -39,6 +39,7 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
         aSD -- Defines anti-Shine-Dalgarno sequence: the 9 bp at the 3' end of the 16S rRNA. Defaults to the E. coli sequence.
         threads -- Defines parallel processing workers, roughly equivalent to multithreading cores
         decimal_places -- Precision of numerical output (number of places to the right of the decimal)
+        constraints -- @TODO
         verbose -- Prints debug information
     '''
     #rename to more descriptive vars
@@ -98,8 +99,6 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
     end_loc_1 = int(end_loc_1)
 
     start_range_1 = [start_loc_1, end_loc_1]   
-
-    constraints = None #set to account for constrains positional argument in OSTIRFactory class
 
     calcObj = OSTIRFactory(seq, start_range_1, aSD, constraints, circular=circular, verbose=verbose) 
     calcObj.threads = threads
@@ -175,7 +174,7 @@ def _print_output(outdict):
         print('_________________________________________________')
 
 def save_to_csv(column_names, outdict, outfile):
-    with open(outfile, 'w') as output_file:
+    with open(outfile, 'w', encoding='utf8') as output_file:
         dict_writer = csv.DictWriter(output_file, column_names, lineterminator="\n")
         dict_writer.writeheader()
         dict_writer.writerows(outdict)

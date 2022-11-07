@@ -1,12 +1,12 @@
 import setuptools
-from Cython.Build import cythonize
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+
 setuptools.setup(
     name="OSTIR",
-    version="1.0.6",
+    version="1.0.7",
     author="Cameron Roots, Jeffrey Barrick, Alexandra Lukasiewicz",
     author_email="croots@utexas.edu",
     description="Open Source Transcription Initiation Rates",
@@ -20,6 +20,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.8',
+    install_requires=['numpy'],
     include_package_data=True,
     test_suite="tests",
     entry_points={
@@ -27,6 +28,5 @@ setuptools.setup(
           'ostir = ostir.ostir:main',
         ],
     },
-    ext_modules = cythonize(['ostir/ostir_cython.pyx', 'ostir/ViennaRNA.pyx'])
 
 )

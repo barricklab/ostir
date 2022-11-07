@@ -3,15 +3,11 @@ from shutil import which
 import warnings
 import os
 from operator import itemgetter
-import numpy as np
 from dataclasses import dataclass
 import re
 import RNA
 from functools import cache
-from cpython cimport array
 import array
-import math
-from pkgutil import get_data
 import sys
 
 #  On import check dependencies
@@ -37,7 +33,7 @@ vienna_constants = ViennaConstants()
 class ViennaRNA(dict):
 
 
-    def __init__(self, Sequence_List, str material = "rna37"):
+    def __init__(self, Sequence_List, material = "rna37"):
         self.RT = 0.61597 #gas constant times 310 Kelvin (in units of kcal/mol)
 
         for seq in Sequence_List:
@@ -48,28 +44,28 @@ class ViennaRNA(dict):
         self["sequences"] = Sequence_List
 
 
-def mfe(list sequences, str constraints, double temp , str dangles, int basepair=0):
+def mfe(sequences, constraints, temp , dangles, basepair=0):
     '''
     Calculate the MFE of a sequence using ViennaRNA as a module
     '''
 
-    cdef object params = get_paramater_object(vienna_constants.material, temp, dangles, noLP = 1)
-    cdef str seq_string = "&".join(sequences).upper().replace("T", "U")
+    params = get_paramater_object(vienna_constants.material, temp, dangles, noLP = 1)
+    seq_string = "&".join(sequences).upper().replace("T", "U")
 
-    cdef object rna = RNA.fold_compound(seq_string, params)
+    rna = RNA.fold_compound(seq_string, params)
 
     if constraints:
-        rna.constraints_add(constraints)
+        rna.hc_add_from_db(constraints)
 
-    cdef list mfe = rna.mfe()
-    cdef str bracket_string = mfe[0]
-    cdef double energy = round(mfe[1], 2)
+    mfe = rna.mfe()
+    bracket_string = mfe[0]
+    energy = round(mfe[1], 2)
 
     bp_x, bp_y = convert_bracket_to_numbered_pairs(bracket_string)
 
-    cdef array.array mfe_basepairing_x = array.array('i', bp_x)
-    cdef array.array mfe_basepairing_y = array.array('i', bp_y)
-    cdef double mfe_energy = energy
+    mfe_basepairing_x = array.array('i', bp_x)
+    mfe_basepairing_y = array.array('i', bp_y)
+    mfe_energy = energy
 
     return mfe_basepairing_x, mfe_basepairing_y, mfe_energy
 
@@ -85,10 +81,14 @@ def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some", ou
 
     #print(f'SEQ STRING: {seq_string}')
 
-    cdef object params = get_paramater_object(vienna_constants.material, temp, dangles, noLP = 1)
+    params = get_paramater_object(vienna_constants.material, temp, dangles, noLP = 1)
     seq_string = "&".join(sequences).upper().replace("T", "U")
 
-    cdef object rna = RNA.fold_compound(seq_string, params)
+    rna = RNA.fold_compound(seq_string, params)
+
+    if constraints:
+        rna.hc_add_from_db(constraints)
+
     subopt = rna.subopt(int((energy_gap+2.481)*100))
     subopt_output = [[str(output.structure), str(round(output.energy, 3))] for output in subopt]
 
@@ -112,12 +112,9 @@ def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some", ou
     return subopt_energy, subopt_basepairing_x, subopt_basepairing_y
 
 
-def energy(list sequences, list base_pairing_x, list base_pairing_y, float Temp, str dangles): 
+def energy(sequences, base_pairing_x, base_pairing_y, Temp, dangles): 
     if Temp <= 0: raise ValueError("The specified temperature must be greater than zero.")
     temp = Temp
-    cdef str seq_string, cmd
-    cdef object args, params, rna
-
 
     seq_string = "&".join(sequences)
     strands = [len(seq) for seq in sequences]
@@ -135,7 +132,7 @@ def energy(list sequences, list base_pairing_x, list base_pairing_y, float Temp,
     return energy
 
 
-cdef str convert_numbered_pairs_to_bracket(strands, bp_x, bp_y):
+def convert_numbered_pairs_to_bracket(strands, bp_x, bp_y):
 
     bp_x = [pos-1 for pos in bp_x[:]] #Shift so that 1st position is 0
     bp_y = [pos-1 for pos in bp_y[:]] #Shift so that 1st position is 0
@@ -155,7 +152,7 @@ cdef str convert_numbered_pairs_to_bracket(strands, bp_x, bp_y):
 
     return "".join(bracket_notation)
 
-cdef convert_bracket_to_numbered_pairs(bracket_string):
+def convert_bracket_to_numbered_pairs(bracket_string):
 
     all_seq_len = len(bracket_string)
     #print(all_seq_len)
@@ -201,7 +198,7 @@ cdef convert_bracket_to_numbered_pairs(bracket_string):
 
     return bp_x, bp_y
 
-cdef process_fold_outputs(findings, multi_sequence = False):
+def process_fold_outputs(findings, multi_sequence = False):
     filtered_findings = []
     # Earlier vienna versions would report 'folds' without any actual folding when running under WSL.
     # This code provides backwards compatibility for versions with that bug
@@ -241,8 +238,7 @@ cdef process_fold_outputs(findings, multi_sequence = False):
 
     return sorted_findings
 
-cdef object get_paramater_file(object parameter):
-    cdef object filepath
+def get_paramater_file(parameter):
     if parameter == 'rna1999':
         filepath = os.path.dirname(sys.modules['ostir'].__file__)+'/rna_turner1999.par'
     elif parameter == 'rna2004':
@@ -252,8 +248,7 @@ cdef object get_paramater_file(object parameter):
     return filepath
 
 @cache
-def get_paramater_object(object parametersfile, double temp, str dangles, int noLP):
-    cdef object filepath
+def get_paramater_object(parametersfile, temp, dangles, noLP):
     filepath = get_paramater_file(parametersfile)
     RNA.params_load(filepath)
 

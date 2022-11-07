@@ -143,6 +143,28 @@ class test_unit_run_ostir_one_sequence_new_aSD(unittest.TestCase):
         # print(list(expected_result))
         self.assertEqual(test_result, expected_result)
 
+class test_unit_constraints(unittest.TestCase):
+    def test_unit_constraints(self):
+        """
+        Tests running with arbitrary constraints
+        """
+        print("\n" + "Unit test: constraints")
+        test_result = ostir.run_ostir("ACUUCUAAUUUAUUCUAUUUAUUCGCGGAUAUGCAUAGGAGUGCUUCGAUGUCAU", start=31,
+                                      aSD="ACGTCCCTA", constraints=".....xxxx.")
+        expected_result = [{'name': 'unnamed',
+                            'start_codon': 'AUG',
+                            'start_position': 31,
+                            'expression': 886.8033,
+                            'RBS_distance_bp': 4,
+                            'dG_total': 1.2289,
+                            'dG_rRNA:mRNA': -2.581,
+                            'dG_mRNA': -5.0,
+                            'dG_spacing': 0.0039,
+                            'dG_standby': 0.0,
+                            'dG_start_codon': -1.194}]
+
+        self.assertEqual(test_result, expected_result)
+
 
 ##############################################################################################
 # Integration tests (command line calls)
@@ -238,7 +260,6 @@ class test_integration_T7_genome(unittest.TestCase):
         print("\n" + the_command)
         subprocess.call(the_command, shell=True)
         self.assertEqual(True, csv_are_identical(output_path, expected_path))
-
 
 if __name__ == "__main__":
     unittest.main()

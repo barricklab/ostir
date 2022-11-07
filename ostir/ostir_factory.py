@@ -23,7 +23,6 @@ import re
 import math
 import os
 import concurrent.futures
-import pyximport; pyximport.install()
 from dataclasses import dataclass
 from .ostir_cython import calc_longest_loop_bulge, calc_longest_helix, calc_kinetic_score, calc_dG_standby_site, find_start_codons, calc_dG_mRNA, calc_dG_mRNA_rRNA, calc_expression_level, cutoff_mRNA
 
@@ -88,7 +87,6 @@ class OSTIRResult():
             'mRNA_structure': self.mRNA_structure,
             'mRNA_rRNA_uncorrected_structure': self.mRNA_rRNA_uncorrected_structure,
             'mRNA_rRNA_corrected_structure': self.mRNA_rRNA_corrected_structure,
-            'most_5p_mRNA': self.most_5p_mRNA,
             'longest_helix': self.longest_helix,
             'dG_start_energy': self.dG_start_energy,
             'helical_loop': self.helical_loop,
@@ -277,7 +275,9 @@ class OSTIRFactory:
                 kinetic_score=kinetic_score
             )
 
-        except CalcError as msg:
+        except ValueError as msg:
+            if "leaderless start codon" not in str(msg):
+                raise ValueError(msg) from msg
             print(msg)
             parallel_output = None
 

@@ -26,12 +26,12 @@ class OstirConstants():
     dG_spacing_constant_pull = np.array([0.06422042, 0.275640836, 0.0], dtype=np.float64)
     cutoff: int = 35  # number of nt +- start codon considering for folding
     standby_site_length: int = 4  # Number of nt before SD sequence that must be unpaired for ribosome binding
-    start_codons: list = ["ATG", # substituted U for T in actual calcs. Ignores CTG/CUG
+    start_codons: list = ("ATG", # substituted U for T in actual calcs. Ignores CTG/CUG
                              "AUG",
                              "GTG",
                              "GUG",
                              "TTG",
-                             "UUG"]
+                             "UUG")
     footprint: int = 1000
     energy_cutoff: float = 3.0
     verbose: bool = False
@@ -62,17 +62,20 @@ def timer(func):
     return wrapper
 
 
-def calc_longest_loop_bulge(structure, bint output_start_end=False, bint InRBSOnly=False, RBS=None): # Todo: cythonize?
+def calc_longest_loop_bulge(structure, output_start_end=False, InRBSOnly=False, RBS=None): # Todo: cythonize?
     """Calculate the longest helical loop and bulge structure
     (longest contiguous list of un-base paired nucleotides starting and
     ending with a helix (loop -> same helix, bulge -> different helix) in the secondary structure"""
 
+    '''
     cdef int x_1, x_2, y_1, y_2, loop_length, begin_helix, i, end_helix, bp_begin, bp_end, RBS_begin, RBS_end
     cdef list loop_list, helical_loop_list, bulge_loop_start_end, helical_loop_start_end
 
     cdef int loop_start, loop_end
+    '''
     
-    cdef str mRNA = structure["mRNA"]
+    mRNA = structure["mRNA"]
+
     bp_x = structure["bp_x"]
     bp_y = structure["bp_y"]
 
@@ -185,12 +188,14 @@ def calc_longest_loop_bulge(structure, bint output_start_end=False, bint InRBSOn
         return (helical_loop_list, bulge_loop_list)
 
 
-cpdef int calc_longest_helix(structure: ViennaRNA): # TODO: cythonize?
+def calc_longest_helix(structure: ViennaRNA): # TODO: cythonize?
     """Calculate the longest helical structure (longest contiguous list of base pairings)
     in the secondary structure"""
+    '''
     cdef int longest_helix, helix_length
+    '''
 
-    cdef bp_x = structure["bp_x"]
+    bp_x = structure["bp_x"]
     bp_y = structure["bp_y"]
 
     longest_helix = 0
@@ -213,7 +218,7 @@ def calc_kinetic_score(mRNA_in=None, bp_x_in=None, bp_y_in=None):
     because it completely ignores cooperative RNA folding mechanisms, such as zipping or strand
     displacement. Here, we use it to eliminate mRNA sequences that MAY fold slowly."""
 
-    cdef float kinetic_score, min_bp_prob, mrnalen, largest_range_helix
+    
 
     mRNA = mRNA_in
     bp_x = bp_x_in
@@ -250,12 +255,11 @@ def calc_dG_standby_site(structure_old, dangles, standby_site_length, constraint
     mRNA = structure["mRNA"]
     bp_x = structure["bp_x"]
     bp_y = structure["bp_y"]
-    cdef double energy_before = structure["dG_mRNA_rRNA"]  # without spacing effects
+    energy_before = structure["dG_mRNA_rRNA"]  # without spacing effects
 
-    cdef int nt_x, nt_y
 
     # Identify the most 5p mRNA nt that is bound to rRNA
-    cdef int most_5p_mRNA = 0
+    most_5p_mRNA = 0
     for (nt_x, nt_y) in zip(bp_x, bp_y):
         if nt_x <= len(mRNA) and nt_y > len(mRNA):  # nt_x is mRNA, nt_y is rRNA, they are bound.
             most_5p_mRNA = nt_x  # starts counting from 0
@@ -300,9 +304,9 @@ def calc_dG_standby_site(structure_old, dangles, standby_site_length, constraint
 
     # Calculate its energy
     fold = ViennaRNA([mRNA, rRNA], material=RNA_model)
-    cdef double energy_after = energy([mRNA, rRNA], bp_x_after, bp_y_after, dangles=dangles, Temp=ostir_constants.temp)
+    energy_after = energy([mRNA, rRNA], bp_x_after, bp_y_after, dangles=dangles, Temp=ostir_constants.temp)
 
-    cdef double dG_standby_site = energy_before - energy_after
+    dG_standby_site = energy_before - energy_after
     if dG_standby_site > 0.0:
         dG_standby_site = 0.0
     # catch negative 0
@@ -318,13 +322,13 @@ def calc_dG_standby_site(structure_old, dangles, standby_site_length, constraint
     return (dG_standby_site, structure)
 
 
-def calc_dG_mRNA(str mRNA, int start_pos, str dangles, str constraints): # TODO: cythonize
+def calc_dG_mRNA(mRNA, start_pos, dangles, constraints): # TODO: cythonize
     """Calculates the dG_mRNA given the mRNA sequence."""
     mRNA = cutoff_mRNA(mRNA, start_pos)
     
     fold = ViennaRNA([mRNA], ostir_constants.RNA_model)
     if constraints:
-        constraints = constraints[np.max(0,start_pos-ostir_constants.cutoff):np.min(len(mRNA),start_pos+ostir_constants.cutoff)]
+        constraints = constraints[max([0,start_pos-ostir_constants.cutoff]) : min([len(mRNA), start_pos+ostir_constants.cutoff])]
         mfe_basepairing_x, mfe_basepairing_y, mfe_energy = mfe([mRNA], constraints, temp=ostir_constants.temp, dangles=dangles, basepair=start_pos+1)
     else:
         mfe_basepairing_x, mfe_basepairing_y, mfe_energy = mfe([mRNA], None, temp=ostir_constants.temp, dangles=dangles, basepair=start_pos+1)
@@ -345,34 +349,35 @@ def calc_dG_mRNA(str mRNA, int start_pos, str dangles, str constraints): # TODO:
 
 
 
-def calc_dG_mRNA_rRNA(str mRNA_in, str rRNA, int start_pos, str dangles, str constraints):  #  TODO: cythonize. Longest run time.
+def calc_dG_mRNA_rRNA(mRNA_in, rRNA, start_pos, dangles, constraints):  #  TODO: cythonize. Longest run time.
     """Calculates the dG_mRNA_rRNA from the mRNA and rRNA sequence.
     Considers all feasible 16S rRNA binding sites and includes the effects of non-optimal spacing."""
 
     # Collect all constants
+    '''
     cdef int index, i
     cdef bint verbose
     cdef double val, spacing_value
     cdef object subopt_basepairing_x, subopt_basepairing_y
     cdef list aligned_spacing, dG_spacing_list, dG_mRNA_rRNA,  dG_mRNA_rRNA_withspacing
+    '''
+
+    cutoff = ostir_constants.cutoff
+    temp = ostir_constants.temp
+    energy_cutoff = ostir_constants.energy_cutoff
+    RNA_model = ostir_constants.RNA_model
 
 
-    cdef int cutoff = ostir_constants.cutoff
-    cdef int temp = ostir_constants.temp
-    cdef int energy_cutoff = ostir_constants.energy_cutoff
-    cdef str RNA_model = ostir_constants.RNA_model
-
-
-    cdef int begin = max(0, start_pos - cutoff)
-    cdef int mRNA_len = min(len(mRNA_in), start_pos + cutoff)
-    cdef int start_pos_in_subsequence = min(start_pos, cutoff)
-    cdef int startpos_to_end_len = mRNA_len - start_pos_in_subsequence - begin
+    begin = max(0, start_pos - cutoff)
+    mRNA_len = min(len(mRNA_in), start_pos + cutoff)
+    start_pos_in_subsequence = min(start_pos, cutoff)
+    startpos_to_end_len = mRNA_len - start_pos_in_subsequence - begin
 
 
     # 1. identify a list of rRNA-binding sites. Binding sites are hybridizations between the mRNA and rRNA and can include mismatches, bulges, etc. Intra-molecular folding is also allowed within the mRNA. The subopt program is used to generate a list of optimal & suboptimal binding sites.
     # Constraints: the entire rRNA-binding site must be upstream of the start codon
     
-    cdef str mRNA = mRNA_in[begin:start_pos]
+    mRNA = mRNA_in[begin:start_pos]
     if begin == start_pos:
         raise ValueError("Warning: There is a leaderless start codon, which is being ignored.")
 
@@ -391,7 +396,7 @@ def calc_dG_mRNA_rRNA(str mRNA_in, str rRNA, int start_pos, str dangles, str con
 
     # Calculate the aligned spacing for each binding site in the list
     aligned_spacing = []
-    cdef int loop_len = len(subopt_basepairing_x)
+    loop_len = len(subopt_basepairing_x)
     for i in range(loop_len):
         aligned_spacing.append(calc_aligned_spacing(rRNA, mRNA, start_pos_in_subsequence, subopt_basepairing_x[i], subopt_basepairing_y[i]))
 
@@ -518,7 +523,7 @@ def calc_dG_mRNA_rRNA(str mRNA_in, str rRNA, int start_pos, str dangles, str con
 
 
     mRNA = mRNA_in[begin:mRNA_len]
-    fold = ViennaRNA([mRNA, rRNA], material=RNA_model)
+    fold = ViennaRNA([mRNA, rRNA], RNA_model)
 
     total_energy = energy([mRNA, rRNA], total_bp_x, total_bp_y, Temp=temp, dangles=dangles)
 
@@ -538,15 +543,13 @@ def calc_dG_mRNA_rRNA(str mRNA_in, str rRNA, int start_pos, str dangles, str con
     return total_energy_withspacing, structure, spacing_value
 
 
-cdef double calc_dG_spacing(double aligned_spacing): # TODO: cythonize
+def calc_dG_spacing(aligned_spacing): # TODO: cythonize
     """Calculates the dG_spacing according to the value of the aligned spacing.
     This relationship was determined through experiments."""
 
-    cdef int optimal_spacing = ostir_constants.optimal_spacing
-    cdef double [:] push_constants = ostir_constants.dG_spacing_constant_push
-    cdef double [:] pull_constants = ostir_constants.dG_spacing_constant_pull
-    cdef double dG_spacing_penalty
-    cdef double ds
+    optimal_spacing = ostir_constants.optimal_spacing
+    push_constants = ostir_constants.dG_spacing_constant_push
+    pull_constants = ostir_constants.dG_spacing_constant_pull
 
     if aligned_spacing < optimal_spacing:
         ds = aligned_spacing - optimal_spacing
@@ -563,14 +566,12 @@ cdef double calc_dG_spacing(double aligned_spacing): # TODO: cythonize
     return dG_spacing_penalty
 
 
-cdef double calc_aligned_spacing(str rRNA, str mRNA, int start_pos, list bp_x, list bp_y):  # TODO: cythonize
+def calc_aligned_spacing(rRNA, mRNA, start_pos, bp_x, bp_y):  # TODO: cythonize
     """Calculates the aligned spacing between the 16S rRNA binding site and the start codon."""
 
     # rRNA is the concatenated at the end of the sequence in 5' to 3' direction
     # first: identify the farthest 3' nt in the rRNA that binds to the mRNA and return its mRNA base pairer
-    cdef bint Ok
-    cdef int rRNA_len, rRNA_nt, seq_len, loop_end, distance_to_start, mRNA_nt, farthest_3_prime_rRNA, rRNA_pos, x_start
-
+    
     rRNA_len = len(rRNA)
     Ok = False
     seq_len = len(mRNA) + rRNA_len
@@ -593,8 +594,6 @@ cdef double calc_aligned_spacing(str rRNA, str mRNA, int start_pos, list bp_x, l
             else:
                 break
     
-    cdef double aligned_spacing
-    
     if Ok:
         aligned_spacing = distance_to_start - farthest_3_prime_rRNA
     else:
@@ -610,10 +609,8 @@ def calc_expression_level(dG):
     return K * math.exp(-dG / RT_eff)
 
 
-cdef find_min(input_list):
+def find_min(input_list):
     """Finds the minimum of a list of numbers."""
-
-    cdef int i, min_index
 
     min_item = ostir_constants.infinity
     min_index = 0
@@ -642,6 +639,6 @@ def find_start_codons(sequence, start_range):
         else:
             pass
 
-def cutoff_mRNA(str mRNA, int start_pos):
+def cutoff_mRNA(mRNA, start_pos):
     mRNA = mRNA[max(0, start_pos - ostir_constants.cutoff):min(len(mRNA), start_pos + ostir_constants.cutoff)]
     return mRNA
