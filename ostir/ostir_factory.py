@@ -24,7 +24,7 @@ import math
 import os
 import concurrent.futures
 from dataclasses import dataclass
-from .ostir_cython import calc_longest_loop_bulge, calc_longest_helix, calc_kinetic_score, calc_dG_standby_site, find_start_codons, calc_dG_mRNA, calc_dG_mRNA_rRNA, calc_expression_level, cutoff_mRNA
+from .ostir_calculations import calc_longest_loop_bulge, calc_longest_helix, calc_kinetic_score, calc_dG_standby_site, find_start_codons, calc_dG_mRNA, calc_dG_mRNA_rRNA, calc_expression_level, cutoff_mRNA
 
 class CalcError(Exception):
     """Base class for exceptions in this module."""

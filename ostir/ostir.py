@@ -39,7 +39,7 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
         aSD -- Defines anti-Shine-Dalgarno sequence: the 9 bp at the 3' end of the 16S rRNA. Defaults to the E. coli sequence.
         threads -- Defines parallel processing workers, roughly equivalent to multithreading cores
         decimal_places -- Precision of numerical output (number of places to the right of the decimal)
-        constraints -- @TODO
+        constraints -- Folding constraints passed to vienna starting from the cuttoff window (35bp upstream of start codon)
         verbose -- Prints debug information
     '''
     #rename to more descriptive vars
