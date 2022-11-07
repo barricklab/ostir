@@ -87,6 +87,8 @@ def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some", ou
     rna = RNA.fold_compound(seq_string, params)
 
     if constraints:
+        if len(sequences) > 1:
+            constraints = constraints + "."*len(sequences[1])
         rna.hc_add_from_db(constraints)
 
     subopt = rna.subopt(int((energy_gap+2.481)*100))

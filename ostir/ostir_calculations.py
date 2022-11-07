@@ -382,11 +382,15 @@ def calc_dG_mRNA_rRNA(mRNA_in, rRNA, start_pos, dangles, constraints):  #  TODO:
         raise ValueError("Warning: There is a leaderless start codon, which is being ignored.")
 
     #include viennaRNA folding constraints due to binding of global regulator 
-    if constraints:
+
+
+    if constraints and len(constraints) >= len(mRNA):
         constraints = constraints[begin:start_pos] #added so constraints file will be the same as the sequence
-        subopt_energy, subopt_basepairing_x, subopt_basepairing_y = subopt([mRNA, rRNA], constraints , energy_cutoff, dangles=dangles, temp=temp)
+    elif constraints and len(constraints) < len(mRNA):
+        constraints = constraints + "."*(len(mRNA)-len(constraints)) # Fill the rest with dots
     else:
-        subopt_energy, subopt_basepairing_x, subopt_basepairing_y = subopt([mRNA, rRNA], None , energy_cutoff, dangles=dangles, temp=temp)
+        constraints = None
+    subopt_energy, subopt_basepairing_x, subopt_basepairing_y = subopt([mRNA, rRNA], constraints , energy_cutoff, dangles=dangles, temp=temp)
 
 
     if len(subopt_basepairing_x) == 0:
