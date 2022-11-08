@@ -55,7 +55,7 @@ More options and examples are described in the [Wiki Documentation](https://gith
 Run OSTIR on a sequence inside of a Python script:
 
 ```python3
-from ostir.ostir import run_ostir
+from ostir import run_ostir
 
 seq = "ACUUCUAAUUUAUUCUAUUUAUUCGCGGAUAUGCAUAGGAGUGCUUCGAUGUCAU"
 results = run_ostir(seq, name="my_sequence", threads=8)
