@@ -8,5 +8,5 @@ if __name__ == "__main__":
             if line.startswith('>'):
                 continue
             t7_genome_string += line.strip()
-    setup = "from ostir.ostir import run_ostir"
-    print(timeit(f"run_ostir('{t7_genome_string}')", setup=setup, number=1))
+    setup = "from ostir import run_ostir"
+    print(timeit(f"run_ostir('{t7_genome_string}')", setup=setup, number=100))

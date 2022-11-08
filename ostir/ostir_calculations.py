@@ -62,18 +62,11 @@ def timer(func):
     return wrapper
 
 
-def calc_longest_loop_bulge(structure, output_start_end=False, InRBSOnly=False, RBS=None): # Todo: cythonize?
+def calc_longest_loop_bulge(structure, output_start_end=False, InRBSOnly=False, RBS=None):
     """Calculate the longest helical loop and bulge structure
     (longest contiguous list of un-base paired nucleotides starting and
     ending with a helix (loop -> same helix, bulge -> different helix) in the secondary structure"""
 
-    '''
-    cdef int x_1, x_2, y_1, y_2, loop_length, begin_helix, i, end_helix, bp_begin, bp_end, RBS_begin, RBS_end
-    cdef list loop_list, helical_loop_list, bulge_loop_start_end, helical_loop_start_end
-
-    cdef int loop_start, loop_end
-    '''
-    
     mRNA = structure["mRNA"]
 
     bp_x = structure["bp_x"]
@@ -148,7 +141,7 @@ def calc_longest_loop_bulge(structure, output_start_end=False, InRBSOnly=False, 
             # print "begin = ", begin_helix
             # print "end = ", end_helix
 
-            if (np.count_nonzero(bp_x == begin_helix) > 0 and np.count_nonzero(bp_y == end_helix) > 0 and np.where(bp_x == begin_helix) == np.where(bp_y == 
+            if (np.count_nonzero(bp_x == begin_helix) > 0 and np.count_nonzero(bp_y == end_helix) > 0 and np.where(bp_x == begin_helix) == np.where(bp_y ==
                     end_helix)):
                 helical_loop_list.append(loop_length)
                 loop_length = 0
@@ -188,12 +181,9 @@ def calc_longest_loop_bulge(structure, output_start_end=False, InRBSOnly=False, 
         return (helical_loop_list, bulge_loop_list)
 
 
-def calc_longest_helix(structure: ViennaRNA): # TODO: cythonize?
+def calc_longest_helix(structure: ViennaRNA):
     """Calculate the longest helical structure (longest contiguous list of base pairings)
     in the secondary structure"""
-    '''
-    cdef int longest_helix, helix_length
-    '''
 
     bp_x = structure["bp_x"]
     bp_y = structure["bp_y"]
@@ -211,14 +201,13 @@ def calc_longest_helix(structure: ViennaRNA): # TODO: cythonize?
     return longest_helix
 
 
-def calc_kinetic_score(mRNA_in=None, bp_x_in=None, bp_y_in=None): 
+def calc_kinetic_score(mRNA_in=None, bp_x_in=None, bp_y_in=None):
     """Calculate a "kinetic score", a heuristic measure of the maximum time required for
     the mRNA secondary structure to form. This is related to the RNA polymer model by David et. al.
     This heuristic should not be used in any way to quantify the folding kinetics of an mRNA sequence
     because it completely ignores cooperative RNA folding mechanisms, such as zipping or strand
     displacement. Here, we use it to eliminate mRNA sequences that MAY fold slowly."""
 
-    
 
     mRNA = mRNA_in
     bp_x = bp_x_in
@@ -241,7 +230,7 @@ def calc_kinetic_score(mRNA_in=None, bp_x_in=None, bp_y_in=None):
     return kinetic_score, min_bp_prob
 
 
-def calc_dG_standby_site(structure_old, dangles, standby_site_length, constraints, rRNA, RNA_model): # TODO: cythonize second longest
+def calc_dG_standby_site(structure_old, dangles, standby_site_length, constraints, rRNA):
     """Calculates the dG_standby given the structure of the mRNA:rRNA complex
 
     To calculate the mfe structure while disallowing base pairing at the standby site,
@@ -279,13 +268,11 @@ def calc_dG_standby_site(structure_old, dangles, standby_site_length, constraint
         constraint_subsequence = None
     else:
         constraint_subsequence = constraints[0:max(0,most_5p_mRNA - standby_site_length - 1)]
-    standby_site = mRNA[most_5p_mRNA - standby_site_length - 1:most_5p_mRNA]
 
     # Fold it and extract the base pairings
     if (len(mRNA_subsequence)) > 0:
-        fold = ViennaRNA([mRNA_subsequence], material=RNA_model)
-        mfe_basepairing_x, mfe_basepairing_y, _ = mfe([mRNA_subsequence], None, temp=ostir_constants.temp, dangles=dangles)
-        bp_x_5p = mfe_basepairing_x  
+        mfe_basepairing_x, mfe_basepairing_y, _ = mfe([mRNA_subsequence], constraint_subsequence, temp=ostir_constants.temp, dangles=dangles)
+        bp_x_5p = mfe_basepairing_x
         bp_y_5p = mfe_basepairing_y
     else:
         bp_x_5p = []
@@ -303,7 +290,6 @@ def calc_dG_standby_site(structure_old, dangles, standby_site_length, constraint
         bp_y_after.append(nt_y)
 
     # Calculate its energy
-    fold = ViennaRNA([mRNA, rRNA], material=RNA_model)
     energy_after = energy([mRNA, rRNA], bp_x_after, bp_y_after, dangles=dangles, Temp=ostir_constants.temp)
 
     dG_standby_site = energy_before - energy_after
@@ -322,16 +308,16 @@ def calc_dG_standby_site(structure_old, dangles, standby_site_length, constraint
     return (dG_standby_site, structure)
 
 
-def calc_dG_mRNA(mRNA, start_pos, dangles, constraints): # TODO: cythonize
+def calc_dG_mRNA(mRNA, start_pos, dangles, constraints):
     """Calculates the dG_mRNA given the mRNA sequence."""
     mRNA = cutoff_mRNA(mRNA, start_pos)
-    
-    fold = ViennaRNA([mRNA], ostir_constants.RNA_model)
+
+    fold = ViennaRNA([mRNA])
     if constraints:
         constraints = constraints[max([0,start_pos-ostir_constants.cutoff]) : min([len(mRNA), start_pos+ostir_constants.cutoff])]
-        mfe_basepairing_x, mfe_basepairing_y, mfe_energy = mfe([mRNA], constraints, temp=ostir_constants.temp, dangles=dangles, basepair=start_pos+1)
+        mfe_basepairing_x, mfe_basepairing_y, mfe_energy = mfe([mRNA], constraints, temp=ostir_constants.temp, dangles=dangles)
     else:
-        mfe_basepairing_x, mfe_basepairing_y, mfe_energy = mfe([mRNA], None, temp=ostir_constants.temp, dangles=dangles, basepair=start_pos+1)
+        mfe_basepairing_x, mfe_basepairing_y, mfe_energy = mfe([mRNA], None, temp=ostir_constants.temp, dangles=dangles)
 
     structure = fold
     structure["mRNA"] = mRNA
@@ -349,24 +335,14 @@ def calc_dG_mRNA(mRNA, start_pos, dangles, constraints): # TODO: cythonize
 
 
 
-def calc_dG_mRNA_rRNA(mRNA_in, rRNA, start_pos, dangles, constraints):  #  TODO: cythonize. Longest run time.
+def calc_dG_mRNA_rRNA(mRNA_in, rRNA, start_pos, dangles, constraints):
     """Calculates the dG_mRNA_rRNA from the mRNA and rRNA sequence.
     Considers all feasible 16S rRNA binding sites and includes the effects of non-optimal spacing."""
 
     # Collect all constants
-    '''
-    cdef int index, i
-    cdef bint verbose
-    cdef double val, spacing_value
-    cdef object subopt_basepairing_x, subopt_basepairing_y
-    cdef list aligned_spacing, dG_spacing_list, dG_mRNA_rRNA,  dG_mRNA_rRNA_withspacing
-    '''
-
     cutoff = ostir_constants.cutoff
     temp = ostir_constants.temp
     energy_cutoff = ostir_constants.energy_cutoff
-    RNA_model = ostir_constants.RNA_model
-
 
     begin = max(0, start_pos - cutoff)
     mRNA_len = min(len(mRNA_in), start_pos + cutoff)
@@ -376,12 +352,12 @@ def calc_dG_mRNA_rRNA(mRNA_in, rRNA, start_pos, dangles, constraints):  #  TODO:
 
     # 1. identify a list of rRNA-binding sites. Binding sites are hybridizations between the mRNA and rRNA and can include mismatches, bulges, etc. Intra-molecular folding is also allowed within the mRNA. The subopt program is used to generate a list of optimal & suboptimal binding sites.
     # Constraints: the entire rRNA-binding site must be upstream of the start codon
-    
+
     mRNA = mRNA_in[begin:start_pos]
     if begin == start_pos:
         raise ValueError("Warning: There is a leaderless start codon, which is being ignored.")
 
-    #include viennaRNA folding constraints due to binding of global regulator 
+    #include viennaRNA folding constraints due to binding of global regulator
 
 
     if constraints and len(constraints) >= len(mRNA):
@@ -428,7 +404,7 @@ def calc_dG_mRNA_rRNA(mRNA_in, rRNA, start_pos, dangles, constraints):  #  TODO:
     # 4. Identify the 5' and 3' ends of the identified 16S rRNA binding site. Create a base pair list.
 
 
-    
+
     most_5p_mRNA = ostir_constants.infinity
     most_3p_mRNA = -ostir_constants.infinity
 
@@ -450,8 +426,8 @@ def calc_dG_mRNA_rRNA(mRNA_in, rRNA, start_pos, dangles, constraints):  #  TODO:
             most_3p_mRNA = max(most_3p_mRNA, bp_x[index_match])
             bp_x_target.append(nt_x)
             bp_y_target.append(nt_y)
-    
-    
+
+
     """
     The rRNA-binding site is between the nucleotides at positions most_5p_mRNA and most_3p_mRNA
     Now, fold the pre-sequence, rRNA-binding-sequence and post-sequence separately. 
@@ -527,7 +503,7 @@ def calc_dG_mRNA_rRNA(mRNA_in, rRNA, start_pos, dangles, constraints):  #  TODO:
 
 
     mRNA = mRNA_in[begin:mRNA_len]
-    fold = ViennaRNA([mRNA, rRNA], RNA_model)
+    fold = ViennaRNA([mRNA, rRNA])
 
     total_energy = energy([mRNA, rRNA], total_bp_x, total_bp_y, Temp=temp, dangles=dangles)
 
@@ -547,7 +523,7 @@ def calc_dG_mRNA_rRNA(mRNA_in, rRNA, start_pos, dangles, constraints):  #  TODO:
     return total_energy_withspacing, structure, spacing_value
 
 
-def calc_dG_spacing(aligned_spacing): # TODO: cythonize
+def calc_dG_spacing(aligned_spacing):
     """Calculates the dG_spacing according to the value of the aligned spacing.
     This relationship was determined through experiments."""
 
@@ -570,18 +546,18 @@ def calc_dG_spacing(aligned_spacing): # TODO: cythonize
     return dG_spacing_penalty
 
 
-def calc_aligned_spacing(rRNA, mRNA, start_pos, bp_x, bp_y):  # TODO: cythonize
+def calc_aligned_spacing(rRNA, mRNA, start_pos, bp_x, bp_y):
     """Calculates the aligned spacing between the 16S rRNA binding site and the start codon."""
 
     # rRNA is the concatenated at the end of the sequence in 5' to 3' direction
     # first: identify the farthest 3' nt in the rRNA that binds to the mRNA and return its mRNA base pairer
-    
+
     rRNA_len = len(rRNA)
     Ok = False
     seq_len = len(mRNA) + rRNA_len
 
     loop_end = seq_len - rRNA_len
-    
+
     for rRNA_nt in range(seq_len, loop_end, -1):
 
         if rRNA_nt in bp_y:
@@ -597,7 +573,7 @@ def calc_aligned_spacing(rRNA, mRNA, start_pos, bp_x, bp_y):  # TODO: cythonize
                 break
             else:
                 break
-    
+
     if Ok:
         aligned_spacing = distance_to_start - farthest_3_prime_rRNA
     else:

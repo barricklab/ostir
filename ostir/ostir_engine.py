@@ -1,22 +1,18 @@
 #!/usr/bin/env python
-"""Given an mRNA sequence, this Python class predicts the dG_total and translation initiation rate.
+"""
+This module contains an early rewrite of the OSTIRFactory class. It is not yet
+implemented, but it will be used to replace the OSTIRFactory class in the future.
 
-This file is part of the Ribosome Binding Site Calculator.
+Parrellism is more straightforward to implement in function based code, so this
+module turns the class based legacy code into a function based implementation.
 
-The Ribosome Binding Site Calculator is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-The Ribosome Binding Site Calculator is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Ribosome Binding Site Calculator.  If not, see <http://www.gnu.org/licenses/>.
+Some of the codebase of this file originated from the Salis Lab's RBS calculator which is distributed under GPL3.
+See <http://www.gnu.org/licenses/>.
 Copyright 2008-2009 is owned by the University of California Regents. All rights reserved.
 """
+
+raise NotImplementedError("This module is not yet implemented")
+
 from dataclasses import dataclass
 
 @dataclass
@@ -87,7 +83,9 @@ class OSTIRResult():
 class OstirManager():
     """This is the class that accepts sequences, prepares parallelization, and sends parts out for computation.
     Everything here is managed in python, while the actual computation is sent off to cython"""
-
+    def __init__(self):
+        self.start_range_1 = None
+        self.start_codons = None
 
     @staticmethod
     def _job() -> OSTIRResult:
@@ -122,4 +120,3 @@ class OstirManager():
 
     def submit_sequence_file(self):
         pass
-

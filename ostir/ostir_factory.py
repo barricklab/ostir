@@ -1,20 +1,10 @@
 #!/usr/bin/env python
-"""Given an mRNA sequence, this Python class predicts the dG_total and translation initiation rate.
+"""
+This module contains the OSTIRFactory class, which is the main script used to call the ostir calculation functions
+and compile a result. There should be no need to interact with this module directly except in advanced use cases.
 
-This file is part of the Ribosome Binding Site Calculator.
-
-The Ribosome Binding Site Calculator is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-The Ribosome Binding Site Calculator is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Ribosome Binding Site Calculator.  If not, see <http://www.gnu.org/licenses/>.
+Some of the codebase of this file originated from the Salis Lab's RBS calculator which is distributed under GPL3.
+See <http://www.gnu.org/licenses/>.
 Copyright 2008-2009 is owned by the University of California Regents. All rights reserved.
 """
 
@@ -24,7 +14,7 @@ import math
 import os
 import concurrent.futures
 from dataclasses import dataclass
-from .ostir_calculations import calc_longest_loop_bulge, calc_longest_helix, calc_kinetic_score, calc_dG_standby_site, find_start_codons, calc_dG_mRNA, calc_dG_mRNA_rRNA, calc_expression_level, cutoff_mRNA
+from .ostir_calculations import calc_longest_loop_bulge, calc_longest_helix, calc_dG_standby_site, find_start_codons, calc_dG_mRNA, calc_dG_mRNA_rRNA, calc_expression_level
 
 class CalcError(Exception):
     """Base class for exceptions in this module."""
@@ -239,8 +229,7 @@ class OSTIRFactory:
                                                                                     dangles,
                                                                                     factory_obj.standby_site_length,
                                                                                     factory_obj.constraints,
-                                                                                    factory_obj.rRNA,
-                                                                                    factory_obj.RNA_model)
+                                                                                    factory_obj.rRNA)
 
             # Total energy is mRNA:rRNA + start - rRNA - mRNA - standby_site
             dG_total = dG_mRNA_rRNA_withspacing + dG_start_codon - dG_mRNA - dG_standby_site
@@ -248,7 +237,8 @@ class OSTIRFactory:
             # Calculate dG to open SD sequence
             # ddG_SD_open = self.calc_dG_SDopen(mRNA_structure, mRNA_rRNA_structure)
 
-            helical_loop_list, bulge_loop_list = calc_longest_loop_bulge(structure=mRNA_structure)
+            loop_result = calc_longest_loop_bulge(structure=mRNA_structure)
+            helical_loop_list, bulge_loop_list = loop_result[0], loop_result[1]
 
             parallel_output = OSTIRResult(
                 name= factory_obj.name,
@@ -287,4 +277,3 @@ class OSTIRFactory:
 # ----------------------------------------------------------------------------------------------------------
 # End RBS_Calculator class
 # ----------------------------------------------------------------------------------------------------------
-

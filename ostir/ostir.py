@@ -1,7 +1,9 @@
 #!/usr/bin/env python
+'''This module is the main module for the OSTIR package. It contains the run_ostir function for
+high level execution and the CLI interface. To use, run "ostir" in the command line or import
+ostir and run run_ostir.
 
-#Jeff: TODO
-# Move start/end logic into run_ostir
+OSTIR is distributed under GPL3. See <http://www.gnu.org/licenses/>.'''
 
 
 import argparse
@@ -20,8 +22,8 @@ try:
 except ModuleNotFoundError:
     from .ostir_factory import OSTIRFactory
 
-ostir_version = '1.1.0'
-oldest_vienna = '2.4.18'
+OSTIR_VERSION = '1.1.0'
+OLDEST_VIENNA = '2.4.18'
 
 # The E. coli sequence
 Ecoli_anti_Shine_Dalgarno = 'ACCTCCTTA'
@@ -47,17 +49,17 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
     in_end_loc_1 = end
 
     # Set up a default name and sd if not provided
-    if name == None:
+    if name is None:
         name = 'unnamed'
 
-    if aSD == None:
+    if aSD is None:
         aSD = Ecoli_anti_Shine_Dalgarno
 
     # Do some checks on the inputs
 
     # Nucleotide character check
     nucleotides=re.compile('[^ATCGUatcgu]')
-    if (nucleotides.search(aSD) != None):
+    if nucleotides.search(aSD) is not None:
         print(f"ERROR: anti-Shine-Dalgarno sequence provided ({aSD}) contains non-nucleotide characters.\n<<<Sequence ({name}) will be skipped.>>>", file=sys.stderr)
         return []
 
@@ -74,42 +76,42 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
     seq = in_seq.replace(" ", "")
 
     # Nucleotide character check
-    if (nucleotides.search(seq) != None):
+    if nucleotides.search(seq) is not None:
         print(f"ERROR: Input sequence contains non-nucleotide characters.\n<<<Sequence ({name}) will be skipped.>>>", file=sys.stderr)
         return []
 
 
     # Start <= end check
-    if (in_start_loc_1!=None and in_end_loc_1!=None and in_end_loc_1<in_start_loc_1):
+    if in_start_loc_1 is not None and in_end_loc_1 is not None and in_end_loc_1<in_start_loc_1:
         print(f"ERROR: Start location ({in_start_loc_1}) is not less than end location ({in_end_loc_1}).\n<<<Sequence ({name}) will be skipped.>>>", file=sys.stderr)
         return []
 
     # Set up start and end locations to search
     start_loc_1 = in_start_loc_1
-    if start_loc_1==None:
+    if start_loc_1 is None:
         start_loc_1 = 1
     start_loc_1 = int(start_loc_1)
 
     end_loc_1 = in_end_loc_1
-    if end_loc_1==None:
-        if in_start_loc_1==None:
+    if end_loc_1 is None:
+        if in_start_loc_1 is None:
             end_loc_1 = len(seq)
         else:
             end_loc_1 = start_loc_1
     end_loc_1 = int(end_loc_1)
 
-    start_range_1 = [start_loc_1, end_loc_1]   
+    start_range_1 = [start_loc_1, end_loc_1]
 
-    calcObj = OSTIRFactory(seq, start_range_1, aSD, constraints, circular=circular, verbose=verbose) 
+    calcObj = OSTIRFactory(seq, start_range_1, aSD, constraints, circular=circular, verbose=verbose)
     calcObj.threads = threads
     calcObj.decimal_places = decimal_places
     calcObj.name = name
     calcObj.calc_dG()
 
     output_data_list = [result.results() for result in calcObj.results]
-    
+
     output_data_list = sorted(output_data_list, key=lambda x: x['start_position'])
-    
+
     del calcObj  # Send OSTIRFactory to garbage collection, clears temp files
 
     return output_data_list
@@ -119,7 +121,7 @@ def parse_fasta(filepath):
     sequences = []
     current_seq_name = None
     current_seq = ""
-    with open(filepath, 'r') as infile:
+    with open(filepath, 'r', encoding='utf8') as infile:
         for line in infile:
             linestr = str(line)
             if linestr[0] == '>':
@@ -139,7 +141,7 @@ def _print_output(outdict):
     sorted_predictions = {}
     keys = []
     for prediction in outdict:
-        if prediction['name'] in sorted_predictions.keys():
+        if prediction['name'] in sorted_predictions:
             sorted_predictions[prediction['name']].append(prediction)
         else:
             sorted_predictions[prediction['name']] = [prediction]
@@ -167,7 +169,7 @@ def _print_output(outdict):
         for start in sorted_predictions[rna]:
             output_data = [start[key] for key in output_items]
             for i, data_point in enumerate(output_data):
-                if type(data_point) == float:
+                if isinstance(data_point, float):
                     data_point = format(data_point, '.4f')
                     output_data[i] = data_point
             print(row_format.format(*output_data))
@@ -195,7 +197,7 @@ class BlankCommentCSVFile:
 
 def main():
     '''Main OSTIR function ran when called as an executable. See ostir -h.'''
-    parser = argparse.ArgumentParser(description=f'OSTIR (Open Source Translation Initiation Rates) version {ostir_version}')
+    parser = argparse.ArgumentParser(description=f'OSTIR (Open Source Translation Initiation Rates) version {OSTIR_VERSION}')
 
     parser.add_argument(
         '-i', '--input',
@@ -310,7 +312,7 @@ def main():
     options = parser.parse_args()
 
     if options.version:
-        print(f'OSTIR version {ostir_version}', file=sys.stderr)
+        print(f'OSTIR version {OSTIR_VERSION}', file=sys.stderr)
         sys.exit(0)
 
     if not options.i:
@@ -352,18 +354,18 @@ def main():
 
     vienna_version = subprocess.check_output(['RNAfold', '--version'])
     vienna_version = str(vienna_version.strip()).replace("'", "").split(' ')[1]
-    print(f'Running OSTIR version {ostir_version} (with Vienna version: {vienna_version})', file=sys.stderr)
+    print(f'Running OSTIR version {OSTIR_VERSION} (with Vienna version: {vienna_version})', file=sys.stderr)
 
     # Check if the viennaRNA version is recent enough
     vienna_version_split = vienna_version.split('.')
-    global oldest_vienna
-    oldest_vienna_split = oldest_vienna.split('.')
-    warning_string = f'The installed version of ViennaRNA ({vienna_version}) is older than what is supported ({oldest_vienna}).'
-    for i in range(0, len(vienna_version_split)):
-        if vienna_version_split[i] > oldest_vienna_split[i]:
-            warn(f'The installed version of ViennaRNA ({vienna_version}) is new than what is last validated ({oldest_vienna}).')
+    global OLDEST_VIENNA
+    OLDEST_VIENNA_split = OLDEST_VIENNA.split('.')
+    warning_string = f'The installed version of ViennaRNA ({vienna_version}) is older than what is supported ({OLDEST_VIENNA}).'
+    for i, split_digit in enumerate(vienna_version_split):
+        if split_digit > OLDEST_VIENNA_split[i]:
+            warn(f'The installed version of ViennaRNA ({vienna_version}) is new than what is last validated ({OLDEST_VIENNA}).')
             break
-        if vienna_version_split[i] < oldest_vienna_split[i]:
+        if split_digit < OLDEST_VIENNA_split[i]:
             raise EnvironmentError(warning_string)
     # Output data: RNA, Codon, position, dg_total, dg rRNA:mRNA, dg mRNA, dG Spacing, dg Standby, Kinetic Score
 
@@ -389,7 +391,7 @@ def main():
         elif filepath_test == '.csv':
             input_type = 'csv'
         else:
-            with open(cmd_kwargs['seq'], 'r') as in_file:   # Try to determine input type from file contents
+            with open(cmd_kwargs['seq'], 'r', encoding='utf8') as in_file:   # Try to determine input type from file contents
                 specified_file_exists = True
                 first_line = in_file.readline()
                 if first_line[0] == '>':
@@ -500,9 +502,9 @@ def main():
             # Assign a name if one is not given from name/id columns
             # If empty assign one based on the index
             name = row.get('name')
-            if name == None or not name:
+            if not name:
                 name = row.get('id')
-            if name == None or not name:
+            if not name:
                 name="sequence_" + str(on_seq_index)
 
             aSD = row.get('anti-shine-dalgarno') #remember, keys lowercased here

@@ -1,14 +1,21 @@
-import subprocess, time
+"""
+
+Some of the codebase of this file originated from the Salis Lab's RBS calculator which is distributed under GPL3.
+See <http://www.gnu.org/licenses/>.
+Copyright 2008-2009 is owned by the University of California Regents. All rights reserved.
+"""
+
 from shutil import which
-import warnings
-import os
 from operator import itemgetter
 from dataclasses import dataclass
-import re
-import RNA
 from functools import cache
+import warnings
+import os
 import array
 import sys
+import re
+import RNA
+
 
 #  On import check dependencies
 dependencies = [which('RNAfold') is not None,
@@ -33,23 +40,23 @@ vienna_constants = ViennaConstants()
 class ViennaRNA(dict):
 
 
-    def __init__(self, Sequence_List, material = "rna37"):
+    def __init__(self, Sequence_List):
         self.RT = 0.61597 #gas constant times 310 Kelvin (in units of kcal/mol)
 
         for seq in Sequence_List:
-            if re.compile('[ATGCU]', re.IGNORECASE).match(seq) == None:
+            if re.compile('[ATGCU]', re.IGNORECASE).match(seq) is None:
                 error_string = "Invalid letters found in inputted sequences. Only ATGCU allowed. \n Sequence is \"" + str(seq) + "\"."
                 raise ValueError(error_string)
 
         self["sequences"] = Sequence_List
 
 
-def mfe(sequences, constraints, temp , dangles, basepair=0):
+def mfe(sequences, constraints, temp , dangles):
     '''
     Calculate the MFE of a sequence using ViennaRNA as a module
     '''
 
-    params = get_paramater_object(vienna_constants.material, temp, dangles, noLP = 1)
+    params = get_paramater_object(vienna_constants.material, temp, dangles)
     seq_string = "&".join(sequences).upper().replace("T", "U")
 
     rna = RNA.fold_compound(seq_string, params)
@@ -57,20 +64,20 @@ def mfe(sequences, constraints, temp , dangles, basepair=0):
     if constraints:
         rna.hc_add_from_db(constraints)
 
-    mfe = rna.mfe()
-    bracket_string = mfe[0]
-    energy = round(mfe[1], 2)
+    vienna_mfe = rna.mfe()
+    bracket_string = vienna_mfe[0]
+    vienna_energy = round(vienna_mfe[1], 2)
 
     bp_x, bp_y = convert_bracket_to_numbered_pairs(bracket_string)
 
     mfe_basepairing_x = array.array('i', bp_x)
     mfe_basepairing_y = array.array('i', bp_y)
-    mfe_energy = energy
+    mfe_energy = vienna_energy
 
     return mfe_basepairing_x, mfe_basepairing_y, mfe_energy
 
 
-def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some", outputPS = False):
+def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some"):
 
     #self["subopt_composition"] = strands
 
@@ -81,7 +88,7 @@ def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some", ou
 
     #print(f'SEQ STRING: {seq_string}')
 
-    params = get_paramater_object(vienna_constants.material, temp, dangles, noLP = 1)
+    params = get_paramater_object(vienna_constants.material, temp, dangles)
     seq_string = "&".join(sequences).upper().replace("T", "U")
 
     rna = RNA.fold_compound(seq_string, params)
@@ -91,14 +98,13 @@ def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some", ou
             constraints = constraints + "."*len(sequences[1])
         rna.hc_add_from_db(constraints)
 
-    subopt = rna.subopt(int((energy_gap+2.481)*100))
-    subopt_output = [[str(output.structure), str(round(output.energy, 3))] for output in subopt]
+    vienna_subopt = rna.subopt(int((energy_gap+2.481)*100))
+    subopt_output = [[str(output.structure), str(round(output.energy, 3))] for output in vienna_subopt]
 
     subopt_energy = []
     subopt_basepairing_x = []
     subopt_basepairing_y = []
 
-    identified_findings = []
     if len(sequences) > 1:
         subopt_output = process_fold_outputs(subopt_output, multi_sequence=True)
     else:
@@ -121,17 +127,15 @@ def energy(sequences, base_pairing_x, base_pairing_y, Temp, dangles):
     seq_string = "&".join(sequences)
     strands = [len(seq) for seq in sequences]
     bracket_string = convert_numbered_pairs_to_bracket(strands,base_pairing_x,base_pairing_y)
-    input_string = seq_string + "\n" + bracket_string + "\n"
 
-
-    params = get_paramater_object(vienna_constants.material, temp, dangles, noLP = 1)
+    params = get_paramater_object(vienna_constants.material, temp, dangles)
     seq_string = "&".join(sequences).upper().replace("T", "U")
 
     rna = RNA.fold_compound(seq_string, params)
     result = rna.eval_structure(bracket_string.replace("&", ""))
 
-    energy = round(result, 2)
-    return energy
+    vienna_energy = round(result, 2)
+    return vienna_energy
 
 
 def convert_numbered_pairs_to_bracket(strands, bp_x, bp_y):
@@ -156,15 +160,12 @@ def convert_numbered_pairs_to_bracket(strands, bp_x, bp_y):
 
 def convert_bracket_to_numbered_pairs(bracket_string):
 
-    all_seq_len = len(bracket_string)
     #print(all_seq_len)
     bp_x = []
     bp_y = []
-    strands = []
 
-    for y in range(bracket_string.count(")")):
+    for _ in range(bracket_string.count(")")):
         bp_y.append([])
-        #print(bp_y)
 
     last_nt_x_list = []
     num_strands=0
@@ -180,7 +181,7 @@ def convert_bracket_to_numbered_pairs(bracket_string):
         elif letter == ")":
             nt_x = last_nt_x_list.pop() #nt_x is list of "(" except last entry
             #print('this is the last_nt_x_list ' + str(last_nt_x_list.pop()))
-            nt_x_pos = bp_x.index(nt_x) 
+            nt_x_pos = bp_x.index(nt_x)
             bp_y[nt_x_pos] = pos-num_strands
 
         elif letter == "&":
@@ -250,7 +251,7 @@ def get_paramater_file(parameter):
     return filepath
 
 @cache
-def get_paramater_object(parametersfile, temp, dangles, noLP):
+def get_paramater_object(parametersfile, temp, dangles):
     filepath = get_paramater_file(parametersfile)
     RNA.params_load(filepath)
 

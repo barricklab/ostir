@@ -6,8 +6,8 @@ with open("README.md", "r", encoding="utf8") as fh:
 
 setuptools.setup(
     name="OSTIR",
-    version="1.0.7",
-    author="Cameron Roots, Jeffrey Barrick, Alexandra Lukasiewicz",
+    version="1.1.0",
+    author="Cameron Roots, Alexandra Lukasiewicz, Jeffrey Barrick, ",
     author_email="croots@utexas.edu",
     description="Open Source Transcription Initiation Rates",
     long_description=long_description,
