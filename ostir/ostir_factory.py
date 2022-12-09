@@ -13,8 +13,16 @@ import re
 import math
 import os
 import concurrent.futures
+import importlib.util
 from dataclasses import dataclass
 from .ostir_calculations import calc_longest_loop_bulge, calc_longest_helix, calc_dG_standby_site, find_start_codons, calc_dG_mRNA, calc_dG_mRNA_rRNA, calc_expression_level
+
+# Optional dependency
+if importlib.util.find_spec("progress") is not None:
+    from progress.bar import Bar
+else:
+    Bar = None
+
 
 class CalcError(Exception):
     """Base class for exceptions in this module."""
@@ -88,7 +96,7 @@ class OSTIRResult():
 
 class OSTIRFactory:
     """Class for calculating the rate of translation initiation of a given mRNA sequence"""
-    def __init__(self, mRNA, start_range, rRNA, constraints, verbose=False, decimal_places=4, circular=False, name="unnamed"):
+    def __init__(self, mRNA, start_range, rRNA, constraints, verbose="progress", decimal_places=4, circular=False, name="unnamed"):
         """
         Initializes the RBS Calculator class with the mRNA sequence and the range of start codon positions considered.
         start_range is a pair of 1-indexed positions
@@ -169,16 +177,45 @@ class OSTIRFactory:
             else:
                 self.mRNA_input = self.mRNA_input + self.mRNA_input[:mRNA_length]
 
+        # Set up progress bar for optional dependency
+
+        arguments = []
+
         parallelizer_arguments = [[], [], []]
-        for _, (start_pos, codon) in enumerate(find_start_codons(self.mRNA_input[:mRNA_length], self.start_range)):
+        for i, (start_pos, codon) in enumerate(find_start_codons(self.mRNA_input[:mRNA_length], self.start_range)):
             parallelizer_arguments[0].append(self)
             parallelizer_arguments[1].append(start_pos)
             parallelizer_arguments[2].append(codon)
-        if self.threads > 1:
-            with concurrent.futures.ThreadPoolExecutor(max_workers=self.threads) as multiprocessor:
-                parallel_output = multiprocessor.map(self._parallel_dG, *parallelizer_arguments)
+            arguments.append([self, start_pos, codon])
+
+        if Bar and self.verbose:
+            progress_bar = Bar('Running OSTIR RBS Predictions', max=i+1)
         else:
-            parallel_output = map(self._parallel_dG, *parallelizer_arguments)
+            progress_bar = None
+
+
+        if self.threads > 1:
+            with concurrent.futures.ProcessPoolExecutor(max_workers=self.threads) as multiprocessor:
+                #parallel_output = multiprocessor.map(self._parallel_dG, *parallelizer_arguments)
+
+                futures = []
+                for task in arguments:
+                    future_object = multiprocessor.submit(self._parallel_dG, *task)
+                    if progress_bar:
+                        future_object.add_done_callback(lambda x: progress_bar.next())
+                    futures.append(future_object)
+                parallel_output = [future.result() for future in futures]
+                
+
+            progress_bar.finish()
+        else:
+            parallel_output = []
+            for task in arguments:
+                result = self._parallel_dG(*task)
+                parallel_output.append(result)
+                if progress_bar:
+                    progress_bar.next()
+            progress_bar.finish()
 
         parallel_output = [x for x in parallel_output if x is not None]
         self.results = parallel_output

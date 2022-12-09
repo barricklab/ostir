@@ -21,6 +21,8 @@ setuptools.setup(
     ],
     python_requires='>=3.8',
     install_requires=['numpy'],
+    extras_require={"status": ["progress"],
+                    "nice_text": ["rich"],},
     include_package_data=True,
     test_suite="tests",
     entry_points={

@@ -12,6 +12,7 @@ import sys
 import subprocess
 import csv
 import re
+import importlib.util
 from shutil import which
 from warnings import warn
 from pathlib import Path
@@ -22,13 +23,19 @@ try:
 except ModuleNotFoundError:
     from .ostir_factory import OSTIRFactory
 
+# Optional dependency
+if importlib.util.find_spec("rich") is not None:
+    from rich import print as rprint
+else:
+    rprint = None
+
 OSTIR_VERSION = '1.1.0'
 OLDEST_VIENNA = '2.4.18'
 
 # The E. coli sequence
 Ecoli_anti_Shine_Dalgarno = 'ACCTCCTTA'
 
-def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, decimal_places=4, circular=False, constraints=None, verbose=False):
+def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, decimal_places=4, circular=False, constraints=None, verbose='bar'):
     '''Takes an RNA with optional parameters and returns binding energies.
         Keyword arguments:
         seq -- Sequence to calculate binding energies for
@@ -60,12 +67,20 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
     # Nucleotide character check
     nucleotides=re.compile('[^ATCGUatcgu]')
     if nucleotides.search(aSD) is not None:
-        print(f"ERROR: anti-Shine-Dalgarno sequence provided ({aSD}) contains non-nucleotide characters.\n<<<Sequence ({name}) will be skipped.>>>", file=sys.stderr)
+        error_message = f"ERROR: anti-Shine-Dalgarno sequence provided ({aSD}) contains non-nucleotide characters.\n<<<Sequence ({name}) will be skipped.>>>"
+        if not rprint:
+            print(error_message, file=sys.stderr)
+        else:
+            rprint(error_message, style="bold red")
         return []
 
     # Length check
     if len(aSD) != 9:
-        print(f"ERROR: anti-Shine-Dalgarno sequence provided ({aSD}) is not 9 bases.\n<<<Sequence ({name}) will be skipped.>>>", file=sys.stderr)
+        error_message = f"ERROR: anti-Shine-Dalgarno sequence provided ({aSD}) is not 9 bases.\n<<<Sequence ({name}) will be skipped.>>>"
+        if not rprint:
+            print(error_message, file=sys.stderr)
+        else:
+            rprint(error_message, style="bold red")
         return []
 
     #Upper case and convert to RNA
@@ -77,13 +92,21 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
 
     # Nucleotide character check
     if nucleotides.search(seq) is not None:
-        print(f"ERROR: Input sequence contains non-nucleotide characters.\n<<<Sequence ({name}) will be skipped.>>>", file=sys.stderr)
+        error_message = f"ERROR: Input sequence contains non-nucleotide characters.\n<<<Sequence ({name}) will be skipped.>>>"
+        if not rprint:
+            print(error_message, file=sys.stderr)
+        else:
+            rprint(error_message, style="bold red")
         return []
 
 
     # Start <= end check
     if in_start_loc_1 is not None and in_end_loc_1 is not None and in_end_loc_1<in_start_loc_1:
-        print(f"ERROR: Start location ({in_start_loc_1}) is not less than end location ({in_end_loc_1}).\n<<<Sequence ({name}) will be skipped.>>>", file=sys.stderr)
+        error_message = f"ERROR: Start location ({in_start_loc_1}) is not less than end location ({in_end_loc_1}).\n<<<Sequence ({name}) will be skipped.>>>"
+        if not rprint:
+            print(error_message, file=sys.stderr)
+        else:
+            rprint(error_message, style="bold red")
         return []
 
     # Set up start and end locations to search
@@ -152,28 +175,67 @@ def _print_output(outdict):
             keys.append(out_names)
 
     if not keys:
-        print('No binding sites were identified.')
+        if not rprint:
+            print('No binding sites were identified.')
+        else:
+            rprint('No binding sites were identified.', style="bold red")
         sys.exit(0)
-
     output_items = ['start_codon', 'start_position', 'expression', 'RBS_distance_bp', 'dG_total', 'dG_rRNA:mRNA', 'dG_mRNA', 'dG_spacing', 'dG_standby', 'dG_start_codon']
-    row_format = "{:>16}" * (len(output_items))
-    print('_________________________________________________')
-    for rna in keys:
-        rna = rna[0]
-        if len(rna) == 2:
-            print(f'Tested Sequence: {rna[1]}')
-            print(f'Sequence RNA: {rna[0]}')
-        elif len(rna) == 1:
-            print(f'Sequence RNA: {rna[0]}')
-        print(row_format.format(*output_items))
-        for start in sorted_predictions[rna]:
-            output_data = [start[key] for key in output_items]
-            for i, data_point in enumerate(output_data):
-                if isinstance(data_point, float):
-                    data_point = format(data_point, '.4f')
-                    output_data[i] = data_point
-            print(row_format.format(*output_data))
+    if not rprint:
+        row_format = "{:>16}" * (len(output_items))
         print('_________________________________________________')
+        for rna in keys:
+            rna = rna[0]
+            if len(rna) == 2:
+                print(f'Tested Sequence: {rna[1]}')
+                print(f'Sequence RNA: {rna[0]}')
+            elif len(rna) == 1:
+                print(f'Sequence RNA: {rna[0]}')
+            print(row_format.format(*output_items))
+            for start in sorted_predictions[rna]:
+                output_data = [start[key] for key in output_items]
+                for i, data_point in enumerate(output_data):
+                    if isinstance(data_point, float):
+                        data_point = format(data_point, '.4f')
+                        output_data[i] = data_point
+                print(row_format.format(*output_data))
+            print('_________________________________________________')
+    else:
+        from rich.table import Table
+        from rich.console import Console
+        console = Console()
+        for rna in keys:
+            rna = rna[0]
+            if len(rna) == 2:
+                print(f'Tested Sequence: {rna[1]}')
+                print(f'Sequence RNA: {rna[0]}')
+            elif len(rna) == 1:
+                print(f'Sequence RNA: {rna[0]}')
+            table = Table()
+            for item in output_items:
+                table.add_column(item)
+            for start in sorted_predictions[rna]:
+                output_data = [start[key] for key in output_items]
+                for i, data_point in enumerate(output_data):
+                    if isinstance(data_point, float):
+                        data_point = format(data_point, '.4f')
+                        output_data[i] = data_point
+                table.add_row(str(start['start_codon']),
+                              str(start['start_position']),
+                                str(start['expression']),
+                                str(start['RBS_distance_bp']),
+                                str(start['dG_total']),
+                                str(start['dG_rRNA:mRNA']),
+                                str(start['dG_mRNA']),
+                                str(start['dG_spacing']),
+                                str(start['dG_standby']),
+                                str(start['dG_start_codon']))
+
+            console.print(table)
+            
+
+
+
 
 def save_to_csv(column_names, outdict, outfile):
     with open(outfile, 'w', encoding='utf8') as output_file:
@@ -312,11 +374,19 @@ def main():
     options = parser.parse_args()
 
     if options.version:
-        print(f'OSTIR version {OSTIR_VERSION}', file=sys.stderr)
+        print_string = f'OSTIR version {OSTIR_VERSION}'
+        if not rprint:
+            print(print_string, file=sys.stdout)
+        else:
+            rprint(print_string)
         sys.exit(0)
 
     if not options.i:
-        print("Input (-i) required.")
+        print_string = "Input (-i) required."
+        if not rprint:
+            print(print_string, file=sys.stderr)
+        else:
+            rprint(print_string, error=True)
         parser.print_help()
         sys.exit(1)
 
@@ -354,7 +424,11 @@ def main():
 
     vienna_version = subprocess.check_output(['RNAfold', '--version'])
     vienna_version = str(vienna_version.strip()).replace("'", "").split(' ')[1]
-    print(f'Running OSTIR version {OSTIR_VERSION} (with Vienna version: {vienna_version})', file=sys.stderr)
+    print_string = f'Running OSTIR version {OSTIR_VERSION} (with Vienna version: {vienna_version})'
+    if not rprint:
+        print(print_string, file=sys.stdout)
+    else:
+        rprint(print_string)
 
     # Check if the viennaRNA version is recent enough
     vienna_version_split = vienna_version.split('.')
@@ -373,6 +447,7 @@ def main():
     input_type = None
     specified_file_exists = False
     valid_string_check = re.compile('[ATGCU.-]', re.IGNORECASE)
+
     if options.t:  # Manual override
         if options.t == 'fasta':
             input_type = 'fasta'
@@ -381,10 +456,13 @@ def main():
         elif options.t == 'string':
             input_type = 'string'
         else:
-            print(f'Unsupported file type {options.t}.')
+            error_string = f'Unsupported file type {options.t}.'
+            if not rprint:
+                print(error_string, file=sys.stderr)
+            else:
+                rprint(error_string, error=True)
             sys.exit(1)
-
-    elif os.path.isfile(cmd_kwargs['seq']) and not input_type:  # Get input type from file name
+    elif os.path.isfile(options.i) and not input_type:  # Get input type from file name
         filepath_test = Path(cmd_kwargs['seq']).suffix
         if filepath_test in ['.fasta', '.fa', '.fna']:
             input_type = 'fasta'
@@ -404,26 +482,37 @@ def main():
 
     if input_type is None:   # Error out
         if specified_file_exists:
-            print('Unable to identify the type of file specified as inout (-i). Please define it using "-t".', file=sys.stderr)
+            error_string = f'Unable to identify the type of file specified as input (-i). Please define it using "-t".'
+            if not rprint:
+                print(error_string, file=sys.stderr)
+            else:
+                rprint(error_string, error=True)
         else:
-            print('Fix input (-i). Provided value does not specify an existing file and is not a valid nucleotide sequence.', file=sys.stderr)
+            error_string = f'Unable to identify the type of input (-i). Please define it using "-t".'
+            if not rprint:
+                print(error_string, file=sys.stderr)
+            else:
+                rprint(error_string, error=True)
         sys.exit(1)
 
 
     # Run OSTIR
     results = []
-
     ## String input ##############################################################
     if input_type == 'string':
 
-        print('Reading input sequence from command line', file=sys.stderr)
+        print_string = 'Reading input sequence from command line'
+        if not rprint:
+            print(print_string, file=sys.stdout)
+        else:
+            rprint(print_string)
 
         sequence = cmd_kwargs.get('seq')
         name = None
         start_loc_1 = cmd_kwargs.get('start')
         end_loc_1 = cmd_kwargs.get('end')
         aSD = cmd_kwargs.get('aSD')
-        verbose = False
+        verbose = 'bar'
         circular = cmd_kwargs.get('circular')
 
         output_dict_list = run_ostir(sequence,
@@ -446,7 +535,11 @@ def main():
     ## FASTA input ##############################################################
     elif input_type == 'fasta':
         input_file = cmd_kwargs['seq']
-        print(f'Reading FASTA file {input_file}', file=sys.stderr)
+        print_string = f'Reading FASTA file {input_file}'
+        if not rprint:
+            print(print_string, file=sys.stdout)
+        else:
+            rprint(print_string)
         sequence_entries = parse_fasta(input_file)
         for sequence_entry in sequence_entries:
             sequence = sequence_entry[1]
@@ -455,7 +548,7 @@ def main():
             end_loc_1 = cmd_kwargs.get('end')
             aSD = cmd_kwargs.get('aSD')
             circular = cmd_kwargs.get('circular')
-            verbose = False
+            verbose = 'bar'
 
             output_dict_list = run_ostir(sequence,
                                          start=start_loc_1,
@@ -478,7 +571,11 @@ def main():
     ## CSV input ##############################################################
     elif input_type == 'csv':
         input_file = cmd_kwargs['seq']
-        print(f'Reading CSV file {input_file}', file=sys.stderr)
+        print_string = f'Reading CSV file {input_file}'
+        if not rprint:
+            print(print_string, file=sys.stdout)
+        else:
+            rprint(print_string)
         reader = csv.DictReader(BlankCommentCSVFile(open(input_file, 'r', encoding='UTF-8-sig')))
         on_seq_index = 0 #used for giving names if none provided in input file
         for row in reader:
@@ -496,7 +593,11 @@ def main():
             elif 'sequence' in row.keys():
                 sequence = row['sequence']
             else:
-                print(f"Required column 'sequence' or 'seq' not found for CSV file row: {row}")
+                error_string = f"Required column 'sequence' or 'seq' not found for CSV file row: {row}"
+                if not rprint:
+                    print(error_string, file=sys.stderr)
+                else:
+                    rprint(error_string, error=True)
                 sys.exit(1)
 
             # Assign a name if one is not given from name/id columns
@@ -522,7 +623,7 @@ def main():
             if not circular:
                 circular = cmd_kwargs.get('circular')
 
-            verbose = False
+            verbose = 'bar'
 
             output_dict_list = run_ostir(sequence,
                                          start=start_loc_1,
@@ -550,7 +651,11 @@ def main():
         if cmd_kwargs.get('print_aSD_sequence'):
             column_names.insert(1, 'anti-Shine-Dalgarno')
         save_to_csv(column_names, results, outfile)
-        print(f'Results written to {outfile}', file=sys.stderr)
+        print_string = f'Results written to {outfile}'
+        if not rprint:
+            print(print_string, file=sys.stdout)
+        else:
+            rprint(print_string)
     else:
         _print_output(results)
 
