@@ -96,7 +96,7 @@ class OSTIRResult():
 
 class OSTIRFactory:
     """Class for calculating the rate of translation initiation of a given mRNA sequence"""
-    def __init__(self, mRNA, start_range, rRNA, constraints, verbose="progress", decimal_places=4, circular=False, name="unnamed"):
+    def __init__(self, mRNA, start_range, rRNA, constraints, verbosity=0, decimal_places=4, circular=False, name="unnamed"):
         """
         Initializes the RBS Calculator class with the mRNA sequence and the range of start codon positions considered.
         start_range is a pair of 1-indexed positions
@@ -161,7 +161,7 @@ class OSTIRFactory:
         self.total_sequence_length = len(mRNA) + len(self.rRNA)
         self.run = 0
         self.start_range = start_range
-        self.verbose = verbose
+        self.verbosity = verbosity
         self.threads = 1
         self.decimal_places = decimal_places
         self.results = []
@@ -187,8 +187,7 @@ class OSTIRFactory:
             parallelizer_arguments[1].append(start_pos)
             parallelizer_arguments[2].append(codon)
             arguments.append([self, start_pos, codon])
-
-        if Bar and self.verbose:
+        if Bar and self.verbosity > 0:
             progress_bar = Bar('Running OSTIR RBS Predictions', max=i+1)
         else:
             progress_bar = None
@@ -205,9 +204,6 @@ class OSTIRFactory:
                         future_object.add_done_callback(lambda x: progress_bar.next())
                     futures.append(future_object)
                 parallel_output = [future.result() for future in futures]
-                
-
-            progress_bar.finish()
         else:
             parallel_output = []
             for task in arguments:
@@ -215,6 +211,7 @@ class OSTIRFactory:
                 parallel_output.append(result)
                 if progress_bar:
                     progress_bar.next()
+        if progress_bar:
             progress_bar.finish()
 
         parallel_output = [x for x in parallel_output if x is not None]

@@ -16,6 +16,7 @@ import importlib.util
 from shutil import which
 from warnings import warn
 from pathlib import Path
+from .shortcuts import from_csv
 
 
 try:
@@ -35,7 +36,16 @@ OLDEST_VIENNA = '2.4.18'
 # The E. coli sequence
 Ecoli_anti_Shine_Dalgarno = 'ACCTCCTTA'
 
-def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, decimal_places=4, circular=False, constraints=None, verbose='bar'):
+def run_ostir(in_seq,
+              start=None,
+              end=None,
+              name=None,
+              aSD=None,
+              threads=1,
+              decimal_places=4,
+              circular=False,
+              constraints=None,
+              verbosity=0):
     '''Takes an RNA with optional parameters and returns binding energies.
         Keyword arguments:
         seq -- Sequence to calculate binding energies for
@@ -49,7 +59,7 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
         threads -- Defines parallel processing workers, roughly equivalent to multithreading cores
         decimal_places -- Precision of numerical output (number of places to the right of the decimal)
         constraints -- Folding constraints passed to vienna starting from the cuttoff window (35bp upstream of start codon)
-        verbose -- Prints debug information
+        verbosity -- Controls verbosity of output. 0 is silent, 1 is normal, 2 is verbose
     '''
     #rename to more descriptive vars
     in_start_loc_1 = start
@@ -125,7 +135,7 @@ def run_ostir(in_seq, start=None, end=None, name=None, aSD=None, threads=1, deci
 
     start_range_1 = [start_loc_1, end_loc_1]
 
-    calcObj = OSTIRFactory(seq, start_range_1, aSD, constraints, circular=circular, verbose=verbose)
+    calcObj = OSTIRFactory(seq, start_range_1, aSD, constraints, circular=circular, verbosity=verbosity)
     calcObj.threads = threads
     calcObj.decimal_places = decimal_places
     calcObj.name = name
@@ -170,29 +180,34 @@ def _print_output(outdict):
             sorted_predictions[prediction['name']] = [prediction]
             out_names = []
             out_names.append(prediction['name'])
-            if prediction.get('i'):
-                out_names.append(prediction.get('i'))
+            if 'sequence' in prediction:
+                out_names.append(prediction['sequence'])
+            else:
+                out_names.append(None)
+            if 'anti-Shine-Dalgarno' in prediction:
+                out_names.append(prediction['anti-Shine-Dalgarno'])
+            else:
+                out_names.append(None)
             keys.append(out_names)
 
     if not keys:
         if not rprint:
             print('No binding sites were identified.')
         else:
-            rprint('No binding sites were identified.', style="bold red")
+            rprint('[bold red]No binding sites were identified.[/bold red]')
         sys.exit(0)
     output_items = ['start_codon', 'start_position', 'expression', 'RBS_distance_bp', 'dG_total', 'dG_rRNA:mRNA', 'dG_mRNA', 'dG_spacing', 'dG_standby', 'dG_start_codon']
     if not rprint:
         row_format = "{:>16}" * (len(output_items))
         print('_________________________________________________')
         for rna in keys:
-            rna = rna[0]
-            if len(rna) == 2:
+            print(f'\nSample: {rna[0]}')
+            if rna[1]:
                 print(f'Tested Sequence: {rna[1]}')
-                print(f'Sequence RNA: {rna[0]}')
-            elif len(rna) == 1:
-                print(f'Sequence RNA: {rna[0]}')
+            if rna[2]:
+                print(f'Sequence RNA: {rna[2]}')
             print(row_format.format(*output_items))
-            for start in sorted_predictions[rna]:
+            for start in sorted_predictions[rna[0]]:
                 output_data = [start[key] for key in output_items]
                 for i, data_point in enumerate(output_data):
                     if isinstance(data_point, float):
@@ -205,16 +220,15 @@ def _print_output(outdict):
         from rich.console import Console
         console = Console()
         for rna in keys:
-            rna = rna[0]
-            if len(rna) == 2:
+            print(f'\nSample: {rna[0]}')
+            if rna[1]:
                 print(f'Tested Sequence: {rna[1]}')
-                print(f'Sequence RNA: {rna[0]}')
-            elif len(rna) == 1:
-                print(f'Sequence RNA: {rna[0]}')
+            if rna[2]:
+                print(f'Sequence RNA: {rna[2]}')
             table = Table()
             for item in output_items:
                 table.add_column(item)
-            for start in sorted_predictions[rna]:
+            for start in sorted_predictions[rna[0]]:
                 output_data = [start[key] for key in output_items]
                 for i, data_point in enumerate(output_data):
                     if isinstance(data_point, float):
@@ -233,10 +247,6 @@ def _print_output(outdict):
 
             console.print(table)
             
-
-
-
-
 def save_to_csv(column_names, outdict, outfile):
     with open(outfile, 'w', encoding='utf8') as output_file:
         dict_writer = csv.DictWriter(output_file, column_names, lineterminator="\n")
@@ -282,11 +292,13 @@ def main():
     )
 
     parser.add_argument(
-        '-v', '--verbose',
-        action='store_true',
+        '-v', '--versity',
+        action='store',
+        metavar= 'int',
         dest='v',
         required=False,
-        help="Prints verbose output.",
+        default="1",
+        help="Sets the verbosity level. Default 0 is quiet, 1 is normal, 2 is verbose",
     )
 
     parser.add_argument(
@@ -386,7 +398,7 @@ def main():
         if not rprint:
             print(print_string, file=sys.stderr)
         else:
-            rprint(print_string, error=True)
+            rprint(print_string, file=sys.stderr)
         parser.print_help()
         sys.exit(1)
 
@@ -397,8 +409,10 @@ def main():
     else:
         outfile = None
         cmd_kwargs['print_out'] = False
+
     if options.j:
         threads = options.j
+        cmd_kwargs['threads'] = threads
     else:
         threads = 1
     if options.s:
@@ -413,6 +427,18 @@ def main():
         cmd_kwargs['print_aSD_sequence'] = options.q
     if options.c:
         cmd_kwargs['circular'] = options.c
+    if options.v:
+        if options.v not in ["0", "1", "2"]:
+            print_string = "Verbosity (-v) must be 0, 1, or 2."
+            print(options.v)
+            if not rprint:
+                print(print_string, file=sys.stderr)
+            else:
+                rprint(print_string, file=sys.stderr)
+            parser.print_help()
+            sys.exit(1)
+        cmd_kwargs['verbosity'] = int(options.v)
+        verbosity = cmd_kwargs['verbosity']
 
     # Check if viennaRNA is installed
     dependencies = [which('RNAfold') is not None,
@@ -424,11 +450,12 @@ def main():
 
     vienna_version = subprocess.check_output(['RNAfold', '--version'])
     vienna_version = str(vienna_version.strip()).replace("'", "").split(' ')[1]
-    print_string = f'Running OSTIR version {OSTIR_VERSION} (with Vienna version: {vienna_version})'
-    if not rprint:
-        print(print_string, file=sys.stdout)
-    else:
-        rprint(print_string)
+    if verbosity > 0:
+        print_string = f'Running OSTIR version {OSTIR_VERSION} (with Vienna version: {vienna_version})'
+        if not rprint:
+            print(print_string, file=sys.stdout)
+        else:
+            rprint(print_string)
 
     # Check if the viennaRNA version is recent enough
     vienna_version_split = vienna_version.split('.')
@@ -460,7 +487,7 @@ def main():
             if not rprint:
                 print(error_string, file=sys.stderr)
             else:
-                rprint(error_string, error=True)
+                rprint(error_string, file=sys.stderr)
             sys.exit(1)
     elif os.path.isfile(options.i) and not input_type:  # Get input type from file name
         filepath_test = Path(cmd_kwargs['seq']).suffix
@@ -486,13 +513,13 @@ def main():
             if not rprint:
                 print(error_string, file=sys.stderr)
             else:
-                rprint(error_string, error=True)
+                rprint(error_string, file=sys.stderr)
         else:
             error_string = f'Unable to identify the type of input (-i). Please define it using "-t".'
             if not rprint:
                 print(error_string, file=sys.stderr)
             else:
-                rprint(error_string, error=True)
+                rprint(error_string, file=sys.stderr)
         sys.exit(1)
 
 
@@ -500,19 +527,19 @@ def main():
     results = []
     ## String input ##############################################################
     if input_type == 'string':
-
-        print_string = 'Reading input sequence from command line'
-        if not rprint:
-            print(print_string, file=sys.stdout)
-        else:
-            rprint(print_string)
+        if verbosity > 0:
+            print_string = 'Reading input sequence from command line'
+            if not rprint:
+                print(print_string, file=sys.stdout)
+            else:
+                rprint(print_string)
 
         sequence = cmd_kwargs.get('seq')
         name = None
         start_loc_1 = cmd_kwargs.get('start')
         end_loc_1 = cmd_kwargs.get('end')
         aSD = cmd_kwargs.get('aSD')
-        verbose = 'bar'
+        verbosity = cmd_kwargs.get('verbosity')
         circular = cmd_kwargs.get('circular')
 
         output_dict_list = run_ostir(sequence,
@@ -522,7 +549,7 @@ def main():
                                      aSD=aSD,
                                      threads=threads,
                                      circular=circular,
-                                     verbose=verbose)
+                                     verbosity=verbosity)
 
         for output_dict in output_dict_list:
             if cmd_kwargs.get('print_mRNA_sequence'):
@@ -535,11 +562,12 @@ def main():
     ## FASTA input ##############################################################
     elif input_type == 'fasta':
         input_file = cmd_kwargs['seq']
-        print_string = f'Reading FASTA file {input_file}'
-        if not rprint:
-            print(print_string, file=sys.stdout)
-        else:
-            rprint(print_string)
+        if verbosity > 0:
+            print_string = f'Reading FASTA file {input_file}'
+            if not rprint:
+                print(print_string, file=sys.stdout)
+            else:
+                rprint(print_string)
         sequence_entries = parse_fasta(input_file)
         for sequence_entry in sequence_entries:
             sequence = sequence_entry[1]
@@ -548,7 +576,7 @@ def main():
             end_loc_1 = cmd_kwargs.get('end')
             aSD = cmd_kwargs.get('aSD')
             circular = cmd_kwargs.get('circular')
-            verbose = 'bar'
+            verbosity = cmd_kwargs.get('verbosity')
 
             output_dict_list = run_ostir(sequence,
                                          start=start_loc_1,
@@ -557,7 +585,7 @@ def main():
                                          aSD=aSD,
                                          threads=threads,
                                          circular=circular,
-                                         verbose=verbose)
+                                         verbosity=verbosity)
 
             for output_dict in output_dict_list:
                 if cmd_kwargs.get('print_mRNA_sequence'):
@@ -571,76 +599,40 @@ def main():
     ## CSV input ##############################################################
     elif input_type == 'csv':
         input_file = cmd_kwargs['seq']
-        print_string = f'Reading CSV file {input_file}'
-        if not rprint:
-            print(print_string, file=sys.stdout)
-        else:
-            rprint(print_string)
-        reader = csv.DictReader(BlankCommentCSVFile(open(input_file, 'r', encoding='UTF-8-sig')))
-        on_seq_index = 0 #used for giving names if none provided in input file
-        for row in reader:
-            on_seq_index = on_seq_index+1
-
-            #lowercase the keys
-            row = dict((k.lower(), v) for k, v in row.items())
-
-            # for debugging
-            #print(row)
-
-            ## Allow 'sequence' or 'seq'
-            if 'seq' in row.keys():
-                sequence = row['seq']
-            elif 'sequence' in row.keys():
-                sequence = row['sequence']
+        if verbosity > 0:
+            print_string = f'Reading CSV file {input_file}'
+            if not rprint:
+                print(print_string, file=sys.stdout)
             else:
-                error_string = f"Required column 'sequence' or 'seq' not found for CSV file row: {row}"
-                if not rprint:
-                    print(error_string, file=sys.stderr)
-                else:
-                    rprint(error_string, error=True)
-                sys.exit(1)
+                rprint(print_string)
 
-            # Assign a name if one is not given from name/id columns
-            # If empty assign one based on the index
-            name = row.get('name')
-            if not name:
-                name = row.get('id')
-            if not name:
-                name="sequence_" + str(on_seq_index)
+        result = from_csv(csv_file=input_file,
+                        threads=cmd_kwargs.get('threads'),
+                        asd=cmd_kwargs.get('aSD'),
+                        start=cmd_kwargs.get('start'),
+                        end=cmd_kwargs.get('end'),
+                        verbosity=cmd_kwargs.get('verbosity'),
+                        circular=cmd_kwargs.get('circular'),)
 
-            aSD = row.get('anti-shine-dalgarno') #remember, keys lowercased here
-            start_loc_1 = row.get('start')
-            end_loc_1 = row.get('end')
-            circular = row.get('circular')
+        # We also need the metadata from the CSV file
+        run_metadata = []
+        with open(input_file, 'r', encoding='UTF-8-sig') as csv_file:
+            reader = csv.DictReader(BlankCommentCSVFile(csv_file))
+            for row in reader:
+                run_metadata.append(row)
 
-            # If any of these are not defined or are empty, use command line values as the defaults
-            if not aSD:
-                aSD = cmd_kwargs.get('aSD')
-            if not start_loc_1:
-                start_loc_1 = cmd_kwargs.get('start')
-            if not end_loc_1:
-                end_loc_1 = cmd_kwargs.get('end')
-            if not circular:
-                circular = cmd_kwargs.get('circular')
-
-            verbose = 'bar'
-
-            output_dict_list = run_ostir(sequence,
-                                         start=start_loc_1,
-                                         end=end_loc_1,
-                                         name=name,
-                                         aSD=aSD,
-                                         threads=threads,
-                                         circular=circular,
-                                         verbose=verbose)
-
-            for output_dict in output_dict_list:
+        results = []
+        for key, finding in result.items():
+            result_set = []
+            for value in finding:
+                value_dict = value.results()
                 if cmd_kwargs.get('print_mRNA_sequence'):
-                    output_dict['sequence'] = sequence
+                    value_dict['sequence'] = run_metadata[key].get('sequence') or run_metadata[key].get('seq')
                 if cmd_kwargs.get('print_aSD_sequence'):
-                    output_dict['anti-Shine-Dalgarno'] = aSD
-
-            results.extend(output_dict_list)
+                    value_dict['anti-Shine-Dalgarno'] = run_metadata[key].get('anti-Shine-Dalgarno') or run_metadata[key].get('asd') or cmd_kwargs.get('aSD')
+                result_set.append(value_dict)
+            results.extend(result_set)
+        
 
     ## Output - for all ways of running ##############################################################
     if outfile:
@@ -651,11 +643,13 @@ def main():
         if cmd_kwargs.get('print_aSD_sequence'):
             column_names.insert(1, 'anti-Shine-Dalgarno')
         save_to_csv(column_names, results, outfile)
-        print_string = f'Results written to {outfile}'
-        if not rprint:
-            print(print_string, file=sys.stdout)
-        else:
-            rprint(print_string)
+        if cmd_kwargs['verbosity'] > 0:
+            print_string = f'Results written to {outfile}'
+        if cmd_kwargs['verbosity'] > 0:
+            if not rprint:
+                print(print_string, file=sys.stdout)
+            else:
+                rprint(print_string)
     else:
         _print_output(results)
 

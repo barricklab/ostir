@@ -193,7 +193,7 @@ class test_integration_command_line_FASTA_input(unittest.TestCase):
         input_path = os.path.join(THIS_DIR, 'input', 'command_line_FASTA_input.fa')
         output_path = os.path.join(THIS_DIR, 'output', 'command_line_FASTA_input.csv')
         expected_path = os.path.join(THIS_DIR, 'expected', 'command_line_FASTA_input.csv')
-        the_command = f'ostir -j 4 -i "{input_path}" -o "{output_path}"'
+        the_command = f'ostir -j 4 -i "{input_path}" -o "{output_path}" -v 0'
         print("\n" + the_command)
         subprocess.call(the_command, shell=True)
         self.assertEqual(True, csv_are_identical(output_path, expected_path))
@@ -204,7 +204,7 @@ class test_integration_command_line_string_input(unittest.TestCase):
         output_path = os.path.join(THIS_DIR, 'output', 'command_line_string_input.csv')
         expected_path = os.path.join(THIS_DIR, 'expected', 'command_line_string_input.csv')
         input_sequence = "TTCTAGAAAAAAAATAAGGAGGTAAAATGGCGAGCTCTGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATG"
-        the_command = f'ostir -j 4 -p -i "{input_sequence}" -o "{output_path}"'
+        the_command = f'ostir -j 4 -p -i "{input_sequence}" -o "{output_path}" -v 0'
         print("\n" + the_command)
         subprocess.call(the_command, shell=True)
         self.assertEqual(True, csv_are_identical(output_path, expected_path))
@@ -215,7 +215,7 @@ class test_integration_command_line_CSV_input(unittest.TestCase):
         input_path = os.path.join(THIS_DIR, 'input', 'command_line_CSV_input.csv')
         output_path = os.path.join(THIS_DIR, 'output', 'command_line_CSV_input.csv')
         expected_path = os.path.join(THIS_DIR, 'expected', 'command_line_CSV_input.csv')
-        the_command = f'ostir -j 4 -i "{input_path}" -o "{output_path}"'
+        the_command = f'ostir -j 4 -i "{input_path}" -o "{output_path}" -v 0'
         print("\n" + the_command)
         subprocess.call(the_command, shell=True)
         self.assertEqual(True, csv_are_identical(output_path, expected_path))
@@ -226,7 +226,7 @@ class test__integration_command_line_CSV_input_alternate_columns_and_defaults(un
         input_path = os.path.join(THIS_DIR, 'input', 'command_line_CSV_input_alternate_columns_and_defaults.csv')
         output_path = os.path.join(THIS_DIR, 'output', 'command_line_CSV_input_alternate_columns_and_defaults.csv')
         expected_path = os.path.join(THIS_DIR, 'expected', 'command_line_CSV_input_alternate_columns_and_defaults.csv')
-        the_command = f'ostir -j 4 -a TCTGAAGAC -p -q -i "{input_path}" -o "{output_path}"'
+        the_command = f'ostir -j 4 -a TCTGAAGAC -p -q -i "{input_path}" -o "{output_path}" -v 0'
         print("\n" + the_command)
         subprocess.call(the_command, shell=True)
         self.assertEqual(True, csv_are_identical(output_path, expected_path))
@@ -241,7 +241,7 @@ class test_integration_Salis2009(unittest.TestCase):
         input_path = os.path.join(THIS_DIR, 'input', 'Salis2009.csv')
         output_path = os.path.join(THIS_DIR, 'output', 'Salis2009.csv')
         expected_path = os.path.join(THIS_DIR, 'expected', 'Salis2009.csv')
-        the_command = f'ostir -j 8 -p -i "{input_path}" -o "{output_path}"'
+        the_command = f'ostir -j 8 -p -i "{input_path}" -o "{output_path}" -v 0'
         print("\n" + the_command)
         subprocess.call(the_command, shell=True)
         self.assertEqual(True, csv_are_identical(output_path, expected_path))
@@ -256,7 +256,7 @@ class test_integration_T7_genome(unittest.TestCase):
         input_path = os.path.join(THIS_DIR, 'input', 'T7_genome.fasta')
         output_path = os.path.join(THIS_DIR, 'output', 'T7_genome.csv')
         expected_path = os.path.join(THIS_DIR, 'expected', 'T7_genome.csv')
-        the_command = f'ostir -j 8 -i "{input_path}" -o "{output_path}"'
+        the_command = f'ostir -j 8 -i "{input_path}" -o "{output_path}" -v 0'
         print("\n" + the_command)
         subprocess.call(the_command, shell=True)
         self.assertEqual(True, csv_are_identical(output_path, expected_path))
