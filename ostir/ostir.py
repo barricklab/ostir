@@ -30,7 +30,7 @@ if importlib.util.find_spec("rich") is not None:
 else:
     rprint = None
 
-OSTIR_VERSION = '1.1.0'
+OSTIR_VERSION = '1.1.1'
 OLDEST_VIENNA = '2.4.18'
 
 # The E. coli sequence
