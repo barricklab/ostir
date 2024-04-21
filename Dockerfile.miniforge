@@ -1,0 +1,13 @@
+FROM python:latest
+
+RUN curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+
+RUN sed -i 's/.*read -r ans/ans="yes"/g' Miniforge3-$(uname)-$(uname -m).sh
+RUN sed -i 's/.*read -r dummy//g' Miniforge3-$(uname)-$(uname -m).sh
+RUN sed -i 's/.*read -r user_prefix/user_prefix=""/g' Miniforge3-$(uname)-$(uname -m).sh
+
+RUN bash Miniforge3-$(uname)-$(uname -m).sh
+
+RUN /root/miniforge3/bin/conda install -c bioconda ostir
+
+CMD /root/miniforge3/bin/ostir -h

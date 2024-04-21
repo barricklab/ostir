@@ -1,0 +1,14 @@
+FROM python:latest
+
+RUN apt-get update -qq && \
+    apt-get install -y \
+      libgsl27 \
+      libopenblas-dev \
+      liblapacke \
+      liblapack3
+
+RUN wget https://www.tbi.univie.ac.at/RNA/download/ubuntu/ubuntu_23_04/viennarna_2.6.4-1_amd64.deb && \
+    dpkg -i ./viennarna_2.6.4-1_amd64.deb && \
+    pip install ostir
+
+CMD ostir -h

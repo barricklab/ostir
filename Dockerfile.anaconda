@@ -1,0 +1,13 @@
+FROM python:latest
+
+RUN wget https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh
+
+RUN sed -i 's/.*read -r ans/ans="yes"/g' Anaconda3-2024.02-1-Linux-x86_64.sh
+RUN sed -i 's/.*read -r dummy//g' Anaconda3-2024.02-1-Linux-x86_64.sh
+RUN sed -i 's/.*read -r user_prefix/user_prefix=""/g' Anaconda3-2024.02-1-Linux-x86_64.sh
+
+RUN bash Anaconda3-2024.02-1-Linux-x86_64.sh
+
+RUN /root/anaconda3/bin/conda install -c bioconda ostir
+
+CMD /root/anaconda3/bin/ostir -h
