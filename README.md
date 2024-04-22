@@ -18,6 +18,8 @@ execution, accelerating the analysis of very large sequences.
 # Quickstart
 
 ## Installation
+
+### Step by step
 [![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](http://bioconda.github.io/recipes/ostir/README.html)
 
 `OSTIR` is a Python module and associated command line script. We recommend installing `OSTIR` using [Bioconda](https://bioconda.github.io/) on Linux or macOS. This will automatically install `OSTIR` and all of its dependencies, including [ViennaRNA](https://www.tbi.univie.ac.at/RNA/) and the required Python modules.
@@ -30,6 +32,20 @@ From Pip (for experts; Linux, macOS, Windows):
 - Run `pip install ostir`
 
 For information on installing for development see the [Wiki Documentation](https://github.com/barricklab/ostir/wiki/Installation).
+
+### Docker
+For an express run and assuming there is [Docker][] in your system you may:
+
+```
+docker build . -t ostir:latest
+docker run -it ostir
+```
+
+You should see `ostir -h` output
+
+**Note**: By default Dockerfile is linked to Dockerfile.miniforge so that miniforge
+is being used to install conda. If you want any other installer (Miniconda or
+Anaconda), please rename/link at your best convenience.
 
 ## Command Line Usage
 
@@ -64,3 +80,4 @@ print(results)
 
 More options and examples are described in the [Wiki Documentation](https://github.com/barricklab/ostir/wiki/Python-Module-Usage).
 
+  [Docker]: https://get.docker.com/

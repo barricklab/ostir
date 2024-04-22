@@ -1,0 +1,13 @@
+FROM python:latest
+
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+RUN sed -i 's/.*read -r ans/ans="yes"/g' Miniconda3-latest-Linux-x86_64.sh
+RUN sed -i 's/.*read -r dummy//g' Miniconda3-latest-Linux-x86_64.sh
+RUN sed -i 's/.*read -r user_prefix/user_prefix=""/g' Miniconda3-latest-Linux-x86_64.sh
+
+RUN bash Miniconda3-latest-Linux-x86_64.sh
+
+RUN /root/miniconda3/bin/conda install -c bioconda ostir
+
+CMD /root/miniconda3/bin/ostir -h
