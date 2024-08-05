@@ -31,7 +31,7 @@ else:
     rprint = None
 
 OSTIR_VERSION = '1.1.1'
-OLDEST_VIENNA = '2.4.18'
+OLDEST_VIENNA = '2.6.4'
 
 # The E. coli sequence
 Ecoli_anti_Shine_Dalgarno = 'ACCTCCTTA'
@@ -246,7 +246,7 @@ def _print_output(outdict):
                                 str(start['dG_start_codon']))
 
             console.print(table)
-            
+
 def save_to_csv(column_names, outdict, outfile):
     with open(outfile, 'w', encoding='utf8') as output_file:
         dict_writer = csv.DictWriter(output_file, column_names, lineterminator="\n")
@@ -298,7 +298,7 @@ def main():
         dest='v',
         required=False,
         default="1",
-        help="Sets the verbosity level. Default 0 is quiet, 1 is normal, 2 is verbose",
+        help="Sets the verbosity level. 0 is quiet, default 1 is normal, 2 is verbose",
     )
 
     parser.add_argument(
@@ -439,6 +439,8 @@ def main():
             sys.exit(1)
         cmd_kwargs['verbosity'] = int(options.v)
         verbosity = cmd_kwargs['verbosity']
+    else:
+        verbosity = 1
 
     # Check if viennaRNA is installed
     dependencies = [which('RNAfold') is not None,
@@ -632,7 +634,7 @@ def main():
                     value_dict['anti-Shine-Dalgarno'] = run_metadata[key].get('anti-Shine-Dalgarno') or run_metadata[key].get('asd') or cmd_kwargs.get('aSD')
                 result_set.append(value_dict)
             results.extend(result_set)
-        
+
 
     ## Output - for all ways of running ##############################################################
     if outfile:

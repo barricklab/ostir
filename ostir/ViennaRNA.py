@@ -15,7 +15,7 @@ import array
 import sys
 import re
 import RNA
-
+import time
 
 #  On import check dependencies
 dependencies = [which('RNAfold') is not None,
@@ -98,7 +98,15 @@ def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some"):
             constraints = constraints + "."*len(sequences[1])
         rna.hc_add_from_db(constraints)
 
-    vienna_subopt = rna.subopt(int((energy_gap+2.481)*100))
+    # Get ahead of VRNA adjustment to suppress warning
+    _, _, mfe_energy = mfe(sequences, constraints, temp, dangles)
+    threshold = int((energy_gap+2.481)*100)
+    if threshold+mfe_energy*100 > 10_000_000:
+        threshold = -1
+
+    vienna_subopt = rna.subopt(threshold)
+
+    time.sleep(1)
     subopt_output = [[str(output.structure), str(round(output.energy, 3))] for output in vienna_subopt]
 
     subopt_energy = []
@@ -111,7 +119,7 @@ def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some"):
         subopt_output = process_fold_outputs(subopt_output, multi_sequence=False)
 
     for finding in subopt_output:
-        
+
         subopt_energy.append(float(finding[1]))
         subopt_basepairing_x.append(finding[2])
         subopt_basepairing_y.append(finding[3])
@@ -120,7 +128,7 @@ def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some"):
     return subopt_energy, subopt_basepairing_x, subopt_basepairing_y
 
 
-def energy(sequences, base_pairing_x, base_pairing_y, Temp, dangles): 
+def energy(sequences, base_pairing_x, base_pairing_y, Temp, dangles):
     if Temp <= 0: raise ValueError("The specified temperature must be greater than zero.")
     temp = Temp
 
