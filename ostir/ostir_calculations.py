@@ -1,7 +1,8 @@
 # cython: profile=True
 
 import math
-from dataclasses import dataclass
+import json
+from dataclasses import dataclass, asdict, fields
 from copy import deepcopy
 from .ViennaRNA import ViennaRNA, subopt, mfe, energy
 import numpy as np
@@ -21,20 +22,55 @@ class OstirConstants():
     optimal_spacing: int = 5  # aligned spacing
     cutoff: int = 35
 
-        # From OSTIR calibration using Salis2009 data. See calibration directory for procedure
-    dG_spacing_constant_push = np.array([17.20965071, 3.46341492, 1.790848365, 3.0], dtype=np.float64)
-    dG_spacing_constant_pull = np.array([0.06422042, 0.275640836, 0.0], dtype=np.float64)
+    # From OSTIR calibration using Salis2009 data. See calibration directory for procedure
+    dG_spacing_constant_push: tuple = (17.20965071, 3.46341492, 1.790848365, 3.0)
+    dG_spacing_constant_pull: tuple = (0.06422042, 0.275640836, 0.0)
     cutoff: int = 35  # number of nt +- start codon considering for folding
     standby_site_length: int = 4  # Number of nt before SD sequence that must be unpaired for ribosome binding
-    start_codons: list = ("ATG", # substituted U for T in actual calcs. Ignores CTG/CUG
-                             "AUG",
-                             "GTG",
-                             "GUG",
-                             "TTG",
-                             "UUG")
+    start_codons: tuple = ("ATG", "AUG", "GTG", "GUG", "TTG", "UUG")  # substituted U for T in actual calcs. Ignores CTG/CUG
     footprint: int = 1000
     energy_cutoff: float = 3.0
     verbose: bool = False
+    
+    def refresh(self):
+        # update RT_eff and K after some variables changed
+        self.RT_eff = 1 / self.Beta
+        self.K = math.exp(self.logK)
+        
+        # enforce type by casting
+        for field in fields(self):
+            value = getattr(self, field.name)
+            if type(value) != field.type: setattr(self, field.name, field.type(value))
+        
+        return self
+            
+    def __post_init__(self):
+        self.refresh()
+    
+    def __str__(self):
+        """for more user-interpretable printing"""
+        output = 'OstirConstants(\n'
+        
+        data_dict = asdict(self)
+        for key, value in data_dict.items():
+            output += f'\t{key}: {type(value).__name__} = {value}\n'
+        output += ')'
+        
+        return output
+    
+    def save_to_json(self, file_path):
+        data_dict = asdict(self)
+        with open(file_path, "w") as file:
+            json.dump(data_dict, file, indent=4)
+    
+    @staticmethod
+    def load_from_json(file_path):
+        """usage: `my_constant = OstirConstants.load_from_json(file_path)`"""
+        with open(file_path, "r") as file:
+            data_dict = json.load(file)
+        
+        return OstirConstants(**data_dict)
+
 
 @dataclass
 class StartEnergies:
