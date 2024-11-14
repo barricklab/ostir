@@ -1,6 +1,7 @@
 # OSTIR specific
 
 tests/output/
+benchmarking/nupack/
 
 # R
 .Rhistory
