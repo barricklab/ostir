@@ -1,5 +1,6 @@
 # OSTIR (Open Source Translation Initiation Rates)
-[![Status](https://github.com/barricklab/ostir/actions/workflows/package_and_test.yml/badge.svg)](https://github.com/barricklab/ostir/actions/workflows/package_and_test.yml) [![status](https://joss.theoj.org/papers/43d02b32408a161e608b886f63e753c1/status.svg)](https://joss.theoj.org/papers/43d02b32408a161e608b886f63e753c1)
+[![Status](https://github.com/barricklab/ostir/actions/workflows/package_and_test.yml/badge.svg)](https://github.com/barricklab/ostir/actions/workflows/package_and_test.yml) [![Bioconda](https://joss.theoj.org/papers/43d02b32408a161e608b886f63e753c1/status.svg)](https://joss.theoj.org/papers/43d02b32408a161e608b886f63e753c1) [![Anaconda Badge](https://anaconda.org/bioconda/ostir/badges/downloads.svg)](https://anaconda.org/bioconda/ostir)
+
 
 
 `OSTIR` is a

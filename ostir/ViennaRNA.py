@@ -15,7 +15,6 @@ import array
 import sys
 import re
 import RNA
-import time
 
 #  On import check dependencies
 dependencies = [which('RNAfold') is not None,
@@ -106,7 +105,6 @@ def subopt(sequences, constraints, energy_gap, temp = 37.0, dangles = "some"):
 
     vienna_subopt = rna.subopt(threshold)
 
-    time.sleep(1)
     subopt_output = [[str(output.structure), str(round(output.energy, 3))] for output in vienna_subopt]
 
     subopt_energy = []
