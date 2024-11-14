@@ -5,12 +5,15 @@ import asyncio
 import math
 import os
 
+from ostir.ostir import parse_fasta
+
 import psutil
 
 from tempfile import TemporaryDirectory
 from rich import print
 from progress.spinner import Spinner
 from progress.bar import Bar
+from time import sleep
 
 conda_namespace = "benchmark_ostir"
 conda_path = "/usr/bin/micromamba"
@@ -20,36 +23,117 @@ conda_path = "/usr/bin/micromamba"
 def get_memory_usage(pid):
     try:
         process = psutil.Process(pid)
-        return process.memory_info().rss
-    except:
+        memory = process.memory_info().rss
+        children = process.children(recursive=True)
+        for child in children:
+            try:
+                memory += child.memory_info().rss
+            except psutil.NoSuchProcess:
+                pass
+        return memory
+    except psutil.NoSuchProcess:
         return 0
+
+def reverse_complement(seq):
+    complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A', 'N': 'N', 'a': 't', 'c': 'g', 'g': 'c', 't': 'a', 'n': 'n'}
+    return ''.join([complement[base] for base in seq[::-1]])
 
 
 class Benchmarker():
     def __init__(self):
         pass
 
-    def benchmark_t7(self):
+    def benchmark_t7(self, n=1):
+        print("Benchmarking T7 genome")
         t7_genome = os.path.abspath("T7_genome.fasta")
-        self.benchmark(t7_genome, 5)
+        self.benchmark(t7_genome, n)
+
+    def benchmark_mg1655(self, n=1):
+        print("Benchmarking MG1655 genome")
+        mg1655_genome = os.path.abspath("MG1655.fna")
+        self.benchmark(mg1655_genome, n)
 
     def benchmark_ecoli(self):
         pass
 
+    def execute(self):
+        starttime = datetime.datetime.now()
+        max_memory_usage = 0
+        for command in self.commands:
+            p = subprocess.Popen(command, shell=False, env=self.env,
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            poll = p.poll()
+            while poll is None:
+                poll = p.poll()
+                max_memory_usage = max(max_memory_usage, get_memory_usage(p.pid))
+                sleep(0.001)
+        endtime = datetime.datetime.now()
+        time = (endtime - starttime).total_seconds()
+        return time, max_memory_usage
+
 class BenchmarkerRBSCalc(Benchmarker):
 
-    def ensure_installed(self):
-        pass
+    def benchmark(self, input_path, no=1):
+        print(f"Setting up RBS Calculator 1.0")
 
+        with TemporaryDirectory() as temp_dir:
+
+            # Setup
+            environment = os.environ.copy()
+            nupack_bin_path = os.path.abspath("nupack/bin")
+            nupack_base_path = os.path.abspath("nupack")
+            environment["PATH"] = f"{nupack_bin_path}:{nupack_base_path}:{environment['PATH']}"
+            environment["NUPACKHOME"] = nupack_base_path
+            self.env = environment
+
+            patch_path = os.path.abspath("rbscalc_bugfixes.patch")
+
+            os.chdir(temp_dir)
+            url = "https://github.com/hsalis/Ribosome-Binding-Site-Calculator-v1.0.git"
+            subprocess.run(f"git clone {url} --quiet", shell=True)
+            os.chdir("Ribosome-Binding-Site-Calculator-v1.0")
+            subprocess.run(f"git apply {patch_path} --quiet", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+            input_string = parse_fasta(input_path)[0][1]
+            reverse_complement_string = reverse_complement(input_string)
+
+            self.commands = [f"micromamba run -n {conda_namespace} python Run_RBS_Calculator.py {input_string}".split(),
+                f"micromamba run -n {conda_namespace} python Run_RBS_Calculator.py {reverse_complement_string}".split()]
+
+            # Run benchmark
+            times = []
+            mem = []
+            with Bar('Running benchmark', max=no) as bar:
+                for _ in range(no):
+                    try:
+                        os.mkdir("output")
+                    except FileExistsError:
+                        pass
+                    result = self.execute()
+                    times.append(result[0])
+                    mem.append(result[1])
+                    bar.next()
+            bar.finish()
+
+            # Calculate averages and standard deviations
+            avg_time = sum(times) / len(times)
+            std_time = math.sqrt(sum([(x - avg_time) ** 2 for x in times]) / len(times))
+            avg_mem = sum(mem) / len(mem)
+            std_mem = math.sqrt(sum([(x - avg_mem) ** 2 for x in mem]) / len(mem))
+
+            print(f"Average time: {avg_time} +- {std_time} seconds")
+            print(f"Average memory: {avg_mem / 1024 / 1024} +- {std_mem / 1024 / 1024} MB")
 
 class BenchmarkerOstir(Benchmarker):
     def __init__(self, commit="latest"):
 
         self.commit = commit
+        self.env = None
         super().__init__()
 
     def benchmark(self, input_path, no=1):
         print(f"Setting up OSTIR ({self.commit})")
+        self.commands = [f'{conda_path} run -n {conda_namespace} ostir -i {input_path} -o output/output -t fasta -j 8'.split()]
         with TemporaryDirectory() as temp_dir:
 
             # Setup
@@ -58,10 +142,10 @@ class BenchmarkerOstir(Benchmarker):
             subprocess.run(f"git clone {url} --quiet", shell=True)
             os.chdir("ostir")
             if self.commit != "latest":
-                subprocess.run(f"git checkout {self.commit} --quiet", shell=True)
+                subprocess.run(f"git checkout {self.commit} --quiet", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-            subprocess.run(f"micromamba env update -n {conda_namespace} -f environment.yml -q -y", shell=True)
-            subprocess.run(f"micromamba run -n {conda_namespace} pip install . --quiet", shell=True)
+            subprocess.run(f"micromamba env update -n {conda_namespace} -f environment.yml -q -y", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.run(f"micromamba run -n {conda_namespace} pip install . --quiet", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
             # Run unittests
 
@@ -74,7 +158,7 @@ class BenchmarkerOstir(Benchmarker):
                         os.mkdir("output")
                     except FileExistsError:
                         pass
-                    result = self.execute(input_path)
+                    result = self.execute()
                     times.append(result[0])
                     mem.append(result[1])
                     bar.next()
@@ -90,31 +174,39 @@ class BenchmarkerOstir(Benchmarker):
             print(f"Average memory: {avg_mem / 1024 / 1024} +- {std_mem / 1024 / 1024} MB")
 
 
-    @staticmethod
-    def execute(input_path):
-        starttime = datetime.datetime.now()
-        p = subprocess.Popen(f'{conda_path} run -n {conda_namespace} ostir -i {input_path} -o output/output -t fasta -j 8 -v 0'.split(), shell=False)
-        poll = p.poll()
-        max_memory_usage = 0
-        while poll is None:
-            poll = p.poll()
-            max_memory_usage = max(max_memory_usage, get_memory_usage(p.pid))
-        endtime = datetime.datetime.now()
-        time = (endtime - starttime).total_seconds()
-        return time, max_memory_usage
-
 
 def setup_micromamba():
     print("Setting up Micromamba")
     # delete existing environment
-    subprocess.run(f"micromamba env remove -n {conda_namespace} -q -y", shell=True)
+    subprocess.run(f"micromamba env remove -n {conda_namespace} -q -y",
+        shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     # create new environment
-    subprocess.run(f"micromamba create -n {conda_namespace} -q -y", shell=True)
+    subprocess.run(f"micromamba create -n {conda_namespace} -q -y",
+        shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 if __name__ == "__main__":
     starting_dir = os.getcwd()
+    print("----------")
+    os.chdir(starting_dir)
     setup_micromamba()
     ostir_benchmark = BenchmarkerOstir()
+    ostir_benchmark.benchmark_t7()
+    os.chdir(starting_dir)
+    ostir_benchmark.benchmark_mg1655()
+    print("----------\n")
+    os.chdir(starting_dir)
+    setup_micromamba()
+    subprocess.run(f"micromamba install -n {conda_namespace} viennarna=2.4.18 -y",
+        shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    ostir_benchmark = BenchmarkerOstir(commit = "79eb4b9")
+    ostir_benchmark.benchmark_t7()
+
+    print("----------\n")
+    os.chdir(starting_dir)
+    setup_micromamba()
+    subprocess.run(f"micromamba install -n {conda_namespace} python=2 -y",
+        shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    ostir_benchmark = BenchmarkerRBSCalc()
     ostir_benchmark.benchmark_t7()
 
     exit()
