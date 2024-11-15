@@ -76,7 +76,7 @@ class Benchmarker():
         max_memory_usage = 0
         for command in self.commands:
             p = subprocess.Popen(command, shell=False, env=self.env,
-                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
             poll = p.poll()
             while poll is None:
                 poll = p.poll()
@@ -112,8 +112,13 @@ class BenchmarkerRBSCalc(Benchmarker):
             input_string = parse_fasta(input_path)[0][1]
             reverse_complement_string = reverse_complement(input_string)
 
-            self.commands = [f"micromamba run -n {conda_namespace} python Run_RBS_Calculator.py {input_string}".split(),
-                f"micromamba run -n {conda_namespace} python Run_RBS_Calculator.py {reverse_complement_string}".split()]
+            # write rc to fasta
+            with open(f"{temp_dir}/rc.fasta", "w") as f:
+                f.write(f">{input_path}\n{reverse_complement_string}")
+
+
+            self.commands = [f"micromamba run -n {conda_namespace} python {temp_dir}/Ribosome-Binding-Site-Calculator-v1.0/Run_RBS_Calculator.py {input_path}".split(),
+                f"micromamba run -n {conda_namespace} python {temp_dir}/Ribosome-Binding-Site-Calculator-v1.0/Run_RBS_Calculator.py {temp_dir}/rc.fasta".split()]
 
             # Run benchmark
             times = []
@@ -224,9 +229,9 @@ if __name__ == "__main__":
     setup_micromamba()
     subprocess.run(f"micromamba install -n {conda_namespace} python=2 -y",
         shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    ostir_benchmark = BenchmarkerRBSCalc()
-    ostir_benchmark.benchmark_t7(no_t7)
+    rbscalc_benchmark = BenchmarkerRBSCalc()
+    rbscalc_benchmark.benchmark_t7(no_t7)
     os.chdir(starting_dir)
-    ostir_benchmark.benchmark_mg1655(no_mg1655)
+    rbscalc_benchmark.benchmark_mg1655(no_mg1655)
 
     exit()

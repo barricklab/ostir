@@ -1,83 +1,56 @@
-diff --git a/NuPACK.py b/NuPACK.py
-index 301f8d4..f29418c 100755
---- a/NuPACK.py
-+++ b/NuPACK.py
-@@ -598,8 +598,6 @@ class NuPACK(dict):
- 
-         #Skip the comments of the text file
-         line = handle.readline()
--        while line[0]=="%":
--            line = handle.readline()
- 
-         self["mfe_basepairing_x"] = []
-         self["mfe_basepairing_y"] = []
-@@ -945,7 +943,3 @@ if __name__ == "__main__":
-     #num_complexes = test["mfe_NumStructs"]  #Number of degenerate complexes (same energy)
-     #dG_mfe = test["mfe_energy"]
-     #print "There are ", num_complexes, " configuration(s) with a minimum free energy of ", dG_mfe, " kcal/mol."
--
--
--
--
 diff --git a/RBS_Calculator.py b/RBS_Calculator.py
-index 30fc464..faa4a06 100755
+index 30fc464..564f8de 100755
 --- a/RBS_Calculator.py
 +++ b/RBS_Calculator.py
-@@ -59,11 +59,9 @@ class RBS_Calculator(NuPACK):
-         """Initializes the RBS Calculator class with the mRNA sequence and the range of start codon positions considered."""
- 
-         #NuPACK.__init__(self,sequences,self.RNA_model)
--
-         exp = re.compile('[ATGCU]',re.IGNORECASE)
-         if exp.match(mRNA) == None:
-             raise ValueError("Invalid letters found in sequence ""%s"". Only ATGCU accepted." % mRNA)
--
-         if start_range[0] < 0: start_range[0] = 0
-         if start_range[1] > len(mRNA): start_range[1] = len(mRNA)
- 
-@@ -72,11 +70,12 @@ class RBS_Calculator(NuPACK):
+@@ -72,7 +72,7 @@ class RBS_Calculator(NuPACK):
          self.rRNA_len = len(self.rRNA)
          self.mRNA_len = len(self.mRNA_input)
          self.total_sequence_length = len(mRNA) + len(self.rRNA)
 -        self.dG_rRNA = self.calc_dG_rRNA()
-+        self.dG_rRNA = 0 #self.calc_dG_rRNA()
++        #self.dG_rRNA = self.calc_dG_rRNA()
          self.run = 0
          self.start_range = start_range
          self.verbose = verbose
- 
-+
-     def find_min(self,input_list):
-         """Finds the minimum of a list of numbers."""
- 
-@@ -388,7 +387,6 @@ class RBS_Calculator(NuPACK):
-         mRNA = self.mRNA_input[max(0,start_pos-self.cutoff):min(len(self.mRNA_input),start_pos+self.cutoff)]
-         fold = NuPACK([mRNA],self.RNA_model)
-         fold.mfe([1], Temp = self.temp, dangles = self.dangles)
--
-         structure = fold
-         structure["mRNA"] = mRNA
-         structure["bp_x"] = fold["mfe_basepairing_x"][0]
-@@ -662,7 +660,6 @@ class RBS_Calculator(NuPACK):
- 
-     def calc_dG(self):
-         """Calculates each dG term in the free energy model and sums them together to create dG_total"""
--
-         start = self.cpu_time()
- 
-         #Initialization of data structures
-@@ -715,7 +712,6 @@ class RBS_Calculator(NuPACK):
- 
-                 #Energy of mRNA folding
-                 [dG_mRNA,mRNA_structure] = self.calc_dG_mRNA(start_pos)
--
-                 #Energy of mRNA:rRNA hybridization & folding
-                 [dG_mRNA_rRNA_withspacing,mRNA_rRNA_structure] = self.calc_dG_mRNA_rRNA(start_pos)
- 
 diff --git a/Run_RBS_Calculator.py b/Run_RBS_Calculator.py
-index f7ca808..16125c4 100755
+index f7ca808..204a180 100755
 --- a/Run_RBS_Calculator.py
 +++ b/Run_RBS_Calculator.py
-@@ -56,4 +56,4 @@ if __name__ == "__main__":
+@@ -18,6 +18,26 @@
+ from RBS_Calculator import RBS_Calculator
+ import sys, math
+ 
++def parse_fasta(filepath):
++    '''Takes a filepath to a fasta formatted file and returns a list of [header, sequence].'''
++    sequences = []
++    current_seq_name = None
++    current_seq = ""
++    with open(filepath, 'r') as infile:
++        for line in infile:
++            linestr = line.decode('utf8') if isinstance(line, bytes) else line
++            if linestr[0] == '>':
++                if current_seq_name:
++                    sequences.append([current_seq_name, current_seq])
++                current_seq_name = linestr[1:].rstrip()
++                current_seq = ""
++                continue
++            else:
++                current_seq += linestr.rstrip()
++    if current_seq_name:
++        sequences.append([current_seq_name, current_seq])
++    return current_seq
++
+ if __name__ == "__main__":
+     #Read command line arguments
+     input_args = []
+@@ -31,6 +51,7 @@ if __name__ == "__main__":
+         start = input_args[2]
+     elif len(input_args) == 2:
+         seq = input_args[1]
++        seq = parse_fasta(seq)
+     else:
+         output = "Usage: " + input_args[0] + " [RNA/DNA Sequence] (start position)" + "\n"
+         print output
+@@ -56,4 +77,4 @@ if __name__ == "__main__":
  
      print len(expr_list)
      for (expr,start_pos,ks) in zip(expr_list,start_pos_list,kinetic_score_list):
