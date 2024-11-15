@@ -4,19 +4,23 @@ import datetime
 import asyncio
 import math
 import os
+import shutil
 
 from ostir.ostir import parse_fasta
 
 import psutil
 
-from tempfile import TemporaryDirectory
+from tempfile import mkdtemp
 from rich import print
 from progress.spinner import Spinner
 from progress.bar import Bar
 from time import sleep
+from contextlib import contextmanager
 
 conda_namespace = "benchmark_ostir"
 conda_path = "/usr/bin/micromamba"
+
+starting_dir = os.path.dirname(os.path.abspath(__file__))
 
 # importing librarie
 
@@ -37,6 +41,17 @@ def get_memory_usage(pid):
 def reverse_complement(seq):
     complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A', 'N': 'N', 'a': 't', 'c': 'g', 'g': 'c', 't': 'a', 'n': 'n'}
     return ''.join([complement[base] for base in seq[::-1]])
+
+@contextmanager
+def rhobust_tempdir():
+    temp_dir = mkdtemp()
+    try:
+        yield temp_dir
+    finally:
+        current_dir = os.getcwd()
+        assert not current_dir.startswith(temp_dir ), f"Current directory '{current_dir}' is within '{temp_dir}' or its subdirectories."
+        shutil.rmtree(temp_dir)
+        assert not os.path.exists(temp_dir), f"Temporary directory '{temp_dir}' failed to be removed."
 
 
 class Benchmarker():
@@ -76,7 +91,7 @@ class BenchmarkerRBSCalc(Benchmarker):
     def benchmark(self, input_path, no=1):
         print(f"Setting up RBS Calculator 1.0")
 
-        with TemporaryDirectory() as temp_dir:
+        with rhobust_tempdir() as temp_dir:
 
             # Setup
             environment = os.environ.copy()
@@ -105,14 +120,13 @@ class BenchmarkerRBSCalc(Benchmarker):
             mem = []
             with Bar('Running benchmark', max=no) as bar:
                 for _ in range(no):
-                    try:
-                        os.mkdir("output")
-                    except FileExistsError:
-                        pass
-                    result = self.execute()
-                    times.append(result[0])
-                    mem.append(result[1])
-                    bar.next()
+                    with rhobust_tempdir() as temp_dir2:
+                        os.chdir(temp_dir2)
+                        result = self.execute()
+                        times.append(result[0])
+                        mem.append(result[1])
+                        bar.next()
+                        os.chdir(starting_dir)
             bar.finish()
 
             # Calculate averages and standard deviations
@@ -123,6 +137,7 @@ class BenchmarkerRBSCalc(Benchmarker):
 
             print(f"Average time: {avg_time} +- {std_time} seconds")
             print(f"Average memory: {avg_mem / 1024 / 1024} +- {std_mem / 1024 / 1024} MB")
+            os.chdir(starting_dir)
 
 class BenchmarkerOstir(Benchmarker):
     def __init__(self, commit="latest"):
@@ -133,8 +148,8 @@ class BenchmarkerOstir(Benchmarker):
 
     def benchmark(self, input_path, no=1):
         print(f"Setting up OSTIR ({self.commit})")
-        self.commands = [f'{conda_path} run -n {conda_namespace} ostir -i {input_path} -o output/output -t fasta -j 8'.split()]
-        with TemporaryDirectory() as temp_dir:
+        self.commands = [f'{conda_path} run -n {conda_namespace} ostir -i {input_path} -o /dev/null -t fasta -j 8'.split()]
+        with rhobust_tempdir() as temp_dir:
 
             # Setup
             os.chdir(temp_dir)
@@ -154,14 +169,13 @@ class BenchmarkerOstir(Benchmarker):
             mem = []
             with Bar('Running benchmark', max=no) as bar:
                 for _ in range(no):
-                    try:
-                        os.mkdir("output")
-                    except FileExistsError:
-                        pass
-                    result = self.execute()
-                    times.append(result[0])
-                    mem.append(result[1])
-                    bar.next()
+                    with rhobust_tempdir() as temp_dir2:
+                        os.chdir(temp_dir2)
+                        result = self.execute()
+                        times.append(result[0])
+                        mem.append(result[1])
+                        bar.next()
+                        os.chdir(starting_dir)
             bar.finish()
 
             # Calculate averages and standard deviations
@@ -172,6 +186,7 @@ class BenchmarkerOstir(Benchmarker):
 
             print(f"Average time: {avg_time} +- {std_time} seconds")
             print(f"Average memory: {avg_mem / 1024 / 1024} +- {std_mem / 1024 / 1024} MB")
+            os.chdir(starting_dir)
 
 
 
@@ -185,28 +200,33 @@ def setup_micromamba():
         shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 if __name__ == "__main__":
-    starting_dir = os.getcwd()
+    no_t7 = 100
+    no_mg1655 = 3
     print("----------")
     os.chdir(starting_dir)
     setup_micromamba()
     ostir_benchmark = BenchmarkerOstir()
-    ostir_benchmark.benchmark_t7()
-    os.chdir(starting_dir)
-    ostir_benchmark.benchmark_mg1655()
+    ostir_benchmark.benchmark_t7(no_t7)
+    #os.chdir(starting_dir)
+    ostir_benchmark.benchmark_mg1655(no_mg1655)
+
     print("----------\n")
     os.chdir(starting_dir)
     setup_micromamba()
     subprocess.run(f"micromamba install -n {conda_namespace} viennarna=2.4.18 -y -c bioconda",
         shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     ostir_benchmark = BenchmarkerOstir(commit = "79eb4b9")
-    ostir_benchmark.benchmark_t7()
-
+    ostir_benchmark.benchmark_t7(100)
+    os.chdir(starting_dir)
+    ostir_benchmark.benchmark_mg1655(no_t7)
     print("----------\n")
     os.chdir(starting_dir)
     setup_micromamba()
     subprocess.run(f"micromamba install -n {conda_namespace} python=2 -y",
         shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     ostir_benchmark = BenchmarkerRBSCalc()
-    ostir_benchmark.benchmark_t7()
+    ostir_benchmark.benchmark_t7(no_t7)
+    os.chdir(starting_dir)
+    ostir_benchmark.benchmark_mg1655(no_mg1655)
 
     exit()
