@@ -196,7 +196,7 @@ if __name__ == "__main__":
     print("----------\n")
     os.chdir(starting_dir)
     setup_micromamba()
-    subprocess.run(f"micromamba install -n {conda_namespace} viennarna=2.4.18 -y",
+    subprocess.run(f"micromamba install -n {conda_namespace} viennarna=2.4.18 -y -c bioconda",
         shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     ostir_benchmark = BenchmarkerOstir(commit = "79eb4b9")
     ostir_benchmark.benchmark_t7()
