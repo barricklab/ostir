@@ -17,6 +17,7 @@ from shutil import which
 from warnings import warn
 from pathlib import Path
 from .shortcuts import from_csv
+from importlib.metadata import version
 
 
 try:
@@ -30,7 +31,10 @@ if importlib.util.find_spec("rich") is not None:
 else:
     rprint = None
 
-OSTIR_VERSION = '1.1.1'
+try:
+    OSTIR_VERSION = version('ostir')
+except:
+    OSTIR_VERSION = 'Unknown'
 OLDEST_VIENNA = '2.6.4'
 
 # The E. coli sequence
