@@ -53,7 +53,7 @@ def ostir_farm(task_objects: list, threads: int=1, callback: Callable=None, verb
 
     # Find all start codons in every supplied sequence.
     # Note: returns list of generators
-    start_codons = [find_start_codons(task.sequence, start_range=[task.start, task.end]) for task in task_objects]
+    start_codons = [find_start_codons(task.sequence.upper(), start_range=[task.start, task.end]) for task in task_objects]
     id_values = [i for i in range(len(task_objects))]
 
     # Tie the generators to the task objects
@@ -108,5 +108,5 @@ def ostir_farm(task_objects: list, threads: int=1, callback: Callable=None, verb
 
     # Return the results
     return parallel_output
-    
+
 # Don't forget the end of file newline!

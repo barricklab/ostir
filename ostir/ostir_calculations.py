@@ -7,6 +7,8 @@ from copy import deepcopy
 from .ViennaRNA import ViennaRNA, subopt, mfe, energy
 import numpy as np
 from datetime import datetime
+import numbers
+import itertools
 
 @dataclass
 class OstirConstants():
@@ -31,58 +33,75 @@ class OstirConstants():
     footprint: int = 1000
     energy_cutoff: float = 3.0
     verbose: bool = False
-    
+
     def refresh(self):
         # update RT_eff and K after some variables changed
         self.RT_eff = 1 / self.Beta
         self.K = math.exp(self.logK)
-        
+
         # enforce type by casting
         for field in fields(self):
             value = getattr(self, field.name)
             if type(value) != field.type: setattr(self, field.name, field.type(value))
-        
+
         return self
-            
+
     def __post_init__(self):
         self.refresh()
-    
+
     def __str__(self):
         """for more user-interpretable printing"""
         output = 'OstirConstants(\n'
-        
+
         data_dict = asdict(self)
         for key, value in data_dict.items():
             output += f'\t{key}: {type(value).__name__} = {value}\n'
         output += ')'
-        
+
         return output
-    
+
     def save_to_json(self, file_path):
         data_dict = asdict(self)
         with open(file_path, "w") as file:
             json.dump(data_dict, file, indent=4)
-    
+
     @staticmethod
     def load_from_json(file_path):
         """usage: `my_constant = OstirConstants.load_from_json(file_path)`"""
         with open(file_path, "r") as file:
             data_dict = json.load(file)
-        
+
         return OstirConstants(**data_dict)
 
 
-@dataclass
 class StartEnergies:
     """Class to hold the start codon energies"""
-    ATG: float = -1.194
-    AUG: float = -1.194
-    GTG: float = -0.0748
-    GUG: float = -0.0748
-    TTG: float = -0.0435
-    UUG: float = -0.0435
-    CTG: float = -0.03406
-    CUG: float = -0.03406
+    def __init__(self):
+        self.ATG: float = -1.194
+        self.AUG: float = -1.194
+        self.GTG: float = -0.0748
+        self.GUG: float = -0.0748
+        self.TTG: float = -0.0435
+        self.UUG: float = -0.0435
+        self.CTG: float = -0.03406
+        self.CUG: float = -0.03406
+
+    def __setattr__(self, name, value):
+        if len(name) != 3:
+            raise ValueError("Codons must be 3 nucleotides long")
+        if not isinstance(value, numbers.Number):
+            raise ValueError("Codon energies must be numeric")
+
+        #Set every permutation of capital and lower case
+        capitals = name.upper()
+        lowers = name.lower()
+        zipped = zip(capitals, lowers)
+        product = list(itertools.product(*zipped))
+
+        for item in product:
+            super().__setattr__("".join(item), value)
+
+
 
 ostir_constants = OstirConstants()
 start_energies = StartEnergies()
@@ -375,6 +394,9 @@ def calc_dG_mRNA_rRNA(mRNA_in, rRNA, start_pos, dangles, constraints):
     """Calculates the dG_mRNA_rRNA from the mRNA and rRNA sequence.
     Considers all feasible 16S rRNA binding sites and includes the effects of non-optimal spacing."""
 
+    if not rRNA:
+        raise ValueError("No rRNA sequence provided.")
+
     # Collect all constants
     cutoff = ostir_constants.cutoff
     temp = ostir_constants.temp
@@ -466,13 +488,13 @@ def calc_dG_mRNA_rRNA(mRNA_in, rRNA, start_pos, dangles, constraints):
 
     """
     The rRNA-binding site is between the nucleotides at positions most_5p_mRNA and most_3p_mRNA
-    Now, fold the pre-sequence, rRNA-binding-sequence and post-sequence separately. 
-    Take their base pairings and combine them together. Calculate the total energy. 
+    Now, fold the pre-sequence, rRNA-binding-sequence and post-sequence separately.
+    Take their base pairings and combine them together. Calculate the total energy.
     For secondary structures, this splitting operation is allowed.
-    We postulate that not all of the post-sequence can form secondary structures. 
-    Once the 30S complex binds to the mRNA, it prevents the formation of secondary 
-    structures that are mutually exclusive with ribosome binding. We define self.footprint 
-    to be the length of the 30S complex footprint. Here, we assume that the entire mRNA 
+    We postulate that not all of the post-sequence can form secondary structures.
+    Once the 30S complex binds to the mRNA, it prevents the formation of secondary
+    structures that are mutually exclusive with ribosome binding. We define self.footprint
+    to be the length of the 30S complex footprint. Here, we assume that the entire mRNA
     sequence downstream of the 16S rRNA binding site can not form secondary structures.
     """
 
