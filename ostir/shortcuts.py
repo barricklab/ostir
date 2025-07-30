@@ -47,6 +47,7 @@ def from_csv(csv_file,
                 sys.exit(1)
 
             sequence = sequence.replace(' ', '') #remove spaces
+            sequence = sequence.upper()
 
             # Assign a name if one is not given from name/id columns
             # If empty assign one based on the index
@@ -88,7 +89,7 @@ def from_csv(csv_file,
     results = {k: list(v) for k, v in groupby(results, lambda x: x[0])}
     for key, value in results.items():
         results[key] = sorted([data for _, data in value], key=lambda x: x.start_position)
-        
+
 
     # Insure the dictionary is sorted by key
     results = {k: results[k] for k in sorted(results)}
@@ -133,4 +134,3 @@ def simplify_results(results):
     for key, value in results.items():
         simplified_results[key] = value.simplify()
     return simplified_results
-
