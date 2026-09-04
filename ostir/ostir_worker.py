@@ -35,7 +35,7 @@ def ostir_worker(task, start_position, task_ID, verbosity=0):
         dangles = dangles_default
 
     # Start codon energy
-    dG_start_codon = start_codon_energies[start_codon]
+    dG_start_codon = start_codon_energies[start_codon.upper()]
 
     # Energy of mRNA folding. This also gets us the kinetic score
     dG_mRNA, mRNA_structure, kinetic_score, min_bp_prob = calc_dG_mRNA(sequence, start_position, dangles, task.constraints)
