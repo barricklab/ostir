@@ -75,7 +75,7 @@ def ostir_farm(task_objects: list, threads: int=1, callback: Callable=None, verb
 
     # Create a pool of workers and run OSTIR
 
-    if threads > 1:
+    if threads is not None and threads > 1:
         with concurrent.futures.ProcessPoolExecutor(max_workers=threads) as multiprocessor:
             #parallel_output = multiprocessor.map(self._parallel_dG, *parallelizer_arguments)
 
